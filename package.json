@@ -6,6 +6,7 @@
     "dev": "next",
     "build": "next build",
     "build:ci": "npm ci && npm run build",
+    "deploy:sanity": "cd studio && npm ci && npm run deploy",
     "start": "next start",
     "format": "prettier --write '**/*.{js,ts,tsx}'",
     "lint": "eslint .",
