@@ -1,0 +1,61 @@
+{
+    "env": {
+      "node": true,
+      "es6": true
+    },
+    "parserOptions": { 
+        "ecmaVersion": 8 ,
+        "sourceType": "module",
+        "allowImportExportEverywhere": true
+    },
+    "ignorePatterns": ["node_modules/*", ".next/*", ".out/*", "!.prettierrc.js"],
+    "extends": [
+        "eslint:recommended",
+        "plugin:react/recommended",
+        "plugin:react-hooks/recommended",
+        "plugin:jsx-a11y/recommended"
+    ],
+    "rules": {
+        "no-unused-vars": [
+          "error",
+          {
+            "varsIgnorePattern": "^_",
+            "ignoreRestSiblings": true
+          }
+        ],
+        "max-lines": "off"
+    },
+    "overrides": [
+      {
+        "files": ["**/*.ts", "**/*.tsx"],
+        "parser": "@typescript-eslint/parser",
+        "settings": { "react": { "version": "detect" } },
+        "env": {
+          "browser": true,
+          "node": true,
+          "es6": true
+        },
+        "extends": [
+          "eslint:recommended",
+          "plugin:@typescript-eslint/recommended",
+          "plugin:react/recommended",
+          "plugin:react-hooks/recommended",
+          "plugin:jsx-a11y/recommended"
+        ],
+        "plugins": ["prettier"],
+        "rules": {
+          "react/prop-types": "off",
+          "react/react-in-jsx-scope": "off",
+          "jsx-a11y/anchor-is-valid": "off",
+        }
+      },
+      {
+          "parser": "babel-parser",
+          "files": ["bin/**/*.js", "lib/**/*.js"],
+            "rules": {
+                "no-console": 0,
+                "no-process-exit": 0
+            }
+      }
+    ]
+  }
