@@ -7,15 +7,16 @@
     "build": "next build",
     "build:ci": "npm ci && npm run build",
     "deploy:sanity": "cd studio && npm ci && npm run deploy",
-    "start": "next start",
+    "husky:install": "husky install",
+    "precommit": "lint-staged",
+    "start": "concurrently 'npm:dev' 'npm:start:sanity'",
+    "start:site": "next start",
     "start:sanity": "cd studio && sanity start",
     "format": "prettier --write '**/*.{js,ts,tsx}'",
     "lint": "eslint .",
     "analyze": "cross-env ANALYZE=true next build",
     "analyze:server": "cross-env BUNDLE_ANALYZE=server next build",
-    "analyze:browser": "cross-env BUNDLE_ANALYZE=browser next build",
-    "precommit": "lint-staged",
-    "prepare": "husky install"
+    "analyze:browser": "cross-env BUNDLE_ANALYZE=browser next build"
   },
   "lint-staged": {
     "**/*.{tsx,ts,js}": [
@@ -41,11 +42,13 @@
     "react-dom": "^17.0.2"
   },
   "devDependencies": {
+    "@asbjorn/eslint-plugin-groq": "^1.0.0",
     "@types/node": "^14.14.37",
     "@types/react": "^17.0.3",
     "@typescript-eslint/eslint-plugin": "^4.20.0",
     "@typescript-eslint/parser": "^4.20.0",
     "babel-eslint": "^10.1.0",
+    "concurrently": "^6.0.1",
     "cross-env": "^7.0.3",
     "eslint": "^7.23.0",
     "eslint-config-prettier": "^8.1.0",

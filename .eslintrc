@@ -8,13 +8,13 @@
         "sourceType": "module",
         "allowImportExportEverywhere": true
     },
-    "ignorePatterns": ["node_modules/*", ".next/*", ".out/*", "!.prettierrc.js", "studio/*"],
+    "ignorePatterns": ["node_modules/*", ".next/*", ".out/*", "!.prettierrc.js", "studio/dist/*"],
     "extends": [
         "eslint:recommended",
         "plugin:react/recommended",
         "plugin:react-hooks/recommended",
         "plugin:jsx-a11y/recommended",
-        "react-app"
+        "react-app",
     ],
     "rules": {
         "no-unused-vars": [
@@ -24,7 +24,14 @@
             "ignoreRestSiblings": true
           }
         ],
-        "max-lines": "off"
+        "import/no-unresolved": [
+            2, 
+            {
+                "ignore": ["^(all|part):"] 
+            }
+        ],
+        "max-lines": "off",
+        "import/no-anonymous-default-export": "off"
     },
     "overrides": [
       {
@@ -42,7 +49,8 @@
           "plugin:react/recommended",
           "plugin:react-hooks/recommended",
           "plugin:jsx-a11y/recommended",
-          "react-app"
+          "react-app",
+          "plugin:@asbjorn/groq/recommended"
         ],
         "plugins": ["prettier"],
         "rules": {
@@ -55,7 +63,9 @@
                 "varsIgnorePattern": "^_",
                 "ignoreRestSiblings": true
               }
-          ]
+          ],
+          "@typescript-eslint/explicit-function-return-type": "off",
+          "@typescript-eslint/explicit-module-boundary-types": "off"
         }
       },
       {
