@@ -1,5 +1,7 @@
 import Link from 'next/link';
 
+const unused = "unused"
+
 const About = () => {
   return (
     <div>
