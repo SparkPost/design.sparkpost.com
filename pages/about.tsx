@@ -1,7 +1,8 @@
 import Link from 'next/link';
 
-const About : React.FC = () : React.ReactElement => {
-    return a
+const unusedVar = "unused";
+
+const About = () => {
   return (
     <div>
       <h1>About Page</h1>
