@@ -17,11 +17,6 @@
     "precommit": "lint-staged",
     "prepare": "husky install"
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
-  },
   "lint-staged": {
     "**/*.{tsx,ts,js}": [
       "eslint --fix",
