@@ -1,6 +1,6 @@
 import Link from 'next/link';
 
-const unusedVar = "unused";
+const unused = "unused";
 
 const About = () => {
   return (
