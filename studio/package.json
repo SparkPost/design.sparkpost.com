@@ -9,7 +9,7 @@
   "scripts": {
     "start": "sanity start",
     "build": "sanity build",
-    "deploy": "./node_modules/.bin/sanity"
+    "deploy": "./node_modules/.bin/sanity deploy"
   },
   "keywords": [
     "sanity"
@@ -28,7 +28,11 @@
     "react-dom": "^17.0"
   },
   "devDependencies": {
-    "@sanity/cli": "^2.7.4"
+    "@sanity/cli": "^2.7.4",
+    "immer": "^8.0.1",
+    "is-svg": "^4.2.2",
+    "mem": "^4.0.0",
+    "yargs-parser": "^13.1.2"
   },
   "repository": {
     "type": "git",
