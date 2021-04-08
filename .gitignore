@@ -109,3 +109,6 @@ dist
 # Proply cache
 .proply
 .vercel
+
+# Sanity DB Files
+studio/*.tar.gz
