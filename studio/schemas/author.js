@@ -1,7 +1,10 @@
+import { AccountCircle } from '@sparkpost/matchbox-icons';
+
 export default {
   name: 'author',
   title: 'Author',
   type: 'document',
+  icon: AccountCircle,
   fields: [
     {
       name: 'name',

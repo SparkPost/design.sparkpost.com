@@ -1,7 +1,10 @@
+import { Category } from '@sparkpost/matchbox-icons';
+
 export default {
   name: 'category',
   title: 'Category',
   type: 'document',
+  icon: Category,
   fields: [
     {
       name: 'title',
