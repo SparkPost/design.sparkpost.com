@@ -1,4 +1,4 @@
-import { RemoveRedEye } from '@sparkpost/matchbox-icons';
+import { Visibility } from '@sparkpost/matchbox-icons';
 import { inferMetadataState, useWorkflowMetadata } from '../../lib/workflow';
 
 export default function ReviewAction(props) {
@@ -17,7 +17,7 @@ export default function ReviewAction(props) {
   return {
     label: 'Request Review',
     shortcut: 'mod+shift+r',
-    icon: RemoveRedEye,
+    icon: Visibility,
     onHandle
   };
 }
