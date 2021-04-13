@@ -1,23 +1,23 @@
-import { Visibility } from '@sparkpost/matchbox-icons';
+import { Edit } from '@sparkpost/matchbox-icons';
 import { inferMetadataState, useWorkflowMetadata } from '../../lib/workflow';
 
-export default function ReviewAction(props) {
+export default function BackToDraftAction(props) {
   const metadata = useWorkflowMetadata(props.id, inferMetadataState(props));
   const { state } = metadata.data;
 
-  if (!props.draft || state === 'inReview') {
+  if (!props.draft || !state === 'inReview') {
     return null;
   }
 
   const onHandle = () => {
-    metadata.setState('inReview');
+    metadata.setState('draft');
     props.onComplete();
   };
 
   return {
-    label: 'Request Review',
-    shortcut: 'mod+shift+r',
-    icon: Visibility,
+    label: 'Back to Draft',
+    icon: Edit,
+    color: 'warning',
     onHandle
   };
 }
