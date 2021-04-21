@@ -25,6 +25,18 @@
     {
       "name": "part:@sanity/base/schema",
       "path": "./schemas/schema"
+    },
+    {
+      "implements": "part:@sanity/base/document-actions/resolver",
+      "path": "./documentActions"
+    },
+    {
+      "implements": "part:@sanity/base/document-badges/resolver",
+      "path": "./documentBadges"
+    },
+    {
+      "name": "part:@sanity/desk-tool/structure",
+      "path": "./structure"
     }
   ],
   "__experimental_spaces": [

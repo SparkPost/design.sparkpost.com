@@ -1,7 +1,10 @@
+import { Description } from '@sparkpost/matchbox-icons';
+
 export default {
   name: 'post',
   title: 'Post',
   type: 'document',
+  icon: Description,
   fields: [
     {
       name: 'title',
