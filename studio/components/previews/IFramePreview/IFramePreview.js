@@ -25,7 +25,7 @@ const IFramePreview = ({ options, document }) => {
   }
 
   return (
-    <Box width="100%" height="100vh">
+    <Box>
       <Box
         as="iframe"
         width="100%"
