@@ -5,7 +5,7 @@ import Box from '@sweatpants/box';
 const getPreviewUrl = ({ displayed, options }) => {
   const { slug, _type } = displayed;
   const { previewUrl } = options;
-  const secret = process.env.SANITY_STUDIO_PREVIEW_SECRET;
+  const secret = 'MATCHBOX';
 
   if (!slug || !previewUrl) {
     console.warn('Missing slug or preview url');

@@ -6,7 +6,7 @@ import { Edit } from '@sparkpost/matchbox-icons';
 const SCHEMA_TYPE = 'post';
 
 // Web preview configuration
-const remoteURL = 'https://design.sparkpost.com';
+const remoteURL = 'https://sparkpost-matchbox-v2.netlify.app';
 const localURL = 'http://localhost:3000';
 const previewUrl = window.location.hostname === 'localhost' ? localURL : remoteURL;
 
