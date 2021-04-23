@@ -2,13 +2,14 @@ import S from '@sanity/desk-tool/structure-builder';
 import { IFramePreview } from '../components/previews';
 import { Visibility } from '@sparkpost/matchbox-icons';
 import { Edit } from '@sparkpost/matchbox-icons';
+import { isLocalhost } from '../lib/helpers';
 
 const SCHEMA_TYPE = 'post';
 
 // Web preview configuration
 const remoteURL = 'https://sparkpost-matchbox-v2.netlify.app';
 const localURL = 'http://localhost:3000';
-const previewUrl = window.location.hostname === 'localhost' ? localURL : remoteURL;
+const previewUrl = isLocalhost() ? localURL : remoteURL;
 
 const post = S.listItem()
   .title('Posts')
