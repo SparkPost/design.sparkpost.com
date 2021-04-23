@@ -1,7 +1,7 @@
 export default function handler(req, res) {
   console.log(req.query);
   // Bail if no secret or slug defined
-  if (req.query.token !== 'HULL' || !req.query.type) {
+  if (req.query.secret !== process.env.NEXT_PUBLIC_SANITY_PREVIEW_SECRET || !req.query.type) {
     return res.status(401).json({ message: 'Invalid preview request' });
   }
 

@@ -3,15 +3,17 @@ import PropTypes from 'prop-types';
 import Box from '@sweatpants/box';
 
 const getPreviewUrl = ({ displayed, options }) => {
-  const { slug } = displayed;
+  console.log(displayed);
+  const { slug, _type } = displayed;
   const { previewUrl } = options;
+  const secret = process.env.NEXT_PUBLIC_SANITY_PREVIEW_SECRET;
 
   if (!slug || !previewUrl) {
     console.warn('Missing slug or preview url');
     return;
   }
 
-  return `${previewUrl}/post/${slug.current}`;
+  return `${previewUrl}/api/preview?secret=${secret}&type=${_type}&slug=${slug.current}`;
 };
 
 const IFramePreview = ({ options, document }) => {

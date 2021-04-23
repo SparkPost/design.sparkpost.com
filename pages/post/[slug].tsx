@@ -8,14 +8,13 @@ const query = groq`*[_type == "post" && slug.current == $slug][0]{
   "slug": slug.current
 }`;
 
-const Post = ({ post, slug }) => {
+const Post = ({ post, preview = false, slug }) => {
   const router = useRouter();
 
-  console.log(slug);
   const { data: postData } = usePreviewSubscription(query, {
     params: { slug: slug },
     initialData: post,
-    enabled: true
+    enabled: preview
   });
 
   if (!router.isFallback && !slug) {
@@ -39,7 +38,7 @@ export async function getStaticProps({ params, preview = false }) {
   // It's important to default the slug so that it doesn't return "undefined"
   const { slug = '' } = params;
 
-  const post = await getClient(true).fetch(query, { slug });
+  const post = await getClient(preview).fetch(query, { slug });
 
   return {
     props: {
