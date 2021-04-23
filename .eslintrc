@@ -3,6 +3,15 @@
       "node": true,
       "es6": true
     },
+    "settings": {
+      "import/resolver": {
+        "node": {
+          "extensions": [".js", ".jsx", ".ts", ".tsx"],
+          "moduleDirectory": ["node_modules", "./"]
+        },
+        "typescript": {}
+      }
+    },
     "parserOptions": { 
         "ecmaVersion": 8 ,
         "sourceType": "module",

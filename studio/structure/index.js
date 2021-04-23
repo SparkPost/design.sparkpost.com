@@ -5,6 +5,8 @@ import { map } from 'rxjs/operators';
 import { Visibility } from '@sparkpost/matchbox-icons';
 import { Edit } from '@sparkpost/matchbox-icons';
 
+import post from './post';
+
 const REVIEW_QUERY = `* [_type == 'workflow.metadata' && state == 'inReview'] {
   ...coalesce(
     *[_id == "drafts." + ^.documentId]{_id,_type}[0],
@@ -25,10 +27,11 @@ const hiddenDocTypes = (listItem) => !HIDDEN_TYPES.includes(listItem.getId());
 
 const docTypeListItems = S.documentTypeListItems().filter(hiddenDocTypes);
 
-export default () =>
+const Structure = () =>
   S.list()
     .title('Content')
     .items([
+      post,
       ...docTypeListItems,
       S.divider(),
       S.listItem()
@@ -72,3 +75,5 @@ export default () =>
         }),
       S.divider()
     ]);
+
+export default Structure;

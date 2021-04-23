@@ -7,8 +7,8 @@
   "author": "Logan Sparlin <logan.sparlin@sparkpost.com>",
   "license": "UNLICENSED",
   "scripts": {
-    "start": "sanity start",
-    "build": "sanity build",
+    "start": "./node_modules/.bin/sanity start",
+    "build": "./node_modules/.bin/sanity build",
     "deploy": "./node_modules/.bin/sanity deploy"
   },
   "keywords": [
@@ -30,10 +30,12 @@
   },
   "devDependencies": {
     "@sanity/cli": "^2.7.4",
+    "@sweatpants/box": "0.0.5",
     "immer": "^8.0.1",
     "is-svg": "^4.2.2",
     "mem": "^4.0.0",
     "rxjs": "^6.6.7",
+    "styled-components": "^5.2.3",
     "yargs-parser": "^13.1.2"
   },
   "repository": {
