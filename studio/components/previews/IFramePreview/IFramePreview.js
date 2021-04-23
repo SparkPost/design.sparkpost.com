@@ -3,10 +3,9 @@ import PropTypes from 'prop-types';
 import Box from '@sweatpants/box';
 
 const getPreviewUrl = ({ displayed, options }) => {
-  console.log(displayed);
   const { slug, _type } = displayed;
   const { previewUrl } = options;
-  const secret = process.env.NEXT_PUBLIC_SANITY_PREVIEW_SECRET;
+  const secret = process.env.SANITY_STUDIO_PREVIEW_SECRET;
 
   if (!slug || !previewUrl) {
     console.warn('Missing slug or preview url');
@@ -20,8 +19,6 @@ const IFramePreview = ({ options, document }) => {
   const { displayed } = document;
 
   const previewUrl = getPreviewUrl({ displayed, options });
-
-  console.log(previewUrl);
 
   if (!previewUrl || !displayed) {
     return <div>No document to preview</div>;
