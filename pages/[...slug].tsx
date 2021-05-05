@@ -1,9 +1,9 @@
 import { usePreviewSubscription, PortableText } from '@lib/sanity';
-import { getHomePage, getAllPageSlugs } from '@lib/api';
+import { getPage, getAllPageSlugs } from '@lib/api';
 
-const Page = ({ data, preview }) => {
+const Page = ({ data, slug, preview }) => {
   const { data: pageData } = usePreviewSubscription(data?.query, {
-    params: { documentId: 'homePage' },
+    params: { slug: slug },
     initialData: data?.pageData,
     enabled: preview
   });
@@ -22,8 +22,10 @@ const Page = ({ data, preview }) => {
   );
 };
 
-export async function getStaticProps({ preview = false }) {
-  const { data: pageData, query } = await getHomePage(preview);
+export async function getStaticProps({ params, preview = false }) {
+  const { slug = '' } = params;
+
+  const { data: pageData, query } = await getPage(slug, preview);
 
   return {
     props: {
@@ -31,7 +33,8 @@ export async function getStaticProps({ preview = false }) {
       data: {
         pageData,
         query
-      }
+      },
+      slug
     }
   };
 }

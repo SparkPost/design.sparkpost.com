@@ -5,7 +5,7 @@ import { map } from 'rxjs/operators';
 import { Visibility } from '@sparkpost/matchbox-icons';
 import { Edit } from '@sparkpost/matchbox-icons';
 
-import post from './post';
+import pages from './page';
 
 const REVIEW_QUERY = `* [_type == 'workflow.metadata' && state == 'inReview'] {
   ...coalesce(
@@ -21,23 +21,15 @@ const DRAFTS_QUERY = `* [_type == 'workflow.metadata' && state == 'draft'] {
   )
 }`;
 
-const HIDDEN_TYPES = ['workflow.metadata'];
-
-const hiddenDocTypes = (listItem) => !HIDDEN_TYPES.includes(listItem.getId());
-
-const docTypeListItems = S.documentTypeListItems().filter(hiddenDocTypes);
-
 const Structure = () =>
   S.list()
     .title('Content')
     .items([
-      post,
-      ...docTypeListItems,
+      ...pages,
       S.divider(),
       S.listItem()
         .title('In Review')
         .id('review')
-        .schemaType('post')
         .icon(Visibility)
         .child(() => {
           return documentStore.listenQuery(REVIEW_QUERY).pipe(
@@ -58,7 +50,6 @@ const Structure = () =>
         .title('Drafts')
         .id('drafts')
         .icon(Edit)
-        .schemaType('post')
         .child(() => {
           return documentStore.listenQuery(DRAFTS_QUERY).pipe(
             map((docs) => {

@@ -1,5 +1,5 @@
 export default {
-  type: 'document',
+  type: 'object',
   name: 'workflow.metadata',
   title: 'Workflow metadata',
   fields: [

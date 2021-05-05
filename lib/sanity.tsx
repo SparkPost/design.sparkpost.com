@@ -1,9 +1,16 @@
+import React from 'react';
+
 import {
   createClient,
   createImageUrlBuilder,
   createPreviewSubscriptionHook,
-  createCurrentUserHook
+  createCurrentUserHook,
+  createPortableTextComponent
 } from 'next-sanity';
+
+const HR = () => {
+  return <hr />;
+};
 
 const config = {
   projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID,
@@ -13,6 +20,15 @@ const config = {
 };
 
 export const urlFor = (source) => createImageUrlBuilder(config).image(source);
+
+export const PortableText = createPortableTextComponent({
+  ...config,
+  serializers: {
+    types: {
+      horizontalRule: HR
+    }
+  }
+});
 
 export const usePreviewSubscription = createPreviewSubscriptionHook(config);
 
@@ -25,6 +41,6 @@ export const previewClient = createClient({
   withCredentials: true
 });
 
-export const getClient = (usePreview) => (usePreview ? previewClient : sanityClient);
+export const getClient = (usePreview = false) => (usePreview ? previewClient : sanityClient);
 
 export const useCurrentUser = createCurrentUserHook(config);

@@ -1,4 +1,13 @@
-export const types = ['post'];
+export const types = [
+  'page',
+  'foundations',
+  'components',
+  'content',
+  'patterns',
+  'brand',
+  'resources',
+  'update'
+];
 
 export const states = [
   { id: 'draft', title: ' Draft ', color: 'warning' },
