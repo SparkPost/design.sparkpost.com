@@ -1,12 +1,39 @@
-import Link from 'next/link';
+import { usePreviewSubscription, PortableText } from '@lib/sanity';
+import { getHomePage } from '@lib/api';
 
-const Home = () => {
+const HomePage = ({ data, preview }) => {
+  const { data: pageData } = usePreviewSubscription(data?.query, {
+    params: { documentId: 'homePage' },
+    initialData: data?.pageData,
+    enabled: preview
+  });
+
+  if (!pageData) {
+    return <div>Error</div>;
+  }
+
+  const { title, body } = pageData;
+
   return (
     <div>
-      <h1>Home Page {process.env.TEST}</h1>
-      <Link href="/about">About</Link>
+      <h1>{title}</h1>
+      <PortableText blocks={body || []} />
     </div>
   );
 };
 
-export default Home;
+export async function getStaticProps({ preview = false }) {
+  const { data: pageData, query } = await getHomePage(preview);
+
+  return {
+    props: {
+      preview,
+      data: {
+        pageData,
+        query
+      }
+    }
+  };
+}
+
+export default HomePage;
