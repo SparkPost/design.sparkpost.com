@@ -1,11 +1,11 @@
 export const types = [
   'page',
-  'foundations',
-  'components',
+  'foundation',
+  'component',
   'content',
-  'patterns',
+  'pattern',
   'brand',
-  'resources',
+  'resource',
   'update'
 ];
 
