@@ -42,8 +42,6 @@ export async function getStaticProps({ params, preview = false }) {
 export async function getStaticPaths() {
   const { data: pages } = await getAllPageSlugs();
 
-  console.log(pages);
-
   const paths = pages.map((slug) => ({
     params: { slug: slug.split('/').filter((p) => p) }
   }));

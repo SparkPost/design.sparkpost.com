@@ -16,13 +16,6 @@ export const modules = groq`
   }
 `;
 
-// export const homeHero = groq`
-//   _type == 'homeHero' => {
-//     title,
-//     description
-//   }
-// `
-
 export async function getHomePage(preview) {
   const query = groq`
         *[_type == "homePage"] | order(_updatedAt desc)[0] {
