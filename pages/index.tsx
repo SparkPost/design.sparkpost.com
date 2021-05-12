@@ -1,5 +1,8 @@
-import { usePreviewSubscription, PortableText } from '@lib/sanity';
+import { usePreviewSubscription } from '@lib/sanity';
 import { getHomePage } from '@lib/api';
+import { Box } from '@sparkpost/matchbox';
+import { HomeHero } from '@components/homeHero';
+import { Card } from '@components/card';
 
 const HomePage = ({ data, preview }) => {
   const { data: pageData } = usePreviewSubscription(data?.query, {
@@ -12,12 +15,30 @@ const HomePage = ({ data, preview }) => {
     return <div>Error</div>;
   }
 
-  const { title, body } = pageData;
+  const { hero, modules } = pageData;
 
   return (
     <div>
-      <h1>{title}</h1>
-      <PortableText blocks={body || []} />
+      <HomeHero title={hero?.title} description={hero?.description} />
+      {modules?.map((module, key) => (
+        <Box
+          key={key}
+          display="grid"
+          gridTemplateColumns={`repeat(${module.size}, 1fr)`}
+          ml="1px"
+          mr="-1px"
+        >
+          {module.columns?.map((column, index) => (
+            <Card
+              key={index}
+              index={index}
+              span={column.span}
+              url={column.url}
+              content={column.content}
+            />
+          ))}
+        </Box>
+      ))}
     </div>
   );
 };

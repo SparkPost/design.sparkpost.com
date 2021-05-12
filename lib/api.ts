@@ -1,11 +1,31 @@
 import { groq } from 'next-sanity';
 import { getClient } from '@lib/sanity';
 
+export const PAGE_TYPES = `['page', 'foundation', 'component', 'content', 'pattern', 'brand', 'resource', 'update']`;
+
+export const modules = groq`
+  _type == 'grid' => {
+    _type,
+    _key,
+    size,
+    columns[] {
+      span,
+      "url": link->slug.current,
+      content
+    }
+  }
+`;
+
 export async function getHomePage(preview) {
   const query = groq`
         *[_type == "homePage"] | order(_updatedAt desc)[0] {
-            title,
-            body
+            hero {
+              title,
+              description
+            },
+            modules[] {
+              ${modules}
+            }
         }
     `;
 
@@ -21,7 +41,7 @@ export async function getPage(slug, preview) {
   const slugString = JSON.stringify(`/${slug.join('/')}`);
 
   const query = groq`
-        *[_type in ["page", "foundations"] && slug.current == ${slugString}][0] {
+        *[_type in ${PAGE_TYPES} && slug.current == ${slugString}][0] {
             title,
             "slug": slug.current,
             body
@@ -38,7 +58,7 @@ export async function getPage(slug, preview) {
 
 export async function getAllPageSlugs() {
   const query = groq`
-        *[_type in ["page", "foundations"] && defined(slug.current)][].slug.current
+        *[_type in ${PAGE_TYPES} && defined(slug.current)][].slug.current
     `;
 
   const data = await getClient().fetch(query);

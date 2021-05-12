@@ -7,6 +7,13 @@ export default {
   icon: GridOn,
   fields: [
     {
+      name: 'note',
+      type: 'note',
+      options: {
+        message: 'It is recommended to use a 10 column grid'
+      }
+    },
+    {
       title: 'Grid Size',
       name: 'size',
       type: 'number',
@@ -34,5 +41,28 @@ export default {
       type: 'array',
       of: [{ type: 'gridColumn' }]
     }
-  ]
+  ],
+  preview: {
+    select: {
+      columns: 'columns'
+    },
+    prepare({ columns }) {
+      const sectionTitle = columns[0]?.content[0]?.children[0]?.text;
+
+      const getTitle = () => {
+        if (columns?.length) {
+          return `
+            ${columns.length} Column${columns.length > 1 ? 's' : ''} ${
+            sectionTitle ? `(${sectionTitle})` : ''
+          }
+          `;
+        }
+
+        return 'No Columns';
+      };
+      return {
+        title: getTitle()
+      };
+    }
+  }
 };

@@ -23,6 +23,8 @@ import gridColumn from './modules/gridColumn';
 import blockContent from './objects/blockContent';
 import author from './objects/author';
 import horizontalRule from './objects/horizontal-rule';
+import navPage from './objects/navPage';
+import homeHero from './objects/homeHero';
 
 export default createSchema({
   name: 'matchbox',
@@ -48,6 +50,8 @@ export default createSchema({
     // Objects
     author,
     blockContent,
-    horizontalRule
+    horizontalRule,
+    navPage,
+    homeHero
   ])
 });
