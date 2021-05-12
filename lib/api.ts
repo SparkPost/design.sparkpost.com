@@ -1,7 +1,7 @@
 import { groq } from 'next-sanity';
 import { getClient } from '@lib/sanity';
 
-export const PAGE_TYPES = `['homePage', 'page', 'foundation', 'component', 'content', 'pattern', 'brand', 'resource', 'update']`;
+export const PAGE_TYPES = `['page', 'foundation', 'component', 'content', 'pattern', 'brand', 'resource', 'update']`;
 
 export const modules = groq`
   _type == 'grid' => {
