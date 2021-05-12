@@ -29,7 +29,13 @@ const HomePage = ({ data, preview }) => {
           mr="-1px"
         >
           {module.columns?.map((column, index) => (
-            <Card key={index} span={column.span} url={column.url} content={column.content} />
+            <Card
+              key={index}
+              index={index}
+              span={column.span}
+              url={column.url}
+              content={column.content}
+            />
           ))}
         </Box>
       ))}
