@@ -26,7 +26,7 @@ NEXT_PUBLIC_SANITY_PREVIEW_SECRET=MATCHBOX
 
 ## ⚡ Running The Apps
 
-From the root directory run `npm start`
+Run `npm start` from the root directory
 - Sanity studio will be running at `localhost:3333`
 - The Nextjs app will be running at `localhost:3000`
   - If you want to change the ports either app run on you will have to update the CORS Origins in the studio settings ([manage.sanity.io]<https://manage.sanity.io>)
