@@ -1,11 +1,9 @@
-# design.sparkpost.com
+# Get Started with design.sparkpost.com
 
 design.sparkpost.com is SparkPost's internal design documentation website
+design.sparkpost.com is built using [Next.js]<https://nextjs.org/> and [Sanity.io]<https://www.sanity.io/>
 
 ---
-
-# Get Started with design.sparkpost.com
-design.sparkpost.com is built using [Next.js]<https://nextjs.org/> and [Sanity.io]<https://www.sanity.io/>
 
 ## 🛠️ Setup
 
