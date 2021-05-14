@@ -1,14 +1,14 @@
 # Get Started with design.sparkpost.com
 
 design.sparkpost.com is SparkPost's internal design documentation website <br />
-The site is built using [Next.js]<https://nextjs.org/> and [Sanity.io]<https://www.sanity.io/>
+The site is built using [Next.js](https://nextjs.org/) and [Sanity.io](https://www.sanity.io/)
 
 ---
 
 ## 🛠️ Setup
 
 ### Sanity
-1. Install the [Sanity CLI]<https://www.sanity.io/docs/getting-started-with-sanity-cli> globally by running `npm install -g @sanity/cli`
+1. Install the [Sanity CLI](https://www.sanity.io/docs/getting-started-with-sanity-cli) globally by running `npm install -g @sanity/cli`
 2. `cd studio` and run `sanity install` in the `/studio` directory
 
 ### Next.js
@@ -27,7 +27,7 @@ NEXT_PUBLIC_SANITY_PREVIEW_SECRET=MATCHBOX
 Run `npm start` from the root directory
 - Sanity studio will be running at `localhost:3333`
 - The Nextjs app will be running at `localhost:3000`
-  - If you want to change the ports either app run on you will have to update the CORS Origins in the studio settings ([manage.sanity.io]<https://manage.sanity.io>)
+  - If you want to change the ports either app run on you will have to update the CORS Origins in the studio settings ([manage.sanity.io](https://manage.sanity.io>))
     - Settings -> API -> CORS Origins
   - You will need to ask a User Experience Engineer for access if you do not already have it
 
