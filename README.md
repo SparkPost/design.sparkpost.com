@@ -7,8 +7,6 @@ design.sparkpost.com is built using [Next.js]<https://nextjs.org/> and [Sanity.i
 
 ## 🛠️ Setup
 
-Before running the site locally you will need to install the 
-
 ### Sanity
 1. Install the [Sanity CLI]<https://www.sanity.io/docs/getting-started-with-sanity-cli> globally by running `npm install -g @sanity/cli`
 2. `cd studio` and run `sanity install` in the `/studio` directory
