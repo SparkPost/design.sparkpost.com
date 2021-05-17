@@ -40,18 +40,17 @@ const footer = groq`
 
 export async function getHomePage(preview) {
   const query = groq`
-        *[_type == "homePage"] | order(_updatedAt desc)[0] {
-            ${header},
-            ${footer},
-            hero {
-              title,
-              description
-            },
-            modules[] {
-              ${modules}
-            }
-        }
+    *[_type == "homePage"] | order(_updatedAt desc)[0] {
+      ${header},
+      ${footer},
+      hero {
+        title,
+        description
+      },
+      modules[] {
+        ${modules}
       }
+    }
     `;
 
   const data = await getClient(preview).fetch(query);
