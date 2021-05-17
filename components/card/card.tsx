@@ -6,7 +6,7 @@ import { ArrowForward } from '@sparkpost/matchbox-icons';
 import { motion } from 'framer-motion';
 import styled from 'styled-components';
 
-const hoverAnimation = (index) => {
+const hoverAnimation = (index: number) => {
   return {
     active: {
       x: index === 0 ? 12 : -12,
@@ -33,7 +33,8 @@ const MotionBox = styled(motion.div)`
   ${(props) => `
         background-color: ${props.theme.colors.white};
         padding: ${props.theme.space['600']};
-        border: 1px solid ${props.theme.colors.gray['900']};
+        border: 1px solid ${props.theme.colors.gray['1000']};
+        cursor: ${props.url ? 'pointer' : ''};
     `}
 `;
 
@@ -59,6 +60,7 @@ const Card: React.FC<CardProps> = (props: CardProps) => {
       >
         <Box position="absolute" width="100%" height="100%" top="0" left="0" bg="blue.700" />
         <MotionBox
+          url={url}
           onMouseEnter={() => setIsHovered(true)}
           onMouseLeave={() => setIsHovered(false)}
           animate={

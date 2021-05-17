@@ -1,8 +1,10 @@
 import { usePreviewSubscription } from '@lib/sanity';
 import { getHomePage } from '@lib/api';
 import { Box } from '@sparkpost/matchbox';
+
 import { HomeHero } from '@components/homeHero';
 import { Card } from '@components/card';
+import { Header } from '@components/header';
 
 const HomePage = ({ data, preview }) => {
   const { data: pageData } = usePreviewSubscription(data?.query, {
@@ -19,15 +21,10 @@ const HomePage = ({ data, preview }) => {
 
   return (
     <div>
+      <Header title="Matchbox" />
       <HomeHero title={hero?.title} description={hero?.description} />
       {modules?.map((module, key) => (
-        <Box
-          key={key}
-          display="grid"
-          gridTemplateColumns={`repeat(${module.size}, 1fr)`}
-          ml="1px"
-          mr="-1px"
-        >
+        <Box key={key} display="grid" gridTemplateColumns={`repeat(${module.size}, 1fr)`} ml="1px">
           {module.columns?.map((column, index) => (
             <Card
               key={index}

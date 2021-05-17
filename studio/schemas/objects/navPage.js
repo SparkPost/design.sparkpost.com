@@ -19,6 +19,7 @@ export default {
         { type: 'component' },
         { type: 'foundation' },
         { type: 'content' },
+        { type: 'brand' },
         { type: 'pattern' },
         { type: 'resource' },
         { type: 'update' }

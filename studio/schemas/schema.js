@@ -14,6 +14,7 @@ import pattern from './documents/pattern';
 import brand from './documents/brand';
 import resource from './documents/resource';
 import update from './documents/update';
+import menu from './documents/menu';
 
 // Modules
 import grid from './modules/grid';
@@ -24,6 +25,7 @@ import blockContent from './objects/blockContent';
 import author from './objects/author';
 import horizontalRule from './objects/horizontal-rule';
 import navPage from './objects/navPage';
+import navLink from './objects/navLink';
 import homeHero from './objects/homeHero';
 
 export default createSchema({
@@ -42,6 +44,7 @@ export default createSchema({
     brand,
     resource,
     update,
+    menu,
 
     // Modules
     grid,
@@ -52,6 +55,7 @@ export default createSchema({
     blockContent,
     horizontalRule,
     navPage,
+    navLink,
     homeHero
   ])
 });

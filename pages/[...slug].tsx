@@ -1,6 +1,8 @@
 import { usePreviewSubscription, PortableText } from '@lib/sanity';
 import { getPage, getAllPageSlugs } from '@lib/api';
 
+import { Header } from '@components/header';
+
 const Page = ({ data, slug, preview }) => {
   const { data: pageData } = usePreviewSubscription(data?.query, {
     params: { slug: slug },
@@ -16,6 +18,7 @@ const Page = ({ data, slug, preview }) => {
 
   return (
     <div>
+      <Header title="Matchbox" />
       <h1>{title}</h1>
       <PortableText blocks={body || []} />
     </div>
