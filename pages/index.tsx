@@ -5,6 +5,7 @@ import { Box } from '@sparkpost/matchbox';
 import { HomeHero } from '@components/homeHero';
 import { Card } from '@components/card';
 import { Header } from '@components/header';
+import Footer from '@components/footer';
 
 const HomePage = ({ data, preview }) => {
   const { data: pageData } = usePreviewSubscription(data?.query, {
@@ -17,7 +18,7 @@ const HomePage = ({ data, preview }) => {
     return <div>Error</div>;
   }
 
-  const { hero, modules } = pageData;
+  const { hero, modules, footer } = pageData;
 
   return (
     <div>
@@ -36,6 +37,7 @@ const HomePage = ({ data, preview }) => {
           ))}
         </Box>
       ))}
+      <Footer items={footer?.menu?.items} />
     </div>
   );
 };

@@ -15,6 +15,7 @@ import brand from './documents/brand';
 import resource from './documents/resource';
 import update from './documents/update';
 import menu from './documents/menu';
+import footerSettings from './documents/footerSettings';
 
 // Modules
 import grid from './modules/grid';
@@ -45,6 +46,7 @@ export default createSchema({
     resource,
     update,
     menu,
+    footerSettings,
 
     // Modules
     grid,
