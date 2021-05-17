@@ -2,11 +2,9 @@ import S from '@sanity/desk-tool/structure-builder';
 import documentStore from 'part:@sanity/base/datastore/document';
 import { map } from 'rxjs/operators';
 
-import { Visibility } from '@sparkpost/matchbox-icons';
+import { Visibility, Settings, PowerInput } from '@sparkpost/matchbox-icons';
 import { Edit } from '@sparkpost/matchbox-icons';
-import { Settings } from '@sparkpost/matchbox-icons';
 import { Menu } from '@sparkpost/matchbox-icons';
-import { PowerInput } from '@sparkpost/matchbox-icons';
 
 import pages from './page';
 
@@ -24,31 +22,28 @@ const DRAFTS_QUERY = `* [_type == 'workflow.metadata' && state == 'draft'] {
   )
 }`;
 
+const HeaderSettings = S.listItem()
+  .title('Header Settings')
+  .child(S.editor().id('headerSettings').schemaType('headerSettings').documentId('headerSettings'))
+  .icon(PowerInput);
+
+const FooterSettings = S.listItem()
+  .title('Footer Settings')
+  .child(S.editor().id('footerSettings').schemaType('footerSettings').documentId('footerSettings'))
+  .icon(Settings);
+
+const Menus = S.listItem()
+  .title('Menus')
+  .child(S.documentTypeList('menu').title('Menus'))
+  .icon(Menu);
+
 const Structure = () =>
   S.list()
     .title('Content')
     .items([
       S.listItem()
         .title('Settings')
-        .child(
-          S.list()
-            .title('Settings')
-            .items([
-              S.listItem()
-                .title('Menus')
-                .child(S.documentTypeList('menu').title('Menus'))
-                .icon(Menu),
-              S.listItem()
-                .title('Header')
-                .child(
-                  S.editor()
-                    .id('headerSettings')
-                    .schemaType('headerSettings')
-                    .documentId('headerSettings')
-                )
-                .icon(PowerInput)
-            ])
-        )
+        .child(S.list().title('Settings').items([Menus, HeaderSettings, FooterSettings]))
         .icon(Settings),
       S.divider(),
       ...pages,

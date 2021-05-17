@@ -16,6 +16,7 @@ import resource from './documents/resource';
 import update from './documents/update';
 import menu from './documents/menu';
 import headerSettings from './documents/headerSettings';
+import footerSettings from './documents/footerSettings';
 
 // Modules
 import grid from './modules/grid';
@@ -47,6 +48,7 @@ export default createSchema({
     update,
     menu,
     headerSettings,
+    footerSettings,
 
     // Modules
     grid,
