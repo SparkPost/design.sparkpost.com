@@ -5,6 +5,7 @@ import { map } from 'rxjs/operators';
 import { Visibility, Settings, PowerInput } from '@sparkpost/matchbox-icons';
 import { Edit } from '@sparkpost/matchbox-icons';
 import { Menu } from '@sparkpost/matchbox-icons';
+import { PowerInput } from '@sparkpost/matchbox-icons';
 
 import pages from './page';
 

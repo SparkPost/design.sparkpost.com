@@ -86,6 +86,20 @@ const Header: React.FC<HeaderProps> = (props: HeaderProps) => {
       <Box px="600" borderX="thick" py="450" mr="-2px">
         <StyledInput type="text" placeholder="Search" width="500"></StyledInput>
       </Box>
+      <StyledList>
+        {items?.map((item, index) => {
+          return <ListItem {...item} key={index} />;
+        })}
+      </StyledList>
+      <Box
+        px="600"
+        borderLeftWidth="1px"
+        borderLeftStyle="solid"
+        borderLeftColor="gray.1000"
+        height="100%"
+      >
+        <StyledInput type="text" placeholder="Search"></StyledInput>
+      </Box>
     </Box>
   );
 };
