@@ -4,6 +4,8 @@ import { map } from 'rxjs/operators';
 
 import { Visibility } from '@sparkpost/matchbox-icons';
 import { Edit } from '@sparkpost/matchbox-icons';
+import { Settings } from '@sparkpost/matchbox-icons';
+import { Menu } from '@sparkpost/matchbox-icons';
 
 import pages from './page';
 
@@ -25,6 +27,20 @@ const Structure = () =>
   S.list()
     .title('Content')
     .items([
+      S.listItem()
+        .title('Settings')
+        .child(
+          S.list()
+            .title('Settings')
+            .items([
+              S.listItem()
+                .title('Menus')
+                .child(S.documentTypeList('menu').title('Menus'))
+                .icon(Menu)
+            ])
+        )
+        .icon(Settings),
+      S.divider(),
       ...pages,
       S.divider(),
       S.listItem()
