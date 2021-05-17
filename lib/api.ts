@@ -16,17 +16,29 @@ export const modules = groq`
   }
 `;
 
+const footer = groq`
+  "footer": *[_type == "footerSettings"][0] {
+    "menu": footerMenu -> {
+      items[]{
+        title,
+        url
+      }
+    }
+  }
+`;
+
 export async function getHomePage(preview) {
   const query = groq`
-        *[_type == "homePage"] | order(_updatedAt desc)[0] {
-            hero {
-              title,
-              description
-            },
-            modules[] {
-              ${modules}
-            }
+      *[_type == "homePage"] | order(_updatedAt desc)[0] {
+        ${footer},
+        hero {
+          title,
+          description
+        },
+        modules[] {
+          ${modules}
         }
+      }
     `;
 
   const data = await getClient(preview).fetch(query);
@@ -44,7 +56,8 @@ export async function getPage(slug, preview) {
         *[_type in ${PAGE_TYPES} && slug.current == ${slugString}][0] {
             title,
             "slug": slug.current,
-            body
+            body,
+            ${footer}
         }
     `;
 

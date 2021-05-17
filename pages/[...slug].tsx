@@ -2,6 +2,7 @@ import { usePreviewSubscription, PortableText } from '@lib/sanity';
 import { getPage, getAllPageSlugs } from '@lib/api';
 
 import { Header } from '@components/header';
+import Footer from '@components/footer';
 
 const Page = ({ data, slug, preview }) => {
   const { data: pageData } = usePreviewSubscription(data?.query, {
@@ -14,13 +15,14 @@ const Page = ({ data, slug, preview }) => {
     return <div>Error</div>;
   }
 
-  const { title, body } = pageData;
+  const { title, body, footer } = pageData;
 
   return (
     <div>
       <Header title="Matchbox" />
       <h1>{title}</h1>
       <PortableText blocks={body || []} />
+      <Footer items={footer?.menu?.items} />
     </div>
   );
 };
