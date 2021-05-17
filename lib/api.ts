@@ -16,9 +16,21 @@ export const modules = groq`
   }
 `;
 
+const header = groq`
+  "header": *[_type == "headerSettings"][0] {
+    "menu": headerMenu -> {
+      items[]{
+        title,
+        "url": page->slug.current,
+      }
+    }
+  }
+`;
+
 export async function getHomePage(preview) {
   const query = groq`
         *[_type == "homePage"] | order(_updatedAt desc)[0] {
+            ${header},
             hero {
               title,
               description

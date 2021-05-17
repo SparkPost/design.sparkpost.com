@@ -6,6 +6,7 @@ import { Visibility } from '@sparkpost/matchbox-icons';
 import { Edit } from '@sparkpost/matchbox-icons';
 import { Settings } from '@sparkpost/matchbox-icons';
 import { Menu } from '@sparkpost/matchbox-icons';
+import { PowerInput } from '@sparkpost/matchbox-icons';
 
 import pages from './page';
 
@@ -36,7 +37,16 @@ const Structure = () =>
               S.listItem()
                 .title('Menus')
                 .child(S.documentTypeList('menu').title('Menus'))
-                .icon(Menu)
+                .icon(Menu),
+              S.listItem()
+                .title('Header')
+                .child(
+                  S.editor()
+                    .id('headerSettings')
+                    .schemaType('headerSettings')
+                    .documentId('headerSettings')
+                )
+                .icon(PowerInput)
             ])
         )
         .icon(Settings),

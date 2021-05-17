@@ -17,11 +17,11 @@ const HomePage = ({ data, preview }) => {
     return <div>Error</div>;
   }
 
-  const { hero, modules } = pageData;
+  const { header, hero, modules } = pageData;
 
   return (
     <div>
-      <Header title="Matchbox" />
+      <Header title="Matchbox" items={header?.menu?.items} />
       <HomeHero title={hero?.title} description={hero?.description} />
       {modules?.map((module, key) => (
         <Box key={key} display="grid" gridTemplateColumns={`repeat(${module.size}, 1fr)`} ml="1px">
