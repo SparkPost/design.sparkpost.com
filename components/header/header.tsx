@@ -32,7 +32,6 @@ const StyledInput = styled.input`
 
 const StyledHomeLink = styled(Box)`
   text-decoration: none;
-  border-right: 1px solid ${(props) => props.theme.colors.gray['1000']};
   color: white;
   transition: ${(props) => props.theme.motion.duration.fast};
 
@@ -49,14 +48,7 @@ const Header: React.FC<HeaderProps> = (props: HeaderProps) => {
   const { title, items } = props;
 
   return (
-    <Box
-      as="header"
-      borderWidth="100"
-      borderStyle="solid"
-      borderColor="gray.1000"
-      display="flex"
-      alignItems="center"
-    >
+    <Box as="header" border="thick" display="flex" alignItems="center">
       <Link href="/">
         <StyledHomeLink
           as="a"
@@ -69,6 +61,8 @@ const Header: React.FC<HeaderProps> = (props: HeaderProps) => {
           pr="100px"
           pl="400"
           py="450"
+          borderX="thick"
+          ml="-2px"
         >
           {title}
         </StyledHomeLink>
@@ -78,14 +72,8 @@ const Header: React.FC<HeaderProps> = (props: HeaderProps) => {
           return <ListItem {...item} key={index} />;
         })}
       </StyledList>
-      <Box
-        px="600"
-        borderLeftWidth="1px"
-        borderLeftStyle="solid"
-        borderLeftColor="gray.1000"
-        height="100%"
-      >
-        <StyledInput type="text" placeholder="Search"></StyledInput>
+      <Box px="600" borderX="thick" py="450" mr="-2px">
+        <StyledInput type="text" placeholder="Search" width="500"></StyledInput>
       </Box>
     </Box>
   );
@@ -93,24 +81,24 @@ const Header: React.FC<HeaderProps> = (props: HeaderProps) => {
 
 const StyledNavLink = styled(Box)`
   display: inline-block;
-  margin-top: -1px;
-  margin-bottom: -1px;
-  margin-left: -1px;
+  margin-top: -2px;
+  margin-bottom: -2px;
+  margin-left: -2px;
   color: ${(props) => props.theme.colors.gray['1000']};
   text-decoration: none;
-  border: 1px solid transparent;
+  border: 2px solid transparent;
   transition: ${(props) => props.theme.motion.duration.fast};
 
   &:hover {
     background: ${(props) => props.theme.colors.blue['200']};
-    border: 1px solid ${(props) => props.theme.colors.gray['1000']};
+    border: ${(props) => props.theme.borders.thick};
   }
 
   ${({ isActive, theme }) => {
     if (isActive) {
       return `
       background: ${theme.colors.blue['200']};
-      border: 1px solid ${theme.colors.gray['1000']};
+      border: ${theme.borders.thick};
       `;
     }
   }}

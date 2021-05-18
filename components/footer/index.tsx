@@ -21,14 +21,7 @@ function Footer(props: FooterProps): JSX.Element {
   const { items } = props;
 
   return (
-    <Box
-      as="footer"
-      borderWidth="1px"
-      borderStyle="solid"
-      borderColor="gray.1000"
-      p="600"
-      mt="-1px"
-    >
+    <Box as="footer" border="thick" p="600" mt="-2px">
       <Ul>
         {items.map((item, i) => (
           <Item {...item} key={i} />

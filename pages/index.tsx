@@ -25,7 +25,7 @@ const HomePage = ({ data, preview }) => {
       <Header title="Matchbox" items={header?.menu?.items} />
       <HomeHero title={hero?.title} description={hero?.description} />
       {modules?.map((module, key) => (
-        <Box key={key} display="grid" gridTemplateColumns={`repeat(${module.size}, 1fr)`} ml="1px">
+        <Box key={key} display="grid" gridTemplateColumns={`repeat(${module.size}, 1fr)`}>
           {module.columns?.map((column, index) => (
             <Card
               key={index}
