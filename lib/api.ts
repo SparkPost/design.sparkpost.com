@@ -94,3 +94,36 @@ export async function getAllPageSlugs() {
     query
   };
 }
+
+type IndexTypes =
+  | 'foundation'
+  | 'component'
+  | 'content'
+  | 'pattern'
+  | 'brand'
+  | 'resource'
+  | 'update';
+
+export async function getIndexPageFor(type: IndexTypes) {
+  const query = groq`
+        *[0] {
+          "list": *[_type == '${type}'] {
+            title,
+            "slug": slug.current,
+          },
+          "settings": *[_type=='indexPage' && slug.current match '/${type}*'][0] {
+            title,
+            layout,
+          },
+          ${header},
+          ${footer},
+        }
+    `;
+
+  const data = await getClient().fetch(query);
+
+  return {
+    data,
+    query
+  };
+}
