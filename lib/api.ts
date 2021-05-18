@@ -69,7 +69,8 @@ export async function getPage(slug, preview) {
             title,
             "slug": slug.current,
             body,
-            ${footer}
+            ${footer},
+            ${header},
         }
     `;
 

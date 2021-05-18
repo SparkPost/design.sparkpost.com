@@ -15,11 +15,11 @@ const Page = ({ data, slug, preview }) => {
     return <div>Error</div>;
   }
 
-  const { title, body, footer } = pageData;
+  const { title, body, footer, header } = pageData;
 
   return (
     <div>
-      <Header title="Matchbox" />
+      <Header title="Matchbox" items={header?.menu?.items} />
       <h1>{title}</h1>
       <PortableText blocks={body || []} />
       <Footer items={footer?.menu?.items} />

@@ -1,6 +1,7 @@
 import { Box } from '@sparkpost/matchbox';
 import styled from 'styled-components';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 
 type MenuItems = {
   title: string;
@@ -90,37 +91,50 @@ const Header: React.FC<HeaderProps> = (props: HeaderProps) => {
   );
 };
 
-const StyledItem = styled(Box)`
+const StyledNavLink = styled(Box)`
   display: inline-block;
+  margin-top: -1px;
+  margin-bottom: -1px;
+  margin-left: -1px;
+  color: ${(props) => props.theme.colors.gray['1000']};
+  text-decoration: none;
+  border: 1px solid transparent;
+  transition: ${(props) => props.theme.motion.duration.fast};
 
-  a,
-  a:visited {
-    display: inline-block;
-    margin-top: -1px;
-    margin-bottom: -1px;
-    color: ${(props) => props.theme.colors.gray['1000']};
-    text-decoration: none;
-    border: 1px solid transparent;
-    transition: ${(props) => props.theme.motion.duration.fast};
-
-    &:hover {
-      background: ${(props) => props.theme.colors.blue['200']};
-      border: 1px solid ${(props) => props.theme.colors.gray['1000']};
-    }
+  &:hover {
+    background: ${(props) => props.theme.colors.blue['200']};
+    border: 1px solid ${(props) => props.theme.colors.gray['1000']};
   }
+
+  ${({ isActive, theme }) => {
+    if (isActive) {
+      return `
+      background: ${theme.colors.blue['200']};
+      border: 1px solid ${theme.colors.gray['1000']};
+      `;
+    }
+  }}
 `;
 
 const ListItem: React.FC<MenuItems> = (props: MenuItems) => {
   const { title, url } = props;
+  const router = useRouter();
 
   return (
-    <StyledItem as="li">
+    <Box as="li" display="inline-block">
       <Link href={url}>
-        <Box as="a" px="450" py="450" fontSize="200" fontWeight="500">
+        <StyledNavLink
+          as="a"
+          px="450"
+          py="450"
+          fontSize="200"
+          fontWeight="500"
+          isActive={router.asPath === url}
+        >
           {title}
-        </Box>
+        </StyledNavLink>
       </Link>
-    </StyledItem>
+    </Box>
   );
 };
 
