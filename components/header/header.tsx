@@ -1,5 +1,6 @@
 import { Box } from '@sparkpost/matchbox';
 import styled from 'styled-components';
+import Link from 'next/link';
 
 type MenuItems = {
   title: string;
@@ -28,6 +29,21 @@ const StyledInput = styled.input`
     `}
 `;
 
+const StyledHomeLink = styled(Box)`
+  text-decoration: none;
+  border-right: 1px solid ${(props) => props.theme.colors.gray['1000']};
+  color: white;
+  transition: ${(props) => props.theme.motion.duration.fast};
+
+  &,
+  &:visited {
+    &:hover {
+      color: white;
+      background: ${(props) => props.theme.colors.blue[700]};
+    }
+  }
+`;
+
 const Header: React.FC<HeaderProps> = (props: HeaderProps) => {
   const { title, items } = props;
 
@@ -40,18 +56,22 @@ const Header: React.FC<HeaderProps> = (props: HeaderProps) => {
       display="flex"
       alignItems="center"
     >
-      <Box
-        as="span"
-        display="inline-block"
-        p="450"
-        bg="gray.1000"
-        color="white"
-        fontSize="500"
-        fontWeight="600"
-        pr="100px"
-      >
-        {title}
-      </Box>
+      <Link href="/">
+        <StyledHomeLink
+          as="a"
+          display="inline-block"
+          height="100%"
+          bg="gray.1000"
+          color="white"
+          fontSize="400"
+          fontWeight="500"
+          pr="100px"
+          pl="400"
+          py="450"
+        >
+          {title}
+        </StyledHomeLink>
+      </Link>
       <StyledList>
         {items?.map((item, index) => {
           return <ListItem {...item} key={index} />;
@@ -75,8 +95,18 @@ const StyledItem = styled(Box)`
 
   a,
   a:visited {
+    display: inline-block;
+    margin-top: -1px;
+    margin-bottom: -1px;
     color: ${(props) => props.theme.colors.gray['1000']};
     text-decoration: none;
+    border: 1px solid transparent;
+    transition: ${(props) => props.theme.motion.duration.fast};
+
+    &:hover {
+      background: ${(props) => props.theme.colors.blue['200']};
+      border: 1px solid ${(props) => props.theme.colors.gray['1000']};
+    }
   }
 `;
 
@@ -84,10 +114,12 @@ const ListItem: React.FC<MenuItems> = (props: MenuItems) => {
   const { title, url } = props;
 
   return (
-    <StyledItem as="li" px="500">
-      <Box as="a" href={url}>
-        {title}
-      </Box>
+    <StyledItem as="li">
+      <Link href={url}>
+        <Box as="a" px="450" py="450" fontSize="200" fontWeight="500">
+          {title}
+        </Box>
+      </Link>
     </StyledItem>
   );
 };
