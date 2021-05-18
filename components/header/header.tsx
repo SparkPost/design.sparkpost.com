@@ -1,7 +1,10 @@
-import { Box } from '@sparkpost/matchbox';
+import React from 'react';
+import { Box, styles } from '@sparkpost/matchbox';
+import { InvertColors } from '@sparkpost/matchbox-icons';
 import styled from 'styled-components';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
+import { ColorSchemeContext } from '../../context/ColorSchemeContext';
 
 type MenuItems = {
   title: string;
@@ -39,23 +42,28 @@ const StyledHomeLink = styled(Box)`
   &:visited {
     &:hover {
       color: white;
-      background: ${(props) => props.theme.colors.blue[700]};
+      background: ${(props) => props.theme.colors.scheme.heavyAccent};
     }
   }
 `;
 
+const SchemeButton = styled.button`
+  ${styles.buttonReset}
+  pointer: cursor;
+  padding: ${(props) => props.theme.space[400]};
+`;
+
 const Header: React.FC<HeaderProps> = (props: HeaderProps) => {
   const { title, items } = props;
-
+  const { toggle } = React.useContext(ColorSchemeContext);
   return (
-    <Box as="header" border="thick" display="flex" alignItems="center">
+    <Box as="header" border="thick" display="flex" alignItems="center" bg="scheme.bg">
       <Link href="/">
         <StyledHomeLink
           as="a"
           display="inline-block"
           height="100%"
           bg="gray.1000"
-          color="white"
           fontSize="400"
           fontWeight="500"
           pr="100px"
@@ -72,6 +80,9 @@ const Header: React.FC<HeaderProps> = (props: HeaderProps) => {
           return <ListItem {...item} key={index} />;
         })}
       </StyledList>
+      <SchemeButton onClick={toggle} type="button">
+        <InvertColors />
+      </SchemeButton>
       <Box px="600" borderX="thick" py="450" mr="-2px">
         <StyledInput type="text" placeholder="Search" width="500"></StyledInput>
       </Box>
@@ -84,20 +95,21 @@ const StyledNavLink = styled(Box)`
   margin-top: -2px;
   margin-bottom: -2px;
   margin-left: -2px;
-  color: ${(props) => props.theme.colors.gray['1000']};
+  color: ${(props) => props.theme.colors.scheme.fg};
   text-decoration: none;
   border: 2px solid transparent;
   transition: ${(props) => props.theme.motion.duration.fast};
 
   &:hover {
-    background: ${(props) => props.theme.colors.blue['200']};
+    background: ${(props) => props.theme.colors.scheme.lightAccent};
     border: ${(props) => props.theme.borders.thick};
+    color: ${(props) => props.theme.colors.scheme.fg};
   }
 
   ${({ isActive, theme }) => {
     if (isActive) {
       return `
-      background: ${theme.colors.blue['200']};
+      background: ${theme.colors.scheme.lightAccent};
       border: ${theme.borders.thick};
       `;
     }

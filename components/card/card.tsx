@@ -31,7 +31,7 @@ const MotionBox = styled(motion.div)`
   top: 0;
   left: 0;
   ${(props) => `
-        background-color: ${props.theme.colors.white};
+        background-color: ${props.theme.colors.scheme.bg};
         padding: ${props.theme.space['600']};
         border: ${props.theme.borders.thick};
         cursor: ${props.url ? 'pointer' : ''};
@@ -63,7 +63,14 @@ const Card: React.FC<CardProps> = (props: CardProps) => {
         pb={['40%', null, '82%', '60%', '42%']}
         position="relative"
       >
-        <Box position="absolute" width="100%" height="100%" top="0" left="0" bg="blue.700" />
+        <Box
+          position="absolute"
+          width="100%"
+          height="100%"
+          top="0"
+          left="0"
+          bg="scheme.heavyAccent"
+        />
         <MotionBox
           url={url}
           onMouseEnter={() => setIsHovered(true)}

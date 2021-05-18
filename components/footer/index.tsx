@@ -27,7 +27,7 @@ function Footer(props: FooterProps): JSX.Element {
           <Item {...item} key={i} />
         ))}
       </Ul>
-      <Box fontSize="100" color="gray.700" pt="800" mt="800">
+      <Box fontSize="100" color="scheme.fg" pt="800" mt="800">
         SparkPost © {new Date().getFullYear()}. All Rights Reserved.
       </Box>
     </Box>
@@ -41,7 +41,7 @@ const Li = styled.li`
 
   a,
   a:visited {
-    color: ${({ theme }) => theme.colors.gray[1000]};
+    color: ${({ theme }) => theme.colors.scheme.fg};
   }
 `;
 
