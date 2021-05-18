@@ -5,9 +5,7 @@ export const ColorSchemeContext = React.createContext({ colorScheme: 'light', to
 
 export function ColorSchemeProvider({ children }) {
   const prefers = usePrefersColorScheme();
-  // const [scheme, setScheme] = React.useState(prefers);
-  // Default to light for now
-  const [scheme, setScheme] = React.useState('light');
+  const [scheme, setScheme] = React.useState(prefers);
 
   function handleToggle() {
     setScheme(scheme === 'light' ? 'dark' : 'light');
