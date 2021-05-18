@@ -60,7 +60,7 @@ const Card: React.FC<CardProps> = (props: CardProps) => {
     <Link href={url || ''}>
       <BorderBox
         gridColumn={['span 10', null, `span ${span}`]}
-        pb={['40%', null, '72%', '60%', '38%']}
+        pb={['40%', null, '82%', '60%', '42%']}
         position="relative"
       >
         <Box position="absolute" width="100%" height="100%" top="0" left="0" bg="blue.700" />
@@ -77,7 +77,11 @@ const Card: React.FC<CardProps> = (props: CardProps) => {
           }}
         >
           <PortableText blocks={content} />
-          {url && <ArrowForward />}
+          {url && (
+            <Box mt="200">
+              <ArrowForward />
+            </Box>
+          )}
         </MotionBox>
       </BorderBox>
     </Link>
