@@ -18,14 +18,14 @@ const HomePage = ({ data, preview }) => {
     return <div>Error</div>;
   }
 
-  const { hero, modules, footer } = pageData;
+  const { header, hero, modules, footer } = pageData;
 
   return (
     <div>
-      <Header title="Matchbox" />
+      <Header title="Matchbox" items={header?.menu?.items} />
       <HomeHero title={hero?.title} description={hero?.description} />
       {modules?.map((module, key) => (
-        <Box key={key} display="grid" gridTemplateColumns={`repeat(${module.size}, 1fr)`} ml="1px">
+        <Box key={key} display="grid" gridTemplateColumns={`repeat(${module.size}, 1fr)`}>
           {module.columns?.map((column, index) => (
             <Card
               key={index}

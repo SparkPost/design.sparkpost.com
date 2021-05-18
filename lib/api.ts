@@ -16,6 +16,17 @@ export const modules = groq`
   }
 `;
 
+const header = groq`
+  "header": *[_type == "headerSettings"][0] {
+    "menu": headerMenu -> {
+      items[] {
+        title,
+        "url": page->slug.current,
+      }
+    }
+  }
+`;
+
 const footer = groq`
   "footer": *[_type == "footerSettings"][0] {
     "menu": footerMenu -> {
@@ -29,16 +40,17 @@ const footer = groq`
 
 export async function getHomePage(preview) {
   const query = groq`
-      *[_type == "homePage"] | order(_updatedAt desc)[0] {
-        ${footer},
-        hero {
-          title,
-          description
-        },
-        modules[] {
-          ${modules}
-        }
+    *[_type == "homePage"] | order(_updatedAt desc)[0] {
+      ${header},
+      ${footer},
+      hero {
+        title,
+        description
+      },
+      modules[] {
+        ${modules}
       }
+    }
     `;
 
   const data = await getClient(preview).fetch(query);
@@ -57,7 +69,8 @@ export async function getPage(slug, preview) {
             title,
             "slug": slug.current,
             body,
-            ${footer}
+            ${footer},
+            ${header},
         }
     `;
 

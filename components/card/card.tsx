@@ -31,11 +31,18 @@ const MotionBox = styled(motion.div)`
   top: 0;
   left: 0;
   ${(props) => `
-        background-color: ${props.theme.colors.white};
+        background-color: ${props.theme.colors.scheme.bg};
         padding: ${props.theme.space['600']};
-        border: 1px solid ${props.theme.colors.gray['1000']};
+        border: ${props.theme.borders.thick};
         cursor: ${props.url ? 'pointer' : ''};
     `}
+`;
+
+const BorderBox = styled(Box)`
+  margin-bottom: -2px;
+  &:not(:first-child) {
+    margin-left: -2px;
+  }
 `;
 
 type CardProps = {
@@ -51,14 +58,19 @@ const Card: React.FC<CardProps> = (props: CardProps) => {
 
   return (
     <Link href={url || ''}>
-      <Box
+      <BorderBox
         gridColumn={['span 10', null, `span ${span}`]}
-        pb={['40%', null, '72%', '60%', '38%']}
+        pb={['40%', null, '82%', '60%', '42%']}
         position="relative"
-        ml="-1px"
-        mt="-1px"
       >
-        <Box position="absolute" width="100%" height="100%" top="0" left="0" bg="blue.700" />
+        <Box
+          position="absolute"
+          width="100%"
+          height="100%"
+          top="0"
+          left="0"
+          bg="scheme.heavyAccent"
+        />
         <MotionBox
           url={url}
           onMouseEnter={() => setIsHovered(true)}
@@ -72,9 +84,13 @@ const Card: React.FC<CardProps> = (props: CardProps) => {
           }}
         >
           <PortableText blocks={content} />
-          {url && <ArrowForward />}
+          {url && (
+            <Box mt="200">
+              <ArrowForward />
+            </Box>
+          )}
         </MotionBox>
-      </Box>
+      </BorderBox>
     </Link>
   );
 };
