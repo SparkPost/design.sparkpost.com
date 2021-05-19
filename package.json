@@ -39,6 +39,7 @@
     "@sparkpost/design-tokens": "^5.1.4",
     "@sparkpost/matchbox": "^5.1.4",
     "@sparkpost/matchbox-icons": "^5.1.4",
+    "@styled-system/css": "^5.1.5",
     "eslint-import-resolver-typescript": "^2.4.0",
     "groq": "^2.2.6",
     "next": "^10.2.0",

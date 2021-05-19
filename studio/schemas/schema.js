@@ -7,6 +7,7 @@ import workflowMetadata from './workflow/metadata';
 // Documents
 import homePage from './documents/homePage';
 import page from './documents/page';
+import indexPage from './documents/indexPage';
 import foundation from './documents/foundation';
 import component from './documents/component';
 import content from './documents/content';
@@ -39,6 +40,7 @@ export default createSchema({
     // Documents
     homePage,
     page,
+    indexPage,
     foundation,
     component,
     content,

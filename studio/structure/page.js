@@ -24,7 +24,7 @@ const previewUrl = isLocalhost() ? localURL : remoteURL;
 const pageTypes = [
   {
     title: 'Index Pages',
-    type: 'page'
+    type: 'indexPage'
   },
   {
     title: 'Foundations',

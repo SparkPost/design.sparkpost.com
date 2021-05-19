@@ -61,11 +61,9 @@ export async function getHomePage(preview) {
   };
 }
 
-export async function getPage(slug, preview) {
-  const slugString = JSON.stringify(`/${slug.join('/')}`);
-
+export async function getPage(slug: string, preview: boolean) {
   const query = groq`
-        *[_type in ${PAGE_TYPES} && slug.current == ${slugString}][0] {
+        *[_type in ${PAGE_TYPES} && slug.current match '${slug}'][0] {
             title,
             "slug": slug.current,
             body,
@@ -85,6 +83,56 @@ export async function getPage(slug, preview) {
 export async function getAllPageSlugs() {
   const query = groq`
         *[_type in ${PAGE_TYPES} && defined(slug.current)][].slug.current
+    `;
+
+  const data = await getClient().fetch(query);
+
+  return {
+    data,
+    query
+  };
+}
+
+type IndexTypes =
+  | 'foundation'
+  | 'component'
+  | 'content'
+  | 'pattern'
+  | 'brand'
+  | 'resource'
+  | 'update';
+
+export async function getPagesByType(type: IndexTypes) {
+  const query = groq`
+        *[_type == '${type}'] {
+            title,
+            "slug": slug.current,
+            body
+          }
+    `;
+
+  const data = await getClient().fetch(query);
+
+  return {
+    data,
+    query
+  };
+}
+
+export async function getIndexPageFor(type: IndexTypes) {
+  const query = groq`
+        *[0] {
+          "list": *[_type == '${type}'] {
+            title,
+            "slug": slug.current,
+          },
+          "settings": *[_type=='indexPage' && (slug.current match '/${type}*' || slug.current match '/${type}')][0] {
+            title,
+            layout,
+          },
+          ${header},
+          ${footer},
+        }
     `;
 
   const data = await getClient().fetch(query);

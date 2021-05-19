@@ -1,5 +1,5 @@
 import { usePreviewSubscription, PortableText } from '@lib/sanity';
-import { getPage, getAllPageSlugs } from '@lib/api';
+import { getPage, getPagesByType } from '@lib/api';
 
 import { Header } from '@components/header';
 import Footer from '@components/footer';
@@ -30,7 +30,7 @@ const Page = ({ data, slug, preview }) => {
 export async function getStaticProps({ params, preview = false }) {
   const { slug = '' } = params;
 
-  const { data: pageData, query } = await getPage(slug, preview);
+  const { data: pageData, query } = await getPage(`updates/${slug}`, preview);
 
   return {
     props: {
@@ -45,10 +45,10 @@ export async function getStaticProps({ params, preview = false }) {
 }
 
 export async function getStaticPaths() {
-  const { data: pages } = await getAllPageSlugs();
+  const { data: pages } = await getPagesByType('update');
 
-  const paths = pages.map((slug) => ({
-    params: { slug: slug.split('/').filter((p) => p) }
+  const paths = pages.map(({ slug }) => ({
+    params: { slug: slug.split('/').pop() }
   }));
 
   return {
