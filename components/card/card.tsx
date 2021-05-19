@@ -5,11 +5,12 @@ import { PortableText } from '@lib/sanity';
 import { ArrowForward } from '@sparkpost/matchbox-icons';
 import { motion } from 'framer-motion';
 import styled from 'styled-components';
+import css from '@styled-system/css';
 
-const hoverAnimation = (index: number) => {
+const hoverAnimation = (index: number, span: number) => {
   return {
     active: {
-      x: index === 0 ? 12 : -12,
+      x: (index * span) % 12 === 0 ? 12 : -12,
       y: -12,
       zIndex: index === 0 ? 2 : 1
     },
@@ -30,37 +31,38 @@ const MotionBox = styled(motion.div)`
   height: 100%;
   top: 0;
   left: 0;
-  ${(props) => `
-        background-color: ${props.theme.colors.scheme.bg};
-        padding: ${props.theme.space['600']};
-        border: ${props.theme.borders.thick};
-        cursor: ${props.url ? 'pointer' : ''};
-    `}
+  ${css({
+    bg: 'scheme.bg',
+    p: ['300', null, null, '400', '600'],
+    border: 'thick'
+  })}
+  ${(props) => `cursor: ${props.url ? 'pointer' : ''};`}
 `;
 
 const BorderBox = styled(Box)`
+  margin-top: -2px;
+  margin-left: -2px;
   margin-bottom: -2px;
-  &:not(:first-child) {
-    margin-left: -2px;
-  }
+  margin-right: -2px;
 `;
 
 type CardProps = {
   url: string;
+  title?: string;
   span: number;
-  index: number;
-  content: Array<any>;
+  index?: number; // Used to animate to the right instead of left
+  content?: Array<any>;
 };
 
 const Card: React.FC<CardProps> = (props: CardProps) => {
-  const { url, span, index, content } = props;
+  const { url, span, index, content, title } = props;
   const [isHovered, setIsHovered] = useState(false);
 
   return (
     <Link href={url || ''}>
       <BorderBox
         gridColumn={['span 10', null, `span ${span}`]}
-        pb={['40%', null, '82%', '60%', '42%']}
+        pb={span === 10 ? ['30%'] : ['40%', null, '82%', '60%', '44%']}
         position="relative"
       >
         <Box
@@ -75,15 +77,25 @@ const Card: React.FC<CardProps> = (props: CardProps) => {
           url={url}
           onMouseEnter={() => setIsHovered(true)}
           onMouseLeave={() => setIsHovered(false)}
+          p={['200', null, '600']}
           animate={
-            url ? (isHovered ? hoverAnimation(index).active : hoverAnimation(index).inActive) : ''
+            url
+              ? isHovered
+                ? hoverAnimation(index, span).active
+                : hoverAnimation(index, span).inActive
+              : ''
           }
           transition={{
             ease: 'easeInOut',
             duration: 0.2
           }}
         >
-          <PortableText blocks={content} />
+          {title && (
+            <Box fontSize="400" fontWeight="500">
+              {title}
+            </Box>
+          )}
+          {content && <PortableText blocks={content} />}
           {url && (
             <Box mt="200">
               <ArrowForward />

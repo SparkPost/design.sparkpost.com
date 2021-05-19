@@ -21,7 +21,7 @@ function FoundationsIndexPage({ data }) {
 export default FoundationsIndexPage;
 
 export async function getStaticProps({ preview = false }) {
-  const { data: pageData, query } = await getIndexPageFor('foundation');
+  const { data: pageData, query } = await getIndexPageFor('component');
 
   return {
     props: {

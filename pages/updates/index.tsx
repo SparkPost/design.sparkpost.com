@@ -5,7 +5,7 @@ import Footer from '@components/footer';
 import PageHero from '@components/pageHero';
 import IndexLayout from '@components/indexLayout';
 
-function FoundationsIndexPage({ data }) {
+function UpdatesIndexPage({ data }) {
   const { header, footer, settings, list } = data.pageData;
 
   return (
@@ -18,10 +18,10 @@ function FoundationsIndexPage({ data }) {
   );
 }
 
-export default FoundationsIndexPage;
+export default UpdatesIndexPage;
 
 export async function getStaticProps({ preview = false }) {
-  const { data: pageData, query } = await getIndexPageFor('foundation');
+  const { data: pageData, query } = await getIndexPageFor('update');
 
   return {
     props: {

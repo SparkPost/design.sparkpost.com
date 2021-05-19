@@ -19,7 +19,7 @@ function MatchboxApp({ Component, pageProps }) {
       theme={{
         borders: {
           thick: `2px solid ${
-            colorScheme === 'dark' ? tokens.color_gray_900 : tokens.color_gray_1000
+            colorScheme === 'dark' ? tokens.color_gray_800 : tokens.color_gray_1000
           }`
         },
         // Extending colors from matchbox
@@ -28,7 +28,7 @@ function MatchboxApp({ Component, pageProps }) {
             bg: colorScheme === 'light' ? tokens.color_white : tokens.color_gray_1000,
             fg: colorScheme === 'dark' ? tokens.color_white : tokens.color_gray_1000,
             lightAccent: colorScheme === 'light' ? tokens.color_blue_200 : tokens.color_gray_900,
-            heavyAccent: colorScheme === 'light' ? tokens.color_blue_700 : tokens.color_gray_900
+            heavyAccent: colorScheme === 'light' ? tokens.color_blue_700 : tokens.color_red_400
           },
           gray: {
             100: tokens.color_gray_100,

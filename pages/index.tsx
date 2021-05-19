@@ -24,19 +24,21 @@ const HomePage = ({ data, preview }) => {
     <div>
       <Header title="Matchbox" items={header?.menu?.items} />
       <HomeHero title={hero?.title} description={hero?.description} />
-      {modules?.map((module, key) => (
-        <Box key={key} display="grid" gridTemplateColumns={`repeat(${module.size}, 1fr)`}>
-          {module.columns?.map((column, index) => (
-            <Card
-              key={index}
-              index={index}
-              span={column.span}
-              url={column.url}
-              content={column.content}
-            />
-          ))}
-        </Box>
-      ))}
+      <Box border="thick" my="-2px">
+        {modules?.map((module, key) => (
+          <Box key={key} display="grid" gridTemplateColumns={`repeat(${module.size}, 1fr)`}>
+            {module.columns?.map((column, index) => (
+              <Card
+                key={index}
+                index={index}
+                span={column.span}
+                url={column.url}
+                content={column.content}
+              />
+            ))}
+          </Box>
+        ))}
+      </Box>
       <Footer items={footer?.menu?.items} />
     </div>
   );
