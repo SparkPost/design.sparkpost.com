@@ -3,10 +3,10 @@ import { getIndexPageFor } from '@lib/api';
 import { Header } from '@components/header';
 import Footer from '@components/footer';
 import PageHero from '@components/pageHero';
-import IndexLayout from '@components/indexLayout';
+import { IndexLayout } from '@components/indexLayout';
 
 function FoundationsIndexPage({ data }) {
-  const { header, footer, settings, list } = data.pageData;
+  const { header, footer, settings, list, enableSidebar } = data.pageData;
 
   return (
     <div>

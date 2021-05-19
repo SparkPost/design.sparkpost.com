@@ -10,7 +10,7 @@ import css from '@styled-system/css';
 const hoverAnimation = (index: number, span: number) => {
   return {
     active: {
-      x: (index * span) % 12 === 0 ? 12 : -12,
+      x: (index * span) % 10 === 0 ? 12 : -12,
       y: -12,
       zIndex: index === 0 ? 2 : 1
     },
@@ -62,7 +62,7 @@ const Card: React.FC<CardProps> = (props: CardProps) => {
     <Link href={url || ''}>
       <BorderBox
         gridColumn={['span 10', null, `span ${span}`]}
-        pb={span === 10 ? ['30%'] : ['40%', null, '82%', '60%', '44%']}
+        pb={span === 10 ? ['25%'] : ['40%', null, '82%', '60%', '54%']}
         position="relative"
       >
         <Box
@@ -91,13 +91,13 @@ const Card: React.FC<CardProps> = (props: CardProps) => {
           }}
         >
           {title && (
-            <Box fontSize="400" fontWeight="500">
+            <Box fontSize="300" fontWeight="500">
               {title}
             </Box>
           )}
           {content && <PortableText blocks={content} />}
           {url && (
-            <Box mt="200">
+            <Box mt="100">
               <ArrowForward />
             </Box>
           )}

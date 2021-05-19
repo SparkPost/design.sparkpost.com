@@ -104,12 +104,12 @@ type IndexTypes =
 
 export async function getPagesByType(type: IndexTypes) {
   const query = groq`
-        *[_type == '${type}'] {
-            title,
-            "slug": slug.current,
-            body
-          }
-    `;
+    *[_type == '${type}'] {
+      title,
+      "slug": slug.current,
+      body
+    } | order(title asc)
+  `;
 
   const data = await getClient().fetch(query);
 
@@ -125,10 +125,12 @@ export async function getIndexPageFor(type: IndexTypes) {
           "list": *[_type == '${type}'] {
             title,
             "slug": slug.current,
-          },
+            subcategory
+          } | order(title asc),
           "settings": *[_type=='indexPage' && (slug.current match '/${type}*' || slug.current match '/${type}')][0] {
             title,
             layout,
+            enableSidebar
           },
           ${header},
           ${footer},
