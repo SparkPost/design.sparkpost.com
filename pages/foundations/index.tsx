@@ -14,7 +14,7 @@ function FoundationsIndexPage({ data }) {
   return (
     <div>
       <Header title="Matchbox" items={header?.menu?.items} />
-      <Box display="grid" gridTemplateColumns="197px 1fr">
+      <Box display="grid" gridTemplateColumns={settings.enableSidebar ? '197px 1fr' : '1fr'}>
         <Sidebar enabled={settings.enableSidebar} items={list} root={settings.title} />
         <div>
           <PageHero title={settings.title}></PageHero>
