@@ -25,6 +25,13 @@ export default {
         ],
         layout: 'radio'
       }
+    },
+    {
+      name: 'enableSidebar',
+      title: 'Enable Sidebar',
+      type: 'boolean',
+      description: 'Enable or disable the side navigation bar',
+      initialValue: false
     }
   ],
   preview: {
