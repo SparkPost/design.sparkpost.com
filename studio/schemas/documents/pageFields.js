@@ -14,6 +14,12 @@ const getPageFields = (type = '') => {
       type: 'blockContent'
     },
     {
+      name: 'subcategory',
+      title: 'Subcategory',
+      type: 'string',
+      description: 'Optional Subcategory to group this page in the side nav'
+    },
+    {
       name: 'modules',
       title: 'Page Modules',
       type: 'array',
