@@ -45,7 +45,7 @@ type CategoryLabel = {
 
 function CategoryLabel(props: CategoryLabel): JSX.Element {
   return (
-    <Box mb="100" mt="300" pl="200" fontSize="100" fontWeight="500" color="scheme.fg">
+    <Box mb="100" pl="200" fontSize="100" fontWeight="500" color="scheme.fg">
       {props.children}
     </Box>
   );
@@ -73,21 +73,23 @@ function Sidebar(props: SidebarProps): JSX.Element {
 
   return (
     <Box as="nav" border="thick" mr="-2px" mt="-2px">
-      <CategoryLabel>{root}</CategoryLabel>
-      <Ul>
-        {rootItems.map((item, i) => {
-          return (
-            <li key={i}>
-              <Link href={item.slug}>
-                <SyledLink isActive={router.asPath === item.slug}>{item.title}</SyledLink>
-              </Link>
-            </li>
-          );
-        })}
-      </Ul>
+      <Box py="400">
+        <CategoryLabel>{root}</CategoryLabel>
+        <Ul>
+          {rootItems.map((item, i) => {
+            return (
+              <li key={i}>
+                <Link href={item.slug}>
+                  <SyledLink isActive={router.asPath === item.slug}>{item.title}</SyledLink>
+                </Link>
+              </li>
+            );
+          })}
+        </Ul>
+      </Box>
       {dedupedCategories.map((cat) => {
         return (
-          <Box>
+          <Box border="thick" m="-2px" py="300">
             <CategoryLabel>{cat}</CategoryLabel>
             <Ul>
               {itemsWithCategory
