@@ -111,7 +111,7 @@ export async function getIndexPageFor(type: IndexTypes) {
             title,
             "slug": slug.current,
           },
-          "settings": *[_type=='indexPage' && slug.current match '/${type}*'][0] {
+          "settings": *[_type=='indexPage' && (slug.current match '/${type}*' || slug.current match '/${type}')][0] {
             title,
             layout,
           },
