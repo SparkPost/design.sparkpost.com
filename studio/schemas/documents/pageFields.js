@@ -5,9 +5,16 @@ const getPageFields = (type = '') => {
     {
       name: 'title',
       title: 'Title',
-      type: 'string'
+      type: 'string',
+      description: 'Title of the page, appears in the page hero'
     },
     slugWithType(type, 'title'),
+    {
+      name: 'subtitle',
+      title: 'Subtitle',
+      type: 'text',
+      description: 'Appears below the title in the page hero'
+    },
     {
       name: 'body',
       title: 'Body',

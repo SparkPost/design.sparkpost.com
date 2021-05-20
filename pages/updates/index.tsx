@@ -8,7 +8,7 @@ import { Sidebar } from '@components/sidebar';
 import { Box } from '@sparkpost/matchbox';
 
 // TODO Abstract this component so we dont need to repeat on each index page
-function FoundationsIndexPage({ data }) {
+function UpdatesIndexPage({ data }) {
   const { header, footer, settings, list } = data.pageData;
 
   return (
@@ -17,7 +17,7 @@ function FoundationsIndexPage({ data }) {
       <Box display="grid" gridTemplateColumns={settings.enableSidebar ? '197px 1fr' : '1fr'}>
         <Sidebar enabled={settings.enableSidebar} items={list} root={settings.title} />
         <div>
-          <PageHero title={settings.title}></PageHero>
+          <PageHero title={settings.title} subtitle={settings.subtitle}></PageHero>
           <IndexLayout layout={settings.layout} items={list} />
         </div>
       </Box>
@@ -26,7 +26,7 @@ function FoundationsIndexPage({ data }) {
   );
 }
 
-export default FoundationsIndexPage;
+export default UpdatesIndexPage;
 
 export async function getStaticProps({ preview = false }) {
   const { data: pageData, query } = await getIndexPageFor('update');
