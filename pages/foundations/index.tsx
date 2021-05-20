@@ -17,7 +17,7 @@ function FoundationsIndexPage({ data }) {
       <Box display="grid" gridTemplateColumns={settings.enableSidebar ? '197px 1fr' : '1fr'}>
         <Sidebar enabled={settings.enableSidebar} items={list} root={settings.title} />
         <div>
-          <PageHero title={settings.title}></PageHero>
+          <PageHero title={settings.title} subtitle={settings.subtitle}></PageHero>
           <IndexLayout layout={settings.layout} items={list} />
         </div>
       </Box>

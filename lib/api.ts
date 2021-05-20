@@ -65,6 +65,7 @@ export async function getPage(slug: string, preview: boolean) {
   const query = groq`
         *[_type in ${PAGE_TYPES} && slug.current match '${slug}'][0] {
             title,
+            subtitle,
             "slug": slug.current,
             body,
             ${footer},
@@ -106,6 +107,7 @@ export async function getPagesByType(type: IndexTypes) {
   const query = groq`
     *[_type == '${type}'] {
       title,
+      subtitle,
       "slug": slug.current,
       body
     } | order(title asc)
@@ -129,6 +131,7 @@ export async function getIndexPageFor(type: IndexTypes) {
           } | order(title asc),
           "settings": *[_type=='indexPage' && (slug.current match '/${type}*' || slug.current match '/${type}')][0] {
             title,
+            subtitle,
             layout,
             enableSidebar
           },
