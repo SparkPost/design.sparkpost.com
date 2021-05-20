@@ -11,7 +11,7 @@ type SidebarProps = {
   items: {
     title: string;
     slug: string;
-    subcategory: string;
+    subcategory?: string;
   }[];
 };
 

@@ -19,7 +19,7 @@ export const modules = groq`
     size,
     columns[] {
       span,
-      "url": link->slug.current,
+      "slug": link->slug.current,
       content
     }
   }
@@ -30,7 +30,7 @@ const header = groq`
     "menu": headerMenu -> {
       items[] {
         title,
-        "url": page->slug.current,
+        "slug": page->slug.current,
       }
     }
   }
@@ -41,7 +41,7 @@ const footer = groq`
     "menu": footerMenu -> {
       items[]{
         title,
-        url
+        slug
       }
     }
   }

@@ -1,40 +1,52 @@
 import React from 'react';
+import { Header } from '@components/header';
+import Footer from '@components/footer';
+import PageHero from '@components/pageHero';
+import { IndexList } from '@components/indexList';
+import { Sidebar } from '@components/sidebar';
 import { Box } from '@sparkpost/matchbox';
-import { Card } from '../card';
+
+type ListProps = {
+  title: string;
+  slug: string;
+  subcategory?: string;
+};
 
 type IndexLayoutProps = {
-  layout?: 'oneColumn' | 'multiColumn';
-  items?: {
-    title: string;
-    slug: string;
-  }[];
+  headerList: ListProps[];
+  sidebarList: ListProps[];
+  list: ListProps[];
+  footerList: ListProps[];
+  enableSidebar: boolean;
+  layoutType: 'oneColumn' | 'multiColumn';
+  title: string;
+  subtitle: string;
 };
 
 function IndexLayout(props: IndexLayoutProps): JSX.Element {
-  function renderOneColumn() {
-    return props.items.map((item, i) => (
-      <Box key={i}>
-        <Card title={item.title} url={item.slug} span={10} />
-      </Box>
-    ));
-  }
-
-  function renderMultiColumn() {
-    return (
-      <Box display="grid" gridTemplateColumns={`repeat(10, 1fr)`} m="0 auto">
-        {props.items.map((item, i) => (
-          <Card title={item.title} url={item.slug} span={2} key={i} index={i} />
-        ))}
-      </Box>
-    );
-  }
+  const {
+    headerList,
+    enableSidebar,
+    sidebarList,
+    layoutType,
+    list,
+    footerList,
+    title,
+    subtitle
+  } = props;
 
   return (
-    <Box border="thick">
-      <Box maxWidth={props.layout === 'oneColumn' ? '1300' : ''} m="0 auto">
-        <div>{props.layout === 'oneColumn' ? renderOneColumn() : renderMultiColumn()}</div>
+    <div>
+      <Header title="Matchbox" items={headerList} />
+      <Box display="grid" gridTemplateColumns={enableSidebar ? '197px 1fr' : '1fr'}>
+        <Sidebar enabled={enableSidebar} items={sidebarList} root={title} />
+        <div>
+          <PageHero title={title} subtitle={subtitle}></PageHero>
+          <IndexList layout={layoutType} items={list} />
+        </div>
       </Box>
-    </Box>
+      <Footer items={footerList} />
+    </div>
   );
 }
 

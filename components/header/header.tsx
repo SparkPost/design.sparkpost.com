@@ -8,7 +8,7 @@ import { ColorSchemeContext } from '../../context/ColorSchemeContext';
 
 type MenuItems = {
   title: string;
-  url: string;
+  slug: string;
 };
 
 type HeaderProps = {
@@ -117,19 +117,19 @@ const StyledNavLink = styled(Box)`
 `;
 
 const ListItem: React.FC<MenuItems> = (props: MenuItems) => {
-  const { title, url } = props;
+  const { title, slug } = props;
   const router = useRouter();
 
   return (
     <Box as="li" display="inline-block">
-      <Link href={url}>
+      <Link href={slug}>
         <StyledNavLink
           as="a"
           px="450"
           py="450"
           fontSize="200"
           fontWeight="500"
-          isActive={router.asPath === url}
+          isActive={router.asPath === slug}
         >
           {title}
         </StyledNavLink>
