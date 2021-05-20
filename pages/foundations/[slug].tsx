@@ -1,6 +1,5 @@
 import { usePreviewSubscription, PortableText } from '@lib/sanity';
 import { getPage, getPagesByType } from '@lib/api';
-
 import { Header } from '@components/header';
 import Footer from '@components/footer';
 import PageHero from '@components/pageHero';
