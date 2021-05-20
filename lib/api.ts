@@ -1,6 +1,15 @@
 import { groq } from 'next-sanity';
 import { getClient } from '@lib/sanity';
 
+type IndexTypes =
+  | 'foundation'
+  | 'component'
+  | 'content'
+  | 'pattern'
+  | 'brand'
+  | 'resource'
+  | 'update';
+
 export const PAGE_TYPES = `['page', 'foundation', 'component', 'content', 'pattern', 'brand', 'resource', 'update']`;
 
 export const modules = groq`
@@ -10,7 +19,7 @@ export const modules = groq`
     size,
     columns[] {
       span,
-      "url": link->slug.current,
+      "slug": link->slug.current,
       content
     }
   }
@@ -21,7 +30,7 @@ const header = groq`
     "menu": headerMenu -> {
       items[] {
         title,
-        "url": page->slug.current,
+        "slug": page->slug.current,
       }
     }
   }
@@ -32,7 +41,7 @@ const footer = groq`
     "menu": footerMenu -> {
       items[]{
         title,
-        url
+        slug
       }
     }
   }
@@ -61,7 +70,7 @@ export async function getHomePage(preview) {
   };
 }
 
-export async function getPage(slug: string, preview: boolean) {
+export async function getPage(slug: string, type: IndexTypes, preview: boolean) {
   const query = groq`
         *[_type in ${PAGE_TYPES} && slug.current match '${slug}'][0] {
             title,
@@ -70,6 +79,11 @@ export async function getPage(slug: string, preview: boolean) {
             body,
             ${footer},
             ${header},
+            "list": *[_type == '${type}'] {
+              title,
+              "slug": slug.current,
+              subcategory
+            } | order(title asc),
         }
     `;
 
@@ -93,15 +107,6 @@ export async function getAllPageSlugs() {
     query
   };
 }
-
-type IndexTypes =
-  | 'foundation'
-  | 'component'
-  | 'content'
-  | 'pattern'
-  | 'brand'
-  | 'resource'
-  | 'update';
 
 export async function getPagesByType(type: IndexTypes) {
   const query = groq`

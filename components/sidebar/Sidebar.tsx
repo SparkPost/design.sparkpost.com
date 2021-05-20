@@ -11,7 +11,7 @@ type SidebarProps = {
   items: {
     title: string;
     slug: string;
-    subcategory: string;
+    subcategory?: string;
   }[];
 };
 
@@ -37,6 +37,15 @@ const SyledLink = styled.a`
       color: 'scheme.fg'
     })}
   }
+
+  ${({ isActive, theme }) =>
+    isActive
+      ? `
+        background: ${theme.colors.scheme.lightAccent};
+        color: ${theme.colors.scheme.heavyAccent};
+        font-weight: 500;
+  `
+      : ''}
 `;
 
 type CategoryLabel = {

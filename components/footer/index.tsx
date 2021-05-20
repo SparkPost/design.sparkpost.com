@@ -3,7 +3,7 @@ import { Box } from '@sparkpost/matchbox';
 import styled from 'styled-components';
 
 type ItemProps = {
-  url: string;
+  slug: string;
   title: string;
 };
 
@@ -48,7 +48,7 @@ const Li = styled.li`
 function Item(props: ItemProps): JSX.Element {
   return (
     <Li>
-      <Box as="a" fontSize="300" href={props.url}>
+      <Box as="a" fontSize="300" href={props.slug}>
         {props.title}
       </Box>
     </Li>

@@ -1,8 +1,10 @@
 import { usePreviewSubscription, PortableText } from '@lib/sanity';
 import { getPage, getPagesByType } from '@lib/api';
-
 import { Header } from '@components/header';
 import Footer from '@components/footer';
+import PageHero from '@components/pageHero';
+import { Sidebar } from '@components/sidebar';
+import { Box } from '@sparkpost/matchbox';
 
 const Page = ({ data, slug, preview }) => {
   const { data: pageData } = usePreviewSubscription(data?.query, {
@@ -15,13 +17,23 @@ const Page = ({ data, slug, preview }) => {
     return <div>Error</div>;
   }
 
-  const { title, body, footer, header } = pageData;
+  const { title, subtitle, body, footer, header, list } = pageData;
 
   return (
     <div>
       <Header title="Matchbox" items={header?.menu?.items} />
-      <h1>{title}</h1>
-      <PortableText blocks={body || []} />
+      <Box display="grid" gridTemplateColumns="197px 1fr">
+        <Sidebar enabled items={list} root="Components" />
+        <div>
+          <PageHero title={title} subtitle={subtitle}></PageHero>
+          <Box border="thick">
+            <Box maxWidth="1200" m="0 auto" py="800" px="400">
+              <PortableText blocks={body || []} />
+            </Box>
+          </Box>
+        </div>
+      </Box>
+
       <Footer items={footer?.menu?.items} />
     </div>
   );
@@ -30,7 +42,7 @@ const Page = ({ data, slug, preview }) => {
 export async function getStaticProps({ params, preview = false }) {
   const { slug = '' } = params;
 
-  const { data: pageData, query } = await getPage(`components/${slug}`, preview);
+  const { data: pageData, query } = await getPage(`components/${slug}`, 'component', preview);
 
   return {
     props: {
