@@ -27,7 +27,7 @@ const Page = ({ data, slug, preview }) => {
         <div>
           <PageHero title={title} subtitle={subtitle}></PageHero>
           <Box border="thick">
-            <Box maxWidth="1300" m="0 auto" py="800" px="400">
+            <Box maxWidth="1200" m="0 auto" py="800" px="400">
               <PortableText blocks={body || []} />
             </Box>
           </Box>
