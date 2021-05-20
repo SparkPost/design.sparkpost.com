@@ -129,7 +129,7 @@ const ListItem: React.FC<MenuItems> = (props: MenuItems) => {
           py="450"
           fontSize="200"
           fontWeight="500"
-          isActive={router.asPath === slug}
+          isActive={router.asPath.includes(slug)}
         >
           {title}
         </StyledNavLink>
