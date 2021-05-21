@@ -81,41 +81,47 @@ function Sidebar(props: SidebarProps): JSX.Element {
   const dedupedCategories = categories.filter((sub, i) => categories.indexOf(sub) === i);
 
   return (
-    <Box as="nav" border="thick" mr="-2px" mt="-2px">
-      <Box py="400">
-        <CategoryLabel>{root}</CategoryLabel>
-        <Ul>
-          {rootItems.map((item, i) => {
-            return (
-              <li key={i}>
-                <Link href={item.slug}>
-                  <SyledLink isActive={router.asPath === item.slug}>{item.title}</SyledLink>
-                </Link>
-              </li>
-            );
-          })}
-        </Ul>
-      </Box>
-      {dedupedCategories.map((cat) => {
-        return (
-          <Box border="thick" m="-2px" py="300">
-            <CategoryLabel>{cat}</CategoryLabel>
+    <Box border="thick" mr="-2px" mt="-2px">
+      <Box position="sticky" top="0">
+        <Box as="nav">
+          <Box py="400">
+            <CategoryLabel>{root}</CategoryLabel>
             <Ul>
-              {itemsWithCategory
-                .filter(({ subcategory }) => subcategory === cat)
-                .map((item, i) => {
-                  return (
-                    <li key={i}>
-                      <Link href={item.slug}>
-                        <SyledLink isActive={router.asPath === item.slug}>{item.title}</SyledLink>
-                      </Link>
-                    </li>
-                  );
-                })}
+              {rootItems.map((item, i) => {
+                return (
+                  <li key={i}>
+                    <Link href={item.slug}>
+                      <SyledLink isActive={router.asPath === item.slug}>{item.title}</SyledLink>
+                    </Link>
+                  </li>
+                );
+              })}
             </Ul>
           </Box>
-        );
-      })}
+          {dedupedCategories.map((cat) => {
+            return (
+              <Box border="thick" m="-2px" py="300">
+                <CategoryLabel>{cat}</CategoryLabel>
+                <Ul>
+                  {itemsWithCategory
+                    .filter(({ subcategory }) => subcategory === cat)
+                    .map((item, i) => {
+                      return (
+                        <li key={i}>
+                          <Link href={item.slug}>
+                            <SyledLink isActive={router.asPath === item.slug}>
+                              {item.title}
+                            </SyledLink>
+                          </Link>
+                        </li>
+                      );
+                    })}
+                </Ul>
+              </Box>
+            );
+          })}
+        </Box>
+      </Box>
     </Box>
   );
 }
