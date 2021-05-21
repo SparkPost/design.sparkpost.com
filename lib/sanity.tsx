@@ -25,7 +25,8 @@ export const PortableText = createPortableTextComponent({
   serializers: {
     types: {
       horizontalRule: Hr,
-      block: Block
+      block: Block,
+      image: () => 'test'
     }
   }
 });

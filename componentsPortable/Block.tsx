@@ -1,13 +1,39 @@
 import React from 'react';
 import { Box } from '@sparkpost/matchbox';
+import { Link as LinkIcon } from '@sparkpost/matchbox-icons';
+import Link from 'next/link';
+import { useRouter } from 'next/router';
+import styled from 'styled-components';
+import css from '@styled-system/css';
 
 type HeaderProps = {
   level: string;
-  children: React.ReactNode;
+  children: string;
 };
 
+const StyledLink = styled.a`
+  text-decoration: none;
+  &,
+  &:hover,
+  &:visited {
+    ${css({
+      color: 'scheme.fg'
+    })}
+  }
+  svg {
+    opacity: 0;
+    margin-top: -2px;
+    transition: 0.15s;
+  }
+
+  &:hover svg {
+    opacity: 1;
+  }
+`;
+
 function Header(props: HeaderProps): JSX.Element {
-  const { level, children } = props;
+  const { level, children = '' } = props;
+  const router = useRouter();
 
   const mb = level === '1' || level === '2' ? '600' : '500';
 
@@ -26,9 +52,22 @@ function Header(props: HeaderProps): JSX.Element {
     }
   }, [level]);
 
+  function toKebab(str: string): string {
+    if (!str || typeof str !== 'string') {
+      return '';
+    }
+    return str.replace(/\s+/g, '-').toLowerCase();
+  }
+
+  const path = router.asPath.split('#')[0];
+
   return (
-    <Box as={`h${level}`} mb={mb} pt="300" fontSize={size}>
-      {children}
+    <Box as={`h${level}`} mb={mb} pt="300" fontSize={size} id={toKebab(children[0])}>
+      <Link href={`${path}#${toKebab(children[0])}`}>
+        <StyledLink>
+          {children} <LinkIcon />
+        </StyledLink>
+      </Link>
     </Box>
   );
 }
