@@ -8,7 +8,7 @@ import css from '@styled-system/css';
 
 type HeaderProps = {
   level: string;
-  children: string;
+  children: string | React.ReactNode | number;
 };
 
 const StyledLink = styled.a`
