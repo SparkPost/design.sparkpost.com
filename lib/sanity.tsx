@@ -8,9 +8,9 @@ import {
   createPortableTextComponent
 } from 'next-sanity';
 
-const HR = () => {
-  return <hr />;
-};
+import Block from '../componentsPortable/Block';
+import Hr from '../componentsPortable/Hr';
+import Image from '../componentsPortable/Image';
 
 const config = {
   projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID,
@@ -19,13 +19,16 @@ const config = {
   useCdn: process.env.NODE_ENV === 'production'
 };
 
+// Creates image urls for Image nodes
 export const urlFor = (source) => createImageUrlBuilder(config).image(source);
 
 export const PortableText = createPortableTextComponent({
   ...config,
   serializers: {
     types: {
-      horizontalRule: HR
+      horizontalRule: Hr,
+      block: Block,
+      image: (props) => <Image source={urlFor(props.node).url()} />
     }
   }
 });

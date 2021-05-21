@@ -32,7 +32,7 @@ const HomePage = ({ data, preview }) => {
                 key={index}
                 index={index}
                 span={column.span}
-                url={column.url}
+                url={column.slug}
                 content={column.content}
               />
             ))}
