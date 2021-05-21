@@ -98,9 +98,9 @@ function Sidebar(props: SidebarProps): JSX.Element {
               })}
             </Ul>
           </Box>
-          {dedupedCategories.map((cat) => {
+          {dedupedCategories.map((cat, i) => {
             return (
-              <Box border="thick" m="-2px" py="300">
+              <Box border="thick" m="-2px" py="300" key={i}>
                 <CategoryLabel>{cat}</CategoryLabel>
                 <Ul>
                   {itemsWithCategory
