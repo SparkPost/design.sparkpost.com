@@ -8,9 +8,8 @@ import {
   createPortableTextComponent
 } from 'next-sanity';
 
-const HR = () => {
-  return <hr />;
-};
+import Block from '../componentsPortable/Block';
+import Hr from '../componentsPortable/Hr';
 
 const config = {
   projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID,
@@ -25,7 +24,8 @@ export const PortableText = createPortableTextComponent({
   ...config,
   serializers: {
     types: {
-      horizontalRule: HR
+      horizontalRule: Hr,
+      block: Block
     }
   }
 });
