@@ -20,7 +20,7 @@ type CodeProps = {
   };
 };
 
-function Code(props: CodeProps): JSX.Element {
+function CodeBlock(props: CodeProps): JSX.Element {
   const {
     node: { language, code }
   } = props;
@@ -59,4 +59,4 @@ function Code(props: CodeProps): JSX.Element {
   );
 }
 
-export default Code;
+export default CodeBlock;
