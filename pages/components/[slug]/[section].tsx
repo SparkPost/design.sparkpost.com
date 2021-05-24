@@ -1,0 +1,131 @@
+import { usePreviewSubscription, PortableText } from '@lib/sanity';
+import { getPage, getPagesByType } from '@lib/api';
+import Link from 'next/link';
+import { useRouter } from 'next/router';
+import { Header } from '@components/header';
+import Footer from '@components/footer';
+import PageHero from '@components/pageHero';
+import { Sidebar } from '@components/sidebar';
+import { Box } from '@sparkpost/matchbox';
+import styled from 'styled-components';
+import css from '@styled-system/css';
+
+const Tab = styled.a`
+  display: inline-flex;
+  align-items: center;
+  text-decoration: none;
+
+  ${css({
+    mr: '-2px;',
+    px: '500',
+    border: 'thick',
+    height: '3.25rem',
+    color: 'scheme.fg'
+  })}
+
+  &:hover {
+    ${css({
+      bg: 'scheme.lightAccent',
+      color: 'scheme.fg'
+    })}
+  }
+
+  ${({ isActive, theme }) => {
+    if (isActive) {
+      return `
+      background: ${theme.colors.scheme.lightAccent};
+      `;
+    }
+  }}
+`;
+
+const Page = ({ data, slug, preview }) => {
+  const { data: pageData } = usePreviewSubscription(data?.query, {
+    params: { slug: slug },
+    initialData: data?.pageData,
+    enabled: preview
+  });
+
+  const { asPath } = useRouter();
+
+  if (!pageData) {
+    return <div>Error</div>;
+  }
+
+  const { title, subtitle, footer, header, list } = pageData;
+  const pathParts = asPath.split('/');
+  const activeSection = pathParts.pop();
+  const basePath = pathParts.join('/');
+
+  return (
+    <div>
+      <Header title="Matchbox" items={header?.menu?.items} />
+      <Box display="grid" gridTemplateColumns="197px 1fr">
+        <Sidebar enabled items={list} root="Components" />
+        <div>
+          <PageHero title={title} subtitle={subtitle}></PageHero>
+          <Box maxWidth="1200" m="-3.25rem auto -2px" px="400" textAlign="left">
+            <Link href={`${basePath}/api`}>
+              <Tab isActive={asPath === `${basePath}/api`}>API</Tab>
+            </Link>
+            <Link href={`${basePath}/usage`}>
+              <Tab isActive={asPath === `${basePath}/usage`}>Usage</Tab>
+            </Link>
+            <Link href={`${basePath}/style`}>
+              <Tab isActive={asPath === `${basePath}/style`}>Style</Tab>
+            </Link>
+          </Box>
+          <Box border="thick">
+            <Box maxWidth="1200" m="0 auto" py="800" px="400">
+              <PortableText blocks={pageData[activeSection] || []} />
+            </Box>
+          </Box>
+        </div>
+      </Box>
+
+      <Footer items={footer?.menu?.items} />
+    </div>
+  );
+};
+
+export async function getStaticProps({ params, preview = false }) {
+  const { slug = '' } = params;
+  const { data: pageData, query } = await getPage(`components/${slug}`, 'component', preview);
+
+  return {
+    props: {
+      preview,
+      data: {
+        pageData,
+        query
+      },
+      slug
+    }
+  };
+}
+
+export async function getStaticPaths() {
+  const { data: pages } = await getPagesByType('component');
+
+  const paths = pages
+    .map(({ slug }) => {
+      const parts = slug.split('/');
+      const paramSlug = parts.pop();
+      return { params: { slug: paramSlug } };
+    })
+    .reduce((acc: object[], { params: { slug } }) => {
+      return [
+        ...acc,
+        { params: { slug, section: 'api' } },
+        { params: { slug, section: 'usage' } },
+        { params: { slug, section: 'style' } }
+      ];
+    }, []);
+
+  return {
+    paths,
+    fallback: false
+  };
+}
+
+export default Page;

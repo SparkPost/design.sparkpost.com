@@ -88,9 +88,10 @@ function Sidebar(props: SidebarProps): JSX.Element {
             <CategoryLabel>{root}</CategoryLabel>
             <Ul>
               {rootItems.map((item, i) => {
+                const href = item.slug.includes('/components') ? `${item.slug}/api` : item.slug;
                 return (
                   <li key={i}>
-                    <Link href={item.slug}>
+                    <Link href={href}>
                       <SyledLink isActive={router.asPath === item.slug}>{item.title}</SyledLink>
                     </Link>
                   </li>
@@ -106,9 +107,12 @@ function Sidebar(props: SidebarProps): JSX.Element {
                   {itemsWithCategory
                     .filter(({ subcategory }) => subcategory === cat)
                     .map((item, i) => {
+                      const href = item.slug.includes('/components')
+                        ? `${item.slug}/api`
+                        : item.slug;
                       return (
                         <li key={i}>
-                          <Link href={item.slug}>
+                          <Link href={href}>
                             <SyledLink isActive={router.asPath === item.slug}>
                               {item.title}
                             </SyledLink>

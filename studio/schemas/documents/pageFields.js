@@ -15,11 +15,13 @@ const getPageFields = (type = '') => {
       type: 'text',
       description: 'Appears below the title in the page hero'
     },
-    {
-      name: 'body',
-      title: 'Body',
-      type: 'blockContent'
-    },
+    type !== 'components'
+      ? {
+          name: 'body',
+          title: 'Body',
+          type: 'blockContent'
+        }
+      : undefined,
     {
       name: 'subcategory',
       title: 'Subcategory',
@@ -32,7 +34,7 @@ const getPageFields = (type = '') => {
       type: 'array',
       of: [{ type: 'grid' }]
     }
-  ];
+  ].filter(Boolean);
 };
 
 export default getPageFields;
