@@ -56,6 +56,7 @@ const Page = ({ data, slug, preview }) => {
   const pathParts = asPath.split('/');
   const activeSection = pathParts.pop();
   const basePath = pathParts.join('/');
+  const shouldHaveTabs = pageData.usage || pageData.style;
 
   return (
     <div>
@@ -64,17 +65,24 @@ const Page = ({ data, slug, preview }) => {
         <Sidebar enabled items={list} root="Components" />
         <div>
           <PageHero title={title} subtitle={subtitle}></PageHero>
-          <Box maxWidth="1200" m="-3.25rem auto -2px" px="400" textAlign="left">
-            <Link href={`${basePath}/api`}>
-              <Tab isActive={asPath === `${basePath}/api`}>API</Tab>
-            </Link>
-            <Link href={`${basePath}/usage`}>
-              <Tab isActive={asPath === `${basePath}/usage`}>Usage</Tab>
-            </Link>
-            <Link href={`${basePath}/style`}>
-              <Tab isActive={asPath === `${basePath}/style`}>Style</Tab>
-            </Link>
-          </Box>
+          {shouldHaveTabs && (
+            <Box maxWidth="1200" m="-3.25rem auto -2px" px="400" textAlign="left">
+              <Link href={`${basePath}/api`}>
+                <Tab isActive={asPath === `${basePath}/api`}>API</Tab>
+              </Link>
+
+              {pageData.usage && (
+                <Link href={`${basePath}/usage`}>
+                  <Tab isActive={asPath === `${basePath}/usage`}>Usage</Tab>
+                </Link>
+              )}
+              {pageData.style && (
+                <Link href={`${basePath}/style`}>
+                  <Tab isActive={asPath === `${basePath}/style`}>Style</Tab>
+                </Link>
+              )}
+            </Box>
+          )}
           <Box border="thick">
             <Box maxWidth="1200" m="0 auto" py="800" px="400">
               <PortableText blocks={pageData[activeSection] || []} />
