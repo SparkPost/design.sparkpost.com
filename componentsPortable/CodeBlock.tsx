@@ -23,11 +23,11 @@ type CodeProps = {
 };
 
 function CodeBlock(props: CodeProps): JSX.Element {
-  const { colorScheme } = React.useContext(ColorSchemeContext);
-
   const {
     node: { language, code }
   } = props;
+
+  const { colorScheme } = React.useContext(ColorSchemeContext);
   const [copied, setCopied] = useState(false);
 
   if (!code) {
