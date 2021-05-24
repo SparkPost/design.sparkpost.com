@@ -8,9 +8,10 @@ import {
   createPortableTextComponent
 } from 'next-sanity';
 
-import Block from '../componentsPortable/Block';
-import Hr from '../componentsPortable/Hr';
-import Image from '../componentsPortable/Image';
+import Block from '@componentsPortable/Block';
+import Hr from '@componentsPortable/Hr';
+import Image from '@componentsPortable/Image';
+import CodeBlock from '@componentsPortable/CodeBlock';
 
 const config = {
   projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID,
@@ -28,6 +29,7 @@ export const PortableText = createPortableTextComponent({
     types: {
       horizontalRule: Hr,
       block: Block,
+      code: CodeBlock,
       image: (props) => <Image source={urlFor(props.node).url()} />
     }
   }

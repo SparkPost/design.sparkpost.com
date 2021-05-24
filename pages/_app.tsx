@@ -22,6 +22,9 @@ function MatchboxApp({ Component, pageProps }) {
             colorScheme === 'dark' ? tokens.color_gray_800 : tokens.color_gray_1000
           }`
         },
+        radii: {
+          rounded: '9px'
+        },
         // Extending colors from matchbox
         colors: {
           scheme: {

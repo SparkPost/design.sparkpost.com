@@ -54,6 +54,9 @@ export default {
     },
     {
       type: 'horizontalRule'
+    },
+    {
+      type: 'code'
     }
   ]
 };
