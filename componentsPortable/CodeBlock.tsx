@@ -3,14 +3,16 @@ import { Box, styles } from '@sparkpost/matchbox';
 import SyntaxHighlighter from 'react-syntax-highlighter';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 import styled from 'styled-components';
+import { ColorSchemeContext } from '@context/ColorSchemeContext';
+import { a11yDark, a11yLight } from 'react-syntax-highlighter/dist/cjs/styles/hljs';
 
 const Copy = styled(Box)`
   ${styles.buttonReset}
   cursor: pointer;
   border: ${(props) => props.theme.borders.thick};
   border-bottom-left-radius: 4px;
-  padding: ${(props) => `${props.theme.space['100']} ${props.theme.space['500']}`};
-  background: ${(props) => props.theme.colors.white};
+  width: 75px;
+  background: ${(props) => props.theme.colors.scheme.bg};
 `;
 
 type CodeProps = {
@@ -24,6 +26,8 @@ function CodeBlock(props: CodeProps): JSX.Element {
   const {
     node: { language, code }
   } = props;
+
+  const { colorScheme } = React.useContext(ColorSchemeContext);
   const [copied, setCopied] = useState(false);
 
   if (!code) {
@@ -42,14 +46,17 @@ function CodeBlock(props: CodeProps): JSX.Element {
     <Box border="thick" borderRadius="rounded" position="relative" overflow="hidden">
       <CopyToClipboard text={code} onCopy={onCopy}>
         <Copy position="absolute" right="-4px" top="-2px" as="button">
-          {copied ? 'Copied' : 'Copy'}
+          <Box as="span" fontSize="100" lineHeight="400" fontWeight="medium">
+            {copied ? 'Copied' : 'Copy'}
+          </Box>
         </Copy>
       </CopyToClipboard>
       <Box overflow="scroll" minHeight="290px" maxHeight="600px" p="500">
         <SyntaxHighlighter
           language={language || 'text'}
+          style={colorScheme === 'light' ? a11yLight : a11yDark}
           customStyle={{
-            backgroundColor: 'transparent'
+            background: 'transparent'
           }}
         >
           {code}
