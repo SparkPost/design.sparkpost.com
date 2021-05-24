@@ -115,6 +115,7 @@ export async function getStaticProps({ params, preview = false }) {
 export async function getStaticPaths() {
   const { data: pages } = await getPagesByType('component');
 
+  // Creates all possible path combinations, with tabbed routes
   const paths = pages
     .map(({ slug }) => {
       const parts = slug.split('/');
