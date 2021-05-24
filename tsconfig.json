@@ -21,6 +21,7 @@
     "paths": {
       "@lib/*": ["lib/*"],
       "@components/*": ["components/*"],
+      "@componentsPortable/*": ["componentsPortable/*"],
       "@pages/*": ["pages/*"]
     }
   },
@@ -28,8 +29,10 @@
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx",
-    "**/*.js"
-, "studio/components/previews/index.jsx", "studio/components/previews/IFramePreview/IFramePreview.tx"  ],
+    "**/*.js", 
+    "studio/components/previews/index.jsx", 
+    "studio/components/previews/IFramePreview/IFramePreview.tx"  
+  ],
   "exclude": [
     "node_modules"
   ]

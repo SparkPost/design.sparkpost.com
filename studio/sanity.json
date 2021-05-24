@@ -14,7 +14,10 @@
     "@sanity/default-login",
     "@sanity/desk-tool",
     "@sanity/production-preview",
-    "note-field"
+    "note-field",
+    "@sanity/dashboard",
+    "dashboard-widget-netlify",
+    "@sanity/code-input"
   ],
   "env": {
     "development": {
@@ -43,6 +46,10 @@
     {
       "name": "part:@sanity/desk-tool/structure",
       "path": "./structure"
+    },
+    {
+      "implements": "part:@sanity/dashboard/config",
+      "path": "./dashboardConfig.js"
     }
   ],
   "__experimental_spaces": [

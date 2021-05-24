@@ -26,7 +26,7 @@ import gridColumn from './modules/gridColumn';
 // Objects
 import blockContent from './objects/blockContent';
 import author from './objects/author';
-import horizontalRule from './objects/horizontal-rule';
+import horizontalRule from './objects/horizontalRule';
 import navPage from './objects/navPage';
 import navLink from './objects/navLink';
 import homeHero from './objects/homeHero';
