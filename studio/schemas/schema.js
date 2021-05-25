@@ -31,6 +31,7 @@ import horizontalRule from './objects/horizontalRule';
 import navPage from './objects/navPage';
 import navLink from './objects/navLink';
 import homeHero from './objects/homeHero';
+import seo from './objects/seo';
 
 export default createSchema({
   name: 'matchbox',
@@ -64,6 +65,7 @@ export default createSchema({
     horizontalRule,
     navPage,
     navLink,
-    homeHero
+    homeHero,
+    seo
   ])
 });

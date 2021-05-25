@@ -39,6 +39,11 @@ export default {
       type: 'boolean',
       description: 'Enable or disable the side navigation bar',
       initialValue: false
+    },
+    {
+      name: 'seo',
+      title: 'SEO Settings',
+      type: 'seo'
     }
   ],
   preview: {

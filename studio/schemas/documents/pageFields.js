@@ -33,6 +33,11 @@ const getPageFields = (type = '') => {
       title: 'Page Modules',
       type: 'array',
       of: [{ type: 'grid' }]
+    },
+    {
+      name: 'seo',
+      title: 'SEO Settings',
+      type: 'seo'
     }
   ].filter(Boolean);
 };
