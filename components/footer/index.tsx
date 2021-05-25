@@ -22,11 +22,7 @@ function Footer(props: FooterProps): JSX.Element {
 
   return (
     <Box as="footer" border="thick" p="600" mt="-2px">
-      <Ul>
-        {items.map((item, i) => (
-          <Item {...item} key={i} />
-        ))}
-      </Ul>
+      <Ul>{items && items.map((item, i) => <Item {...item} key={i} />)}</Ul>
       <Box fontSize="100" color="scheme.fg" pt="800" mt="800">
         SparkPost © {new Date().getFullYear()}. All Rights Reserved.
       </Box>
