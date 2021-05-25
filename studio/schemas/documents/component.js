@@ -6,7 +6,25 @@ export default {
   title: 'Components',
   type: 'document',
   icon: Code,
-  fields: [...getPageFields('components')],
+  fields: [
+    ...getPageFields('components'),
+    {
+      name: 'api',
+      title: 'API Documentation',
+      type: 'blockContent',
+      required: true
+    },
+    {
+      name: 'usage',
+      title: 'Usage Documentation',
+      type: 'blockContent'
+    },
+    {
+      name: 'style',
+      title: 'Style Documentation',
+      type: 'blockContent'
+    }
+  ],
   preview: {
     select: {
       title: 'title',

@@ -77,6 +77,9 @@ export async function getPage(slug: string, type: IndexTypes, preview: boolean) 
             subtitle,
             "slug": slug.current,
             body,
+            api,
+            usage,
+            style,
             ${footer},
             ${header},
             "list": *[_type == '${type}'] {
