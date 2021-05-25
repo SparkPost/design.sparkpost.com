@@ -5,7 +5,7 @@ type SeoProps = {
   title: string;
   description: string;
   keywords: string;
-  image: any;
+  image: object;
 };
 
 const SEO: React.FC<SeoProps> = (props: SeoProps) => {
