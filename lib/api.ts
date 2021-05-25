@@ -47,11 +47,27 @@ const footer = groq`
   }
 `;
 
+const seo = groq`
+  "seo": *[_type == "seoSettings"][0] {
+    metaTitle,
+    metaDescription,
+    metaKeywords,
+    metaImage,
+  }
+`;
+
+const site = groq`
+  "site": {
+    ${seo},
+    ${header},
+    ${footer},
+  }
+`;
+
 export async function getHomePage(preview) {
   const query = groq`
     *[_type == "homePage"] | order(_updatedAt desc)[0] {
-      ${header},
-      ${footer},
+      ${site},
       hero {
         title,
         description
@@ -73,6 +89,7 @@ export async function getHomePage(preview) {
 export async function getPage(slug: string, type: IndexTypes, preview: boolean) {
   const query = groq`
         *[_type in ${PAGE_TYPES} && slug.current match '${slug}'][0] {
+            ${site},
             title,
             subtitle,
             "slug": slug.current,
@@ -80,8 +97,6 @@ export async function getPage(slug: string, type: IndexTypes, preview: boolean) 
             api,
             usage,
             style,
-            ${footer},
-            ${header},
             "list": *[_type == '${type}'] {
               title,
               "slug": slug.current,

@@ -4,12 +4,20 @@ import Footer from '@components/footer';
 import PageHero from '@components/pageHero';
 import { IndexList } from '@components/indexList';
 import { Sidebar } from '@components/sidebar';
+import { SEO } from '@components/seo';
 import { Box } from '@sparkpost/matchbox';
 
 type ListProps = {
   title: string;
   slug: string;
   subcategory?: string;
+};
+
+type SEOProps = {
+  metaTitle: string;
+  metaDescription: string;
+  metaKeywords: string;
+  metaImage: object;
 };
 
 type IndexLayoutProps = {
@@ -21,10 +29,12 @@ type IndexLayoutProps = {
   layoutType: 'oneColumn' | 'multiColumn';
   title: string;
   subtitle: string;
+  seo: SEOProps;
 };
 
 function IndexLayout(props: IndexLayoutProps): JSX.Element {
   const {
+    seo,
     headerList,
     enableSidebar,
     sidebarList,
@@ -37,6 +47,12 @@ function IndexLayout(props: IndexLayoutProps): JSX.Element {
 
   return (
     <div>
+      <SEO
+        title={seo?.metaTitle}
+        description={seo?.metaDescription}
+        keywords={seo?.metaKeywords}
+        image={seo?.metaImage}
+      />
       <Header title="Matchbox" items={headerList} />
       <Box display="grid" gridTemplateColumns={enableSidebar ? '197px 1fr' : '1fr'}>
         <Sidebar enabled={enableSidebar} items={sidebarList} root={title} />

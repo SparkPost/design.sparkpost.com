@@ -3,16 +3,17 @@ import { getIndexPageFor } from '@lib/api';
 import { IndexLayout } from '@components/indexLayout';
 
 function FoundationsIndexPage({ data }) {
-  const { header, footer, settings, list } = data.pageData;
+  const { site, settings, list } = data.pageData;
 
   return (
     <IndexLayout
-      headerList={header?.menu?.items}
+      seo={site?.seo}
+      headerList={site?.header?.menu?.items}
       enableSidebar={settings.enableSidebar}
       sidebarList={list}
       layoutType={settings.layout}
       list={list}
-      footerList={footer?.menu?.items}
+      footerList={site?.footer?.menu?.items}
       title={settings.title}
       subtitle={settings.subtitle}
     />
