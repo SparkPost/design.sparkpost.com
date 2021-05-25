@@ -18,6 +18,7 @@ import update from './documents/update';
 import menu from './documents/menu';
 import headerSettings from './documents/headerSettings';
 import footerSettings from './documents/footerSettings';
+import seoSettings from './documents/seoSettings';
 
 // Modules
 import grid from './modules/grid';
@@ -51,6 +52,7 @@ export default createSchema({
     menu,
     headerSettings,
     footerSettings,
+    seoSettings,
 
     // Modules
     grid,

@@ -6,6 +6,7 @@ import { HomeHero } from '@components/homeHero';
 import { Card } from '@components/card';
 import { Header } from '@components/header';
 import Footer from '@components/footer';
+import { SEO } from '@components/seo';
 
 const HomePage = ({ data, preview }) => {
   const { data: pageData } = usePreviewSubscription(data?.query, {
@@ -18,11 +19,17 @@ const HomePage = ({ data, preview }) => {
     return <div>Error</div>;
   }
 
-  const { header, hero, modules, footer } = pageData;
+  const { site, hero, modules } = pageData;
 
   return (
     <div>
-      <Header title="Matchbox" items={header?.menu?.items} />
+      <SEO
+        title={site?.seo?.metaTitle}
+        description={site?.seo?.metaDescription}
+        keywords={site?.seo?.metaKeywords}
+        image={site?.seo?.metaImage}
+      />
+      <Header title="Matchbox" items={site?.header?.menu?.items} />
       <HomeHero title={hero?.title} description={hero?.description} />
       <Box border="thick" my="-2px">
         {modules?.map((module, key) => (
@@ -39,7 +46,7 @@ const HomePage = ({ data, preview }) => {
           </Box>
         ))}
       </Box>
-      <Footer items={footer?.menu?.items} />
+      <Footer items={site?.footer?.menu?.items} />
     </div>
   );
 };

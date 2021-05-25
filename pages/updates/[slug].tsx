@@ -4,6 +4,7 @@ import { Header } from '@components/header';
 import Footer from '@components/footer';
 import PageHero from '@components/pageHero';
 import { Sidebar } from '@components/sidebar';
+import { SEO } from '@components/seo';
 import { Box } from '@sparkpost/matchbox';
 
 const Page = ({ data, slug, preview }) => {
@@ -17,11 +18,17 @@ const Page = ({ data, slug, preview }) => {
     return <div>Error</div>;
   }
 
-  const { title, subtitle, body, footer, header, list } = pageData;
+  const { site, title, subtitle, body, list } = pageData;
 
   return (
     <div>
-      <Header title="Matchbox" items={header?.menu?.items} />
+      <SEO
+        title={site?.seo?.metaTitle}
+        description={site?.seo?.metaDescription}
+        keywords={site?.seo?.metaKeywords}
+        image={site?.seo?.metaImage}
+      />
+      <Header title="Matchbox" items={site?.header?.menu?.items} />
       <Box display="grid" gridTemplateColumns="197px 1fr">
         <Sidebar enabled items={list} root="Updates" />
         <div>
@@ -34,7 +41,7 @@ const Page = ({ data, slug, preview }) => {
         </div>
       </Box>
 
-      <Footer items={footer?.menu?.items} />
+      <Footer items={site?.footer?.menu?.items} />
     </div>
   );
 };

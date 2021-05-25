@@ -6,6 +6,7 @@ import { Header } from '@components/header';
 import Footer from '@components/footer';
 import PageHero from '@components/pageHero';
 import { Sidebar } from '@components/sidebar';
+import { SEO } from '@components/seo';
 import { Box } from '@sparkpost/matchbox';
 import styled from 'styled-components';
 import css from '@styled-system/css';
@@ -52,7 +53,7 @@ const Page = ({ data, slug, preview }) => {
     return <div>Error</div>;
   }
 
-  const { title, subtitle, footer, header, list } = pageData;
+  const { site, title, subtitle, list } = pageData;
   const pathParts = asPath.split('/');
   const activeSection = pathParts.pop();
   const basePath = pathParts.join('/');
@@ -60,7 +61,13 @@ const Page = ({ data, slug, preview }) => {
 
   return (
     <div>
-      <Header title="Matchbox" items={header?.menu?.items} />
+      <SEO
+        title={site?.seo?.metaTitle}
+        description={site?.seo?.metaDescription}
+        keywords={site?.seo?.metaKeywords}
+        image={site?.seo?.metaImage}
+      />
+      <Header title="Matchbox" items={site?.header?.menu?.items} />
       <Box display="grid" gridTemplateColumns="197px 1fr">
         <Sidebar enabled items={list} root="Components" />
         <div>
@@ -91,7 +98,7 @@ const Page = ({ data, slug, preview }) => {
         </div>
       </Box>
 
-      <Footer items={footer?.menu?.items} />
+      <Footer items={site?.footer?.menu?.items} />
     </div>
   );
 };

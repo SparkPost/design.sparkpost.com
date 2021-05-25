@@ -2,7 +2,7 @@ import S from '@sanity/desk-tool/structure-builder';
 import documentStore from 'part:@sanity/base/datastore/document';
 import { map } from 'rxjs/operators';
 
-import { Visibility, Settings, PowerInput } from '@sparkpost/matchbox-icons';
+import { Visibility, Settings, PowerInput, Language } from '@sparkpost/matchbox-icons';
 import { Edit } from '@sparkpost/matchbox-icons';
 import { Menu } from '@sparkpost/matchbox-icons';
 
@@ -21,6 +21,11 @@ const DRAFTS_QUERY = `* [_type == 'workflow.metadata' && state == 'draft'] {
     *[_id == ^.documentId]{_id,_type}[0]
   )
 }`;
+
+const SEOSettings = S.listItem()
+  .title('SEO Settings')
+  .child(S.editor().id('seoSettings').schemaType('seoSettings').documentId('seoSettings'))
+  .icon(Language);
 
 const HeaderSettings = S.listItem()
   .title('Header Settings')
@@ -43,7 +48,9 @@ const Structure = () =>
     .items([
       S.listItem()
         .title('Settings')
-        .child(S.list().title('Settings').items([Menus, HeaderSettings, FooterSettings]))
+        .child(
+          S.list().title('Settings').items([SEOSettings, Menus, HeaderSettings, FooterSettings])
+        )
         .icon(Settings),
       S.divider(),
       ...pages,
