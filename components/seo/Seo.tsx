@@ -6,7 +6,7 @@ type SeoProps = {
   description: string;
   keywords: string;
   image: object;
-  favicon: object;
+  favicon?: object;
 };
 
 const SEO: React.FC<SeoProps> = (props: SeoProps) => {
