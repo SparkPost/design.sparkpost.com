@@ -12,6 +12,8 @@ import Block from '@componentsPortable/Block';
 import Hr from '@componentsPortable/Hr';
 import Image from '@componentsPortable/Image';
 import CodeBlock from '@componentsPortable/CodeBlock';
+import List from '@componentsPortable/List';
+import InlineCode from '@componentsPortable/InlineCode';
 
 const config = {
   projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID,
@@ -31,6 +33,10 @@ export const PortableText = createPortableTextComponent({
       block: Block,
       code: CodeBlock,
       image: (props) => <Image source={urlFor(props.node).url()} />
+    },
+    list: List,
+    marks: {
+      code: InlineCode
     }
   }
 });

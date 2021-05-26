@@ -35,7 +35,7 @@ function Header(props: HeaderProps): JSX.Element {
   const { level, children = '' } = props;
   const router = useRouter();
 
-  const mb = level === '1' || level === '2' ? '600' : '500';
+  const mb = level === '1' || level === '2' ? '500' : '400';
 
   const size = React.useMemo(() => {
     switch (level) {
@@ -62,7 +62,7 @@ function Header(props: HeaderProps): JSX.Element {
   const path = router.asPath.split('#')[0];
 
   return (
-    <Box as={`h${level}`} mb={mb} pt="300" fontSize={size} id={toKebab(children[0])}>
+    <Box as={`h${level}`} mb={mb} pt="200" fontSize={size} id={toKebab(children[0])}>
       <Link href={`${path}#${toKebab(children[0])}`}>
         <StyledLink>
           {children} <LinkIcon />
