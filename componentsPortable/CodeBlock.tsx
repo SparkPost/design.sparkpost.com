@@ -43,7 +43,7 @@ function CodeBlock(props: CodeProps): JSX.Element {
   };
 
   return (
-    <Box border="thick" borderRadius="rounded" position="relative" overflow="hidden">
+    <Box border="thick" borderRadius="rounded" position="relative" overflow="hidden" mb="600">
       <CopyToClipboard text={code} onCopy={onCopy}>
         <Copy position="absolute" right="-4px" top="-2px" as="button">
           <Box as="span" fontSize="100" lineHeight="400" fontWeight="medium">
