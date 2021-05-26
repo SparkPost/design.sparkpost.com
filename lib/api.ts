@@ -158,8 +158,7 @@ export async function getIndexPageFor(type: IndexTypes) {
             layout,
             enableSidebar
           },
-          ${header},
-          ${footer},
+          ${site},
         }
     `;
 
