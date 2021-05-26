@@ -93,7 +93,15 @@ export async function getPage(slug: string, type: IndexTypes, preview: boolean) 
             title,
             subtitle,
             "slug": slug.current,
-            body,
+            body[]{
+              ...,
+              markDefs[]{
+                ...,
+                _type == "internalLink" => {
+                  "slug": @.to->slug.current
+                }
+              }
+            },
             api,
             usage,
             style,

@@ -14,6 +14,7 @@ import Image from '@componentsPortable/Image';
 import CodeBlock from '@componentsPortable/CodeBlock';
 import List from '@componentsPortable/List';
 import InlineCode from '@componentsPortable/InlineCode';
+import { InternalLink, ExternalLink } from '@componentsPortable/Links';
 
 const config = {
   projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID,
@@ -36,7 +37,9 @@ export const PortableText = createPortableTextComponent({
     },
     list: List,
     marks: {
-      code: InlineCode
+      code: InlineCode,
+      internalLink: InternalLink,
+      externalLink: ExternalLink
     }
   }
 });

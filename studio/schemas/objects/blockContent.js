@@ -1,3 +1,5 @@
+import { OpenInNew, Link } from '@sparkpost/matchbox-icons';
+
 export default {
   title: 'Block Content',
   name: 'blockContent',
@@ -34,9 +36,38 @@ export default {
         // Annotations can be any object structure – e.g. a link or a footnote.
         annotations: [
           {
-            title: 'URL',
-            name: 'link',
+            title: 'Internal Link',
+            name: 'internalLink',
             type: 'object',
+            blockEditor: {
+              icon: Link
+            },
+            fields: [
+              {
+                title: 'To',
+                name: 'to',
+                type: 'reference',
+                to: [
+                  { type: 'page' },
+                  { type: 'indexPage' },
+                  { type: 'component' },
+                  { type: 'foundation' },
+                  { type: 'pattern' },
+                  { type: 'content' },
+                  { type: 'brand' },
+                  { type: 'resource' },
+                  { type: 'update' }
+                ]
+              }
+            ]
+          },
+          {
+            title: 'External Link',
+            name: 'externalLink',
+            type: 'object',
+            blockEditor: {
+              icon: OpenInNew
+            },
             fields: [
               {
                 title: 'URL',
