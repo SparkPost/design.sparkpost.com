@@ -29,12 +29,19 @@ function ColorComponent(props: ColorProps): JSX.Element {
     >
       <Box>
         <Box bg={tokens[color.javascript]} height="6rem" width="100%" border="thick" mb="200"></Box>
-        <Box>
+        <Box mb="200">
           {label && `${label}, `}
           {color.friendly}
         </Box>
-        <Box fontSize="100" mb="200">
-          {c.rgb().string()}, {color.value}
+        <Box fontSize="100" lineHeight="100" mb="200" display="flex">
+          <Box pr="400">
+            <Box>RGB</Box>
+            {c.rgb().string()}
+          </Box>
+          <Box>
+            <Box>HEX</Box>
+            {color.value}
+          </Box>
         </Box>
         <Box>{description}</Box>
       </Box>
