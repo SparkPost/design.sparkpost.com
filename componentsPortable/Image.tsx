@@ -15,6 +15,7 @@ function Image(props: ImageProps): JSX.Element {
       borderRadius="rounded"
       overflow="hidden"
       display="block"
+      border="thick"
     >
       <Box as="img" display="block" width="100%" src={props.source} />
     </Box>

@@ -81,7 +81,7 @@ function BlockQuote(props: BlockQuoteProps): JSX.Element {
 
   return (
     <Box as="blockquote" display="flex" p="0" m="0" mb="600">
-      <Box bg="scheme.fg" width="3px" borderRadius="pill"></Box>
+      <Box bg="scheme.lightFg" width="3px" borderRadius="pill"></Box>
       <Box pl="400" py="300" fontSize="400" lineHeight="500" fontStyle="italic" color="scheme.fg">
         {children}
       </Box>
