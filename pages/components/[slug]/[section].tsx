@@ -53,7 +53,7 @@ const Page = ({ data, slug, preview }) => {
     return <div>Error</div>;
   }
 
-  const { site, title, subtitle, list } = pageData;
+  const { site, title, subtitle, list, seo } = pageData;
   const pathParts = asPath.split('/');
   const activeSection = pathParts.pop();
   const basePath = pathParts.join('/');
@@ -62,10 +62,10 @@ const Page = ({ data, slug, preview }) => {
   return (
     <div>
       <SEO
-        title={site?.seo?.metaTitle}
-        description={site?.seo?.metaDescription}
-        keywords={site?.seo?.metaKeywords}
-        image={site?.seo?.metaImage}
+        title={seo?.metaTitle || site?.seo?.metaTitle}
+        description={seo?.metaDescription || site?.seo?.metaDescription}
+        keywords={seo?.metaKeywords || site?.seo?.metaKeywords}
+        image={seo?.metaImage || site?.seo?.metaImage}
       />
       <Header title="Matchbox" items={site?.header?.menu?.items} />
       <Box display="grid" gridTemplateColumns="197px 1fr">

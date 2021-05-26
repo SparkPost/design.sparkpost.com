@@ -68,6 +68,7 @@ export async function getHomePage(preview) {
   const query = groq`
     *[_type == "homePage"] | order(_updatedAt desc)[0] {
       ${site},
+      seo,
       hero {
         title,
         description
@@ -90,6 +91,7 @@ export async function getPage(slug: string, type: IndexTypes, preview: boolean) 
   const query = groq`
         *[_type in ${PAGE_TYPES} && slug.current match '${slug}'][0] {
             ${site},
+            seo,
             title,
             subtitle,
             "slug": slug.current,
@@ -129,6 +131,8 @@ export async function getAllPageSlugs() {
 export async function getPagesByType(type: IndexTypes) {
   const query = groq`
     *[_type == '${type}'] {
+      ${site},
+      seo,
       title,
       subtitle,
       "slug": slug.current,
@@ -156,8 +160,10 @@ export async function getIndexPageFor(type: IndexTypes) {
             title,
             subtitle,
             layout,
-            enableSidebar
+            enableSidebar,
+            seo
           },
+          ${site},
           ${header},
           ${footer},
         }
