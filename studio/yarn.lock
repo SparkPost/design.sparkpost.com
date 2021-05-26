@@ -1580,6 +1580,11 @@
     "@sanity/util" "2.10.5"
     loader-utils "1.1.0"
 
+"@sparkpost/design-tokens@^5.1.5":
+  version "5.1.5"
+  resolved "https://registry.yarnpkg.com/@sparkpost/design-tokens/-/design-tokens-5.1.5.tgz#468b9bdc5cb4add082bc533c054aa46213df97ca"
+  integrity sha512-IfOlJ4nS6HAY6Y5pWmsQGBrnBWFWqmj+GkXNnSi5CFb8DVYDiEbEbShL97xjvwAoKN4kbZGGmbtXwll7GoK0VQ==
+
 "@sparkpost/matchbox-icons@^5.1.2":
   version "5.1.5"
   resolved "https://registry.npmjs.org/@sparkpost/matchbox-icons/-/matchbox-icons-5.1.5.tgz#a6a5b6d0fcd16c30db8bb9af7fcffa1054de5adb"
