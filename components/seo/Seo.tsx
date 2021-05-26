@@ -6,11 +6,13 @@ type SeoProps = {
   description: string;
   keywords: string;
   image: object;
+  favicon: object;
 };
 
 const SEO: React.FC<SeoProps> = (props: SeoProps) => {
-  const { title, description, keywords, image } = props;
+  const { title, description, keywords, image, favicon } = props;
   const url = urlFor(image).width(1200).height(630).url();
+  const faviconUrl = urlFor(favicon).width(100).height(100).url();
 
   return (
     <Head>
@@ -21,6 +23,7 @@ const SEO: React.FC<SeoProps> = (props: SeoProps) => {
       <link rel="icon" href="/favicon.png" />
 
       <title>{title}</title>
+      <link rel="shortcut icon" type="image/png" href={faviconUrl} />
       <meta property="og:title" content={title} />
       <meta name="twitter:title" content={title} />
       <meta name="og:site_name" content={title} />

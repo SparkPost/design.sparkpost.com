@@ -53,6 +53,7 @@ const seo = groq`
     metaDescription,
     metaKeywords,
     metaImage,
+    favicon
   }
 `;
 

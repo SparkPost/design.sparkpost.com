@@ -28,6 +28,7 @@ const HomePage = ({ data, preview }) => {
         description={seo?.metaDescription || site?.seo?.metaDescription}
         keywords={seo?.metaKeywords || site?.seo?.metaKeywords}
         image={seo?.metaImage || site?.seo?.metaImage}
+        favicon={site?.seo?.favicon}
       />
       <Header title="Matchbox" items={site?.header?.menu?.items} />
       <HomeHero title={hero?.title} description={hero?.description} />
