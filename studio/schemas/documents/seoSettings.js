@@ -34,6 +34,11 @@ export default {
       name: 'metaImage',
       type: 'image',
       description: 'Will be cropped to 1200 x 630'
+    },
+    {
+      title: 'Favicon',
+      name: 'favicon',
+      type: 'image'
     }
   ],
   preview: {
