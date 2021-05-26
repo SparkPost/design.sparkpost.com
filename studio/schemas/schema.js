@@ -32,6 +32,7 @@ import navPage from './objects/navPage';
 import navLink from './objects/navLink';
 import homeHero from './objects/homeHero';
 import seo from './objects/seo';
+import color from './objects/color';
 
 export default createSchema({
   name: 'matchbox',
@@ -66,6 +67,7 @@ export default createSchema({
     navPage,
     navLink,
     homeHero,
-    seo
+    seo,
+    color
   ])
 });
