@@ -88,6 +88,9 @@ export default {
     },
     {
       type: 'code'
+    },
+    {
+      type: 'color'
     }
   ]
 };
