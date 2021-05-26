@@ -1,7 +1,6 @@
 import React from 'react';
 import { Box } from '@sparkpost/matchbox';
 import { meta, tokens } from '@sparkpost/design-tokens';
-import styled from 'styled-components';
 import Color from 'color';
 
 type ColorProps = {
@@ -12,12 +11,6 @@ type ColorProps = {
   };
 };
 
-const Wrapper = styled(Box)`
-  p + & {
-    padding-left: 0;
-  }
-`;
-
 function ColorComponent(props: ColorProps): JSX.Element {
   const { name, description, label } = props.node;
 
@@ -25,7 +18,7 @@ function ColorComponent(props: ColorProps): JSX.Element {
   const c = Color(color.value);
 
   return (
-    <Wrapper
+    <Box
       data-id="color-description"
       display="inline-block"
       width="50%"
@@ -45,7 +38,7 @@ function ColorComponent(props: ColorProps): JSX.Element {
         </Box>
         <Box>{description}</Box>
       </Box>
-    </Wrapper>
+    </Box>
   );
 }
 
