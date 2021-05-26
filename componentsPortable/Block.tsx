@@ -35,7 +35,7 @@ function Header(props: HeaderProps): JSX.Element {
   const { level, children = '' } = props;
   const router = useRouter();
 
-  const mb = level === '1' || level === '2' ? '600' : '500';
+  const mb = level === '1' || level === '2' ? '500' : '400';
 
   const size = React.useMemo(() => {
     switch (level) {
@@ -62,7 +62,7 @@ function Header(props: HeaderProps): JSX.Element {
   const path = router.asPath.split('#')[0];
 
   return (
-    <Box as={`h${level}`} mb={mb} pt="300" fontSize={size} id={toKebab(children[0])}>
+    <Box as={`h${level}`} mb={mb} pt="200" fontSize={size} id={toKebab(children[0])}>
       <Link href={`${path}#${toKebab(children[0])}`}>
         <StyledLink>
           {children} <LinkIcon />
@@ -81,7 +81,7 @@ function BlockQuote(props: BlockQuoteProps): JSX.Element {
 
   return (
     <Box as="blockquote" display="flex" p="0" m="0" mb="600">
-      <Box bg="scheme.fg" width="3px" borderRadius="pill"></Box>
+      <Box bg="scheme.lightFg" width="3px" borderRadius="pill"></Box>
       <Box pl="400" py="300" fontSize="400" lineHeight="500" fontStyle="italic" color="scheme.fg">
         {children}
       </Box>
