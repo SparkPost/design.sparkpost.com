@@ -20,8 +20,6 @@ const SEO: React.FC<SeoProps> = (props: SeoProps) => {
       <meta httpEquiv="x-ua-compatible" content="ie=edge" />
       <meta name="viewport" content="initial-scale=1.0, width=device-width" />
 
-      <link rel="icon" href="/favicon.png" />
-
       <title>{title}</title>
       <link rel="shortcut icon" type="image/png" href={faviconUrl} />
       <meta property="og:title" content={title} />
