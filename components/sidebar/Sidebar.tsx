@@ -81,8 +81,8 @@ function Sidebar(props: SidebarProps): JSX.Element {
   const dedupedCategories = categories.filter((sub, i) => categories.indexOf(sub) === i);
 
   return (
-    <Box border="thick" mr="-2px" mt="-2px">
-      <Box position="sticky" top="0">
+    <Box border="thick" mr="-2px" mt="-2px" borderBottom="none">
+      <Box position="sticky" top="0" maxHeight="100vh" overflow="auto">
         <Box as="nav">
           <Box py="400">
             <CategoryLabel>{root}</CategoryLabel>
