@@ -12,7 +12,6 @@ import Block from '@componentsPortable/Block';
 import Hr from '@componentsPortable/Hr';
 import Image from '@componentsPortable/Image';
 import CodeBlock from '@componentsPortable/CodeBlock';
-import Color from '@componentsPortable/Color';
 import List from '@componentsPortable/List';
 import InlineCode from '@componentsPortable/InlineCode';
 import { InternalLink, ExternalLink } from '@componentsPortable/Links';
@@ -21,7 +20,7 @@ const config = {
   projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID,
   dataset: process.env.NEXT_PUBLIC_SANITY_DATASET,
   apiVersion: '2021-03-25',
-  useCdn: true
+  useCdn: process.env.NODE_ENV === 'production'
 };
 
 // Creates image urls for Image nodes
@@ -34,8 +33,7 @@ export const PortableText = createPortableTextComponent({
       horizontalRule: Hr,
       block: Block,
       code: CodeBlock,
-      image: (props) => <Image source={urlFor(props.node).url()} />,
-      color: Color
+      image: (props) => <Image source={urlFor(props.node).url()} />
     },
     list: List,
     marks: {
@@ -52,14 +50,11 @@ export const sanityClient = createClient(config);
 
 export const previewClient = createClient({
   ...config,
-  useCdn: true,
+  useCdn: false,
   token: process.env.SANITY_API_TOKEN,
   withCredentials: true
 });
 
-export const getClient = (usePreview = false) => {
-  console.log(usePreview);
-  return usePreview ? previewClient : sanityClient;
-};
+export const getClient = (usePreview = false) => (usePreview ? previewClient : sanityClient);
 
 export const useCurrentUser = createCurrentUserHook(config);

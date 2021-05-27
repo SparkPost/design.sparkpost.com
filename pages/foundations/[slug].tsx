@@ -6,6 +6,7 @@ import PageHero from '@components/pageHero';
 import { Sidebar } from '@components/sidebar';
 import { SEO } from '@components/seo';
 import { Box } from '@sparkpost/matchbox';
+import useSeo from '@hooks/useSeo';
 
 const Page = ({ data, slug, preview }) => {
   const { data: pageData } = usePreviewSubscription(data?.query, {
@@ -14,20 +15,20 @@ const Page = ({ data, slug, preview }) => {
     enabled: preview
   });
 
+  const { site, title, subtitle, body, list, seo } = pageData;
+
+  const { getSeoProps } = useSeo({
+    site: site?.seo,
+    page: seo
+  });
+
   if (!pageData) {
     return <div>Error</div>;
   }
 
-  const { site, title, subtitle, body, list, seo } = pageData;
-
   return (
     <div>
-      <SEO
-        title={seo?.metaTitle || site?.seo?.metaTitle}
-        description={seo?.metaDescription || site?.seo?.metaDescription}
-        keywords={seo?.metaKeywords || site?.seo?.metaKeywords}
-        image={seo?.metaImage || site?.seo?.metaImage}
-      />
+      <SEO {...getSeoProps()} />
       <Header title="Matchbox" items={site?.header?.menu?.items} />
       <Box display="grid" gridTemplateColumns="197px 1fr">
         <Sidebar enabled items={list} root="Foundations" />
@@ -59,7 +60,8 @@ export async function getStaticProps({ params, preview = false }) {
         query
       },
       slug
-    }
+    },
+    revalidate: 10
   };
 }
 

@@ -14,10 +14,10 @@ type ListProps = {
 };
 
 type SEOProps = {
-  metaTitle: string;
-  metaDescription: string;
-  metaKeywords: string;
-  metaImage: object;
+  title: string;
+  description: string;
+  keywords: string;
+  image: object;
 };
 
 type IndexLayoutProps = {
@@ -48,10 +48,10 @@ function IndexLayout(props: IndexLayoutProps): JSX.Element {
   return (
     <div>
       <SEO
-        title={seo?.metaTitle}
-        description={seo?.metaDescription}
-        keywords={seo?.metaKeywords}
-        image={seo?.metaImage}
+        title={seo?.title}
+        description={seo?.description}
+        keywords={seo?.keywords}
+        image={seo?.image}
       />
       <Header title="Matchbox" items={headerList} />
       <Box display="grid" gridTemplateColumns={enableSidebar ? '197px 1fr' : '1fr'}>

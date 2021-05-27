@@ -1,19 +1,15 @@
 import React from 'react';
 import { getIndexPageFor } from '@lib/api';
 import { IndexLayout } from '@components/indexLayout';
+import useSeo from '@hooks/useSeo';
 
 function ContentIndexPage({ data }) {
   const { site, settings, list } = data.pageData;
 
-  const siteSeo = site?.seo;
-  const pageSeo = settings?.seo;
-
-  const seo = {
-    metaTitle: pageSeo?.metaTitle || siteSeo?.metaTitle,
-    metaDescription: pageSeo?.metaDescription || siteSeo?.metaDescription,
-    metaKeywords: pageSeo?.metaKeywords || siteSeo?.metaKeywords,
-    metaImage: pageSeo?.metaImage || siteSeo?.metaImage
-  };
+  const { seo } = useSeo({
+    site: site?.seo,
+    page: settings?.seo
+  });
 
   return (
     <IndexLayout
@@ -42,6 +38,7 @@ export async function getStaticProps({ preview = false }) {
         pageData,
         query
       }
-    }
+    },
+    revalidate: 10
   };
 }
