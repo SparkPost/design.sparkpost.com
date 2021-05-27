@@ -98,7 +98,7 @@ type BlockProps = {
 
 // This component is reponsible for rendering default Sanity blocks – paragraphs and headers and blockquotes
 function Block(props: BlockProps): JSX.Element {
-  const style = props.node.style || 'normal';
+  const style = props?.node?.style || 'normal';
 
   // This is a header
   if (/^h\d/.test(style)) {
