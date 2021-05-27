@@ -15,7 +15,8 @@ export default function getTheme(colorScheme: string) {
         fg: colorScheme === 'dark' ? tokens.color_white : tokens.color_gray_1000,
         lightFg: colorScheme === 'dark' ? tokens.color_gray_800 : tokens.color_gray_300,
         lightAccent: colorScheme === 'light' ? tokens.color_blue_200 : tokens.color_gray_900,
-        heavyAccent: colorScheme === 'light' ? tokens.color_blue_700 : tokens.color_red_400
+        heavyAccent: colorScheme === 'light' ? tokens.color_blue_700 : tokens.color_red_400,
+        warning: colorScheme === 'light' ? tokens.color_yellow_600 : tokens.color_yellow_400
       },
       gray: {
         100: tokens.color_gray_100,

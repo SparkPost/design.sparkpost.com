@@ -91,6 +91,9 @@ export default {
     },
     {
       type: 'color'
+    },
+    {
+      type: 'prop'
     }
   ]
 };
