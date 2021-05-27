@@ -27,8 +27,6 @@ const HomePage = ({ data, preview }) => {
     return <div>Error</div>;
   }
 
-  console.log(getSeoProps());
-
   return (
     <div>
       <SEO {...getSeoProps()} />
