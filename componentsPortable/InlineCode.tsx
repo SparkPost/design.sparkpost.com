@@ -1,7 +1,13 @@
 import React from 'react';
 import { Box } from '@sparkpost/matchbox';
 
-function InlineCode(props): JSX.Element {
+type InlineCodeTypes = {
+  children: React.ReactNode;
+  fontSize?: string;
+};
+
+function InlineCode(props: InlineCodeTypes): JSX.Element {
+  const { children, fontSize = '70%' } = props;
   return (
     <Box
       as="code"
@@ -9,10 +15,10 @@ function InlineCode(props): JSX.Element {
       display="inline-block"
       px="100"
       py="100"
-      fontSize="70%"
+      fontSize={fontSize}
       borderRadius="3px"
     >
-      {props.children}
+      {children}
     </Box>
   );
 }

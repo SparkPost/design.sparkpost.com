@@ -16,6 +16,7 @@ import Color from '@componentsPortable/Color';
 import List from '@componentsPortable/List';
 import InlineCode from '@componentsPortable/InlineCode';
 import { InternalLink, ExternalLink } from '@componentsPortable/Links';
+import Prop from '@componentsPortable/Prop';
 
 const config = {
   projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID,
@@ -35,7 +36,8 @@ export const PortableText = createPortableTextComponent({
       block: Block,
       code: CodeBlock,
       image: (props) => <Image source={urlFor(props.node).url()} />,
-      color: Color
+      color: Color,
+      prop: Prop
     },
     list: List,
     marks: {
