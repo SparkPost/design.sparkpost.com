@@ -10,6 +10,7 @@ function Image(props: ImageProps): JSX.Element {
     <Box
       as="figure"
       m="0"
+      mb="600"
       p="0"
       width="100%"
       borderRadius="rounded"
