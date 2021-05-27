@@ -20,7 +20,7 @@ const config = {
   projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID,
   dataset: process.env.NEXT_PUBLIC_SANITY_DATASET,
   apiVersion: '2021-03-25',
-  useCdn: process.env.NODE_ENV === 'production'
+  useCdn: true
 };
 
 // Creates image urls for Image nodes
@@ -50,11 +50,14 @@ export const sanityClient = createClient(config);
 
 export const previewClient = createClient({
   ...config,
-  useCdn: false,
+  useCdn: true,
   token: process.env.SANITY_API_TOKEN,
   withCredentials: true
 });
 
-export const getClient = (usePreview = false) => (usePreview ? previewClient : sanityClient);
+export const getClient = (usePreview = false) => {
+  console.log(usePreview);
+  return usePreview ? previewClient : sanityClient;
+};
 
 export const useCurrentUser = createCurrentUserHook(config);
