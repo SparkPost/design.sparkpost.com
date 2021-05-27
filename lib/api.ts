@@ -41,7 +41,7 @@ const footer = groq`
     "menu": footerMenu -> {
       items[]{
         title,
-        slug
+        "slug": url
       }
     }
   }
@@ -157,14 +157,14 @@ export async function getPagesByType(type: IndexTypes) {
   };
 }
 
-export async function getIndexPageFor(type: IndexTypes) {
+export async function getIndexPageFor(type: IndexTypes, { order = 'title asc' } = {}) {
   const query = groq`
         *[0] {
-          "list": *[_type == '${type}'] {
+          "list": *[_type == '${type}'] | order(${order}) {
             title,
             "slug": slug.current,
             subcategory
-          } | order(title asc),
+          },
           "settings": *[_type=='indexPage' && (slug.current match '/${type}*' || slug.current match '/${type}')][0] {
             title,
             subtitle,

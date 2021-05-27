@@ -33,7 +33,7 @@ function UpdatesIndexPage({ data }) {
 export default UpdatesIndexPage;
 
 export async function getStaticProps({ preview = false }) {
-  const { data: pageData, query } = await getIndexPageFor('update');
+  const { data: pageData, query } = await getIndexPageFor('update', { order: '_updatedAt desc' });
 
   return {
     props: {
