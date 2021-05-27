@@ -41,7 +41,7 @@ const footer = groq`
     "menu": footerMenu -> {
       items[]{
         title,
-        slug
+        "slug": url
       }
     }
   }
