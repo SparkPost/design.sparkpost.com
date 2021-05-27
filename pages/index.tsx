@@ -7,6 +7,7 @@ import { Card } from '@components/card';
 import { Header } from '@components/header';
 import Footer from '@components/footer';
 import { SEO } from '@components/seo';
+import useSeo from '@hooks/useSeo';
 
 const HomePage = ({ data, preview }) => {
   const { data: pageData } = usePreviewSubscription(data?.query, {
@@ -15,21 +16,20 @@ const HomePage = ({ data, preview }) => {
     enabled: preview
   });
 
+  const { site, hero, modules, seo } = pageData;
+
+  const { getSeoProps } = useSeo({
+    site: site?.seo,
+    page: seo
+  });
+
   if (!pageData) {
     return <div>Error</div>;
   }
 
-  const { site, hero, modules, seo } = pageData;
-
   return (
     <div>
-      <SEO
-        title={seo?.metaTitle || site?.seo?.metaTitle}
-        description={seo?.metaDescription || site?.seo?.metaDescription}
-        keywords={seo?.metaKeywords || site?.seo?.metaKeywords}
-        image={seo?.metaImage || site?.seo?.metaImage}
-        favicon={site?.seo?.favicon}
-      />
+      <SEO {...getSeoProps()} />
       <Header title="Matchbox" items={site?.header?.menu?.items} />
       <HomeHero title={hero?.title} description={hero?.description} />
       <Box border="thick" my="-2px">
@@ -62,7 +62,8 @@ export async function getStaticProps({ preview = false }) {
         pageData,
         query
       }
-    }
+    },
+    revalidate: 10
   };
 }
 

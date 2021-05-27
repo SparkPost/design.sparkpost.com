@@ -13,7 +13,8 @@ const getPageFields = (type = '') => {
       name: 'subtitle',
       title: 'Subtitle',
       type: 'text',
-      description: 'Appears below the title in the page hero'
+      description: 'Appears below the title in the page hero',
+      rows: 3
     },
     type !== 'components'
       ? {

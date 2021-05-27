@@ -17,6 +17,7 @@ export default {
     {
       name: 'subtitle',
       title: 'Subtitle',
+      rows: 3,
       type: 'text',
       description: 'Appears below the title in the page hero'
     },

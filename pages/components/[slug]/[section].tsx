@@ -10,6 +10,7 @@ import { SEO } from '@components/seo';
 import { Box } from '@sparkpost/matchbox';
 import styled from 'styled-components';
 import css from '@styled-system/css';
+import useSeo from '@hooks/useSeo';
 
 const Tab = styled.a`
   display: inline-flex;
@@ -49,24 +50,24 @@ const Page = ({ data, slug, preview }) => {
 
   const { asPath } = useRouter();
 
-  if (!pageData) {
-    return <div>Error</div>;
-  }
-
   const { site, title, subtitle, list, seo } = pageData;
   const pathParts = asPath.split('/');
   const activeSection = pathParts.pop();
   const basePath = pathParts.join('/');
   const shouldHaveTabs = pageData.usage || pageData.style;
 
+  const { getSeoProps } = useSeo({
+    site: site?.seo,
+    page: seo
+  });
+
+  if (!pageData) {
+    return <div>Error</div>;
+  }
+
   return (
     <div>
-      <SEO
-        title={seo?.metaTitle || site?.seo?.metaTitle}
-        description={seo?.metaDescription || site?.seo?.metaDescription}
-        keywords={seo?.metaKeywords || site?.seo?.metaKeywords}
-        image={seo?.metaImage || site?.seo?.metaImage}
-      />
+      <SEO {...getSeoProps()} />
       <Header title="Matchbox" items={site?.header?.menu?.items} />
       <Box display="grid" gridTemplateColumns="197px 1fr">
         <Sidebar enabled items={list} root="Components" />
@@ -115,7 +116,8 @@ export async function getStaticProps({ params, preview = false }) {
         query
       },
       slug
-    }
+    },
+    revalidate: 10
   };
 }
 

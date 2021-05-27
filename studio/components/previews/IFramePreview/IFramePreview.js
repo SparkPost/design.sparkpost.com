@@ -25,17 +25,12 @@ const IFramePreview = ({ options, document }) => {
   }
 
   return (
-    <Box
-      width="100%"
-      height="100%"
-      style={{
-        'pointer-events': 'none'
-      }}
-    >
+    <Box width="100%" height="100%">
       <Box
         as="iframe"
         width="100%"
         height="100%"
+        overflow="scroll"
         border="none"
         title="LivePreview"
         src={previewUrl}
