@@ -47,6 +47,7 @@ export default {
                 title: 'To',
                 name: 'to',
                 type: 'reference',
+                weak: true,
                 to: [
                   { type: 'page' },
                   { type: 'indexPage' },

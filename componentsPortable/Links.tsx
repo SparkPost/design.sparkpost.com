@@ -31,7 +31,7 @@ type LinkProps = {
 
 function InternalLink(props: LinkProps): JSX.Element {
   return (
-    <Link href={props.mark.slug}>
+    <Link href={props?.mark?.slug}>
       <StyledLink>{props.children}</StyledLink>
     </Link>
   );
@@ -39,7 +39,7 @@ function InternalLink(props: LinkProps): JSX.Element {
 
 function ExternalLink(props: LinkProps): JSX.Element {
   return (
-    <StyledLink href={props.mark.href} target="_blank" rel="noopener noreferrer">
+    <StyledLink href={props?.mark?.href} target="_blank" rel="noopener noreferrer">
       {props.children}
     </StyledLink>
   );

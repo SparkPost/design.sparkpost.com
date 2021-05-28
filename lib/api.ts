@@ -65,6 +65,30 @@ const site = groq`
   }
 `;
 
+const usage = groq`
+  api[] {
+    ...,
+    markDefs[]{
+      ...,
+      _type == "internalLink" => {
+        "slug": @.to->slug.current
+      }
+    }
+  }
+`;
+
+const style = groq`
+  api[] {
+    ...,
+    markDefs[]{
+      ...,
+      _type == "internalLink" => {
+        "slug": @.to->slug.current
+      }
+    }
+  }
+`;
+
 export async function getHomePage(preview) {
   const query = groq`
     *[_type == "homePage"] | order(_updatedAt desc)[0] {
@@ -88,6 +112,21 @@ export async function getHomePage(preview) {
   };
 }
 
+const fillPropComponentLinks = `
+_type == "prop" => {
+  ...,
+  description[] {
+    ...,
+    markDefs[]{
+      ...,
+      _type == "internalLink" => {
+        "slug": @.to->slug.current
+      }
+    },
+  }
+}
+`;
+
 export async function getPage(slug: string, type: IndexTypes, preview: boolean) {
   const query = groq`
         *[_type in ${PAGE_TYPES} && slug.current match '${slug}'][0] {
@@ -96,7 +135,7 @@ export async function getPage(slug: string, type: IndexTypes, preview: boolean) 
             title,
             subtitle,
             "slug": slug.current,
-            body[]{
+            body[] {
               ...,
               markDefs[]{
                 ...,
@@ -105,9 +144,34 @@ export async function getPage(slug: string, type: IndexTypes, preview: boolean) 
                 }
               }
             },
-            api,
-            usage,
-            style,
+            api[] {
+							...,
+              markDefs[]{
+                ...,
+                _type == "internalLink" => {
+                  "slug": @.to->slug.current
+                }
+              },
+							${fillPropComponentLinks}
+            },
+            style[] {
+              ...,
+              markDefs[]{
+                ...,
+                _type == "internalLink" => {
+                  "slug": @.to->slug.current
+                }
+              }
+            },
+            usage[] {
+              ...,
+              markDefs[]{
+                ...,
+                _type == "internalLink" => {
+                  "slug": @.to->slug.current
+                }
+              }
+            },
             "list": *[_type == '${type}'] {
               title,
               "slug": slug.current,
