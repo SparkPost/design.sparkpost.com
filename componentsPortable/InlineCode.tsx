@@ -14,7 +14,7 @@ function InlineCode(props: InlineCodeTypes): JSX.Element {
       bg="scheme.lightAccent"
       display="inline-block"
       px="100"
-      py="100"
+      py="0.18em"
       fontSize={fontSize}
       borderRadius="3px"
     >
