@@ -5,7 +5,7 @@ import InlineCode from './InlineCode';
 import styled from 'styled-components';
 
 const NegateMargins = styled(Box)`
-  p:last-child {
+  p {
     margin-bottom: 0 !important;
   }
 `;
@@ -27,7 +27,7 @@ function Prop(props: PropTypes): JSX.Element {
 
   return (
     <Box mb="700">
-      <Box display="flex" mb="200">
+      <Box display="flex" mb="100">
         <Box pr="200">
           <InlineCode fontSize="90%">{name}</InlineCode>
         </Box>
