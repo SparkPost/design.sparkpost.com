@@ -9,19 +9,20 @@ export default {
     {
       name: 'name',
       title: 'Example Title',
-      type: 'string'
-    },
-    {
-      name: 'code',
-      title: 'Example Code',
-      type: 'code',
-      description: 'Optional'
+      type: 'string',
+      required: true
     },
     {
       name: 'description',
       title: 'Description',
       type: 'blockContent',
-      description: 'Optional'
+      required: true
+    },
+    {
+      name: 'code',
+      title: 'Example Code',
+      type: 'code',
+      required: true
     }
   ]
 };

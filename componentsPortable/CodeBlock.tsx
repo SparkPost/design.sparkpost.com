@@ -5,6 +5,8 @@ import { CopyToClipboard } from 'react-copy-to-clipboard';
 import styled from 'styled-components';
 import { ColorSchemeContext } from '@context/ColorSchemeContext';
 import { a11yDark, a11yLight } from 'react-syntax-highlighter/dist/cjs/styles/hljs';
+import prettier from 'prettier/standalone';
+import parserBabel from 'prettier/parser-babel';
 
 const Copy = styled(Box)`
   ${styles.buttonReset}
@@ -44,6 +46,13 @@ function CodeBlock(props: CodeProps): JSX.Element {
     }, 2000);
   };
 
+  const formatted = prettier.format(code.trim(), {
+    parser: 'babel',
+    plugins: [parserBabel],
+    tabWidth: 2,
+    jsxSingleQuote: false
+  });
+
   return (
     <Box
       border="thick"
@@ -69,7 +78,7 @@ function CodeBlock(props: CodeProps): JSX.Element {
             background: 'transparent'
           }}
         >
-          {code}
+          {formatted}
         </SyntaxHighlighter>
       </Box>
     </Box>

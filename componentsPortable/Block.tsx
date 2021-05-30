@@ -31,7 +31,7 @@ const StyledLink = styled.a`
   }
 `;
 
-function Header(props: HeaderProps): JSX.Element {
+export function Header(props: HeaderProps): JSX.Element {
   const { level, children = '' } = props;
   const router = useRouter();
 

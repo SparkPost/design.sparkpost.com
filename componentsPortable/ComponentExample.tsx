@@ -5,7 +5,7 @@ import CodeBlock from './CodeBlock';
 import { LiveProvider, LivePreview, LiveError } from 'react-live';
 import Frame, { FrameContextConsumer } from 'react-frame-component';
 import styled from 'styled-components';
-import ReactDOMServer from 'react-dom/server';
+import { Header } from './Block';
 
 const Box = Components.Box;
 const ThemeProvider = Components.ThemeProvider;
@@ -34,16 +34,19 @@ function ComponentExample(props: ComponentExampleProps) {
 
   return (
     <Box mb="600">
-      <Box fontSize="400" fontWeight="500" mb="100">
-        {name}
-      </Box>
-      <Box mb="200">
+      <Header level="4">{name}</Header>
+      <Box mb="400">
         <NegateParagraphMargins>
           <PortableText blocks={description} />
         </NegateParagraphMargins>
       </Box>
       <Box>
         <LiveProvider code={code.code} scope={Components}>
+          {/*
+            Important
+            This is rendered in an iframe so that this sites
+            theme and styles do not conflict with previews
+          */}
           <Box
             as={Frame}
             display="block"
@@ -61,7 +64,9 @@ function ComponentExample(props: ComponentExampleProps) {
               {({ document }) => {
                 return (
                   <ThemeProvider target={document.head}>
-                    <LivePreview />
+                    <Box p="500">
+                      <LivePreview />
+                    </Box>
                   </ThemeProvider>
                 );
               }}
