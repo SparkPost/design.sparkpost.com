@@ -20,6 +20,7 @@ type PropTypes = {
     defaultValue?: string;
   };
 };
+
 function Prop(props: PropTypes): JSX.Element {
   const {
     node: { name, required, description, deprecated, type, defaultValue }

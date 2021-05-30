@@ -34,6 +34,7 @@ import homeHero from './objects/homeHero';
 import seo from './objects/seo';
 import color from './objects/color';
 import prop from './objects/prop';
+import componentExample from './objects/componentExample';
 
 export default createSchema({
   name: 'matchbox',
@@ -70,6 +71,7 @@ export default createSchema({
     homeHero,
     seo,
     color,
-    prop
+    prop,
+    componentExample
   ])
 });

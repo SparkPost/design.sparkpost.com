@@ -127,6 +127,21 @@ _type == "prop" => {
 }
 `;
 
+const fillComponentExampleLinks = `
+_type == "componentExample" => {
+  ...,
+  description[] {
+    ...,
+    markDefs[]{
+      ...,
+      _type == "internalLink" => {
+        "slug": @.to->slug.current
+      }
+    },
+  }
+}
+`;
+
 export async function getPage(slug: string, type: IndexTypes, preview: boolean) {
   const query = groq`
         *[_type in ${PAGE_TYPES} && slug.current match '${slug}'][0] {
@@ -170,7 +185,8 @@ export async function getPage(slug: string, type: IndexTypes, preview: boolean) 
                 _type == "internalLink" => {
                   "slug": @.to->slug.current
                 }
-              }
+              },
+              ${fillComponentExampleLinks}
             },
             "list": *[_type == '${type}'] {
               title,

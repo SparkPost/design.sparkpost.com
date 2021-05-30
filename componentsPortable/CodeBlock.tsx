@@ -5,6 +5,8 @@ import { CopyToClipboard } from 'react-copy-to-clipboard';
 import styled from 'styled-components';
 import { ColorSchemeContext } from '@context/ColorSchemeContext';
 import { a11yDark, a11yLight } from 'react-syntax-highlighter/dist/cjs/styles/hljs';
+import prettier from 'prettier/standalone';
+import parserBabel from 'prettier/parser-babel';
 
 const Copy = styled(Box)`
   ${styles.buttonReset}
@@ -20,11 +22,13 @@ type CodeProps = {
     code: string;
     language: string;
   };
+  connectWithTop?: boolean;
 };
 
 function CodeBlock(props: CodeProps): JSX.Element {
   const {
-    node: { language, code }
+    node: { language, code },
+    connectWithTop
   } = props;
 
   const { colorScheme } = React.useContext(ColorSchemeContext);
@@ -42,8 +46,23 @@ function CodeBlock(props: CodeProps): JSX.Element {
     }, 2000);
   };
 
+  const formatted = prettier.format(code.trim(), {
+    parser: 'babel',
+    plugins: [parserBabel],
+    tabWidth: 2,
+    jsxSingleQuote: false
+  });
+
   return (
-    <Box border="thick" borderRadius="rounded" position="relative" overflow="hidden" mb="600">
+    <Box
+      border="thick"
+      borderRadius="rounded"
+      position="relative"
+      overflow="hidden"
+      mb="600"
+      borderTopLeftRadius={connectWithTop ? 0 : 'rounded'}
+      borderTopRightRadius={connectWithTop ? 0 : 'rounded'}
+    >
       <CopyToClipboard text={code} onCopy={onCopy}>
         <Copy position="absolute" right="-4px" top="-2px" as="button">
           <Box as="span" fontSize="100" lineHeight="400" fontWeight="medium">
@@ -51,7 +70,7 @@ function CodeBlock(props: CodeProps): JSX.Element {
           </Box>
         </Copy>
       </CopyToClipboard>
-      <Box overflow="scroll" minHeight="290px" maxHeight="600px" p="500">
+      <Box overflow="scroll" minHeight="140px" maxHeight="600px" p="500">
         <SyntaxHighlighter
           language={language || 'text'}
           style={colorScheme === 'light' ? a11yLight : a11yDark}
@@ -59,7 +78,7 @@ function CodeBlock(props: CodeProps): JSX.Element {
             background: 'transparent'
           }}
         >
-          {code}
+          {formatted}
         </SyntaxHighlighter>
       </Box>
     </Box>
