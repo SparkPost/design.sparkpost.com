@@ -84,17 +84,10 @@ export default {
       type: 'image',
       options: { hotspot: true }
     },
-    {
-      type: 'horizontalRule'
-    },
-    {
-      type: 'code'
-    },
-    {
-      type: 'color'
-    },
-    {
-      type: 'prop'
-    }
+    { type: 'horizontalRule' },
+    { type: 'code' },
+    { type: 'color' },
+    { type: 'prop' },
+    { type: 'componentExample' }
   ]
 };
