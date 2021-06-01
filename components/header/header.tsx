@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, styles } from '@sparkpost/matchbox';
+import { Box, ScreenReaderOnly, styles } from '@sparkpost/matchbox';
 import { InvertColors } from '@sparkpost/matchbox-icons';
 import styled from 'styled-components';
 import Link from 'next/link';
@@ -49,7 +49,7 @@ const StyledHomeLink = styled(Box)`
 
 const SchemeButton = styled.button`
   ${styles.buttonReset}
-  pointer: cursor;
+  cursor: pointer;
   padding: ${(props) => props.theme.space[400]};
 `;
 
@@ -81,6 +81,7 @@ const Header: React.FC<HeaderProps> = (props: HeaderProps) => {
         })}
       </StyledList>
       <SchemeButton onClick={toggle} type="button">
+        <ScreenReaderOnly>Change Theme</ScreenReaderOnly>
         <InvertColors />
       </SchemeButton>
       <Box px="600" borderX="thick" py="450" mr="-2px">

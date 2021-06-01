@@ -65,30 +65,6 @@ const site = groq`
   }
 `;
 
-const usage = groq`
-  api[] {
-    ...,
-    markDefs[]{
-      ...,
-      _type == "internalLink" => {
-        "slug": @.to->slug.current
-      }
-    }
-  }
-`;
-
-const style = groq`
-  api[] {
-    ...,
-    markDefs[]{
-      ...,
-      _type == "internalLink" => {
-        "slug": @.to->slug.current
-      }
-    }
-  }
-`;
-
 export async function getHomePage(preview) {
   const query = groq`
     *[_type == "homePage"] | order(_updatedAt desc)[0] {
@@ -112,17 +88,20 @@ export async function getHomePage(preview) {
   };
 }
 
+const fillMarkDefs = `
+markDefs[]{
+  ...,
+  _type == "internalLink" => {
+    "slug": @.to->slug.current
+  }
+}
+`;
 const fillPropComponentLinks = `
 _type == "prop" => {
   ...,
   description[] {
     ...,
-    markDefs[]{
-      ...,
-      _type == "internalLink" => {
-        "slug": @.to->slug.current
-      }
-    },
+   ${fillMarkDefs} 
   }
 }
 `;
@@ -132,12 +111,7 @@ _type == "componentExample" => {
   ...,
   description[] {
     ...,
-    markDefs[]{
-      ...,
-      _type == "internalLink" => {
-        "slug": @.to->slug.current
-      }
-    },
+    ${fillMarkDefs} 
   }
 }
 `;
@@ -152,40 +126,20 @@ export async function getPage(slug: string, type: IndexTypes, preview: boolean) 
             "slug": slug.current,
             body[] {
               ...,
-              markDefs[]{
-                ...,
-                _type == "internalLink" => {
-                  "slug": @.to->slug.current
-                }
-              }
+              ${fillMarkDefs} 
             },
             api[] {
 							...,
-              markDefs[]{
-                ...,
-                _type == "internalLink" => {
-                  "slug": @.to->slug.current
-                }
-              },
+              ${fillMarkDefs},
 							${fillPropComponentLinks}
             },
             style[] {
               ...,
-              markDefs[]{
-                ...,
-                _type == "internalLink" => {
-                  "slug": @.to->slug.current
-                }
-              }
+              ${fillMarkDefs} 
             },
             usage[] {
               ...,
-              markDefs[]{
-                ...,
-                _type == "internalLink" => {
-                  "slug": @.to->slug.current
-                }
-              },
+              ${fillMarkDefs},
               ${fillComponentExampleLinks}
             },
             "list": *[_type == '${type}'] {
@@ -243,7 +197,8 @@ export async function getIndexPageFor(type: IndexTypes, { order = 'title asc' } 
           "list": *[_type == '${type}'] | order(${order}) {
             title,
             "slug": slug.current,
-            subcategory
+            subcategory,
+            subtitle
           },
           "settings": *[_type=='indexPage' && (slug.current match '/${type}*' || slug.current match '/${type}')][0] {
             title,

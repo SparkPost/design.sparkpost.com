@@ -35,6 +35,7 @@ import seo from './objects/seo';
 import color from './objects/color';
 import prop from './objects/prop';
 import componentExample from './objects/componentExample';
+import systemProps from './objects/systemProps';
 
 export default createSchema({
   name: 'matchbox',
@@ -72,6 +73,7 @@ export default createSchema({
     seo,
     color,
     prop,
-    componentExample
+    componentExample,
+    systemProps
   ])
 });

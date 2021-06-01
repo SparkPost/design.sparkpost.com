@@ -29,7 +29,7 @@ type ComponentExampleProps = {
 
 // For some reason preview doesnt render on hard refresh of a page
 // But navigating away and back fixes it
-function ComponentExample(props: ComponentExampleProps) {
+function ComponentExample(props: ComponentExampleProps): JSX.Element {
   const { name, description, code } = props.node;
 
   return (

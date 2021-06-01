@@ -88,6 +88,7 @@ export default {
     { type: 'code' },
     { type: 'color' },
     { type: 'prop' },
-    { type: 'componentExample' }
+    { type: 'componentExample' },
+    { type: 'systemProps' }
   ]
 };
