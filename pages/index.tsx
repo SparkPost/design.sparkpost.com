@@ -33,24 +33,23 @@ const HomePage = ({ data, preview }) => {
       <Header title="Matchbox" items={site?.header?.menu?.items} />
       <HomeHero title={hero?.title} description={hero?.description} />
       <Box border="thick" my="-2px">
-        {modules?.map((module, key) => {
-          return (
-            <Box key={key} display="grid" gridTemplateColumns={`repeat(${module.size}, 1fr)`}>
-              {module.columns?.map((column: any, index: number) => {
-                return (
-                  <Card
-                    key={index}
-                    index={index}
-                    span={column.span}
-                    url={column.slug}
-                    content={column.content}
-                    category={column.category}
-                  />
-                );
-              })}
-            </Box>
-          );
-        })}
+        {modules?.map((module, key) => (
+          <Box key={key} display="grid" gridTemplateColumns={`repeat(${module.size}, 1fr)`}>
+            {module.columns?.map((column, index) => {
+              console.log(column);
+              return (
+                <Card
+                  key={index}
+                  index={index}
+                  span={column.span}
+                  url={column.slug}
+                  content={column.content}
+                  enableCategory={column.enableCategoryLabel}
+                />
+              );
+            })}
+          </Box>
+        ))}
       </Box>
       <Footer items={site?.footer?.menu?.items} />
     </div>

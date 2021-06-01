@@ -45,15 +45,15 @@ export default {
       ]
     },
     {
-      title: 'Category',
-      name: 'category',
-      type: 'string',
-      description: 'Category for this card. Enables color-coded labels.'
-    },
-    {
       title: 'Content',
       name: 'content',
       type: 'blockContent'
+    },
+    {
+      title: 'Enable Category Label',
+      name: 'enableCategoryLabel',
+      type: 'boolean',
+      description: 'Turns on the category label based on url'
     }
   ],
   preview: {

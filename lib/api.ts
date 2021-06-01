@@ -21,7 +21,7 @@ export const modules = groq`
       span,
       "slug": link->slug.current,
       content,
-      category
+      enableCategoryLabel
     }
   }
 `;
