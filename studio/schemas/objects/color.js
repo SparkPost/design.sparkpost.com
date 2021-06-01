@@ -1,4 +1,4 @@
-import { ColorLens } from '@sparkpost/matchbox-icons';
+import { Colorize } from '@sparkpost/matchbox-icons';
 import { meta } from '@sparkpost/design-tokens';
 
 const colorNames = meta
@@ -9,7 +9,7 @@ export default {
   name: 'color',
   title: 'Color',
   type: 'object',
-  icon: ColorLens,
+  icon: Colorize,
   fields: [
     {
       name: 'name',

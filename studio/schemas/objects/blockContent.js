@@ -87,6 +87,7 @@ export default {
     { type: 'horizontalRule' },
     { type: 'code' },
     { type: 'color' },
+    { type: 'colorPalette' },
     { type: 'prop' },
     { type: 'componentExample' },
     { type: 'systemProps' }
