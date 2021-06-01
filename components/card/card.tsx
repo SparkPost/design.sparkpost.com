@@ -64,10 +64,10 @@ const MotionBox = styled(motion.div)`
 `;
 
 const BorderBox = styled(Box)`
-  margin-top: -2px;
-  margin-left: -2px;
-  margin-bottom: -2px;
-  margin-right: -2px;
+  margin-top: -1px;
+  margin-left: -1px;
+  margin-bottom: -1px;
+  margin-right: -1px;
 `;
 
 const NegateMargins = styled.div`
@@ -115,7 +115,15 @@ const Card: React.FC<CardProps> = (props: CardProps) => {
         minHeight="15rem"
         position="relative"
       >
-        <Box position="absolute" width="100%" height="100%" top="0" left="0" bg={accentColor} />
+        <Box
+          position="absolute"
+          width="100%"
+          height="100%"
+          top="0"
+          left="0"
+          bg={accentColor}
+          border="thick"
+        />
         <MotionBox
           url={url}
           onMouseEnter={() => setIsHovered(true)}
