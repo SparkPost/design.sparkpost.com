@@ -13,6 +13,7 @@ import Hr from '@componentsPortable/Hr';
 import Image from '@componentsPortable/Image';
 import CodeBlock from '@componentsPortable/CodeBlock';
 import Color from '@componentsPortable/Color';
+import ColorPalette from '@componentsPortable/ColorPalette';
 import List from '@componentsPortable/List';
 import InlineCode from '@componentsPortable/InlineCode';
 import { InternalLink, ExternalLink } from '@componentsPortable/Links';
@@ -37,6 +38,7 @@ export const PortableText = createPortableTextComponent({
       code: CodeBlock,
       image: (props) => <Image source={urlFor(props.node).url()} />,
       color: Color,
+      colorPalette: ColorPalette,
       prop: Prop
     },
     list: List,

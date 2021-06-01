@@ -93,6 +93,9 @@ export default {
       type: 'color'
     },
     {
+      type: 'colorPalette'
+    },
+    {
       type: 'prop'
     }
   ]

@@ -33,6 +33,7 @@ import navLink from './objects/navLink';
 import homeHero from './objects/homeHero';
 import seo from './objects/seo';
 import color from './objects/color';
+import colorPalette from './objects/colorPalette';
 import prop from './objects/prop';
 
 export default createSchema({
@@ -70,6 +71,7 @@ export default createSchema({
     homeHero,
     seo,
     color,
+    colorPalette,
     prop
   ])
 });
