@@ -34,7 +34,13 @@ const HomePage = ({ data, preview }) => {
       <HomeHero title={hero?.title} description={hero?.description} />
       <Box border="thick" my="-2px">
         {modules?.map((module, key) => (
-          <Box key={key} display="grid" gridTemplateColumns={`repeat(${module.size}, 1fr)`}>
+          <Box
+            key={key}
+            display="grid"
+            gridTemplateColumns={`repeat(${module.size}, 1fr)`}
+            mt="-1px"
+            mb="-1px"
+          >
             {module.columns?.map((column, index) => {
               return (
                 <Card
