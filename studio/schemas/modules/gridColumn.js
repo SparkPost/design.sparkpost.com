@@ -45,7 +45,13 @@ export default {
       ]
     },
     {
-      itle: 'Content',
+      title: 'Category',
+      name: 'category',
+      type: 'string',
+      description: 'Category for this card. Enables color-coded labels.'
+    },
+    {
+      title: 'Content',
       name: 'content',
       type: 'blockContent'
     }

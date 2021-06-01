@@ -20,7 +20,8 @@ export const modules = groq`
     columns[] {
       span,
       "slug": link->slug.current,
-      content
+      content,
+      category
     }
   }
 `;
