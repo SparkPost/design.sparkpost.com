@@ -46,12 +46,18 @@ function CodeBlock(props: CodeProps): JSX.Element {
     }, 2000);
   };
 
-  const formatted = prettier.format(code.trim(), {
-    parser: 'babel',
-    plugins: [parserBabel],
-    tabWidth: 2,
-    jsxSingleQuote: false
-  });
+  const formatted = React.useMemo(() => {
+    if (!['javascript'].includes(language)) {
+      return code;
+    }
+
+    return prettier.format(code.trim(), {
+      parser: 'babel',
+      plugins: [parserBabel],
+      tabWidth: 2,
+      jsxSingleQuote: false
+    });
+  }, [language, code]);
 
   return (
     <Box
