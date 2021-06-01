@@ -30,7 +30,7 @@ function SystemProps(props: SystemPropsProps): JSX.Element {
         }
 
         return (
-          <Box key={key} display="grid" gridTemplateColumns="6rem 1fr" gridGap="400" mb="300">
+          <Box key={key} display="grid" gridTemplateColumns="6rem 1fr" gridGap="400" mb="400">
             <Box>
               <InlineCode>{key}</InlineCode>
             </Box>
