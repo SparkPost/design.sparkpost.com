@@ -30,17 +30,17 @@ function SystemProps(props: SystemPropsProps): JSX.Element {
         }
 
         return (
-          <Box key={key} display="grid" gridTemplateColumns="6rem 1fr" gridGap="400" mb="300">
+          <Box key={key} display="grid" gridTemplateColumns="6rem 1fr" gridGap="400" mb="400">
             <Box>
               <InlineCode>{key}</InlineCode>
             </Box>
             <Box>
-              <Inline space="100">
+              <Inline space="200">
                 {names.map((name: string) => {
                   return (
-                    <Box key={name}>
-                      <InlineCode>{name}</InlineCode>
-                    </Box>
+                    <InlineCode key={name} display="block">
+                      {name}
+                    </InlineCode>
                   );
                 })}
               </Inline>
