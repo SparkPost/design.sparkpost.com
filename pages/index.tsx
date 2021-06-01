@@ -35,15 +35,19 @@ const HomePage = ({ data, preview }) => {
       <Box border="thick" my="-2px">
         {modules?.map((module, key) => (
           <Box key={key} display="grid" gridTemplateColumns={`repeat(${module.size}, 1fr)`}>
-            {module.columns?.map((column, index) => (
-              <Card
-                key={index}
-                index={index}
-                span={column.span}
-                url={column.slug}
-                content={column.content}
-              />
-            ))}
+            {module.columns?.map((column, index) => {
+              console.log(column);
+              return (
+                <Card
+                  key={index}
+                  index={index}
+                  span={column.span}
+                  url={column.slug}
+                  content={column.content}
+                  enableCategory={column.enableCategoryLabel}
+                />
+              );
+            })}
           </Box>
         ))}
       </Box>

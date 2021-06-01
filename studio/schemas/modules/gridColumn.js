@@ -45,9 +45,15 @@ export default {
       ]
     },
     {
-      itle: 'Content',
+      title: 'Content',
       name: 'content',
       type: 'blockContent'
+    },
+    {
+      title: 'Enable Category Label',
+      name: 'enableCategoryLabel',
+      type: 'boolean',
+      description: 'Turns on the category label based on url'
     }
   ],
   preview: {
