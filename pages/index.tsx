@@ -36,7 +36,6 @@ const HomePage = ({ data, preview }) => {
         {modules?.map((module, key) => (
           <Box key={key} display="grid" gridTemplateColumns={`repeat(${module.size}, 1fr)`}>
             {module.columns?.map((column, index) => {
-              console.log(column);
               return (
                 <Card
                   key={index}
