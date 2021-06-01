@@ -4,15 +4,16 @@ import { Box } from '@sparkpost/matchbox';
 type InlineCodeTypes = {
   children: React.ReactNode;
   fontSize?: string;
+  display?: string;
 };
 
 function InlineCode(props: InlineCodeTypes): JSX.Element {
-  const { children, fontSize = '70%' } = props;
+  const { children, fontSize = '70%', display = 'inline-block' } = props;
   return (
     <Box
       as="code"
       bg="scheme.lightAccent"
-      display="inline-block"
+      display={display}
       px="100"
       py="0.18em"
       fontSize={fontSize}
