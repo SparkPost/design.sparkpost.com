@@ -41,7 +41,8 @@ export const PortableText = createPortableTextComponent({
       color: Color,
       prop: Prop,
       componentExample: ComponentExample,
-      systemProps: SystemProps
+      systemProps: SystemProps,
+      colorPalette: () => 'this is a stub to get build working'
     },
     list: List,
     marks: {
