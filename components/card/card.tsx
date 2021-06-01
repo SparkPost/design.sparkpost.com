@@ -91,8 +91,6 @@ const Card: React.FC<CardProps> = (props: CardProps) => {
   const { url, span, index, content, title, subtitle, category } = props;
   const [isHovered, setIsHovered] = useState(false);
 
-  console.log(category);
-
   return (
     <Link href={url || ''}>
       <BorderBox
