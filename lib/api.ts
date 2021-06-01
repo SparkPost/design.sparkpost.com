@@ -197,7 +197,8 @@ export async function getIndexPageFor(type: IndexTypes, { order = 'title asc' } 
           "list": *[_type == '${type}'] | order(${order}) {
             title,
             "slug": slug.current,
-            subcategory
+            subcategory,
+            subtitle
           },
           "settings": *[_type=='indexPage' && (slug.current match '/${type}*' || slug.current match '/${type}')][0] {
             title,

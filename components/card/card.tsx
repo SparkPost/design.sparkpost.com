@@ -10,7 +10,7 @@ import css from '@styled-system/css';
 const hoverAnimation = (index: number, span: number) => {
   return {
     active: {
-      x: (index * span) % 10 === 0 ? 12 : -12,
+      x: (index * span) % 12 === 0 ? 12 : -12,
       y: -12,
       zIndex: index === 0 ? 2 : 1
     },
@@ -52,17 +52,19 @@ type CardProps = {
   span: number;
   index?: number; // Used to animate to the right instead of left
   content?: Array<any>;
+  subtitle?: string;
 };
 
 const Card: React.FC<CardProps> = (props: CardProps) => {
-  const { url, span, index, content, title } = props;
+  const { url, span, index, content, title, subtitle } = props;
   const [isHovered, setIsHovered] = useState(false);
 
   return (
     <Link href={url || ''}>
       <BorderBox
-        gridColumn={['span 10', null, `span ${span}`]}
-        pb={span === 10 ? ['25%'] : ['40%', null, '82%', '60%', '54%']}
+        gridColumn={['span 12', null, `span ${span}`]}
+        pb={span === 12 ? ['25%'] : ['40%', null, '82%', '60%', '54%']}
+        minHeight="15rem"
         position="relative"
       >
         <Box
@@ -91,8 +93,13 @@ const Card: React.FC<CardProps> = (props: CardProps) => {
           }}
         >
           {title && (
-            <Box fontSize="300" fontWeight="500">
+            <Box fontSize="300" fontWeight="500" mb="200">
               {title}
+            </Box>
+          )}
+          {subtitle && (
+            <Box fontSize="200" mb="200">
+              {subtitle}
             </Box>
           )}
           {content && <PortableText blocks={content} />}

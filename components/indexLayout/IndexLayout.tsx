@@ -11,6 +11,7 @@ type ListProps = {
   title: string;
   slug: string;
   subcategory?: string;
+  subtitle?: string;
 };
 
 type SEOProps = {
