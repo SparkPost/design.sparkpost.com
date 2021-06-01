@@ -7,6 +7,7 @@ type IndexListProps = {
   items?: {
     title: string;
     slug: string;
+    subtitle?: string;
   }[];
 };
 
@@ -14,16 +15,23 @@ function IndexList(props: IndexListProps): JSX.Element {
   function renderOneColumn() {
     return props.items.map((item, i) => (
       <Box key={i}>
-        <Card title={item.title} url={item.slug} span={10} />
+        <Card title={item.title} url={item.slug} subtitle={item.subtitle} span={12} />
       </Box>
     ));
   }
 
   function renderMultiColumn() {
     return (
-      <Box display="grid" gridTemplateColumns={`repeat(10, 1fr)`} m="0 auto">
+      <Box display="grid" gridTemplateColumns={`repeat(12, 1fr)`} m="0 auto">
         {props.items.map((item, i) => (
-          <Card title={item.title} url={item.slug} span={2} key={i} index={i} />
+          <Card
+            title={item.title}
+            url={item.slug}
+            subtitle={item.subtitle}
+            span={3}
+            key={i}
+            index={i}
+          />
         ))}
       </Box>
     );

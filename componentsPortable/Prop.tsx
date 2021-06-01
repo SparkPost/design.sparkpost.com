@@ -5,7 +5,7 @@ import InlineCode from './InlineCode';
 import styled from 'styled-components';
 
 const NegateMargins = styled(Box)`
-  p:last-child {
+  p {
     margin-bottom: 0 !important;
   }
 `;
@@ -20,6 +20,7 @@ type PropTypes = {
     defaultValue?: string;
   };
 };
+
 function Prop(props: PropTypes): JSX.Element {
   const {
     node: { name, required, description, deprecated, type, defaultValue }
@@ -27,9 +28,11 @@ function Prop(props: PropTypes): JSX.Element {
 
   return (
     <Box mb="700">
-      <Box display="flex" mb="200">
+      <Box display="flex" mb="100">
         <Box pr="200">
-          <InlineCode fontSize="90%">{name}</InlineCode>
+          <Box fontSize="400" fontWeight="medium">
+            {name}
+          </Box>
         </Box>
         {required && (
           <Box px="200" color="scheme.heavyAccent">
@@ -46,7 +49,7 @@ function Prop(props: PropTypes): JSX.Element {
         <PortableText blocks={description} />
       </NegateMargins>
       <Box display="flex">
-        <Box pr="300">
+        <Box pr="600">
           <Box fontSize="100">TYPE</Box>
           <Box>
             <InlineCode>{type}</InlineCode>

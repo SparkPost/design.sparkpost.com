@@ -49,9 +49,10 @@ const Page = ({ data, slug, preview }) => {
   });
 
   const { asPath } = useRouter();
+  const pathWithoutHash = asPath.split('#').shift();
 
   const { site, title, subtitle, list, seo } = pageData;
-  const pathParts = asPath.split('/');
+  const pathParts = pathWithoutHash.split('/');
   const activeSection = pathParts.pop();
   const basePath = pathParts.join('/');
   const shouldHaveTabs = pageData.usage || pageData.style;
@@ -76,17 +77,17 @@ const Page = ({ data, slug, preview }) => {
           {shouldHaveTabs && (
             <Box maxWidth="1200" m="-3.25rem auto -2px" px="400" textAlign="left">
               <Link href={`${basePath}/api`}>
-                <Tab isActive={asPath === `${basePath}/api`}>API</Tab>
+                <Tab isActive={pathWithoutHash === `${basePath}/api`}>API</Tab>
               </Link>
 
               {pageData.usage && (
                 <Link href={`${basePath}/usage`}>
-                  <Tab isActive={asPath === `${basePath}/usage`}>Usage</Tab>
+                  <Tab isActive={pathWithoutHash === `${basePath}/usage`}>Usage</Tab>
                 </Link>
               )}
               {pageData.style && (
                 <Link href={`${basePath}/style`}>
-                  <Tab isActive={asPath === `${basePath}/style`}>Style</Tab>
+                  <Tab isActive={pathWithoutHash === `${basePath}/style`}>Style</Tab>
                 </Link>
               )}
             </Box>

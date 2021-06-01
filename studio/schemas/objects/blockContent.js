@@ -47,6 +47,7 @@ export default {
                 title: 'To',
                 name: 'to',
                 type: 'reference',
+                weak: true,
                 to: [
                   { type: 'page' },
                   { type: 'indexPage' },
@@ -83,20 +84,12 @@ export default {
       type: 'image',
       options: { hotspot: true }
     },
-    {
-      type: 'horizontalRule'
-    },
-    {
-      type: 'code'
-    },
-    {
-      type: 'color'
-    },
-    {
-      type: 'colorPalette'
-    },
-    {
-      type: 'prop'
-    }
+    { type: 'horizontalRule' },
+    { type: 'code' },
+    { type: 'color' },
+    { type: 'colorPalette' },
+    { type: 'prop' },
+    { type: 'componentExample' },
+    { type: 'systemProps' }
   ]
 };

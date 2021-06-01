@@ -88,6 +88,34 @@ export async function getHomePage(preview) {
   };
 }
 
+const fillMarkDefs = `
+markDefs[]{
+  ...,
+  _type == "internalLink" => {
+    "slug": @.to->slug.current
+  }
+}
+`;
+const fillPropComponentLinks = `
+_type == "prop" => {
+  ...,
+  description[] {
+    ...,
+   ${fillMarkDefs} 
+  }
+}
+`;
+
+const fillComponentExampleLinks = `
+_type == "componentExample" => {
+  ...,
+  description[] {
+    ...,
+    ${fillMarkDefs} 
+  }
+}
+`;
+
 export async function getPage(slug: string, type: IndexTypes, preview: boolean) {
   const query = groq`
         *[_type in ${PAGE_TYPES} && slug.current match '${slug}'][0] {
@@ -96,18 +124,24 @@ export async function getPage(slug: string, type: IndexTypes, preview: boolean) 
             title,
             subtitle,
             "slug": slug.current,
-            body[]{
+            body[] {
               ...,
-              markDefs[]{
-                ...,
-                _type == "internalLink" => {
-                  "slug": @.to->slug.current
-                }
-              }
+              ${fillMarkDefs} 
             },
-            api,
-            usage,
-            style,
+            api[] {
+							...,
+              ${fillMarkDefs},
+							${fillPropComponentLinks}
+            },
+            style[] {
+              ...,
+              ${fillMarkDefs} 
+            },
+            usage[] {
+              ...,
+              ${fillMarkDefs},
+              ${fillComponentExampleLinks}
+            },
             "list": *[_type == '${type}'] {
               title,
               "slug": slug.current,
@@ -163,7 +197,8 @@ export async function getIndexPageFor(type: IndexTypes, { order = 'title asc' } 
           "list": *[_type == '${type}'] | order(${order}) {
             title,
             "slug": slug.current,
-            subcategory
+            subcategory,
+            subtitle
           },
           "settings": *[_type=='indexPage' && (slug.current match '/${type}*' || slug.current match '/${type}')][0] {
             title,

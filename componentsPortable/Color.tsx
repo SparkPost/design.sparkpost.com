@@ -1,7 +1,7 @@
 import React from 'react';
 import { Box, useCopyToClipboard, styles } from '@sparkpost/matchbox';
 import { meta, tokens } from '@sparkpost/design-tokens';
-import Color from 'color';
+import Color from 'color'; //eslint-disable-line
 import styled from 'styled-components';
 import css from '@styled-system/css';
 
