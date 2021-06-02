@@ -1,5 +1,6 @@
 import React from 'react';
 import * as Components from '@sparkpost/matchbox';
+import * as Icons from '@sparkpost/matchbox-icons';
 import { PortableText } from '@lib/sanity';
 import CodeBlock from './CodeBlock';
 import { LiveProvider, LivePreview, LiveError } from 'react-live';
@@ -41,7 +42,7 @@ function ComponentExample(props: ComponentExampleProps): JSX.Element {
         </NegateParagraphMargins>
       </Box>
       <Box>
-        <LiveProvider code={code.code} scope={Components}>
+        <LiveProvider code={code.code} scope={{ ...Components, ...Icons }}>
           {/*
             Important
             This is rendered in an iframe so that this sites
