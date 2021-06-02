@@ -26,8 +26,8 @@ type IndexLayoutProps = {
   sidebarList: ListProps[];
   list: ListProps[];
   footerList: ListProps[];
-  enableSidebar: boolean;
-  enableDatesAndExcerpts: boolean;
+  enableSidebar?: boolean;
+  enableDatesAndExcerpts?: boolean;
   layoutType: 'oneColumn' | 'multiColumn';
   title: string;
   subtitle: string;
