@@ -45,6 +45,7 @@ const SEO: React.FC<SeoProps> = (props: SeoProps) => {
 
       <meta property="og:type" content="website" />
       <meta name="twitter:card" content="summary_large_image" />
+      <link href="/assets/critical.css" rel="stylesheet" />
     </Head>
   );
 };
