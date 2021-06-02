@@ -8,15 +8,7 @@ import { SEO } from '@components/seo';
 import { Box } from '@sparkpost/matchbox';
 import useSeo from '@hooks/useSeo';
 
-type PageProps = {
-  data: {
-    pageData: any;
-  };
-  slug: string;
-  preview: boolean;
-};
-
-const Page: React.FC<PageProps> = ({ data, slug, preview }: PageProps) => {
+const Page = ({ data, slug, preview }) => {
   const { data: pageData } = usePreviewSubscription(data?.query, {
     params: { slug: slug },
     initialData: data?.pageData,
