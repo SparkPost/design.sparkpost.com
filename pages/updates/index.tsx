@@ -16,6 +16,7 @@ function UpdatesIndexPage({ data }) {
       seo={seo}
       headerList={site?.header?.menu?.items}
       enableSidebar={settings.enableSidebar}
+      enableDatesAndExcerpts
       sidebarList={list}
       layoutType={settings.layout}
       list={list}

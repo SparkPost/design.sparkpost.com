@@ -4,10 +4,13 @@ import { Card } from '../card';
 
 type IndexListProps = {
   layout?: 'oneColumn' | 'multiColumn';
+  enableDatesAndExcerpts: boolean;
   items?: {
     title: string;
     slug: string;
     subtitle?: string;
+    created_at?: string;
+    excerpt?: object[];
   }[];
 };
 
@@ -15,7 +18,14 @@ function IndexList(props: IndexListProps): JSX.Element {
   function renderOneColumn() {
     return props.items.map((item, i) => (
       <Box key={i}>
-        <Card title={item.title} url={item.slug} subtitle={item.subtitle} span={12} />
+        <Card
+          title={item.title}
+          url={item.slug}
+          subtitle={item.subtitle}
+          span={12}
+          date={props.enableDatesAndExcerpts ? item.created_at : null}
+          excerpt={props.enableDatesAndExcerpts ? item.excerpt : null}
+        />
       </Box>
     ));
   }

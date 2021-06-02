@@ -125,6 +125,8 @@ export async function getPage(slug: string, type: IndexTypes, preview: boolean) 
             title,
             subtitle,
             "slug": slug.current,
+            "created_at": _createdAt,
+            "updated_at": _updatedAt,
             body[] {
               ...,
               ${fillMarkDefs} 
@@ -199,7 +201,10 @@ export async function getIndexPageFor(type: IndexTypes, { order = 'title asc' } 
             title,
             "slug": slug.current,
             subcategory,
-            subtitle
+            subtitle,
+            "created_at": _createdAt,
+            "updated_at": _updatedAt,
+            "excerpt": body
           },
           "settings": *[_type=='indexPage' && (slug.current match '/${type}*' || slug.current match '/${type}')][0] {
             title,

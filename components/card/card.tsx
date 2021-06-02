@@ -7,6 +7,7 @@ import { ArrowForward } from '@sparkpost/matchbox-icons';
 import { motion } from 'framer-motion';
 import styled from 'styled-components';
 import css from '@styled-system/css';
+import { formatDate } from '@utils/date';
 
 const categoryMap = {
   foundations: {
@@ -30,6 +31,26 @@ const categoryMap = {
     fg: tokens.color_magenta_900
   }
 };
+
+// Turns block content into plain text
+function toPlainText(blocks = []) {
+  return (
+    blocks
+      // loop through each block
+      .map((block) => {
+        // if it's not a text block with children or if it is a header,
+        // return nothing
+        if (block._type !== 'block' || !block.children || /^h\d/.test(block.style)) {
+          return '';
+        }
+        // loop through the children spans, and join the
+        // text strings
+        return block.children.map((child) => child.text).join('');
+      })
+      // join the paragraphs leaving split by two linebreaks
+      .join('\n\n')
+  );
+}
 
 const hoverAnimation = (index: number, span: number) => {
   return {
@@ -79,17 +100,19 @@ const NegateMargins = styled.div`
 `;
 
 type CardProps = {
-  url: string;
-  title?: string;
-  span: number;
-  index?: number; // Used to animate to the right instead of left
   content?: Array<any>;
-  subtitle?: string;
+  date?: string;
   enableCategory?: boolean;
+  excerpt?: object[];
+  index?: number; // Used to animate to the right instead of left
+  span: number;
+  subtitle?: string;
+  title?: string;
+  url: string;
 };
 
 const Card: React.FC<CardProps> = (props: CardProps) => {
-  const { url, span, index, content, title, subtitle, enableCategory } = props;
+  const { url, span, index, content, title, subtitle, enableCategory, date, excerpt } = props;
   const [isHovered, setIsHovered] = React.useState(false);
 
   const category = React.useMemo(() => {
@@ -157,14 +180,25 @@ const Card: React.FC<CardProps> = (props: CardProps) => {
               {category.toUpperCase()}
             </Box>
           )}
+          {date && (
+            <Box fontSize="100" mb="0" lineHeight="100">
+              {formatDate(date)}
+            </Box>
+          )}
           {title && (
             <Box fontSize="300" fontWeight="500" mb="200">
               {title}
             </Box>
           )}
           {subtitle && (
-            <Box fontSize="200" mb="200">
+            <Box fontSize="200" lineHeight="200" mb="200">
               {subtitle}
+            </Box>
+          )}
+          {excerpt && (
+            <Box fontSize="200" lineHeight="200" mb="200">
+              {toPlainText(excerpt).substring(0, 180)}
+              {toPlainText(excerpt).substring(0, 180).length > 179 ? '...' : ''}
             </Box>
           )}
           {content && (

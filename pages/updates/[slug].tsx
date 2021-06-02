@@ -8,14 +8,22 @@ import { SEO } from '@components/seo';
 import { Box } from '@sparkpost/matchbox';
 import useSeo from '@hooks/useSeo';
 
-const Page = ({ data, slug, preview }) => {
+type PageProps = {
+  data: {
+    pageData: any;
+  };
+  slug: string;
+  preview: boolean;
+};
+
+const Page: React.FC<PageProps> = ({ data, slug, preview }: PageProps) => {
   const { data: pageData } = usePreviewSubscription(data?.query, {
     params: { slug: slug },
     initialData: data?.pageData,
     enabled: preview
   });
 
-  const { site, title, subtitle, body, list, seo } = pageData;
+  const { site, title, subtitle, updated_at, body, list, seo } = pageData;
 
   const { getSeoProps } = useSeo({
     site: site?.seo,
@@ -33,7 +41,7 @@ const Page = ({ data, slug, preview }) => {
       <Box display="grid" gridTemplateColumns="197px 1fr">
         <Sidebar enabled items={list} root="Updates" />
         <div>
-          <PageHero title={title} subtitle={subtitle}></PageHero>
+          <PageHero title={title} subtitle={subtitle} updatedAt={updated_at}></PageHero>
           <Box border="thick">
             <Box maxWidth="1200" m="0 auto" py="800" px="400">
               <PortableText blocks={body || []} />
