@@ -26,7 +26,8 @@ type IndexLayoutProps = {
   sidebarList: ListProps[];
   list: ListProps[];
   footerList: ListProps[];
-  enableSidebar: boolean;
+  enableSidebar?: boolean;
+  enableDatesAndExcerpts?: boolean;
   layoutType: 'oneColumn' | 'multiColumn';
   title: string;
   subtitle: string;
@@ -38,6 +39,7 @@ function IndexLayout(props: IndexLayoutProps): JSX.Element {
     seo,
     headerList,
     enableSidebar,
+    enableDatesAndExcerpts,
     sidebarList,
     layoutType,
     list,
@@ -59,7 +61,11 @@ function IndexLayout(props: IndexLayoutProps): JSX.Element {
         <Sidebar enabled={enableSidebar} items={sidebarList} root={title} />
         <div>
           <PageHero title={title} subtitle={subtitle}></PageHero>
-          <IndexList layout={layoutType} items={list} />
+          <IndexList
+            layout={layoutType}
+            items={list}
+            enableDatesAndExcerpts={enableDatesAndExcerpts}
+          />
         </div>
       </Box>
       <Footer items={footerList} />

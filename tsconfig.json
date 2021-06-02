@@ -2,11 +2,7 @@
   "compilerOptions": {
     "baseUrl": ".",
     "target": "esnext",
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext"
-    ],
+    "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
     "skipLibCheck": true,
     "strict": false,
@@ -25,17 +21,16 @@
       "@pages/*": ["pages/*"],
       "@context/*": ["context/*"],
       "@hooks/*": ["hooks/*"],
+      "@utils/*": ["utils/*"]
     }
   },
   "include": [
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx",
-    "**/*.js", 
-    "studio/components/previews/index.jsx", 
-    "studio/components/previews/IFramePreview/IFramePreview.tx"  
+    "**/*.js",
+    "studio/components/previews/index.jsx",
+    "studio/components/previews/IFramePreview/IFramePreview.tx"
   ],
-  "exclude": [
-    "node_modules"
-  ]
+  "exclude": ["node_modules"]
 }

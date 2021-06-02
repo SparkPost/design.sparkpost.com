@@ -51,7 +51,7 @@ const Page = ({ data, slug, preview }) => {
   const { asPath } = useRouter();
   const pathWithoutHash = asPath.split('#').shift();
 
-  const { site, title, subtitle, list, seo } = pageData;
+  const { site, title, subtitle, list, seo, updated_at } = pageData;
   const pathParts = pathWithoutHash.split('/');
   const activeSection = pathParts.pop();
   const basePath = pathParts.join('/');
@@ -73,7 +73,7 @@ const Page = ({ data, slug, preview }) => {
       <Box display="grid" gridTemplateColumns="197px 1fr">
         <Sidebar enabled items={list} root="Components" />
         <div>
-          <PageHero title={title} subtitle={subtitle}></PageHero>
+          <PageHero title={title} subtitle={subtitle} updatedAt={updated_at}></PageHero>
           {shouldHaveTabs && (
             <Box maxWidth="1200" m="-3.25rem auto -2px" px="400" textAlign="left">
               <Link href={`${basePath}/api`}>
