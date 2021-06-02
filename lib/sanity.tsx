@@ -20,6 +20,7 @@ import { InternalLink, ExternalLink } from '@componentsPortable/Links';
 import Prop from '@componentsPortable/Prop';
 import ComponentExample from '@componentsPortable/ComponentExample';
 import SystemProps from '@componentsPortable/SystemProps';
+import HardcodedBlock from '@componentsPortable/HardcodedBlock';
 
 const config = {
   projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID,
@@ -43,7 +44,8 @@ export const PortableText = createPortableTextComponent({
       colorPalette: ColorPalette,
       prop: Prop,
       componentExample: ComponentExample,
-      systemProps: SystemProps
+      systemProps: SystemProps,
+      hardcodedBlock: HardcodedBlock
     },
     list: List,
     marks: {
