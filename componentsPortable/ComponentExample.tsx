@@ -32,6 +32,13 @@ type ComponentExampleProps = {
 // But navigating away and back fixes it
 function ComponentExample(props: ComponentExampleProps): JSX.Element {
   const { name, description, code } = props.node;
+  const [initialized, setInitialized] = React.useState(false);
+
+  React.useEffect(() => {
+    if (!initialized) {
+      setInitialized(true);
+    }
+  }, [initialized]);
 
   return (
     <Box mb="600">
@@ -48,32 +55,34 @@ function ComponentExample(props: ComponentExampleProps): JSX.Element {
             This is rendered in an iframe so that this sites
             theme and styles do not conflict with previews
           */}
-          <Box
-            as={Frame}
-            display="block"
-            border="thick"
-            width="100%"
-            borderRadius="rounded"
-            borderBottomRightRadius="0"
-            borderBottomLeftRadius="0"
-            mb="-2px"
-            height="300px"
-            // BG should always be white because matchbox components dont look great in dark mode
-            bg="white"
-          >
-            <FrameContextConsumer>
-              {({ document }) => {
-                return (
-                  <ThemeProvider target={document.head}>
-                    <link href="/assets/critical.css" rel="stylesheet" />
-                    <Box p="500">
-                      <LivePreview />
-                    </Box>
-                  </ThemeProvider>
-                );
-              }}
-            </FrameContextConsumer>
-          </Box>
+          {initialized && (
+            <Box
+              as={Frame}
+              display="block"
+              border="thick"
+              width="100%"
+              borderRadius="rounded"
+              borderBottomRightRadius="0"
+              borderBottomLeftRadius="0"
+              mb="-2px"
+              height="300px"
+              // BG should always be white because matchbox components dont look great in dark mode
+              bg="white"
+            >
+              <FrameContextConsumer>
+                {({ document }) => {
+                  return (
+                    <ThemeProvider target={document.head}>
+                      <link href="/assets/critical.css" rel="stylesheet" />
+                      <Box p="500">
+                        <LivePreview />
+                      </Box>
+                    </ThemeProvider>
+                  );
+                }}
+              </FrameContextConsumer>
+            </Box>
+          )}
           <LiveError />
         </LiveProvider>
       </Box>
