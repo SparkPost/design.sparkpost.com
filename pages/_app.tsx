@@ -4,7 +4,6 @@ import getTheme from '@lib/theme';
 import { createGlobalStyle } from 'styled-components';
 import { ColorSchemeProvider, ColorSchemeContext } from '../context/ColorSchemeContext';
 import { AnimatePresence, motion } from 'framer-motion';
-import './critical.css';
 
 const GlobalStyle = createGlobalStyle`	
   body {

@@ -65,6 +65,7 @@ function ComponentExample(props: ComponentExampleProps): JSX.Element {
               {({ document }) => {
                 return (
                   <ThemeProvider target={document.head}>
+                    <link href="/assets/critical.css" rel="stylesheet" />
                     <Box p="500">
                       <LivePreview />
                     </Box>
