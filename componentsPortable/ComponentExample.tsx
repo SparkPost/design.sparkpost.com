@@ -21,6 +21,7 @@ type ComponentExampleProps = {
   node: {
     name: string;
     description?: object[];
+    disableIframe?: boolean;
     code: {
       code: string;
       language: string;
