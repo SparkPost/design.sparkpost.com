@@ -57,6 +57,9 @@ function TokenReferenceTable(): JSX.Element {
           <Button onClick={() => setSyntax('javascript')} active={syntax === 'javascript'}>
             JavaScript
           </Button>
+          <Button onClick={() => setSyntax('system')} active={syntax === 'system'}>
+            System Prop
+          </Button>
         </Button.Group>
       </Box>
       <Box mb="300">

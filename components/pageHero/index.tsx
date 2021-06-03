@@ -38,7 +38,7 @@ function PageHero(props: PageHeroProps): JSX.Element {
             <Category category={category} />
           </Box>
         )}
-        <Box as="p" mt="400" fontSize="600" lineHeight="600" width={['100%', null, '70%']}>
+        <Box as="p" mt="400" fontSize="600" lineHeight="600" width={['100%', null, '85%']}>
           {props.subtitle}
         </Box>
       </Box>
