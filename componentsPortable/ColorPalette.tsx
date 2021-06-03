@@ -206,7 +206,7 @@ function ColorPalette(props: ColorProps): JSX.Element {
   };
 
   return (
-    <>
+    <Box mb="600">
       <Box as="h3" mb="400">
         {group}
       </Box>
@@ -234,7 +234,7 @@ function ColorPalette(props: ColorProps): JSX.Element {
         </Box>
         <ColorDetails {...activeColor} />
       </Box>
-    </>
+    </Box>
   );
 }
 

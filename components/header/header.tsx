@@ -5,6 +5,7 @@ import styled from 'styled-components';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { ColorSchemeContext } from '../../context/ColorSchemeContext';
+import { Search } from '@components/search';
 
 type MenuItems = {
   title: string;
@@ -21,16 +22,6 @@ const StyledList = styled.ul`
   margin: 0;
   padding: 0;
   flex: 1;
-`;
-
-const StyledInput = styled.input`
-  appearance: none;
-  border: none;
-  outline: none;
-
-  ${(props) => `
-        font-size: ${props.theme.fontSize_400};
-    `}
 `;
 
 const StyledHomeLink = styled(Box)`
@@ -84,8 +75,8 @@ const Header: React.FC<HeaderProps> = (props: HeaderProps) => {
         <ScreenReaderOnly>Change Theme</ScreenReaderOnly>
         <InvertColors />
       </SchemeButton>
-      <Box px="600" borderX="thick" py="450" mr="-2px">
-        <StyledInput type="text" placeholder="Search" width="500"></StyledInput>
+      <Box borderX="thick" mr="-2px">
+        <Search />
       </Box>
     </Box>
   );
