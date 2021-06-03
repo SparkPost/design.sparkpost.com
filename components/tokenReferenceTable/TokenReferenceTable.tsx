@@ -27,7 +27,9 @@ const Input = styled.input`
     width: '100%',
     px: '200',
     py: '200',
-    border: 'thick'
+    border: 'thick',
+    bg: 'scheme.bg',
+    color: 'scheme.fg'
   })}
 
   &:focus {

@@ -1,36 +1,13 @@
 import React from 'react';
 import Link from 'next/link';
 import { Box } from '@sparkpost/matchbox';
-import { tokens } from '@sparkpost/design-tokens';
 import { PortableText } from '@lib/sanity';
 import { ArrowForward } from '@sparkpost/matchbox-icons';
 import { motion } from 'framer-motion';
 import styled from 'styled-components';
 import css from '@styled-system/css';
 import { formatDate } from '@utils/date';
-
-const categoryMap = {
-  foundations: {
-    bg: tokens.color_purple_300,
-    fg: tokens.color_purple_800
-  },
-  components: {
-    bg: tokens.color_yellow_300,
-    fg: tokens.color_yellow_800
-  },
-  updates: {
-    bg: tokens.color_teal_300,
-    fg: tokens.color_teal_800
-  },
-  content: {
-    bg: tokens.color_green_400,
-    fg: tokens.color_green_900
-  },
-  resources: {
-    bg: tokens.color_magenta_400,
-    fg: tokens.color_magenta_900
-  }
-};
+import { Category, categoryColors } from '@components/category';
 
 // Turns block content into plain text
 function toPlainText(blocks = []) {
@@ -127,7 +104,7 @@ const Card: React.FC<CardProps> = (props: CardProps) => {
       return 'scheme.heavyAccent';
     }
 
-    return categoryMap[category]?.bg || 'scheme.heavyAccent';
+    return categoryColors[category]?.bg || 'scheme.heavyAccent';
   }, [category]);
 
   return (
@@ -164,22 +141,7 @@ const Card: React.FC<CardProps> = (props: CardProps) => {
             duration: 0.2
           }}
         >
-          {enableCategory && url && (
-            <Box
-              fontSize="50"
-              lineHeight="100"
-              fontWeight="500"
-              mb="200"
-              bg={categoryMap[category]?.bg}
-              color={categoryMap[category]?.fg}
-              borderRadius="2px"
-              display="inline-block"
-              px="100"
-              py="0"
-            >
-              {category.toUpperCase()}
-            </Box>
-          )}
+          {enableCategory && url && <Category category={category} />}
           {date && (
             <Box fontSize="100" mb="0" lineHeight="100">
               {formatDate(date)}
