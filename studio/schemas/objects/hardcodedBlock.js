@@ -11,7 +11,10 @@ export default {
       title: 'Identifier',
       type: 'string',
       required: true,
-      description: 'Make sure you know what you are doing. Contact a UX engineer.'
+      description: 'Make sure you know what you are doing. Contact a UX engineer.',
+      options: {
+        list: [{ title: 'Token Reference Table', value: 'token-reference-table' }]
+      }
     }
   ]
 };
