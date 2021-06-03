@@ -37,6 +37,7 @@ import colorPalette from './objects/colorPalette';
 import prop from './objects/prop';
 import componentExample from './objects/componentExample';
 import systemProps from './objects/systemProps';
+import hardcodedBlock from './objects/hardcodedBlock';
 
 export default createSchema({
   name: 'matchbox',
@@ -76,6 +77,7 @@ export default createSchema({
     colorPalette,
     prop,
     componentExample,
-    systemProps
+    systemProps,
+    hardcodedBlock
   ])
 });

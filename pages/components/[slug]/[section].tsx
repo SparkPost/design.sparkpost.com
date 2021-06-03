@@ -73,7 +73,7 @@ const Page = ({ data, slug, preview }) => {
       <Box display="grid" gridTemplateColumns="197px 1fr">
         <Sidebar enabled items={list} root="Components" />
         <div>
-          <PageHero title={title} subtitle={subtitle} updatedAt={updated_at}></PageHero>
+          <PageHero title={title} subtitle={subtitle} updatedAt={updated_at} enableCategory />
           {shouldHaveTabs && (
             <Box maxWidth="1200" m="-3.25rem auto -2px" px="400" textAlign="left">
               <Link href={`${basePath}/api`}>

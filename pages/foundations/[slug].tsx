@@ -33,7 +33,7 @@ const Page = ({ data, slug, preview }) => {
       <Box display="grid" gridTemplateColumns="197px 1fr">
         <Sidebar enabled items={list} root="Foundations" />
         <div>
-          <PageHero title={title} subtitle={subtitle} updatedAt={updated_at}></PageHero>
+          <PageHero title={title} subtitle={subtitle} updatedAt={updated_at} enableCategory />
           <Box border="thick">
             <Box maxWidth="1200" m="0 auto" py="800" px="400">
               <PortableText blocks={body || []} />

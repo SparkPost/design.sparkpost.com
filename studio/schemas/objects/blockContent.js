@@ -90,6 +90,7 @@ export default {
     { type: 'colorPalette' },
     { type: 'prop' },
     { type: 'componentExample' },
-    { type: 'systemProps' }
+    { type: 'systemProps' },
+    { type: 'hardcodedBlock' }
   ]
 };

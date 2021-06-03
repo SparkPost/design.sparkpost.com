@@ -92,7 +92,9 @@ function Sidebar(props: SidebarProps): JSX.Element {
                 return (
                   <li key={i}>
                     <Link href={href}>
-                      <SyledLink isActive={router.asPath === item.slug}>{item.title}</SyledLink>
+                      <SyledLink isActive={router.asPath.includes(item.slug)}>
+                        {item.title}
+                      </SyledLink>
                     </Link>
                   </li>
                 );
@@ -113,7 +115,7 @@ function Sidebar(props: SidebarProps): JSX.Element {
                       return (
                         <li key={i}>
                           <Link href={href}>
-                            <SyledLink isActive={router.asPath === item.slug}>
+                            <SyledLink isActive={router.asPath.includes(item.slug)}>
                               {item.title}
                             </SyledLink>
                           </Link>
