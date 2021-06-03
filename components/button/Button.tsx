@@ -10,6 +10,7 @@ const StyledButton = styled(Box)`
     px: '400',
     py: '200'
   })}
+
   cursor: pointer;
   &:hover {
     ${css({
@@ -22,13 +23,22 @@ const StyledButton = styled(Box)`
     if (isActive) {
       return css({
         bg: 'scheme.fg',
-        color: 'scheme.bg'
+        color: 'scheme.bg',
+        pointerEvents: 'none'
       });
     }
   }}
 `;
 
-function Button(props): JSX.Element {
+interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+  /**
+   * Disables pointer events and highlights the button
+   */
+  active?: boolean;
+  children: React.ReactNode;
+}
+
+function Button(props: ButtonProps): JSX.Element {
   const { children, active, ...rest } = props;
   return (
     <StyledButton as="button" type="button" {...rest} isActive={active}>
@@ -43,7 +53,14 @@ const StyledGroup = styled.div`
   }
 `;
 
-function Group(props): JSX.Element {
+type GroupProps = {
+  children: React.ReactNode;
+};
+
+/**
+ * Collapses borders between child Buttons
+ */
+function Group(props: GroupProps): JSX.Element {
   const { children } = props;
   return <StyledGroup>{children}</StyledGroup>;
 }

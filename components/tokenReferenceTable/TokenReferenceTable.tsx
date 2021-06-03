@@ -9,6 +9,12 @@ const CopyButton = styled.button`
   ${styles.buttonReset}
   cursor: pointer;
   text-align: right;
+
+  ${css({
+    fontSize: '100',
+    fontFamily: 'monospace'
+  })}
+
   &:hover {
     ${css({
       color: 'scheme.heavyAccent'
