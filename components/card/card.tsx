@@ -107,8 +107,10 @@ const Card: React.FC<CardProps> = (props: CardProps) => {
     return categoryColors[category]?.bg || 'scheme.heavyAccent';
   }, [category]);
 
+  const Wrapper = url ? Link : React.Fragment;
+
   return (
-    <Link href={url || ''}>
+    <Wrapper href={url || undefined}>
       <BorderBox
         gridColumn={['span 12', null, `span ${span}`]}
         pb={span === 12 ? ['25%'] : ['40%', null, '82%', '60%', '44%']}
@@ -175,7 +177,7 @@ const Card: React.FC<CardProps> = (props: CardProps) => {
           )}
         </MotionBox>
       </BorderBox>
-    </Link>
+    </Wrapper>
   );
 };
 
