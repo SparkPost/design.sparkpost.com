@@ -23,6 +23,12 @@ export default {
       title: 'Example Code',
       type: 'code',
       required: true
+    },
+    {
+      name: 'disableIframe',
+      title: 'Disable Iframe',
+      type: 'boolean',
+      description: 'Disable iframes for overlay components'
     }
   ]
 };

@@ -26,6 +26,7 @@ function MatchboxApp({ Component, pageProps, router }) {
           exit={{ opacity: 0 }}
         >
           <Component key={router.asPath} {...pageProps} />
+          <div id="portal-target" />
         </motion.div>
       </AnimatePresence>
     </ThemeProvider>
