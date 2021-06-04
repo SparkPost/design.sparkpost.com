@@ -1,9 +1,8 @@
 import React from 'react';
-import { Box, useCopyToClipboard, styles } from '@sparkpost/matchbox';
+import { Box } from '@sparkpost/matchbox';
 import { meta, tokens } from '@sparkpost/design-tokens';
 import Color from 'color'; //eslint-disable-line
-import styled from 'styled-components';
-import css from '@styled-system/css';
+import { CopyButton } from '@components/copyButton';
 
 type ColorProps = {
   node: {
@@ -13,24 +12,11 @@ type ColorProps = {
   };
 };
 
-const CopyButton = styled.button`
-  ${styles.buttonReset}
-  cursor: pointer;
-  &:hover {
-    ${css({
-      color: 'scheme.heavyAccent'
-    })}
-  }
-`;
-
 function ColorComponent(props: ColorProps): JSX.Element {
   const { name, description, label } = props.node;
 
   const color = meta.filter(({ javascript }) => javascript === name).shift();
   const c = Color(color.value);
-
-  const { copy: rgbCopy, copied: rgbCopied } = useCopyToClipboard();
-  const { copy: hexCopy, copied: hexCopied } = useCopyToClipboard();
 
   return (
     <Box
@@ -51,15 +37,11 @@ function ColorComponent(props: ColorProps): JSX.Element {
         <Box fontSize="100" lineHeight="100" mb="200" display="flex">
           <Box pr="400" minWidth="6.5rem">
             <Box>RGB</Box>
-            <CopyButton onClick={() => rgbCopy(c.rgb().string())}>
-              {rgbCopied ? 'Copied' : c.rgb().string()}
-            </CopyButton>
+            <CopyButton fontSize="50">{c.rgb().string()}</CopyButton>
           </Box>
           <Box>
             <Box>HEX</Box>
-            <CopyButton onClick={() => hexCopy(color.value)}>
-              {hexCopied ? 'Copied' : color.value}
-            </CopyButton>
+            <CopyButton fontSize="50">{color.value}</CopyButton>
           </Box>
         </Box>
         <Box>{description}</Box>
