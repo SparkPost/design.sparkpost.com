@@ -5,7 +5,6 @@ import { Button } from '@components/button';
 import { CopyButton } from '@components/copyButton';
 import styled from 'styled-components';
 
-console.log(meta);
 const fontTokens = meta
   .filter((t) => t.name.includes('font-size-'))
   .filter((t) => !t.name.includes('root'))
