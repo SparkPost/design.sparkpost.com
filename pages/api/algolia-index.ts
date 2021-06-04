@@ -17,27 +17,39 @@ const sanity = sanityClient({
 const index = algolia.initIndex('matchbox-v2');
 
 export default function handler(req, res) {
-  console.log(req);
   if (req.headers['content-type'] !== 'application/json') {
     res.status(400);
     res.json({ message: 'Bad request' });
     return;
   }
 
+  const genericPageProjection = `{
+        title,
+        subtitle,
+        "path": slug.current
+    }`;
+
   const sanityAlgolia = indexer(
     {
-      component: {
-        index,
-        projection: `{
-                    title,
-                    subtitle,
-                    "path": slug.current
-                }`
-      }
+      page: { index, projection: genericPageProjection },
+      foundation: { index, projection: genericPageProjection },
+      component: { index, projection: genericPageProjection },
+      content: { index, projection: genericPageProjection },
+      pattern: { index, projection: genericPageProjection },
+      brand: { index, projection: genericPageProjection },
+      resource: { index, projection: genericPageProjection },
+      update: { index, projection: genericPageProjection }
     },
     (document) => {
       switch (document._type) {
+        case 'page':
+        case 'foundation':
         case 'component':
+        case 'content':
+        case 'pattern':
+        case 'brand':
+        case 'resource':
+        case 'update':
           return {
             title: document.title,
             subtitle: document.subtitle,
