@@ -14,7 +14,8 @@ export default {
       description: 'Make sure you know what you are doing. Contact a UX engineer.',
       options: {
         list: [{ title: 'Token Reference Table', value: 'token-reference-table' }],
-        list: [{ title: 'Spacing Token Table', value: 'spacing-token-table' }]
+        list: [{ title: 'Spacing Token Table', value: 'spacing-token-table' }],
+        list: [{ title: 'Elevation Token Table', value: 'elevation-token-table' }]
       }
     }
   ]
