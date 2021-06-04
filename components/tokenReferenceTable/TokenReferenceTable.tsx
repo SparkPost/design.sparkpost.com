@@ -1,26 +1,10 @@
 import React from 'react';
 import { meta } from '@sparkpost/design-tokens';
-import { Box, styles, useCopyToClipboard } from '@sparkpost/matchbox';
+import { Box } from '@sparkpost/matchbox';
 import { Button } from '@components/button';
+import { CopyButton } from '@components/copyButton';
 import styled from 'styled-components';
 import css from '@styled-system/css';
-
-const CopyButton = styled.button`
-  ${styles.buttonReset}
-  cursor: pointer;
-  text-align: right;
-
-  ${css({
-    fontSize: '100',
-    fontFamily: 'monospace'
-  })}
-
-  &:hover {
-    ${css({
-      color: 'scheme.heavyAccent'
-    })}
-  }
-`;
 
 const Input = styled.input`
   ${css({
@@ -73,9 +57,6 @@ function TokenReferenceTable(): JSX.Element {
       <Box as="table" width="100%">
         <tbody>
           {meta.map((token) => {
-            const { copy: valueCopy, copied: valueCopied } = useCopyToClipboard();
-            const { copy: pxValueCopy, copied: pxValueCopied } = useCopyToClipboard();
-            const { copy: syntaxCopy, copied: syntaxCopied } = useCopyToClipboard();
             const { name, friendly, value, pixel_value } = token;
 
             if (
@@ -93,21 +74,13 @@ function TokenReferenceTable(): JSX.Element {
                   <Box fontWeight="medium">{friendly}</Box>
                 </Box>
                 <Box as="td" py="200" px="200" width="20%" textAlign="right">
-                  <CopyButton onClick={() => valueCopy(value)}>
-                    {valueCopied ? 'Copied' : value}
-                  </CopyButton>
+                  <CopyButton>{value}</CopyButton>
                 </Box>
                 <Box as="td" py="200" px="200" width="15%" textAlign="right">
-                  {pixel_value && (
-                    <CopyButton onClick={() => pxValueCopy(pixel_value)}>
-                      {pxValueCopied ? 'Copied' : pixel_value}
-                    </CopyButton>
-                  )}
+                  {pixel_value && <CopyButton>{pixel_value}</CopyButton>}
                 </Box>
                 <Box as="td" py="200" textAlign="right">
-                  <CopyButton onClick={() => syntaxCopy(token[syntax])}>
-                    {syntaxCopied ? 'Copied' : token[syntax]}
-                  </CopyButton>
+                  <CopyButton>{token[syntax]}</CopyButton>
                 </Box>
               </Box>
             );
