@@ -16,7 +16,8 @@ function Search(): JSX.Element {
   );
 
   useWindowEvent('click', function (e) {
-    const isOutside = !container.current || !container.current.contains(e.target);
+    const current = container?.current || null;
+    const isOutside = !current || !current.contains(e.target);
 
     if (hasFocus && isOutside) {
       setHasFocus(false);
