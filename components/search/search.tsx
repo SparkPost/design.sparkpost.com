@@ -9,7 +9,6 @@ function Search(): JSX.Element {
   const [query, setQuery] = useState('');
   const [hasFocus, setHasFocus] = useState(false);
   const container = useRef();
-  const indices = [{ name: `matchbox`, title: `Pages` }];
 
   const searchClient = algoliasearch(
     process.env.NEXT_PUBLIC_ALGOLIA_APP_ID,
@@ -25,14 +24,14 @@ function Search(): JSX.Element {
   });
 
   return (
-    <Box position="relative" px="400" py="300" ref={container}>
+    <Box position="relative" ref={container}>
       <InstantSearch
         searchClient={searchClient}
         indexName="matchbox"
         onSearchStateChange={({ query }) => setQuery(query)}
       >
         <SearchInput onFocus={() => setHasFocus(true)} hasFocus={hasFocus} />
-        <SearchResults show={query && query.length > 0 && hasFocus} indices={indices} />
+        <SearchResults show={query && query.length > 0 && hasFocus} />
       </InstantSearch>
     </Box>
   );

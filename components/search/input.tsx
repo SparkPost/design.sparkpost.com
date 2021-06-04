@@ -27,10 +27,11 @@ export default connectSearchBox(({ refine, currentRefinement, onFocus, hasFocus 
   });
 
   return (
-    <Box as="form" role="search">
+    <Box as="form" role="search" zIndex="11" bg="scheme.bg" position="relative" px="400" py="300">
       <StyledInput
         id="algolia-search-input"
         type="text"
+        autocomplete="off"
         placeholder="Search"
         aria-label="Search"
         onChange={(e) => refine(e.target.value)}

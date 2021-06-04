@@ -22,7 +22,7 @@ import ComponentExample from '@componentsPortable/ComponentExample';
 import SystemProps from '@componentsPortable/SystemProps';
 import HardcodedBlock from '@componentsPortable/HardcodedBlock';
 
-const config = {
+export const config = {
   projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID,
   dataset: process.env.NEXT_PUBLIC_SANITY_DATASET,
   apiVersion: '2021-03-25',
