@@ -5,12 +5,13 @@ import indexer from 'sanity-algolia';
 
 const algolia = algoliasearch(
   process.env.NEXT_PUBLIC_ALGOLIA_APP_ID,
-  process.env.NEXT_PUBLIC_ALGOLIA_SEARCH_KEY
+  process.env.NEXT_PUBLIC_ALGOLIA_ADMIN_KEY
 );
 
 const sanity = sanityClient({
   ...config,
-  token: process.env.SANITY_API_TOKEN
+  token: process.env.SANITY_API_TOKEN,
+  useCdn: false
 });
 
 const index = algolia.initIndex('matchbox-v2');
