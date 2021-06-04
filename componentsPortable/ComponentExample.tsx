@@ -21,6 +21,7 @@ type ComponentExampleProps = {
   node: {
     name: string;
     description?: object[];
+    disableIframe?: boolean;
     code: {
       code: string;
       language: string;
@@ -31,7 +32,7 @@ type ComponentExampleProps = {
 // For some reason preview doesnt render on hard refresh of a page
 // But navigating away and back fixes it
 function ComponentExample(props: ComponentExampleProps): JSX.Element {
-  const { name, description, code } = props.node;
+  const { name, description, code, disableIframe } = props.node;
   const [initialized, setInitialized] = React.useState(false);
 
   React.useEffect(() => {
@@ -50,12 +51,30 @@ function ComponentExample(props: ComponentExampleProps): JSX.Element {
       </Box>
       <Box>
         <LiveProvider code={code.code} scope={{ ...Components, ...Icons }}>
+          {disableIframe && (
+            <Box
+              display="block"
+              border="thick"
+              width="100%"
+              borderRadius="rounded"
+              borderBottomRightRadius="0"
+              borderBottomLeftRadius="0"
+              mb="-2px"
+              height="300px"
+              // BG should always be white because matchbox components dont look great in dark mode
+              bg="white"
+            >
+              <Box p="500">
+                <LivePreview />
+              </Box>
+            </Box>
+          )}
           {/*
             Important
             This is rendered in an iframe so that this sites
             theme and styles do not conflict with previews
           */}
-          {initialized && (
+          {!disableIframe && initialized && (
             <Box
               as={Frame}
               display="block"

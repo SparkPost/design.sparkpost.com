@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { Box, useCopyToClipboard, styles } from '@sparkpost/matchbox';
+import { Box, styles } from '@sparkpost/matchbox';
 import { meta } from '@sparkpost/design-tokens';
 import Color from 'color'; //eslint-disable-line
 import styled from 'styled-components';
 import css from '@styled-system/css';
+import { CopyButton } from '@components/copyButton';
 
 type ColorProps = {
   node: {
@@ -64,16 +65,6 @@ const StyledColorBlock = styled(Box)`
   transition: background 400ms ease-in-out;
 `;
 
-const CopyButton = styled.button`
-  ${styles.buttonReset}
-  cursor: pointer;
-  &:hover {
-    ${css({
-      color: 'scheme.heavyAccent'
-    })}
-  }
-`;
-
 const checkContrast = (c1, c2, isLarge = false) => {
   const contrast = Color(c1).contrast(Color(c2));
   const passingRatio = isLarge ? 3 : 4.5;
@@ -86,13 +77,6 @@ function ColorDetails(props: DetailProps): JSX.Element {
 
   const c = Color(value);
   const sp = javascript?.replace('color_', '').split('_').join('.');
-
-  const { copy: hexCopy, copied: hexCopied } = useCopyToClipboard();
-  const { copy: rgbCopy, copied: rgbCopied } = useCopyToClipboard();
-  const { copy: jsCopy, copied: jsCopied } = useCopyToClipboard();
-  const { copy: cssCopy, copied: cssCopied } = useCopyToClipboard();
-  const { copy: scssCopy, copied: scssCopied } = useCopyToClipboard();
-  const { copy: spCopy, copied: spCopied } = useCopyToClipboard();
 
   return (
     <Box
@@ -154,31 +138,27 @@ function ColorDetails(props: DetailProps): JSX.Element {
       <Box p="400" fontFamily="monospace" fontSize="100">
         <Box display="flex" justifyContent="space-between" pb="100">
           <Box>Hexadecimal:</Box>
-          <CopyButton onClick={() => hexCopy(value)}>{hexCopied ? 'Copied' : value}</CopyButton>
+          <CopyButton>{value}</CopyButton>
         </Box>
         <Box display="flex" justifyContent="space-between" pb="100">
           <Box>RGB:</Box>
-          <CopyButton onClick={() => rgbCopy(c.rgb().string())}>
-            {rgbCopied ? 'Copied' : c.rgb().string()}
-          </CopyButton>
+          <CopyButton>{c.rgb().string()}</CopyButton>
         </Box>
         <Box display="flex" justifyContent="space-between" pb="100">
           <Box>JS:</Box>
-          <CopyButton onClick={() => jsCopy(javascript)}>
-            {jsCopied ? 'Copied' : javascript}
-          </CopyButton>
+          <CopyButton>{javascript}</CopyButton>
         </Box>
         <Box display="flex" justifyContent="space-between" pb="100">
           <Box>CSS:</Box>
-          <CopyButton onClick={() => cssCopy(css)}>{cssCopied ? 'Copied' : css}</CopyButton>
+          <CopyButton>{css}</CopyButton>
         </Box>
         <Box display="flex" justifyContent="space-between" pb="100">
           <Box>Scss:</Box>
-          <CopyButton onClick={() => scssCopy(scss)}>{scssCopied ? 'Copied' : scss}</CopyButton>
+          <CopyButton>{scss}</CopyButton>
         </Box>
         <Box display="flex" justifyContent="space-between" pb="100">
           <Box>System Prop:</Box>
-          <CopyButton onClick={() => spCopy(sp)}>{spCopied ? 'Copied' : sp}</CopyButton>
+          <CopyButton>{sp}</CopyButton>
         </Box>
       </Box>
     </Box>
