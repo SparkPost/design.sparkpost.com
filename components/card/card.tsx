@@ -67,6 +67,7 @@ const BorderBox = styled(Box)`
   margin-bottom: -1px;
   margin-right: -1px;
   text-decoration: none;
+  display: block;
 
   &,
   &:visited,
