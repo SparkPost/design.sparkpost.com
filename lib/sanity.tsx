@@ -56,6 +56,23 @@ export const PortableText = createPortableTextComponent({
   }
 });
 
+// This is used for portable text within cards, where we limited functionality
+// Disables header links so we dont get nested <a>s
+export const SimplePortableText = createPortableTextComponent({
+  ...config,
+  serializers: {
+    types: {
+      block: (props) => <Block {...props} disableLinks />
+    },
+    list: List,
+    marks: {
+      code: InlineCode,
+      internalLink: InternalLink,
+      externalLink: ExternalLink
+    }
+  }
+});
+
 export const usePreviewSubscription = createPreviewSubscriptionHook(config);
 
 export const sanityClient = createClient(config);
