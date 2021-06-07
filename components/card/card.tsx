@@ -1,7 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
 import { Box } from '@sparkpost/matchbox';
-import { PortableText } from '@lib/sanity';
+import { SimplePortableText } from '@lib/sanity';
 import { ArrowForward } from '@sparkpost/matchbox-icons';
 import { motion } from 'framer-motion';
 import styled from 'styled-components';
@@ -66,6 +66,16 @@ const BorderBox = styled(Box)`
   margin-left: -1px;
   margin-bottom: -1px;
   margin-right: -1px;
+  text-decoration: none;
+
+  &,
+  &:visited,
+  &:hover {
+    ${css({ color: 'scheme.fg' })}
+  }
+  &:focus {
+    outline: none;
+  }
 `;
 
 const NegateMargins = styled.div`
@@ -107,77 +117,84 @@ const Card: React.FC<CardProps> = (props: CardProps) => {
     return categoryColors[category]?.bg || 'scheme.heavyAccent';
   }, [category]);
 
-  const Wrapper = url ? Link : React.Fragment;
-
-  return (
-    <Wrapper href={url || undefined}>
-      <BorderBox
-        gridColumn={['span 12', null, `span ${span}`]}
-        pb={span === 12 ? ['25%'] : ['40%', null, '82%', '60%', '44%']}
-        minHeight="15rem"
-        position="relative"
+  const card = (
+    <BorderBox
+      gridColumn={['span 12', null, `span ${span}`]}
+      pb={span === 12 ? ['25%'] : ['40%', null, '82%', '60%', '44%']}
+      minHeight="15rem"
+      position="relative"
+      as={url ? 'a' : 'div'}
+      onFocus={() => setIsHovered(true)}
+      onBlur={() => setIsHovered(false)}
+    >
+      <Box
+        position="absolute"
+        width="100%"
+        height="100%"
+        top="0"
+        left="0"
+        bg={accentColor}
+        border="thick"
+      />
+      <MotionBox
+        url={url}
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => setIsHovered(false)}
+        p={['200', null, '600']}
+        animate={
+          url
+            ? isHovered
+              ? hoverAnimation(index, span).active
+              : hoverAnimation(index, span).inActive
+            : ''
+        }
+        transition={{
+          ease: 'easeInOut',
+          duration: 0.2
+        }}
       >
-        <Box
-          position="absolute"
-          width="100%"
-          height="100%"
-          top="0"
-          left="0"
-          bg={accentColor}
-          border="thick"
-        />
-        <MotionBox
-          url={url}
-          onMouseEnter={() => setIsHovered(true)}
-          onMouseLeave={() => setIsHovered(false)}
-          p={['200', null, '600']}
-          animate={
-            url
-              ? isHovered
-                ? hoverAnimation(index, span).active
-                : hoverAnimation(index, span).inActive
-              : ''
-          }
-          transition={{
-            ease: 'easeInOut',
-            duration: 0.2
-          }}
-        >
-          {enableCategory && url && <Category category={category} />}
-          {date && (
-            <Box fontSize="100" mb="0" lineHeight="100">
-              {formatDate(date)}
-            </Box>
-          )}
-          {title && (
-            <Box fontSize="300" fontWeight="500" mb="200">
-              {title}
-            </Box>
-          )}
-          {subtitle && (
-            <Box fontSize="200" lineHeight="200" mb="200">
-              {subtitle}
-            </Box>
-          )}
-          {excerpt && (
-            <Box fontSize="200" lineHeight="200" mb="200">
-              {toPlainText(excerpt).substring(0, 180)}
-              {toPlainText(excerpt).substring(0, 180).length > 179 ? '...' : ''}
-            </Box>
-          )}
-          {content && (
-            <NegateMargins>
-              <PortableText blocks={content} />
-            </NegateMargins>
-          )}
-          {url && (
-            <Box mt="100">
-              <ArrowForward />
-            </Box>
-          )}
-        </MotionBox>
-      </BorderBox>
-    </Wrapper>
+        {enableCategory && url && <Category category={category} />}
+        {date && (
+          <Box fontSize="100" mb="0" lineHeight="100">
+            {formatDate(date)}
+          </Box>
+        )}
+        {title && (
+          <Box fontSize="300" fontWeight="500" mb="200">
+            {title}
+          </Box>
+        )}
+        {subtitle && (
+          <Box fontSize="200" lineHeight="200" mb="200">
+            {subtitle}
+          </Box>
+        )}
+        {excerpt && (
+          <Box fontSize="200" lineHeight="200" mb="200">
+            {toPlainText(excerpt).substring(0, 180)}
+            {toPlainText(excerpt).substring(0, 180).length > 179 ? '...' : ''}
+          </Box>
+        )}
+        {content && (
+          <NegateMargins>
+            <SimplePortableText blocks={content} />
+          </NegateMargins>
+        )}
+        {url && (
+          <Box mt="100">
+            <ArrowForward />
+          </Box>
+        )}
+      </MotionBox>
+    </BorderBox>
+  );
+
+  return url ? (
+    <Link href={url} passHref>
+      {card}
+    </Link>
+  ) : (
+    <>{card}</>
   );
 };
 
