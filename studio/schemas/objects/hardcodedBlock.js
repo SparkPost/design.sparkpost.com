@@ -15,7 +15,8 @@ export default {
       options: {
         list: [{ title: 'Token Reference Table', value: 'token-reference-table' }],
         list: [{ title: 'Spacing Token Table', value: 'spacing-token-table' }],
-        list: [{ title: 'Elevation Token Table', value: 'elevation-token-table' }]
+        list: [{ title: 'Elevation Token Table', value: 'elevation-token-table' }],
+        list: [{ title: 'Typography Token Table', value: 'typography-token-table' }]
       }
     }
   ]

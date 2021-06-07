@@ -102,6 +102,8 @@ const SearchResults: React.FC<ResultsProps> = (props: ResultsProps) => {
         border="thick"
         borderRight="none"
         zIndex="11"
+        maxHeight="90vh"
+        overflow="auto"
       >
         <ResultCount />
         <ResultsWrapper>

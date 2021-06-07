@@ -22,8 +22,8 @@ const StyledButton = styled(Box)`
   ${({ isActive }) => {
     if (isActive) {
       return css({
-        bg: 'scheme.fg',
-        color: 'scheme.bg',
+        bg: 'scheme.lightAccent',
+        color: 'scheme.heavyAccent',
         pointerEvents: 'none'
       });
     }

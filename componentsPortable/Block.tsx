@@ -9,6 +9,7 @@ import css from '@styled-system/css';
 type HeaderProps = {
   level: string;
   children: string | React.ReactNode | number;
+  disableLinks?: boolean;
 };
 
 const StyledLink = styled.a`
@@ -63,11 +64,15 @@ export function Header(props: HeaderProps): JSX.Element {
 
   return (
     <Box as={`h${level}`} mb={mb} pt="200" fontSize={size} id={toKebab(children[0])}>
-      <Link href={`${path}#${toKebab(children[0])}`}>
-        <StyledLink>
-          {children} <LinkIcon />
-        </StyledLink>
-      </Link>
+      {!props.disableLinks ? (
+        <Link href={`${path}#${toKebab(children[0])}`}>
+          <StyledLink>
+            {children} <LinkIcon />
+          </StyledLink>
+        </Link>
+      ) : (
+        children
+      )}
     </Box>
   );
 }
@@ -94,6 +99,7 @@ type BlockProps = {
     style: 'normal' | 'h1' | 'h2' | 'h3' | 'h4' | 'blockquote';
   };
   children: React.ReactNode;
+  disableLinks?: boolean;
 };
 
 // This component is reponsible for rendering default Sanity blocks – paragraphs and headers and blockquotes
@@ -102,7 +108,11 @@ function Block(props: BlockProps): JSX.Element {
 
   // This is a header
   if (/^h\d/.test(style)) {
-    return <Header level={style.replace(/[^\d]/g, '')}>{props.children}</Header>;
+    return (
+      <Header level={style.replace(/[^\d]/g, '')} disableLinks={props.disableLinks}>
+        {props.children}
+      </Header>
+    );
   }
 
   if (style === 'blockquote') {
