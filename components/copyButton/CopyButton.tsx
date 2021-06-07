@@ -6,10 +6,10 @@ import css from '@styled-system/css';
 const StyledCopyButton = styled.button`
   ${styles.buttonReset}
   cursor: pointer;
-  text-align: right;
 
-  ${({ fontSize }) =>
+  ${({ fontSize, textAlign }) =>
     css({
+      textAlign,
       fontSize,
       fontFamily: 'monospace'
     })}
@@ -24,14 +24,15 @@ const StyledCopyButton = styled.button`
 type CopyButtonProps = {
   children: React.ReactNode;
   fontSize?: string;
+  textAlign?: string;
 };
 
 function CopyButton(props: CopyButtonProps): JSX.Element {
-  const { children, fontSize = '100' } = props;
+  const { children, fontSize = '100', textAlign = 'right' } = props;
   const { copy, copied } = useCopyToClipboard();
 
   return (
-    <StyledCopyButton onClick={() => copy(children)} fontSize={fontSize}>
+    <StyledCopyButton onClick={() => copy(children)} fontSize={fontSize} textAlign={textAlign}>
       {copied ? 'Copied' : children}
     </StyledCopyButton>
   );
