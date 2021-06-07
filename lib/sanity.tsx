@@ -56,7 +56,7 @@ export const PortableText = createPortableTextComponent({
   }
 });
 
-// This is used for portable text within cards, where we limited functionality
+// This is used for portable text within cards, where we want limited functionality
 // Disables header links so we dont get nested <a>s
 export const SimplePortableText = createPortableTextComponent({
   ...config,

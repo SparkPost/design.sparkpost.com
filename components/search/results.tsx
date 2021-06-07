@@ -63,7 +63,7 @@ const Result = ({ hit }) => {
           <Box as="h5">
             <Highlight attribute="title" hit={hit} tagName="mark" />
           </Box>
-          <Category category="components" />
+          <Category category={hit.slug.split('/')[1]} />
         </Box>
         <Box fontSize="200" lineHeight="200" color="gray.700" pt="200">
           <Snippet attribute="excerpt" hit={hit} tagName="mark" />
@@ -92,6 +92,8 @@ const SearchResults: React.FC<ResultsProps> = (props: ResultsProps) => {
         border="thick"
         borderRight="none"
         zIndex="11"
+        maxHeight="90vh"
+        overflow="auto"
       >
         <ResultCount />
         <ResultsWrapper>
