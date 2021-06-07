@@ -28,7 +28,7 @@ function Search(): JSX.Element {
     <Box position="relative" ref={container}>
       <InstantSearch
         searchClient={searchClient}
-        indexName="matchbox"
+        indexName="matchbox-v2"
         onSearchStateChange={({ query }) => setQuery(query)}
       >
         <SearchInput onFocus={() => setHasFocus(true)} hasFocus={hasFocus} />

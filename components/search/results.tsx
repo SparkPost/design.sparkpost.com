@@ -1,7 +1,7 @@
 import { Box } from '@sparkpost/matchbox';
 import Link from 'next/link';
 import { Category } from '@components/category';
-import { connectStateResults, Highlight, Hits, Snippet } from 'react-instantsearch-dom';
+import { connectStateResults, Highlight, Hits } from 'react-instantsearch-dom';
 import styled from 'styled-components';
 
 type ResultsProps = {
@@ -55,18 +55,28 @@ const StyledLink = styled(Link)`
   }
 `;
 
+const getCategoryFromType = (type) => {
+  const pluralTypes = ['resource', 'component', 'update', 'foundation'];
+
+  if (pluralTypes.includes(type)) {
+    return `${type}s`;
+  }
+
+  return type;
+};
+
 const Result = ({ hit }) => {
   return (
-    <StyledLink href={hit.slug}>
+    <StyledLink href={hit.path}>
       <Box pb="500">
         <Box display="flex" justifyContent="space-between">
           <Box as="h5">
             <Highlight attribute="title" hit={hit} tagName="mark" />
           </Box>
-          <Category category="components" />
+          <Category category={getCategoryFromType(hit.type)} />
         </Box>
         <Box fontSize="200" lineHeight="200" color="gray.700" pt="200">
-          <Snippet attribute="excerpt" hit={hit} tagName="mark" />
+          <Highlight attribute="subtitle" hit={hit} tagName="mark" />
         </Box>
       </Box>
     </StyledLink>
