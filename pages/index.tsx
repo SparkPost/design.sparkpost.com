@@ -40,6 +40,8 @@ const HomePage = ({ data, preview }) => {
             gridTemplateColumns={`repeat(${module.size}, 1fr)`}
             mt="-1px"
             mb="-1px"
+            ml="-1px"
+            mr="-1px"
           >
             {module.columns?.map((column, index) => {
               return (
@@ -47,6 +49,7 @@ const HomePage = ({ data, preview }) => {
                   key={index}
                   index={index}
                   span={column.span}
+                  mobileSpan={column.mobileSpan}
                   url={column.slug}
                   content={column.content}
                   enableCategory={column.enableCategoryLabel}

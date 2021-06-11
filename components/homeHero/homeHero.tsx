@@ -9,7 +9,7 @@ const HomeHero: React.FC<HomeHeroProps> = (props: HomeHeroProps) => {
   const { title, description } = props;
 
   return (
-    <Box display="grid" py="125px" px="600" borderX="thick">
+    <Box display="grid" py="125px" px={['400', null, '600']} borderX="thick">
       <Box
         mx="auto"
         my="0"

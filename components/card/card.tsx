@@ -29,36 +29,40 @@ function toPlainText(blocks = []) {
   );
 }
 
-const hoverAnimation = (index: number, span: number) => {
-  return {
-    active: {
-      x: (index * span) % 12 === 0 ? 12 : -12,
-      y: -12,
-      zIndex: index === 0 ? 2 : 1
-    },
-    inActive: {
-      x: 0,
-      y: 0,
-      zIndex: 1,
-      transitionEnd: {
-        zIndex: 0
-      }
-    }
-  };
-};
-
 const MotionBox = styled(motion.div)`
   position: absolute;
   width: 100%;
   height: 100%;
   top: 0;
   left: 0;
-  ${css({
-    bg: 'scheme.bg',
-    p: ['300', null, null, '400', '600'],
-    border: 'thick'
-  })}
-  ${(props) => `cursor: ${props.url ? 'pointer' : ''};`}
+  transform: translate3d(0, 0, 0);
+  transition: transform 200ms ease-in-out, z-index 200ms linear;
+  z-index: 0;
+
+  ${({ url, index }) => {
+    return `
+      cursor: ${url ? 'pointer' : ''};
+      &:hover {
+        transition: transform 200ms ease-in-out, z-index 200ms linear;
+        z-index: ${index === 0 ? 2 : 1};
+      }
+    `;
+  }};
+
+  ${({ index, span }) =>
+    css({
+      bg: 'scheme.bg',
+      p: ['300', null, null, '400', '600'],
+      border: 'thick',
+      'user-select': ['none', null, 'inherit'],
+      '&:hover, &:active': {
+        transform: [
+          `translate3d(0, 0, 0)`,
+          null,
+          `translate3d(${(index * span) % 12 === 0 ? '12px' : '-12px'}, -12px, 0)`
+        ]
+      }
+    })}
 `;
 
 const BorderBox = styled(Box)`
@@ -94,21 +98,22 @@ type CardProps = {
   excerpt?: object[];
   index?: number; // Used to animate to the right instead of left
   span: number;
+  mobileSpan?: number;
   subtitle?: string;
   title?: string;
   url: string;
 };
 
 const Card: React.FC<CardProps> = (props: CardProps) => {
-  const { url, span, index, content, title, subtitle, enableCategory, date, excerpt } = props;
-  const [isHovered, setIsHovered] = React.useState(false);
+  const { url, span, mobileSpan, index, content, title, subtitle, enableCategory, date, excerpt } =
+    props;
 
   const category = React.useMemo(() => {
     if (!url) {
       return '';
     }
     return url.split('/')?.[1];
-  }, []);
+  }, [url]);
 
   const accentColor = React.useMemo(() => {
     if (!url) {
@@ -116,17 +121,17 @@ const Card: React.FC<CardProps> = (props: CardProps) => {
     }
 
     return categoryColors[category]?.bg || 'scheme.heavyAccent';
-  }, [category]);
+  }, [category, url]);
+
+  const smallSpan = mobileSpan || '6';
 
   const card = (
     <BorderBox
-      gridColumn={['span 12', null, `span ${span}`]}
+      gridColumn={[`span ${smallSpan}`, null, `span ${span}`]}
       pb={span === 12 ? ['25%'] : ['40%', null, '82%', '60%', '44%']}
-      minHeight="15rem"
+      minHeight="12rem"
       position="relative"
       as={url ? 'a' : 'div'}
-      onFocus={() => setIsHovered(true)}
-      onBlur={() => setIsHovered(false)}
     >
       <Box
         position="absolute"
@@ -137,23 +142,7 @@ const Card: React.FC<CardProps> = (props: CardProps) => {
         bg={accentColor}
         border="thick"
       />
-      <MotionBox
-        url={url}
-        onMouseEnter={() => setIsHovered(true)}
-        onMouseLeave={() => setIsHovered(false)}
-        p={['200', null, '600']}
-        animate={
-          url
-            ? isHovered
-              ? hoverAnimation(index, span).active
-              : hoverAnimation(index, span).inActive
-            : ''
-        }
-        transition={{
-          ease: 'easeInOut',
-          duration: 0.2
-        }}
-      >
+      <MotionBox url={url} p={['200', null, '600']} index={index} span={span}>
         {enableCategory && url && <Category category={category} />}
         {date && (
           <Box fontSize="100" mb="0" lineHeight="100">

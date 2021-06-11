@@ -16,7 +16,8 @@ export default function getTheme(colorScheme: string) {
         lightFg: colorScheme === 'dark' ? tokens.color_gray_800 : tokens.color_gray_300,
         lightAccent: colorScheme === 'light' ? tokens.color_blue_200 : tokens.color_gray_900,
         heavyAccent: colorScheme === 'light' ? tokens.color_blue_700 : tokens.color_red_400,
-        warning: colorScheme === 'light' ? tokens.color_yellow_600 : tokens.color_yellow_400
+        warning: colorScheme === 'light' ? tokens.color_yellow_600 : tokens.color_yellow_400,
+        transparentBg: 'rgba(0, 0, 0, 0.6)'
       },
       gray: {
         100: tokens.color_gray_100,
