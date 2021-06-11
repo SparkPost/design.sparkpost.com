@@ -9,6 +9,7 @@ const StyledInput = styled.input`
   border: none;
   outline: none;
   background: transparent;
+  border-radius: 0;
 
   ${css({
     fontSize: '300',
@@ -53,6 +54,9 @@ export default connectSearchBox(({ refine, currentRefinement, onFocus, hasFocus 
       role="search"
       zIndex="11"
       bg="scheme.bg"
+      borderX={['thick', null, 'none']}
+      ml={['-2px', null, '0']}
+      mr={['-2px', null, '0']}
     >
       <StyledInput
         id="algolia-search-input"

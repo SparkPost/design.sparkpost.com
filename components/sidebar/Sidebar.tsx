@@ -67,6 +67,7 @@ const ChevronButton = styled.button`
   ${styles.buttonReset}
   ${css({
     p: 200,
+    mr: -200,
     '&:focus': {
       border: 'none',
       outline: 'none',
@@ -124,7 +125,13 @@ function Sidebar(props: SidebarProps): JSX.Element {
   return (
     <>
       <NoSSR>
-        <Box display={['none', null, 'block']} position="sticky" top="0" maxHeight="100vh">
+        <Box
+          display={['none', null, 'block']}
+          position="sticky"
+          top="0"
+          maxHeight="100vh"
+          zindex="10"
+        >
           <SidebarList enabled={enabled} items={items} root={root} />
         </Box>
         <Box display={['block', null, 'none']} position="sticky" top="68px">
