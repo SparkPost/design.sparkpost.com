@@ -4,6 +4,7 @@ import { InstantSearch } from 'react-instantsearch-dom';
 import SearchInput from './input';
 import SearchResults from './results';
 import algoliasearch from 'algoliasearch/lite';
+import NoSSR from 'react-no-ssr';
 
 function Search(): JSX.Element {
   const [query, setQuery] = useState('');
@@ -25,15 +26,17 @@ function Search(): JSX.Element {
   });
 
   return (
-    <Box position="relative" ref={container}>
-      <InstantSearch
-        searchClient={searchClient}
-        indexName="matchbox-v2"
-        onSearchStateChange={({ query }) => setQuery(query)}
-      >
-        <SearchInput onFocus={() => setHasFocus(true)} hasFocus={hasFocus} />
-        <SearchResults show={query && query.length > 0 && hasFocus} />
-      </InstantSearch>
+    <Box ref={container} width="100%" position="relative">
+      <NoSSR>
+        <InstantSearch
+          searchClient={searchClient}
+          indexName="matchbox-v2"
+          onSearchStateChange={({ query }) => setQuery(query)}
+        >
+          <SearchInput onFocus={() => setHasFocus(true)} hasFocus={hasFocus} />
+          <SearchResults show={query && query.length > 0 && hasFocus} />
+        </InstantSearch>
+      </NoSSR>
     </Box>
   );
 }

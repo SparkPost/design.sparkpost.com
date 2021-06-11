@@ -70,12 +70,19 @@ const Page = ({ data, slug, preview }) => {
     <div>
       <SEO {...getSeoProps()} />
       <Header title="Matchbox" items={site?.header?.menu?.items} />
-      <Box display="grid" gridTemplateColumns="197px 1fr">
+      <Box display="grid" gridTemplateColumns={['1fr', null, '197px 1fr']}>
         <Sidebar enabled items={list} root="Components" />
         <div>
           <PageHero title={title} subtitle={subtitle} updatedAt={updated_at} enableCategory />
           {shouldHaveTabs && (
-            <Box maxWidth="1200" m="-3.25rem auto -2px" px="400" textAlign="left">
+            <Box
+              maxWidth="1200"
+              m="-3.25rem auto -2px"
+              ml={['-2px', null, 'auto']}
+              mr={['-2px', null, 'auto']}
+              px="400"
+              textAlign="left"
+            >
               <Link href={`${basePath}/api`}>
                 <Tab isActive={pathWithoutHash === `${basePath}/api`}>API</Tab>
               </Link>
@@ -93,7 +100,15 @@ const Page = ({ data, slug, preview }) => {
             </Box>
           )}
           <Box border="thick">
-            <Box maxWidth="1200" m="0 auto" py="800" px="400">
+            <Box
+              maxWidth="1200"
+              width="100vw"
+              m="0 auto"
+              ml={['-2px', null, 'auto']}
+              mr={['-2px', null, 'auto']}
+              py="800"
+              px="400"
+            >
               <PortableText blocks={pageData[activeSection] || []} />
             </Box>
           </Box>

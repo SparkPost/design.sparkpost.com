@@ -1,21 +1,40 @@
 import { Search as SearchIcon } from '@sparkpost/matchbox-icons';
 import { connectSearchBox } from 'react-instantsearch-dom';
-import { Box, TextField, useWindowEvent } from '@sparkpost/matchbox';
+import { Box, useWindowEvent } from '@sparkpost/matchbox';
 import styled from 'styled-components';
 import css from '@styled-system/css';
 
-const StyledInput = styled(TextField)`
+const StyledInput = styled.input`
   appearance: none;
   border: none;
   outline: none;
   background: transparent;
-  width: 300px;
 
   ${css({
-    fontSize: 'fontSize_400',
+    fontSize: '300',
+    lineHeight: '300',
     color: 'scheme.fg',
-    mr: '400',
-    px: '200'
+    px: '400',
+    py: '450',
+    width: ['100%', null, '300px'],
+    '&:focus': {
+      bg: 'scheme.lightAccent'
+    }
+  })}
+
+  &:focus {
+    border: none;
+    outline: none;
+  }
+`;
+
+const IconWrapper = styled(Box)`
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+
+  ${css({
+    right: '400'
   })}
 `;
 
@@ -27,27 +46,31 @@ export default connectSearchBox(({ refine, currentRefinement, onFocus, hasFocus 
   });
 
   return (
-    <Box as="form" role="search" zIndex="11" bg="scheme.bg" position="relative" px="400" py="300">
+    <Box
+      as="form"
+      position="relative"
+      onSubmit={(e) => e.preventDefault()}
+      role="search"
+      zIndex="11"
+      bg="scheme.bg"
+    >
       <StyledInput
         id="algolia-search-input"
         type="text"
-        autocomplete="off"
+        autoComplete="off"
+        aria-autocomplete="both"
+        autocorrect="off"
+        autocapitalize="off"
+        spellcheck="false"
         placeholder="Search"
         aria-label="Search"
         onChange={(e) => refine(e.target.value)}
         value={currentRefinement}
         onFocus={onFocus}
-        suffix={<SearchIcon />}
       />
+      <IconWrapper>
+        <SearchIcon size="24" />
+      </IconWrapper>
     </Box>
   );
 });
-
-// const SearchInput = () => {
-//     return (
-//         <>
-//             <StyledInput type="text" placeholder="Search..." />
-//             <SearchIcon size={24} />
-//         </>
-//     )
-// }

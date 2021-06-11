@@ -19,6 +19,7 @@ type SEOProps = {
   description: string;
   keywords: string;
   image: object;
+  favicon?: object;
 };
 
 type IndexLayoutProps = {
@@ -55,9 +56,10 @@ function IndexLayout(props: IndexLayoutProps): JSX.Element {
         description={seo?.description}
         keywords={seo?.keywords}
         image={seo?.image}
+        favicon={seo?.favicon}
       />
       <Header title="Matchbox" items={headerList} />
-      <Box display="grid" gridTemplateColumns={enableSidebar ? '197px 1fr' : '1fr'}>
+      <Box display="grid" gridTemplateColumns={enableSidebar ? ['1fr', null, '197px 1fr'] : '1fr'}>
         <Sidebar enabled={enableSidebar} items={sidebarList} root={title} />
         <div>
           <PageHero title={title} subtitle={subtitle}></PageHero>

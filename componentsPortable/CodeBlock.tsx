@@ -1,7 +1,6 @@
-import React, { useState } from 'react';
-import { Box, styles } from '@sparkpost/matchbox';
+import { useContext } from 'react';
+import { Box, styles, useCopyToClipboard } from '@sparkpost/matchbox';
 import SyntaxHighlighter from 'react-syntax-highlighter';
-import { CopyToClipboard } from 'react-copy-to-clipboard';
 import styled from 'styled-components';
 import { ColorSchemeContext } from '@context/ColorSchemeContext';
 import { a11yDark, a11yLight } from 'react-syntax-highlighter/dist/cjs/styles/hljs';
@@ -29,20 +28,12 @@ function CodeBlock(props: CodeProps): JSX.Element {
     connectWithTop
   } = props;
 
-  const { colorScheme } = React.useContext(ColorSchemeContext);
-  const [copied, setCopied] = useState(false);
+  const { colorScheme } = useContext(ColorSchemeContext);
+  const { copy, copied } = useCopyToClipboard();
 
   if (!code) {
     return null;
   }
-
-  const onCopy = () => {
-    setCopied(true);
-
-    setTimeout(() => {
-      setCopied(false);
-    }, 2000);
-  };
 
   return (
     <Box
@@ -51,20 +42,20 @@ function CodeBlock(props: CodeProps): JSX.Element {
       position="relative"
       overflow="hidden"
       mb="600"
+      width="100%"
       borderTopLeftRadius={connectWithTop ? 0 : 'rounded'}
       borderTopRightRadius={connectWithTop ? 0 : 'rounded'}
     >
-      <CopyToClipboard text={code} onCopy={onCopy}>
-        <Copy position="absolute" right="-4px" top="-2px" as="button">
-          <Box as="span" fontSize="100" lineHeight="400" fontWeight="medium">
-            {copied ? 'Copied' : 'Copy'}
-          </Box>
-        </Copy>
-      </CopyToClipboard>
-      <Box overflow="scroll" minHeight="140px" maxHeight="600px" p="500">
+      <Copy position="absolute" right="-4px" top="-2px" as="button" onClick={() => copy(code)}>
+        <Box as="span" fontSize="100" lineHeight="400" fontWeight="medium">
+          {copied ? 'Copied' : 'Copy'}
+        </Box>
+      </Copy>
+      <Box overflow="scroll" minHeight="140px" maxHeight="600px" p="500" width="100%">
         <SyntaxHighlighter
           language={language || 'text'}
           style={colorScheme === 'light' ? a11yLight : a11yDark}
+          wrapLines={true}
           customStyle={{
             background: 'transparent'
           }}

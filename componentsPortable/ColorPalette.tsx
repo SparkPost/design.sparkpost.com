@@ -21,8 +21,8 @@ type DetailProps = {
 };
 
 const activeStyles = {
-  width: 'calc(100% + 30px)',
-  left: '-15px',
+  width: ['calc(100% + 16px)', null, 'calc(100% + 30px)'],
+  left: ['-8px', null, '-15px'],
   transition: 'all 100ms ease-in-out',
   zIndex: 10
 };
@@ -45,8 +45,10 @@ const StyledColor = styled.button`
     })}
 
   &:hover {
-    width: calc(100% + 16px);
-    left: -8px;
+    ${css({
+      width: ['calc(100% + 8px)', null, 'calc(100% + 16px)'],
+      left: ['-4px', null, '-8px']
+    })}
     transition: all 100ms ease-in-out;
     z-index: 5;
   }
@@ -87,17 +89,20 @@ function ColorDetails(props: DetailProps): JSX.Element {
       minHeight="500px"
       position="relative"
       zIndex="2"
+      width="50%"
     >
-      <StyledColorBlock bg={value} height="50%" width="100%" borderBottom="thick">
+      <StyledColorBlock bg={value} height={['30%', null, '50%']} width="100%" borderBottom="thick">
         <Box
-          display="flex"
+          display={['none', null, 'flex']}
           width="100%"
           height="100%"
           justifyContent="center"
           alignItems="flex-end"
           p="500"
+          flexDirection={['column', null, 'row']}
+          fontSize={['100', null, '300']}
         >
-          <Box display="flex" alignItems="flex-end" mr="600">
+          <Box display="flex" alignItems="flex-end" mr={['0', null, '600']} mb={['300', null, '0']}>
             <Box textAlign="center" mr="200" width="45px">
               <Box fontSize="200" lineHeight="100" color="black">
                 A
@@ -136,31 +141,29 @@ function ColorDetails(props: DetailProps): JSX.Element {
         </Box>
       </StyledColorBlock>
       <Box p="400" fontFamily="monospace" fontSize="100">
-        <Box display="flex" justifyContent="space-between" pb="100">
-          <Box>Hexadecimal:</Box>
-          <CopyButton>{value}</CopyButton>
-        </Box>
-        <Box display="flex" justifyContent="space-between" pb="100">
-          <Box>RGB:</Box>
-          <CopyButton>{c.rgb().string()}</CopyButton>
-        </Box>
-        <Box display="flex" justifyContent="space-between" pb="100">
-          <Box>JS:</Box>
-          <CopyButton>{javascript}</CopyButton>
-        </Box>
-        <Box display="flex" justifyContent="space-between" pb="100">
-          <Box>CSS:</Box>
-          <CopyButton>{css}</CopyButton>
-        </Box>
-        <Box display="flex" justifyContent="space-between" pb="100">
-          <Box>Scss:</Box>
-          <CopyButton>{scss}</CopyButton>
-        </Box>
-        <Box display="flex" justifyContent="space-between" pb="100">
-          <Box>System Prop:</Box>
-          <CopyButton>{sp}</CopyButton>
-        </Box>
+        <ColorValue label="Hexadecimal" value={value} />
+        <ColorValue label="RGB" value={c.rgb().string()} />
+        <ColorValue label="JS" value={javascript} />
+        <ColorValue label="CSS" value={css} />
+        <ColorValue label="Scss" value={scss} />
+        <ColorValue label="System Prop" value={sp} />
       </Box>
+    </Box>
+  );
+}
+
+function ColorValue({ label, value }) {
+  return (
+    <Box
+      display="flex"
+      justifyContent="space-between"
+      pb="200"
+      flexWarap="wrap"
+      flexDirection={['column', null, 'row']}
+      alignItems={['flex-start', null, '']}
+    >
+      <Box pb={['100', null, '0']}>{label}:</Box>
+      <CopyButton>{value}</CopyButton>
     </Box>
   );
 }
@@ -192,7 +195,7 @@ function ColorPalette(props: ColorProps): JSX.Element {
       </Box>
       {description && <p>{description}</p>}
       <Box display="flex" pb="600">
-        <Box data-id="color-palette" width="50%" position="relative" zIndex="1">
+        <Box data-id="color-palette" width={['45%', null, '50%']} position="relative" zIndex="1">
           <Box mt="2px">
             {colors.map((color) => {
               const c = Color(color.value);

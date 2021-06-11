@@ -13,12 +13,13 @@ const ResultsWrapper = styled.div`
 
   .ais-Hits-item {
     margin: 0;
+    cursor: pointer;
   }
 
   .ais-Highlight-highlighted,
   .ais-Snippet-highlighted {
     font-weight: 600;
-    background: ${({ theme }) => theme.colors.yellow[100]};
+    background: ${({ theme }) => theme.colors.scheme.lightAccent};
     color: inherit;
   }
 
@@ -32,8 +33,18 @@ const ResultsWrapper = styled.div`
 const ResultCount = connectStateResults(({ searchResults }) => {
   const resultCount = searchResults && searchResults.nbHits;
   return resultCount > 0 ? (
-    <Box fontSize="100" color="gray.600" borderBottom="thick" px="400" py="200">
-      {resultCount} result{resultCount > 1 ? 's' : ''}
+    <Box
+      fontSize="100"
+      color="scheem.fg"
+      borderBottom="thick"
+      px="400"
+      py="200"
+      display="flex"
+      justifyContent="space-between"
+    >
+      <span>
+        {resultCount} result{resultCount > 1 ? 's' : ''}
+      </span>
     </Box>
   ) : (
     <Box px="400" py="200">
@@ -75,7 +86,7 @@ const Result = ({ hit }) => {
           </Box>
           <Category category={getCategoryFromType(hit.type)} />
         </Box>
-        <Box fontSize="200" lineHeight="200" color="gray.700" pt="200">
+        <Box fontSize="200" lineHeight="200" color="scheem.fg" pt="200">
           <Highlight attribute="subtitle" hit={hit} tagName="mark" />
         </Box>
       </Box>
@@ -94,7 +105,7 @@ const SearchResults: React.FC<ResultsProps> = (props: ResultsProps) => {
     <Box>
       <Box
         position="absolute"
-        width="550px"
+        width={['calc(100vw - 2px)', null, '550px']}
         bg="scheme.bg"
         ml="-2px"
         right="0"
@@ -102,7 +113,7 @@ const SearchResults: React.FC<ResultsProps> = (props: ResultsProps) => {
         border="thick"
         borderRight="none"
         zIndex="11"
-        maxHeight="90vh"
+        maxHeight={['400px', null, '90vh']}
         overflow="auto"
       >
         <ResultCount />
@@ -114,12 +125,11 @@ const SearchResults: React.FC<ResultsProps> = (props: ResultsProps) => {
         style={{
           pointerEvents: 'none'
         }}
-        position="fixed"
+        position={['fixed', null, 'fixed']}
         width="100vw"
         height="100vh"
-        bg="scheme.fg"
-        opacity="0.25"
-        zIndex="10"
+        bg="scheme.transparentBg"
+        zIndex="1"
         top="0"
         left="0"
         bottom="0"

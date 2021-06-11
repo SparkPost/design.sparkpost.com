@@ -19,6 +19,7 @@ export const modules = groq`
     size,
     columns[] {
       span,
+      mobileSpan,
       "slug": link->slug.current,
       content,
       enableCategoryLabel

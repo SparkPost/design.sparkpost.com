@@ -10,6 +10,9 @@ const GlobalStyle = createGlobalStyle`
     background: ${({ theme }) => theme.colors.scheme.bg};
     color: ${({ theme }) => theme.colors.scheme.fg};
   }
+  * {
+    touch-action: manipulation;
+  }
 `;
 
 function MatchboxApp({ Component, pageProps, router }) {

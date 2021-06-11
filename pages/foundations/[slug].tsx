@@ -30,12 +30,19 @@ const Page = ({ data, slug, preview }) => {
     <div>
       <SEO {...getSeoProps()} />
       <Header title="Matchbox" items={site?.header?.menu?.items} />
-      <Box display="grid" gridTemplateColumns="197px 1fr">
-        <Sidebar enabled items={list} root="Foundations" />
+      <Box display="grid" gridTemplateColumns={['1fr', null, '197px 1fr']}>
+        <Sidebar enabled items={list} activePage={title} root="Foundations" />
         <div>
           <PageHero title={title} subtitle={subtitle} updatedAt={updated_at} enableCategory />
           <Box border="thick">
-            <Box maxWidth="1200" m="0 auto" py="800" px="400">
+            <Box
+              maxWidth={'1200'}
+              width="100vw"
+              ml={['-2px', null, 'auto']}
+              mr={['-2px', null, 'auto']}
+              py="800"
+              px="400"
+            >
               <PortableText blocks={body || []} />
             </Box>
           </Box>
