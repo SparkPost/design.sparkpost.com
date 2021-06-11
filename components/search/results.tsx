@@ -53,16 +53,29 @@ const ResultCount = connectStateResults(({ searchResults }) => {
   );
 });
 
-const StyledLink = styled(Link)`
+const StyledLink = styled.a`
   display: block;
   margin-bottom: 0;
   text-decoration: none;
   padding: ${({ theme }) => theme.space[300]} ${({ theme }) => theme.space[400]};
+  color: inherit;
+  background: ${({ theme }) => theme.colors.scheme.bg};
 
   &:hover,
   &:focus {
     outline: none;
-    background: ${({ theme }) => theme.colors.blue[100]};
+    background: ${({ theme }) => theme.colors.scheme.lightAccent};
+  }
+
+  &,
+  &:hover,
+  &:focus,
+  &:visited {
+    color: ${({ theme }) => theme.colors.scheme.fg};
+  }
+
+  &:visited {
+    background: inherit;
   }
 `;
 
@@ -78,19 +91,21 @@ const getCategoryFromType = (type) => {
 
 const Result = ({ hit }) => {
   return (
-    <StyledLink href={hit.path}>
-      <Box pb="500">
-        <Box display="flex" justifyContent="space-between">
-          <Box as="h5">
-            <Highlight attribute="title" hit={hit} tagName="mark" />
+    <Link href={hit.path} passHref>
+      <StyledLink href={hit.path}>
+        <Box pb="500">
+          <Box display="flex" justifyContent="space-between">
+            <Box as="h5">
+              <Highlight attribute="title" hit={hit} tagName="mark" />
+            </Box>
+            <Category category={getCategoryFromType(hit.type)} />
           </Box>
-          <Category category={getCategoryFromType(hit.type)} />
+          <Box fontSize="200" lineHeight="200" color="scheem.fg" pt="200">
+            <Highlight attribute="subtitle" hit={hit} tagName="mark" />
+          </Box>
         </Box>
-        <Box fontSize="200" lineHeight="200" color="scheem.fg" pt="200">
-          <Highlight attribute="subtitle" hit={hit} tagName="mark" />
-        </Box>
-      </Box>
-    </StyledLink>
+      </StyledLink>
+    </Link>
   );
 };
 
