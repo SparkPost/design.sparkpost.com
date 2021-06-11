@@ -71,7 +71,7 @@ const Page = ({ data, slug, preview }) => {
       <SEO {...getSeoProps()} />
       <Header title="Matchbox" items={site?.header?.menu?.items} />
       <Box display="grid" gridTemplateColumns={['1fr', null, '197px 1fr']}>
-        <Sidebar enabled items={list} root="Components" />
+        <Sidebar enabled items={list} activePage={title} root="Components" />
         <div>
           <PageHero title={title} subtitle={subtitle} updatedAt={updated_at} enableCategory />
           {shouldHaveTabs && (

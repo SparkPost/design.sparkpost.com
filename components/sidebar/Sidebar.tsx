@@ -124,7 +124,7 @@ function Sidebar(props: SidebarProps): JSX.Element {
   return (
     <>
       <NoSSR>
-        <Box display={['none', null, 'block']}>
+        <Box display={['none', null, 'block']} position="sticky" top="0" maxHeight="100vh">
           <SidebarList enabled={enabled} items={items} root={root} />
         </Box>
         <Box display={['block', null, 'none']} position="sticky" top="68px">
@@ -179,12 +179,7 @@ function SidebarList(props: SidebarProps): JSX.Element {
   return (
     <Box border={['none', null, 'thick']} mr="-2px" mt="-2px" borderBottom="none">
       {/* Height calculation here is a hack to fix odd scrolling behavior. Should probably fix in <Drawer /> component */}
-      <Box
-        position="sticky"
-        top="0"
-        maxHeight={['calc(100vh - 77px)', null, '100vh']}
-        overflow="auto"
-      >
+      <Box maxHeight={['calc(100vh - 77px)', null, '100vh']} overflow="auto">
         <Box as="nav">
           <Box py="400" px={['400', null, '0']}>
             <CategoryLabel>{root}</CategoryLabel>
