@@ -3,7 +3,6 @@ import Link from 'next/link';
 import { Box } from '@sparkpost/matchbox';
 import { SimplePortableText } from '@lib/sanity';
 import { ArrowForward } from '@sparkpost/matchbox-icons';
-import { motion } from 'framer-motion';
 import styled from 'styled-components';
 import css from '@styled-system/css';
 import { formatDate } from '@utils/date';
@@ -29,7 +28,7 @@ function toPlainText(blocks = []) {
   );
 }
 
-const MotionBox = styled(motion.div)`
+const HoverBox = styled.div`
   position: absolute;
   width: 100%;
   height: 100%;
@@ -49,7 +48,7 @@ const MotionBox = styled(motion.div)`
     `;
   }};
 
-  ${({ index, span }) =>
+  ${({ index, span, url }) =>
     css({
       bg: 'scheme.bg',
       p: ['300', null, null, '400', '600'],
@@ -59,7 +58,9 @@ const MotionBox = styled(motion.div)`
         transform: [
           `translate3d(0, 0, 0)`,
           null,
-          `translate3d(${(index * span) % 12 === 0 ? '12px' : '-12px'}, -12px, 0)`
+          url
+            ? `translate3d(${(index * span) % 12 === 0 ? '12px' : '-12px'}, -12px, 0)`
+            : 'translate3d(0, 0, 0)'
         ]
       }
     })}
@@ -142,7 +143,7 @@ const Card: React.FC<CardProps> = (props: CardProps) => {
         bg={accentColor}
         border="thick"
       />
-      <MotionBox url={url} p={['200', null, '600']} index={index} span={span}>
+      <HoverBox url={url} p={['200', null, '600']} index={index} span={span}>
         {enableCategory && url && <Category category={category} />}
         {date && (
           <Box fontSize="100" mb="0" lineHeight="100">
@@ -175,7 +176,7 @@ const Card: React.FC<CardProps> = (props: CardProps) => {
             <ArrowForward />
           </Box>
         )}
-      </MotionBox>
+      </HoverBox>
     </BorderBox>
   );
 
