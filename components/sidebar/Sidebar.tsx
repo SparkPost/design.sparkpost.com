@@ -9,6 +9,12 @@ import NoSSR from 'react-no-ssr';
 import { Drawer } from '@components/drawer';
 import useDrawer from '@hooks/useDrawer';
 
+function isActive(asPath: string, slug: string): boolean {
+  const asPathParts = asPath.split('/');
+  const slugParts = slug.split('/');
+  return asPathParts[1] === slugParts[1] && asPathParts[2] === slugParts[2];
+}
+
 type SidebarProps = {
   enabled?: boolean;
   root: string;
@@ -197,7 +203,7 @@ function SidebarList(props: SidebarProps): JSX.Element {
                 return (
                   <li key={i}>
                     <Link href={href}>
-                      <SyledLink isActive={router.asPath.includes(item.slug)}>
+                      <SyledLink isActive={isActive(router.asPath, item.slug)}>
                         {item.title}
                       </SyledLink>
                     </Link>
@@ -220,7 +226,7 @@ function SidebarList(props: SidebarProps): JSX.Element {
                       return (
                         <li key={i}>
                           <Link href={href}>
-                            <SyledLink isActive={router.asPath.includes(item.slug)}>
+                            <SyledLink isActive={isActive(router.asPath, item.slug)}>
                               {item.title}
                             </SyledLink>
                           </Link>

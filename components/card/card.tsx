@@ -88,7 +88,6 @@ const NegateMargins = styled.div`
   * {
     margin-bottom: 0;
     padding-top: 0;
-    pointer-events: none;
   }
 `;
 

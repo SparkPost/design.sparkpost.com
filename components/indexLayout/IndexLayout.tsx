@@ -52,7 +52,7 @@ function IndexLayout(props: IndexLayoutProps): JSX.Element {
   return (
     <div>
       <SEO
-        title={seo?.title}
+        title={title || seo?.title}
         description={seo?.description}
         keywords={seo?.keywords}
         image={seo?.image}
