@@ -1,11 +1,13 @@
 import React from 'react';
-import { Box, styles, Drawer, useDrawer } from '@sparkpost/matchbox';
+import { Box, styles } from '@sparkpost/matchbox';
 import Link from 'next/link';
 import styled from 'styled-components';
 import css from '@styled-system/css';
 import { useRouter } from 'next/router';
 import { ChevronRight, ChevronLeft } from '@sparkpost/matchbox-icons';
 import NoSSR from 'react-no-ssr';
+import { Drawer } from '@components/drawer';
+import useDrawer from '@hooks/useDrawer';
 
 type SidebarProps = {
   enabled?: boolean;
@@ -112,7 +114,7 @@ function Breadcrumbs(props: BreadcrumbProps): JSX.Element {
 
 function Sidebar(props: SidebarProps): JSX.Element {
   const { enabled, items, root, activePage } = props;
-  const { getDrawerProps, getActivatorProps } = useDrawer();
+  const { getDrawerProps, getActivatorProps } = useDrawer({});
 
   const formatString = (string) => {
     if (!string) {
@@ -143,8 +145,7 @@ function Sidebar(props: SidebarProps): JSX.Element {
             />
           )}
           <Drawer {...getDrawerProps()} position="right">
-            <Drawer.Header />
-            <Drawer.Content p="0">
+            <Box>
               <Box
                 position="fixed"
                 width="100%"
@@ -155,7 +156,7 @@ function Sidebar(props: SidebarProps): JSX.Element {
                 style={{ pointerEvents: 'none' }}
               />
               <SidebarList enabled={enabled} items={items} root={root} />
-            </Drawer.Content>
+            </Box>
           </Drawer>
         </Box>
       </NoSSR>
@@ -186,7 +187,7 @@ function SidebarList(props: SidebarProps): JSX.Element {
   return (
     <Box border={['none', null, 'thick']} mr="-2px" mt="-2px" borderBottom={['none', null, 'none']}>
       {/* Height calculation here is a hack to fix odd scrolling behavior. Should probably fix in <Drawer /> component */}
-      <Box maxHeight={['calc(100vh - 77px)', null, '100vh']} overflow="auto">
+      <Box maxHeight="100vh" overflow="auto">
         <Box as="nav">
           <Box py="400" px={['400', null, '0']}>
             <CategoryLabel>{root}</CategoryLabel>

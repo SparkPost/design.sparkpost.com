@@ -51,7 +51,15 @@ function CodeBlock(props: CodeProps): JSX.Element {
           {copied ? 'Copied' : 'Copy'}
         </Box>
       </Copy>
-      <Box overflow="scroll" minHeight="140px" maxHeight="600px" p="500" width="100%">
+      <Box
+        overflow="scroll"
+        minHeight="140px"
+        maxHeight="600px"
+        p="500"
+        width="100%"
+        display="flex"
+        alignItems="center"
+      >
         <SyntaxHighlighter
           language={language || 'text'}
           style={colorScheme === 'light' ? a11yLight : a11yDark}
