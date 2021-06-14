@@ -59,7 +59,8 @@ const Page = ({ data, slug, preview }) => {
 
   const { getSeoProps } = useSeo({
     site: site?.seo,
-    page: seo
+    page: seo,
+    pageTitle: title
   });
 
   if (!pageData) {
