@@ -50,7 +50,8 @@ function ComponentExample(props: ComponentExampleProps): JSX.Element {
         </NegateParagraphMargins>
       </Box>
       <Box>
-        <LiveProvider code={code.code} scope={{ ...Components, ...Icons }}>
+        {/* Components need to come after Icons here because of conflicting component and icon names */}
+        <LiveProvider code={code.code} scope={{ ...Icons, ...Components }}>
           {disableIframe && (
             <Box
               display="block"
