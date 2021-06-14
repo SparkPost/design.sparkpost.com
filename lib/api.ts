@@ -12,6 +12,15 @@ type IndexTypes =
 
 export const PAGE_TYPES = `['page', 'foundation', 'component', 'content', 'pattern', 'brand', 'resource', 'update']`;
 
+const fillMarkDefs = `
+markDefs[]{
+  ...,
+  _type == "internalLink" => {
+    "slug": @.to->slug.current
+  }
+}
+`;
+
 export const modules = groq`
   _type == 'grid' => {
     _type,
@@ -21,7 +30,10 @@ export const modules = groq`
       span,
       mobileSpan,
       "slug": link->slug.current,
-      content,
+      content[] {
+        ...,
+        ${fillMarkDefs}
+      },
       enableCategoryLabel
     }
   }
@@ -67,6 +79,26 @@ const site = groq`
   }
 `;
 
+const fillPropComponentLinks = `
+_type == "prop" => {
+  ...,
+  description[] {
+    ...,
+   ${fillMarkDefs} 
+  }
+}
+`;
+
+const fillComponentExampleLinks = `
+_type == "componentExample" => {
+  ...,
+  description[] {
+    ...,
+    ${fillMarkDefs} 
+  }
+}
+`;
+
 export async function getHomePage(preview) {
   const query = groq`
     *[_type == "homePage"] | order(_updatedAt desc)[0] {
@@ -89,34 +121,6 @@ export async function getHomePage(preview) {
     query
   };
 }
-
-const fillMarkDefs = `
-markDefs[]{
-  ...,
-  _type == "internalLink" => {
-    "slug": @.to->slug.current
-  }
-}
-`;
-const fillPropComponentLinks = `
-_type == "prop" => {
-  ...,
-  description[] {
-    ...,
-   ${fillMarkDefs} 
-  }
-}
-`;
-
-const fillComponentExampleLinks = `
-_type == "componentExample" => {
-  ...,
-  description[] {
-    ...,
-    ${fillMarkDefs} 
-  }
-}
-`;
 
 export async function getPage(slug: string, type: IndexTypes, preview: boolean) {
   const query = groq`
