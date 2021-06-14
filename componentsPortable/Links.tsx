@@ -30,7 +30,7 @@ type LinkProps = {
 
 function InternalLink(props: LinkProps): JSX.Element {
   return (
-    <Link href={props?.mark?.slug}>
+    <Link href={props?.mark?.slug} passHref>
       <StyledLink>{props.children}</StyledLink>
     </Link>
   );
