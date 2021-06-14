@@ -134,7 +134,7 @@ function Sidebar(props: SidebarProps): JSX.Element {
         >
           <SidebarList enabled={enabled} items={items} root={root} />
         </Box>
-        <Box display={['block', null, 'none']} position="sticky" top="68px">
+        <Box display={['block', null, 'none']} position="sticky" top="68px" zIndex="10">
           {activePage && (
             <Breadcrumbs
               category={root}
@@ -184,7 +184,7 @@ function SidebarList(props: SidebarProps): JSX.Element {
   const dedupedCategories = categories.filter((sub, i) => categories.indexOf(sub) === i);
 
   return (
-    <Box border={['none', null, 'thick']} mr="-2px" mt="-2px" borderBottom="none">
+    <Box border={['none', null, 'thick']} mr="-2px" mt="-2px" borderBottom={['none', null, 'none']}>
       {/* Height calculation here is a hack to fix odd scrolling behavior. Should probably fix in <Drawer /> component */}
       <Box maxHeight={['calc(100vh - 77px)', null, '100vh']} overflow="auto">
         <Box as="nav">
