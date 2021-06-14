@@ -43,7 +43,7 @@ const HoverBox = styled.div`
       cursor: ${url ? 'pointer' : ''};
       &:hover {
         transition: transform 200ms ease-in-out, z-index 200ms linear;
-        z-index: ${index === 0 ? 2 : 1};
+        z-index: url ? ${index === 0 ? 2 : 1} : 0;
       }
     `;
   }};
