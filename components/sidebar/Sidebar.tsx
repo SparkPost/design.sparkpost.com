@@ -1,11 +1,13 @@
 import React from 'react';
-import { Box, styles, Drawer, useDrawer } from '@sparkpost/matchbox';
+import { Box, styles } from '@sparkpost/matchbox';
 import Link from 'next/link';
 import styled from 'styled-components';
 import css from '@styled-system/css';
 import { useRouter } from 'next/router';
 import { ChevronRight, ChevronLeft } from '@sparkpost/matchbox-icons';
 import NoSSR from 'react-no-ssr';
+import { Drawer } from '@components/drawer';
+import useDrawer from '@hooks/useDrawer';
 
 function isActive(asPath: string, slug: string): boolean {
   const asPathParts = asPath.split('/');
@@ -30,7 +32,7 @@ const Ul = styled.ul`
   padding: 0;
 `;
 
-const SyledLink = styled.a`
+const StyledLink = styled.a`
   text-decoration: none;
   display: block;
   ${css({
@@ -45,6 +47,10 @@ const SyledLink = styled.a`
       bg: 'scheme.lightAccent',
       color: 'scheme.fg'
     })}
+  }
+
+  &:visited {
+    color: inherit;
   }
 
   ${({ isActive, theme }) =>
@@ -118,7 +124,7 @@ function Breadcrumbs(props: BreadcrumbProps): JSX.Element {
 
 function Sidebar(props: SidebarProps): JSX.Element {
   const { enabled, items, root, activePage } = props;
-  const { getDrawerProps, getActivatorProps } = useDrawer();
+  const { getDrawerProps, getActivatorProps } = useDrawer({});
 
   const formatString = (string) => {
     if (!string) {
@@ -148,9 +154,8 @@ function Sidebar(props: SidebarProps): JSX.Element {
               getActivatorProps={getActivatorProps}
             />
           )}
-          <Drawer {...getDrawerProps()} position="right">
-            <Drawer.Header />
-            <Drawer.Content p="0">
+          <Drawer {...getDrawerProps()}>
+            <Box display={['block', null, 'none']}>
               <Box
                 position="fixed"
                 width="100%"
@@ -161,7 +166,7 @@ function Sidebar(props: SidebarProps): JSX.Element {
                 style={{ pointerEvents: 'none' }}
               />
               <SidebarList enabled={enabled} items={items} root={root} />
-            </Drawer.Content>
+            </Box>
           </Drawer>
         </Box>
       </NoSSR>
@@ -190,9 +195,19 @@ function SidebarList(props: SidebarProps): JSX.Element {
   const dedupedCategories = categories.filter((sub, i) => categories.indexOf(sub) === i);
 
   return (
-    <Box border={['none', null, 'thick']} mr="-2px" mt="-2px" borderBottom={['none', null, 'none']}>
+    <Box
+      border={['none', null, 'thick']}
+      height="100%"
+      mr="-2px"
+      mt="-2px"
+      borderBottom={['none', null, 'none']}
+    >
       {/* Height calculation here is a hack to fix odd scrolling behavior. Should probably fix in <Drawer /> component */}
-      <Box maxHeight={['calc(100vh - 77px)', null, '100vh']} overflow="auto">
+      <Box
+        maxHeight={['auto', null, '100vh']}
+        overflowX={[null, null, 'hidden']}
+        overflowY={[null, null, 'scroll']}
+      >
         <Box as="nav">
           <Box py="400" px={['400', null, '0']}>
             <CategoryLabel>{root}</CategoryLabel>
@@ -201,10 +216,10 @@ function SidebarList(props: SidebarProps): JSX.Element {
                 const href = item.slug.includes('/components') ? `${item.slug}/api` : item.slug;
                 return (
                   <li key={i}>
-                    <Link href={href}>
-                      <SyledLink isActive={isActive(router.asPath, item.slug)}>
+                    <Link href={href} passHref>
+                      <StyledLink isActive={isActive(router.asPath, item.slug)}>
                         {item.title}
-                      </SyledLink>
+                      </StyledLink>
                     </Link>
                   </li>
                 );
@@ -213,7 +228,15 @@ function SidebarList(props: SidebarProps): JSX.Element {
           </Box>
           {dedupedCategories.map((cat, i) => {
             return (
-              <Box border="thick" m="-2px" py="300" px={['400', null, '0']} key={i}>
+              <Box
+                border="thick"
+                ml="-2px"
+                mr="-2px"
+                mt="-2px"
+                py="300"
+                px={['400', null, '0']}
+                key={i}
+              >
                 <CategoryLabel>{cat}</CategoryLabel>
                 <Ul>
                   {itemsWithCategory
@@ -225,9 +248,9 @@ function SidebarList(props: SidebarProps): JSX.Element {
                       return (
                         <li key={i}>
                           <Link href={href}>
-                            <SyledLink isActive={isActive(router.asPath, item.slug)}>
+                            <StyledLink isActive={isActive(router.asPath, item.slug)}>
                               {item.title}
-                            </SyledLink>
+                            </StyledLink>
                           </Link>
                         </li>
                       );

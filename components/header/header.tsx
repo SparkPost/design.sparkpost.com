@@ -22,7 +22,7 @@ const StyledList = styled.ul`
   flex: 1;
 
   ${css({
-    display: ['none', null, 'block']
+    display: ['none', null, null, null, 'block']
   })}
 `;
 
@@ -65,7 +65,7 @@ const Header: React.FC<HeaderProps> = (props: HeaderProps) => {
         alignItems="center"
         bg="scheme.bg"
         justifyContent="space-between"
-        position={['sticky', null, 'relative']}
+        position={['sticky', null, null, null, 'relative']}
         top="0"
         zIndex="100"
       >
@@ -77,7 +77,7 @@ const Header: React.FC<HeaderProps> = (props: HeaderProps) => {
             bg="gray.1000"
             fontSize="400"
             fontWeight="500"
-            pr={['400', null, '100px']}
+            pr={['400', null, null, null, '100px']}
             pl="400"
             py="450"
             borderX="thick"

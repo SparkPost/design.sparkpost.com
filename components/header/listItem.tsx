@@ -26,7 +26,7 @@ const StyledNavLink = styled(Box)`
   }
 
   ${css({
-    width: ['calc(100% + 4px)', null, 'auto'],
+    width: ['calc(100% + 4px)', null, null, null, 'auto'],
     color: 'scheme.fg',
     '&:visited': {
       color: 'scheme.fg'
@@ -52,9 +52,9 @@ const ListItem: React.FC<MenuItems> = (props: MenuItems) => {
       <Link href={slug} passHref>
         <StyledNavLink
           as="a"
-          px={['600', null, '450']}
+          px={['600', null, null, null, '450']}
           py="450"
-          fontSize={['400', null, '200']}
+          fontSize={['400', null, null, null, '200']}
           fontWeight="500"
           isActive={router.asPath.includes(slug)}
         >

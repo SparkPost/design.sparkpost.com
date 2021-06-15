@@ -49,7 +49,7 @@ const MobileStyledList = styled(motion.ul)`
     border: 'thick',
     bg: 'scheme.bg',
     p: 0,
-    display: ['flex', null, 'none']
+    display: ['flex', null, null, null, 'none']
   })}
 `;
 
@@ -73,7 +73,7 @@ function MobileMenu(props: MenuProps): JSX.Element {
   const variant = isOpen ? 'open' : 'closed';
 
   return (
-    <Box display={['block', null, 'none']}>
+    <Box display={['block', null, null, null, 'none']}>
       <MobileStyledList
         id={id}
         initial={{ opacity: 0, scaleY: 0.9 }}

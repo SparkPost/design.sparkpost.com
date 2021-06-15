@@ -14,7 +14,7 @@ const ToggleButton = styled.button`
   ${css({
     py: '400',
     px: '300',
-    display: ['block', null, 'none'],
+    display: ['block', null, null, null, 'none'],
     mr: '300'
   })}
 `;
