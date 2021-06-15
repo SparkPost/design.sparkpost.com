@@ -4,6 +4,7 @@ import * as Icons from '@sparkpost/matchbox-icons';
 import { PortableText } from '@lib/sanity';
 import CodeBlock from './CodeBlock';
 import { LiveProvider, LivePreview, LiveError } from 'react-live';
+import { DateUtils } from 'react-day-picker';
 import Frame, { FrameContextConsumer } from 'react-frame-component';
 import styled from 'styled-components';
 import { Header } from './Block';
@@ -51,7 +52,7 @@ function ComponentExample(props: ComponentExampleProps): JSX.Element {
       </Box>
       <Box>
         {/* Components need to come after Icons here because of conflicting component and icon names */}
-        <LiveProvider code={code.code} scope={{ ...Icons, ...Components }}>
+        <LiveProvider code={code.code} scope={{ ...Icons, ...Components, DateUtils }}>
           {disableIframe && (
             <Box
               display="block"
