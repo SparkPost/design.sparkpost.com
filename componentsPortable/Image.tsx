@@ -18,7 +18,14 @@ function Image(props: ImageProps): JSX.Element {
       display="block"
       border="thick"
     >
-      <Box as="img" display="block" width="100%" src={props.source} />
+      <Box
+        as="img"
+        display="block"
+        maxWidth="100%"
+        maxHeight="25rem"
+        m="0 auto"
+        src={props.source}
+      />
     </Box>
   );
 }
