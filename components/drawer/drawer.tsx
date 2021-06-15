@@ -1,15 +1,9 @@
+import React from 'react';
 import { Box, Portal, ScreenReaderOnly, styles, useWindowEvent } from '@sparkpost/matchbox';
 import { motion } from 'framer-motion';
 import styled from 'styled-components';
 import css from '@styled-system/css';
 import ScrollLock, { TouchScrollable } from 'react-scrolllock';
-
-type DrawerProps = {
-  children: React.ReactNode;
-  id: string;
-  onClose: () => void;
-  open: boolean;
-};
 
 const drawerAnimation = {
   open: {
@@ -93,8 +87,8 @@ function CloseIcon({ onClick }) {
   );
 }
 
-function Drawer(props: DrawerProps): JSX.Element {
-  const { open, id, onClose, children } = props;
+function Drawer(props): JSX.Element {
+  const { children, open, id, onClose } = props;
   const variants = open ? 'open' : 'closed';
 
   useWindowEvent('keydown', onKeyDown);
