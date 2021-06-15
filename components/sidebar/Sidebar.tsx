@@ -32,7 +32,7 @@ const Ul = styled.ul`
   padding: 0;
 `;
 
-const SyledLink = styled.a`
+const StyledLink = styled.a`
   text-decoration: none;
   display: block;
   ${css({
@@ -47,6 +47,10 @@ const SyledLink = styled.a`
       bg: 'scheme.lightAccent',
       color: 'scheme.fg'
     })}
+  }
+
+  &:visited {
+    color: inherit;
   }
 
   ${({ isActive, theme }) =>
@@ -150,8 +154,8 @@ function Sidebar(props: SidebarProps): JSX.Element {
               getActivatorProps={getActivatorProps}
             />
           )}
-          <Drawer {...getDrawerProps()} position="right">
-            <Box>
+          <Drawer {...getDrawerProps()}>
+            <Box display={['block', null, 'none']}>
               <Box
                 position="fixed"
                 width="100%"
@@ -191,9 +195,19 @@ function SidebarList(props: SidebarProps): JSX.Element {
   const dedupedCategories = categories.filter((sub, i) => categories.indexOf(sub) === i);
 
   return (
-    <Box border={['none', null, 'thick']} mr="-2px" mt="-2px" borderBottom={['none', null, 'none']}>
+    <Box
+      border={['none', null, 'thick']}
+      height="100%"
+      mr="-2px"
+      mt="-2px"
+      borderBottom={['none', null, 'none']}
+    >
       {/* Height calculation here is a hack to fix odd scrolling behavior. Should probably fix in <Drawer /> component */}
-      <Box maxHeight="100vh" overflow="auto">
+      <Box
+        maxHeight={['auto', null, '100vh']}
+        overflowX={[null, null, 'hidden']}
+        overflowY={[null, null, 'scroll']}
+      >
         <Box as="nav">
           <Box py="400" px={['400', null, '0']}>
             <CategoryLabel>{root}</CategoryLabel>
@@ -202,10 +216,10 @@ function SidebarList(props: SidebarProps): JSX.Element {
                 const href = item.slug.includes('/components') ? `${item.slug}/api` : item.slug;
                 return (
                   <li key={i}>
-                    <Link href={href}>
-                      <SyledLink isActive={isActive(router.asPath, item.slug)}>
+                    <Link href={href} passHref>
+                      <StyledLink isActive={isActive(router.asPath, item.slug)}>
                         {item.title}
-                      </SyledLink>
+                      </StyledLink>
                     </Link>
                   </li>
                 );
@@ -214,7 +228,15 @@ function SidebarList(props: SidebarProps): JSX.Element {
           </Box>
           {dedupedCategories.map((cat, i) => {
             return (
-              <Box border="thick" m="-2px" py="300" px={['400', null, '0']} key={i}>
+              <Box
+                border="thick"
+                ml="-2px"
+                mr="-2px"
+                mt="-2px"
+                py="300"
+                px={['400', null, '0']}
+                key={i}
+              >
                 <CategoryLabel>{cat}</CategoryLabel>
                 <Ul>
                   {itemsWithCategory
@@ -226,9 +248,9 @@ function SidebarList(props: SidebarProps): JSX.Element {
                       return (
                         <li key={i}>
                           <Link href={href}>
-                            <SyledLink isActive={isActive(router.asPath, item.slug)}>
+                            <StyledLink isActive={isActive(router.asPath, item.slug)}>
                               {item.title}
-                            </SyledLink>
+                            </StyledLink>
                           </Link>
                         </li>
                       );

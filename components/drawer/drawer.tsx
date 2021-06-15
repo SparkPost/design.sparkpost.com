@@ -1,19 +1,14 @@
-import { Box, Portal } from '@sparkpost/matchbox';
+import { Box, Portal, ScreenReaderOnly, styles, useWindowEvent } from '@sparkpost/matchbox';
 import { motion } from 'framer-motion';
-// import useDrawer from '@hooks/useDrawer';
 import styled from 'styled-components';
 import css from '@styled-system/css';
+import ScrollLock, { TouchScrollable } from 'react-scrolllock';
 
 type DrawerProps = {
   children: React.ReactNode;
-  closeOnEscape?: boolean;
-  closeOnOutsideClick?: boolean;
   id: string;
-  onChange: () => void;
   onClose: () => void;
   open: boolean;
-  portalId: string;
-  position: 'right' | 'left';
 };
 
 const drawerAnimation = {
@@ -24,6 +19,10 @@ const drawerAnimation = {
   closed: {
     x: '100%',
     opacity: 0
+  },
+  initial: {
+    x: '100%',
+    opacity: 0
   }
 };
 
@@ -32,6 +31,9 @@ const overlayAnimation = {
     opacity: 1
   },
   closed: {
+    opacity: 0
+  },
+  initial: {
     opacity: 0
   }
 };
@@ -54,35 +56,100 @@ const Overlay = styled(motion.div)`
   ${css({ bg: 'scheme.transparentBg' })};
 `;
 
-function Drawer(props: DrawerProps): JSX.Element {
-  const { open, onClose, children } = props;
-  console.log(open);
-  const variants = open ? 'open' : 'closed';
+const CloseButton = styled.button`
+  ${styles.buttonReset}
+  width: 24px;
+  height: 24px;
+  position: relative;
+  display: inline-block;
+  /* ${css({ p: '400' })} */
+`;
+
+function CloseIcon({ onClick }) {
   return (
-    <Portal>
-      <Box
-        position="fixed"
-        tabIndex="-1"
-        width="100vw"
-        height="100vh"
-        top="0"
-        right="0"
-        zIndex="100"
-        style={{ pointerEvents: open ? null : 'none' }}
-      >
-        <DrawerContent
-          animate={variants}
-          variants={drawerAnimation}
-          transition={{
-            duration: 0.3,
-            ease: 'easeOut'
-          }}
+    <Box p="400">
+      <ScreenReaderOnly>Close</ScreenReaderOnly>
+      <CloseButton onClick={onClick}>
+        <Box
+          width="100%"
+          height="2px"
+          bg="scheme.fg"
+          position="absolute"
+          left="0"
+          top="50%"
+          style={{ transform: 'rotate(45deg)' }}
+        />
+        <Box
+          width="100%"
+          height="2px"
+          bg="scheme.fg"
+          position="absolute"
+          left="0"
+          top="50%"
+          style={{ transform: 'rotate(-45deg)' }}
+        />
+      </CloseButton>
+    </Box>
+  );
+}
+
+function Drawer(props: DrawerProps): JSX.Element {
+  const { open, id, onClose, children } = props;
+  const variants = open ? 'open' : 'closed';
+
+  useWindowEvent('keydown', onKeyDown);
+
+  function onKeyDown(e) {
+    const { key } = e;
+    if (key === 'Escape') {
+      onClose();
+    }
+  }
+
+  return (
+    <>
+      <ScrollLock isActive={open} />
+      <Portal portalId>
+        <Box
+          position="fixed"
+          tabIndex="-1"
+          width="100vw"
+          height="100vh"
+          top="0"
+          right={'0'}
+          zIndex="100"
+          style={{ pointerEvents: open ? null : 'none' }}
+          id={id}
+          aria-modal="true"
+          role="dialog"
         >
-          {children}
-        </DrawerContent>
-        <Overlay animate={variants} variants={overlayAnimation} onClick={onClose} />
-      </Box>
-    </Portal>
+          <DrawerContent
+            animate={variants}
+            variants={drawerAnimation}
+            initial={drawerAnimation.initial}
+            transition={{
+              duration: 0.3,
+              ease: 'easeInOut'
+            }}
+          >
+            <Box as="header" display="flex" justifyContent="flex-end" position="relative">
+              <CloseIcon onClick={onClose} />
+            </Box>
+            <TouchScrollable>
+              <Box height="calc(100vh - 62px)" overflowX="hidden" overflowY="scroll">
+                {children}
+              </Box>
+            </TouchScrollable>
+          </DrawerContent>
+          <Overlay
+            animate={variants}
+            variants={overlayAnimation}
+            initial={overlayAnimation.initial}
+            onClick={onClose}
+          />
+        </Box>
+      </Portal>
+    </>
   );
 }
 
