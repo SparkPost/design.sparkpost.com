@@ -7,6 +7,7 @@ import { Sidebar } from '@components/sidebar';
 import { SEO } from '@components/seo';
 import { Box } from '@sparkpost/matchbox';
 import useSeo from '@hooks/useSeo';
+import { PageTransition } from '@components/pageTransition';
 
 const Page = ({ data, slug, preview }) => {
   const { data: pageData } = usePreviewSubscription(data?.query, {
@@ -31,26 +32,28 @@ const Page = ({ data, slug, preview }) => {
     <div>
       <SEO {...getSeoProps()} />
       <Header title="Matchbox" items={site?.header?.menu?.items} />
-      <Box display="grid" gridTemplateColumns={['1fr', null, '197px 1fr']}>
-        <Sidebar enabled items={list} activePage={title} root="Foundations" />
-        <div>
-          <PageHero title={title} subtitle={subtitle} updatedAt={updated_at} enableCategory />
-          <Box border="thick">
-            <Box
-              maxWidth={'1200'}
-              width="100vw"
-              ml={['-2px', null, 'auto']}
-              mr={['-2px', null, 'auto']}
-              py="800"
-              px="400"
-            >
-              <PortableText blocks={body || []} />
+      <PageTransition>
+        <Box display="grid" gridTemplateColumns={['1fr', null, '197px 1fr']}>
+          <Sidebar enabled items={list} activePage={title} root="Foundations" />
+          <div>
+            <PageHero title={title} subtitle={subtitle} updatedAt={updated_at} enableCategory />
+            <Box border="thick">
+              <Box
+                maxWidth={'1200'}
+                width="100vw"
+                ml={['-2px', null, 'auto']}
+                mr={['-2px', null, 'auto']}
+                py="800"
+                px="400"
+              >
+                <PortableText blocks={body || []} />
+              </Box>
             </Box>
-          </Box>
-        </div>
-      </Box>
+          </div>
+        </Box>
 
-      <Footer items={site?.footer?.menu?.items} />
+        <Footer items={site?.footer?.menu?.items} />
+      </PageTransition>
     </div>
   );
 };

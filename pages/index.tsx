@@ -7,6 +7,7 @@ import { Card } from '@components/card';
 import { Header } from '@components/header';
 import Footer from '@components/footer';
 import { SEO } from '@components/seo';
+import { PageTransition } from '@components/pageTransition';
 import useSeo from '@hooks/useSeo';
 
 const HomePage = ({ data, preview }) => {
@@ -31,35 +32,37 @@ const HomePage = ({ data, preview }) => {
     <div>
       <SEO {...getSeoProps()} />
       <Header title="Matchbox" items={site?.header?.menu?.items} />
-      <HomeHero title={hero?.title} description={hero?.description} />
-      <Box border="thick" my="-2px">
-        {modules?.map((module, key) => (
-          <Box
-            key={key}
-            display="grid"
-            gridTemplateColumns={`repeat(${module.size}, 1fr)`}
-            mt="-1px"
-            mb="-1px"
-            ml="-1px"
-            mr="-1px"
-          >
-            {module.columns?.map((column, index) => {
-              return (
-                <Card
-                  key={index}
-                  index={index}
-                  span={column.span}
-                  mobileSpan={column.mobileSpan}
-                  url={column.slug}
-                  content={column.content}
-                  enableCategory={column.enableCategoryLabel}
-                />
-              );
-            })}
-          </Box>
-        ))}
-      </Box>
-      <Footer items={site?.footer?.menu?.items} />
+      <PageTransition>
+        <HomeHero title={hero?.title} description={hero?.description} />
+        <Box border="thick" my="-2px">
+          {modules?.map((module, key) => (
+            <Box
+              key={key}
+              display="grid"
+              gridTemplateColumns={`repeat(${module.size}, 1fr)`}
+              mt="-1px"
+              mb="-1px"
+              ml="-1px"
+              mr="-1px"
+            >
+              {module.columns?.map((column, index) => {
+                return (
+                  <Card
+                    key={index}
+                    index={index}
+                    span={column.span}
+                    mobileSpan={column.mobileSpan}
+                    url={column.slug}
+                    content={column.content}
+                    enableCategory={column.enableCategoryLabel}
+                  />
+                );
+              })}
+            </Box>
+          ))}
+        </Box>
+        <Footer items={site?.footer?.menu?.items} />
+      </PageTransition>
     </div>
   );
 };
