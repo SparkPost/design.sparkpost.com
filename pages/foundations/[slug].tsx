@@ -32,9 +32,9 @@ const Page = ({ data, slug, preview }) => {
     <div>
       <SEO {...getSeoProps()} />
       <Header title="Matchbox" items={site?.header?.menu?.items} />
-      <PageTransition>
-        <Box display="grid" gridTemplateColumns={['1fr', null, '197px 1fr']}>
-          <Sidebar enabled items={list} activePage={title} root="Foundations" />
+      <Box display="grid" gridTemplateColumns={['1fr', null, '197px 1fr']}>
+        <Sidebar enabled items={list} activePage={title} root="Foundations" />
+        <PageTransition>
           <div>
             <PageHero title={title} subtitle={subtitle} updatedAt={updated_at} enableCategory />
             <Box border="thick">
@@ -50,10 +50,10 @@ const Page = ({ data, slug, preview }) => {
               </Box>
             </Box>
           </div>
-        </Box>
+        </PageTransition>
+      </Box>
 
-        <Footer items={site?.footer?.menu?.items} />
-      </PageTransition>
+      <Footer items={site?.footer?.menu?.items} />
     </div>
   );
 };
