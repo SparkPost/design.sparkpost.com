@@ -11,6 +11,7 @@ import { Box } from '@sparkpost/matchbox';
 import styled from 'styled-components';
 import css from '@styled-system/css';
 import useSeo from '@hooks/useSeo';
+import { PageTransition } from '@components/pageTransition';
 
 const Tab = styled.a`
   display: inline-flex;
@@ -84,38 +85,39 @@ const Page = ({ data, slug, preview }) => {
               px="400"
               textAlign="left"
             >
-              <Link href={`${basePath}/api`}>
+              <Link href={`${basePath}/api`} replace={true}>
                 <Tab isActive={pathWithoutHash === `${basePath}/api`}>API</Tab>
               </Link>
 
               {pageData.usage && (
-                <Link href={`${basePath}/usage`}>
+                <Link href={`${basePath}/usage`} replace={true}>
                   <Tab isActive={pathWithoutHash === `${basePath}/usage`}>Usage</Tab>
                 </Link>
               )}
               {pageData.style && (
-                <Link href={`${basePath}/style`}>
+                <Link href={`${basePath}/style`} replace={true}>
                   <Tab isActive={pathWithoutHash === `${basePath}/style`}>Style</Tab>
                 </Link>
               )}
             </Box>
           )}
-          <Box border="thick">
-            <Box
-              maxWidth="1200"
-              width="100vw"
-              m="0 auto"
-              ml={['-2px', null, 'auto']}
-              mr={['-2px', null, 'auto']}
-              py="800"
-              px="400"
-            >
-              <PortableText blocks={pageData[activeSection] || []} />
+          <PageTransition>
+            <Box border="thick">
+              <Box
+                maxWidth="1200"
+                width="100vw"
+                m="0 auto"
+                ml={['-2px', null, 'auto']}
+                mr={['-2px', null, 'auto']}
+                py="800"
+                px="400"
+              >
+                <PortableText blocks={pageData[activeSection] || []} />
+              </Box>
             </Box>
-          </Box>
+          </PageTransition>
         </div>
       </Box>
-
       <Footer items={site?.footer?.menu?.items} />
     </div>
   );

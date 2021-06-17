@@ -1,7 +1,6 @@
 import React from 'react';
 import { Box } from '@sparkpost/matchbox';
 import { Link as LinkIcon } from '@sparkpost/matchbox-icons';
-import Link from 'next/link';
 import { useRouter } from 'next/router';
 import styled from 'styled-components';
 import css from '@styled-system/css';
@@ -61,15 +60,12 @@ export function Header(props: HeaderProps): JSX.Element {
   }
 
   const path = router.asPath.split('#')[0];
-
   return (
     <Box as={`h${level}`} mb={mb} pt="200" fontSize={size} id={toKebab(children[0])}>
       {!props.disableLinks ? (
-        <Link href={`${path}#${toKebab(children[0])}`}>
-          <StyledLink>
-            {children} <LinkIcon />
-          </StyledLink>
-        </Link>
+        <StyledLink href={`${path}#${toKebab(children[0])}`}>
+          {children} <LinkIcon />
+        </StyledLink>
       ) : (
         children
       )}

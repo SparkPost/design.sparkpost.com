@@ -6,6 +6,7 @@ import { IndexList } from '@components/indexList';
 import { Sidebar } from '@components/sidebar';
 import { SEO } from '@components/seo';
 import { Box } from '@sparkpost/matchbox';
+import { PageTransition } from '@components/pageTransition';
 
 type ListProps = {
   title: string;
@@ -59,18 +60,23 @@ function IndexLayout(props: IndexLayoutProps): JSX.Element {
         favicon={seo?.favicon}
       />
       <Header title="Matchbox" items={headerList} />
-      <Box display="grid" gridTemplateColumns={enableSidebar ? ['1fr', null, '197px 1fr'] : '1fr'}>
-        <Sidebar enabled={enableSidebar} items={sidebarList} root={title} />
-        <div>
-          <PageHero title={title} subtitle={subtitle}></PageHero>
-          <IndexList
-            layout={layoutType}
-            items={list}
-            enableDatesAndExcerpts={enableDatesAndExcerpts}
-          />
-        </div>
-      </Box>
-      <Footer items={footerList} />
+      <PageTransition>
+        <Box
+          display="grid"
+          gridTemplateColumns={enableSidebar ? ['1fr', null, '197px 1fr'] : '1fr'}
+        >
+          <Sidebar enabled={enableSidebar} items={sidebarList} root={title} />
+          <div>
+            <PageHero title={title} subtitle={subtitle}></PageHero>
+            <IndexList
+              layout={layoutType}
+              items={list}
+              enableDatesAndExcerpts={enableDatesAndExcerpts}
+            />
+          </div>
+        </Box>
+        <Footer items={footerList} />
+      </PageTransition>
     </div>
   );
 }
