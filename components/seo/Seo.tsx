@@ -19,13 +19,11 @@ const SEO: React.FC<SeoProps> = (props: SeoProps) => {
       <meta charSet="utf-8"></meta>
       <meta httpEquiv="x-ua-compatible" content="ie=edge" />
       <meta name="viewport" content="initial-scale=1.0, width=device-width" />
-
       <title>{title}</title>
       <link rel="shortcut icon" type="image/png" href={faviconUrl} />
       <meta property="og:title" content={title} />
       <meta name="twitter:title" content={title} />
       <meta name="og:site_name" content={title} />
-
       {description && (
         <>
           <meta name="description" content={description} />
@@ -33,19 +31,23 @@ const SEO: React.FC<SeoProps> = (props: SeoProps) => {
           <meta name="twitter:description" content={description} />
         </>
       )}
-
       {keywords && <meta name="keywords" content={keywords} />}
-
       {url && (
         <>
           <meta property="og:image" content={url} />
           <meta name="twitter:image" content={url} />
         </>
       )}
-
       <meta property="og:type" content="website" />
       <meta name="twitter:card" content="summary_large_image" />
-      <link href="/assets/critical.css" rel="stylesheet" />
+
+      <link
+        href="/assets/critical.css"
+        rel="preload"
+        as="style"
+        // @ts-expect-error
+        onLoad="this.rel='stylesheet'"
+      />
     </Head>
   );
 };
