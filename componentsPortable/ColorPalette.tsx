@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Box, styles } from '@sparkpost/matchbox';
-import { meta } from '@sparkpost/design-tokens';
+import { meta, tokens } from '@sparkpost/design-tokens';
 import Color from 'color'; //eslint-disable-line
 import styled from 'styled-components';
 import css from '@styled-system/css';
@@ -104,19 +104,19 @@ function ColorDetails(props: DetailProps): JSX.Element {
         >
           <Box display="flex" alignItems="flex-end" mr={['0', null, '600']} mb={['300', null, '0']}>
             <Box textAlign="center" mr="200" width="45px">
-              <Box fontSize="200" lineHeight="100" color="black">
+              <Box fontSize="200" lineHeight="100" color="gray.900">
                 A
               </Box>
               <Box mt="100" fontSize="100" bg="black" color="white">
-                {checkContrast(value, '#000') ? 'PASS' : 'FAIL'}
+                {checkContrast(value, tokens.color_gray_900) ? 'PASS' : 'FAIL'}
               </Box>
             </Box>
             <Box textAlign="center" mr="200" width="45px">
-              <Box fontSize="600" lineHeight="400" color="black">
+              <Box fontSize="600" lineHeight="400" color="gray.900">
                 A
               </Box>
               <Box mt="100" fontSize="100" bg="black" color="white">
-                {checkContrast(value, '#000', true) ? 'PASS' : 'FAIL'}
+                {checkContrast(value, tokens.color_gray_900, true) ? 'PASS' : 'FAIL'}
               </Box>
             </Box>
           </Box>
