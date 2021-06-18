@@ -29,7 +29,6 @@ export default class MyDocument extends Document {
   }
 
   render() {
-    console.log(process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS);
     return (
       <Html lang="en">
         <Head>
