@@ -13,10 +13,13 @@ export default {
       required: true,
       description: 'Make sure you know what you are doing. Contact a UX engineer.',
       options: {
-        list: [{ title: 'Token Reference Table', value: 'token-reference-table' }],
-        list: [{ title: 'Spacing Token Table', value: 'spacing-token-table' }],
-        list: [{ title: 'Elevation Token Table', value: 'elevation-token-table' }],
-        list: [{ title: 'Typography Token Table', value: 'typography-token-table' }]
+        list: [
+          { title: 'Token Reference Table', value: 'token-reference-table' },
+          { title: 'Spacing Token Table', value: 'spacing-token-table' },
+          { title: 'Elevation Token Table', value: 'elevation-token-table' },
+          { title: 'Typography Token Table', value: 'typography-token-table' },
+          { title: 'Icon Reference List', value: 'icon-reference-list' }
+        ]
       }
     }
   ]

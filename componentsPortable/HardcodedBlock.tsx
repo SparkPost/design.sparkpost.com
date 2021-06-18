@@ -3,6 +3,7 @@ import { TokenReferenceTable } from '@components/tokenReferenceTable';
 import { SpacingTokenTable } from '@components/spacingTokenTable';
 import { ElevationTokenTable } from '@components/elevationTokenTable';
 import { TypographyTokenTable } from '@components/typographyTokenTable';
+import { IconReferenceList } from '@components/iconReferenceList';
 
 type HardcodedBlockProps = {
   node: {
@@ -25,6 +26,8 @@ function HardcodedBlock(props: HardcodedBlockProps): JSX.Element {
       return <ElevationTokenTable />;
     case 'typography-token-table':
       return <TypographyTokenTable />;
+    case 'icon-reference-list':
+      return <IconReferenceList />;
     default:
       return <div>ERROR: No component found for "{node.id}"</div>;
   }
