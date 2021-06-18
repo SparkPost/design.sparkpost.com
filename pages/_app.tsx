@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { ThemeProvider } from '@sparkpost/matchbox';
 import getTheme from '@lib/theme';
 import { createGlobalStyle } from 'styled-components';
 import { ColorSchemeProvider, ColorSchemeContext } from '../context/ColorSchemeContext';
 import { AnimatePresence } from 'framer-motion';
+import { pageView } from '@lib/ga';
 
 const GlobalStyle = createGlobalStyle`	
   
@@ -18,6 +19,18 @@ const GlobalStyle = createGlobalStyle`
 
 function MatchboxApp({ Component, pageProps, router }) {
   const { colorScheme } = React.useContext(ColorSchemeContext);
+
+  useEffect(() => {
+    const onRouteChange = (url) => {
+      pageView(url);
+    };
+
+    router.events.on('routeChangeComplete', onRouteChange);
+
+    return () => {
+      router.events.off('routeChangeComplete', onRouteChange);
+    };
+  }, [router.events]);
 
   return (
     <ThemeProvider theme={getTheme(colorScheme)}>
