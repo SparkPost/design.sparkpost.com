@@ -60,12 +60,9 @@ function IndexLayout(props: IndexLayoutProps): JSX.Element {
         favicon={seo?.favicon}
       />
       <Header title="Matchbox" items={headerList} />
-      <PageTransition>
-        <Box
-          display="grid"
-          gridTemplateColumns={enableSidebar ? ['1fr', null, '197px 1fr'] : '1fr'}
-        >
-          <Sidebar enabled={enableSidebar} items={sidebarList} root={title} />
+      <Box display="grid" gridTemplateColumns={enableSidebar ? ['1fr', null, '197px 1fr'] : '1fr'}>
+        <Sidebar enabled={enableSidebar} items={sidebarList} root={title} />
+        <PageTransition>
           <div>
             <PageHero title={title} subtitle={subtitle}></PageHero>
             <IndexList
@@ -74,9 +71,9 @@ function IndexLayout(props: IndexLayoutProps): JSX.Element {
               enableDatesAndExcerpts={enableDatesAndExcerpts}
             />
           </div>
-        </Box>
-        <Footer items={footerList} />
-      </PageTransition>
+        </PageTransition>
+      </Box>
+      <Footer items={footerList} />
     </div>
   );
 }
