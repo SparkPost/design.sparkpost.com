@@ -28,6 +28,15 @@ function toPlainText(blocks = []) {
   );
 }
 
+// TODO: this is temporary, need to find a better way to scale cards
+function getRatio(span) {
+  if (span > 5) {
+    return '25%'
+  }
+
+  return ['40%', null, '82%', '60%', '44%']
+}
+
 const HoverBox = styled.div`
   position: absolute;
   width: 100%;
@@ -128,7 +137,7 @@ const Card: React.FC<CardProps> = (props: CardProps) => {
   const card = (
     <BorderBox
       gridColumn={[`span ${smallSpan}`, null, `span ${span}`]}
-      pb={span === 12 ? ['25%'] : ['40%', null, '82%', '60%', '44%']}
+      pb={getRatio(span)}
       minHeight="12rem"
       position="relative"
       as={url ? 'a' : 'div'}
