@@ -18,6 +18,7 @@ export default {
           { title: 'Teal', value: 'Teal' },
           { title: 'Green', value: 'Green' },
           { title: 'Yellow', value: 'Yellow' },
+          { title: 'Red', value: 'Red' },
           { title: 'Magenta', value: 'Magenta' },
           { title: 'Purple', value: 'Purple' },
           { title: 'Brand', value: 'Brand' }
