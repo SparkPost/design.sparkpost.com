@@ -84,7 +84,7 @@ function ColorDetails(props: DetailProps): JSX.Element {
     <Box
       flex="1"
       border="thick"
-      bg="white"
+      bg="scheme.bg"
       ml="-2px"
       minHeight="500px"
       position="relative"
