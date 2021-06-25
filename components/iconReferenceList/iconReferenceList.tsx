@@ -29,30 +29,35 @@ const StyledTextField = styled(TextField)`
   outline: none;
 `;
 
-function IconList({ items }) {
+function IconItem(props) {
+  const { key, icon } = props;
   const { copy, copied } = useCopyToClipboard();
-  return items.map((icon, i) => {
-    const Icon = icons[icon];
-    return (
-      <Box
-        key={i}
-        gridColumn="span 1"
-        borderBottom="thick"
-        borderRight="thick"
-        width="calc(100% / 4)"
-        display="flex"
-        alignItems="center"
-        justifyContent="center"
-        py="600"
-      >
-        <Box textAlign="center">
-          <Icon size={40} />
-          <StyledCopyButton fontSize="50" onClick={() => copy(`<${icon} />`)}>
-            {copied ? 'Copied' : `<${icon} />`}
-          </StyledCopyButton>
-        </Box>
+  const Icon = icons[icon];
+  return (
+    <Box
+      key={key}
+      gridColumn="span 1"
+      borderBottom="thick"
+      borderRight="thick"
+      width="calc(100% / 4)"
+      display="flex"
+      alignItems="center"
+      justifyContent="center"
+      py="600"
+    >
+      <Box textAlign="center">
+        <Icon size={40} />
+        <StyledCopyButton fontSize="50" onClick={() => copy(`<${icon} />`)}>
+          {copied ? 'Copied' : `<${icon} />`}
+        </StyledCopyButton>
       </Box>
-    );
+    </Box>
+  );
+}
+
+function IconList({ items }) {
+  return items.map((icon, i) => {
+    return <IconItem key={i} icon={icon} />;
   });
 }
 
