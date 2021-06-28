@@ -91,6 +91,7 @@ export default {
     { type: 'prop' },
     { type: 'componentExample' },
     { type: 'systemProps' },
-    { type: 'hardcodedBlock' }
+    { type: 'hardcodedBlock' },
+    { type: 'resourceDownload' }
   ]
 };
