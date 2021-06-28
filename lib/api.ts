@@ -89,6 +89,19 @@ _type == "prop" => {
 }
 `;
 
+const fillResourceDownloadComponentLinks = `
+  _type == "resourceDownload" => {
+    ...,
+    "url": displayImage.asset->url,
+    resources[] {
+      ...,
+      "url": asset->url,
+      "extension": asset->extension,
+      "originalFilename": asset->originalFilename
+    }
+  }
+`;
+
 const fillComponentExampleLinks = `
 _type == "componentExample" => {
   ...,
@@ -134,7 +147,8 @@ export async function getPage(slug: string, type: IndexTypes, preview: boolean) 
             "updated_at": _updatedAt,
             body[] {
               ...,
-              ${fillMarkDefs} 
+              ${fillMarkDefs},
+              ${fillResourceDownloadComponentLinks}
             },
             api[] {
 							...,

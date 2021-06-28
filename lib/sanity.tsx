@@ -21,6 +21,7 @@ import Prop from '@componentsPortable/Prop';
 import ComponentExample from '@componentsPortable/ComponentExample';
 import SystemProps from '@componentsPortable/SystemProps';
 import HardcodedBlock from '@componentsPortable/HardcodedBlock';
+import ResourceDownload from '@componentsPortable/ResourceDownload';
 
 export const config = {
   projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID,
@@ -45,7 +46,8 @@ export const PortableText = createPortableTextComponent({
       prop: Prop,
       componentExample: ComponentExample,
       systemProps: SystemProps,
-      hardcodedBlock: HardcodedBlock
+      hardcodedBlock: HardcodedBlock,
+      resourceDownload: ResourceDownload
     },
     list: List,
     marks: {
