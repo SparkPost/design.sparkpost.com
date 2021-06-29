@@ -39,7 +39,7 @@ const StyledResource = styled.div`
   ${css({
     mb: '600',
     width: ['100%', null, '50%'],
-    pr: '500'
+    pr: ['0', null, '500']
   })}
 `;
 
