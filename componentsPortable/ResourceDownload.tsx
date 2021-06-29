@@ -1,6 +1,5 @@
 import { urlFor } from '@lib/sanity';
 import { Box } from '@sparkpost/matchbox';
-import Image from 'next/image';
 import styled from 'styled-components';
 import css from '@styled-system/css';
 
@@ -92,7 +91,13 @@ function ResourceDownload(props: ResourceDownloadProps): JSX.Element {
         bg={darkBackground ? 'gray.900' : 'white'}
       >
         <Box width="100%" position="relative" height="150px" maxWidth="200px" margin="0 auto">
-          <Image src={displayImageUrl} alt="resource download" layout="fill" objectFit="contain" />
+          <Box
+            as="img"
+            src={displayImageUrl}
+            width="100%"
+            height="100%"
+            style={{ 'object-fit': 'contain' }}
+          />
         </Box>
       </Box>
       <Box as="p" pt="200">
