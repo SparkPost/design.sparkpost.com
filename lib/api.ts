@@ -135,7 +135,7 @@ export async function getHomePage(preview) {
   };
 }
 
-export const getPageBySlug = groq`
+export const getPageSlug = groq`
   *[_type in ${PAGE_TYPES} && slug.current match $slug][0] {
     "slug": slug.current
   }

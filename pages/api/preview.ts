@@ -1,5 +1,5 @@
 import { previewClient } from '@lib/sanity';
-import { getPageBySlug } from '@lib/api';
+import { getPageSlug } from '@lib/api';
 
 export default async function handler(req, res) {
   const type = req.query?.type;
@@ -11,7 +11,7 @@ export default async function handler(req, res) {
     return res.status(401).json({ message: 'Invalid preview request' });
   }
 
-  const page = await previewClient.fetch(getPageBySlug, {
+  const page = await previewClient.fetch(getPageSlug, {
     slug
   });
 
