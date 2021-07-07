@@ -96,7 +96,7 @@ function ResourceDownload(props: ResourceDownloadProps): JSX.Element {
             src={displayImageUrl}
             width="100%"
             height="100%"
-            style={{ 'object-fit': 'contain' }}
+            style={{ objectFit: 'contain' }}
           />
         </Box>
       </Box>

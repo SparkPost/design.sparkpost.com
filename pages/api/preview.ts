@@ -4,7 +4,7 @@ export default function handler(req, res) {
   const secret = req.query?.secret;
 
   // Bail if no secret or slug defined
-  if (secret !== process.env.NEXT_PUBLIC_SANITY_PREVIEW_SECRET || !type) {
+  if (secret !== process.env.NEXT_PUBLIC_SANITY_PREVIEW_SECRET || !type || !slug) {
     return res.status(401).json({ message: 'Invalid preview request' });
   }
 
@@ -16,5 +16,6 @@ export default function handler(req, res) {
     }
   );
 
-  res.redirect(`${slug}`);
+  res.writeHead(307, { Location: `${slug}` });
+  res.end();
 }
