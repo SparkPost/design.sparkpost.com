@@ -135,6 +135,12 @@ export async function getHomePage(preview) {
   };
 }
 
+export const getPageBySlug = groq`
+  *[_type in ${PAGE_TYPES} && slug.current match $slug][0] {
+    "slug": slug.current
+  }
+`;
+
 export async function getPage(slug: string, type: IndexTypes, preview: boolean) {
   const query = groq`
         *[_type in ${PAGE_TYPES} && slug.current match '${slug}'][0] {

@@ -10,14 +10,11 @@ import useSeo from '@hooks/useSeo';
 import { PageTransition } from '@components/pageTransition';
 
 const Page = ({ data, slug, preview }) => {
-  console.log(preview);
   const { data: pageData } = usePreviewSubscription(data?.query, {
     params: { slug: slug },
     initialData: data?.pageData,
     enabled: preview
   });
-
-  console.log(pageData);
 
   const { site, title, subtitle, updated_at, body, list, seo } = pageData;
 
