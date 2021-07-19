@@ -15,6 +15,7 @@ export default {
       type: 'reference',
       to: [
         { type: 'homePage' },
+        { type: 'indexPage' },
         { type: 'page' },
         { type: 'component' },
         { type: 'foundation' },
