@@ -22,6 +22,10 @@ export const categoryColors = {
   resources: {
     bg: tokens.color_magenta_400,
     fg: tokens.color_magenta_900
+  },
+  patterns: {
+    bg: tokens.color_blue_400,
+    fg: tokens.color_blue_900
   }
 };
 
