@@ -39,6 +39,9 @@ import componentExample from './objects/componentExample';
 import systemProps from './objects/systemProps';
 import hardcodedBlock from './objects/hardcodedBlock';
 import resourceDownload from './objects/resourceDownload';
+import table from './objects/table';
+import tableRow from './objects/tableRow';
+import tableCell from './objects/tableCell';
 
 export default createSchema({
   name: 'matchbox',
@@ -80,6 +83,9 @@ export default createSchema({
     componentExample,
     systemProps,
     hardcodedBlock,
-    resourceDownload
+    resourceDownload,
+    table,
+    tableRow,
+    tableCell
   ])
 });

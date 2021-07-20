@@ -112,6 +112,22 @@ _type == "componentExample" => {
 }
 `;
 
+const fillTableLinks = `
+_type == "table" => {
+  ...,
+  rows[] {
+    ...,
+    cells[] {
+      ...,
+      content[] {
+        ...,
+        ${fillMarkDefs} 
+      }
+    }
+  }
+}
+`;
+
 export async function getHomePage(preview) {
   const query = groq`
     *[_type == "homePage"] | order(_updatedAt desc)[0] {
@@ -154,7 +170,8 @@ export async function getPage(slug: string, type: IndexTypes, preview: boolean) 
             body[] {
               ...,
               ${fillMarkDefs},
-              ${fillResourceDownloadComponentLinks}
+              ${fillResourceDownloadComponentLinks},
+              ${fillTableLinks}
             },
             api[] {
 							...,
