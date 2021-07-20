@@ -4,7 +4,7 @@ import { PortableText } from '@lib/sanity';
 import styled from 'styled-components';
 import css from '@styled-system/css';
 
-const StyledWrapper = styled.div`
+const StyledWrapper = styled(Box)`
   ${css({
     border: 'thick',
     borderColor: 'scheme.lightFg',
@@ -53,10 +53,9 @@ type TableProps = {
 };
 
 function Table(props: TableProps): JSX.Element {
-  console.log(props);
   const { node } = props;
   return (
-    <StyledWrapper>
+    <StyledWrapper as="div" mb="600">
       <StyledTable width="100%" cellPadding="0">
         <tbody>
           {node.rows.map((row, i) => {
