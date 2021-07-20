@@ -22,6 +22,7 @@ import ComponentExample from '@componentsPortable/ComponentExample';
 import SystemProps from '@componentsPortable/SystemProps';
 import HardcodedBlock from '@componentsPortable/HardcodedBlock';
 import ResourceDownload from '@componentsPortable/ResourceDownload';
+import Table from '@componentsPortable/Table';
 
 export const config = {
   projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID,
@@ -47,7 +48,8 @@ export const PortableText = createPortableTextComponent({
       componentExample: ComponentExample,
       systemProps: SystemProps,
       hardcodedBlock: HardcodedBlock,
-      resourceDownload: ResourceDownload
+      resourceDownload: ResourceDownload,
+      table: Table
     },
     list: List,
     marks: {
