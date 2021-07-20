@@ -93,6 +93,7 @@ export default {
     { type: 'systemProps' },
     { type: 'hardcodedBlock' },
     { type: 'resourceDownload' },
-    { type: 'table' }
+    { type: 'table' },
+    { type: 'teamGrid' }
   ]
 };

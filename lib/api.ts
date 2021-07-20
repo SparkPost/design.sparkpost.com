@@ -102,6 +102,12 @@ const fillResourceDownloadComponentLinks = `
   }
 `;
 
+const fillTeamGridLinks = `
+  _type == "teamGrid" => {
+    ...
+  }
+`;
+
 const fillComponentExampleLinks = `
 _type == "componentExample" => {
   ...,
@@ -171,7 +177,8 @@ export async function getPage(slug: string, type: IndexTypes, preview: boolean) 
               ...,
               ${fillMarkDefs},
               ${fillResourceDownloadComponentLinks},
-              ${fillTableLinks}
+              ${fillTableLinks},
+              ${fillTeamGridLinks},
             },
             api[] {
 							...,

@@ -42,6 +42,9 @@ import resourceDownload from './objects/resourceDownload';
 import table from './objects/table';
 import tableRow from './objects/tableRow';
 import tableCell from './objects/tableCell';
+import teamGrid from './objects/teamGrid';
+import teamMember from './objects/teamMember';
+import labelValue from './objects/labelValue';
 
 export default createSchema({
   name: 'matchbox',
@@ -86,6 +89,9 @@ export default createSchema({
     resourceDownload,
     table,
     tableRow,
-    tableCell
+    tableCell,
+    teamGrid,
+    teamMember,
+    labelValue
   ])
 });
