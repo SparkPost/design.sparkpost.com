@@ -70,7 +70,7 @@ function TeamGrid(props: TeamGridProps): JSX.Element {
               <Box pt="400">
                 {member.metadata.map((metadata, i) => {
                   return (
-                    <Box key={i}>
+                    <Box key={i} pb="300">
                       <Box fontSize="200" lineHeight="200" fontWeight="500">
                         {metadata.label}
                       </Box>
