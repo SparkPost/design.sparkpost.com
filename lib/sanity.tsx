@@ -23,6 +23,7 @@ import SystemProps from '@componentsPortable/SystemProps';
 import HardcodedBlock from '@componentsPortable/HardcodedBlock';
 import ResourceDownload from '@componentsPortable/ResourceDownload';
 import Table from '@componentsPortable/Table';
+import TeamGrid from '@componentsPortable/TeamGrid';
 
 export const config = {
   projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID,
@@ -49,7 +50,8 @@ export const PortableText = createPortableTextComponent({
       systemProps: SystemProps,
       hardcodedBlock: HardcodedBlock,
       resourceDownload: ResourceDownload,
-      table: Table
+      table: Table,
+      teamGrid: TeamGrid
     },
     list: List,
     marks: {

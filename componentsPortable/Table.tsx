@@ -61,9 +61,9 @@ function Table(props: TableProps): JSX.Element {
           {node.rows.map((row, i) => {
             return (
               <Box as="tr" key={i}>
-                {row.cells.map((cell) => {
+                {row.cells.map((cell, index) => {
                   return (
-                    <Box as="td">
+                    <Box key={`cell${index}`} as="td">
                       <PortableText blocks={cell.content} />
                     </Box>
                   );
