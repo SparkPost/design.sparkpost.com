@@ -64,7 +64,7 @@ function TeamGrid(props: TeamGridProps): JSX.Element {
                   pl="200"
                   as="span"
                   fontSize="200"
-                  fontWeight="300"
+                  fontWeight="400"
                   fontStyle="italic"
                 >
                   {member.pronouns}
