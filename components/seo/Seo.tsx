@@ -40,14 +40,6 @@ const SEO: React.FC<SeoProps> = (props: SeoProps) => {
       )}
       <meta property="og:type" content="website" />
       <meta name="twitter:card" content="summary_large_image" />
-
-      <link
-        href="/assets/critical.css"
-        rel="preload"
-        as="style"
-        // @ts-expect-error
-        onLoad="this.rel='stylesheet'"
-      />
     </Head>
   );
 };

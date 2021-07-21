@@ -49,6 +49,14 @@ export default class MyDocument extends Document {
           `
             }}
           />
+          <link
+            href="/assets/critical.css"
+            rel="preload"
+            as="style"
+            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+            // @ts-expect-error
+            onLoad="this.rel='stylesheet'"
+          />
         </Head>
         <body>
           <Main />
