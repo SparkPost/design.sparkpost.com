@@ -23,12 +23,18 @@ function TeamGrid(props: TeamGridProps): JSX.Element {
   const { members } = node;
 
   return (
-    <Box display="grid" gridTemplateColumns="repeat(2, 1fr)" gridGap="600" py="300">
+    <Box
+      display="grid"
+      gridTemplateColumns={['1fr', null, 'repeat(2, 1fr)']}
+      gridGap="600"
+      py="300"
+      width="100%"
+    >
       {members.map((member) => {
         const imgUrl = urlFor(member.image).url();
 
         return (
-          <Box key={member._key} color="gray.1000" position="relative" mb="200">
+          <Box key={member._key} color="scheme.fg" position="relative" mb="200">
             <Box
               width="100%"
               height="0"
