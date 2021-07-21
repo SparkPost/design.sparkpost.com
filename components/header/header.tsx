@@ -99,7 +99,6 @@ const Header: React.FC<HeaderProps> = (props: HeaderProps) => {
         <Box
           display="flex"
           alignItems="center"
-          flex="1"
           justifyContent="flex-end"
           position="relative"
           height="100%"
