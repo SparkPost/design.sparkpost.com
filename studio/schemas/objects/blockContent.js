@@ -82,7 +82,25 @@ export default {
     },
     {
       type: 'image',
-      options: { hotspot: true }
+      options: { hotspot: true },
+      fields: [
+        {
+          title: 'Alt Text',
+          name: 'alt',
+          type: 'string',
+          options: {
+            isHighlighted: true
+          }
+        },
+        {
+          title: 'Caption',
+          name: 'caption',
+          type: 'string',
+          options: {
+            isHighlighted: true
+          }
+        }
+      ]
     },
     { type: 'horizontalRule' },
     { type: 'code' },
