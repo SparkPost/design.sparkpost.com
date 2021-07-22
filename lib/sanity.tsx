@@ -42,7 +42,13 @@ export const PortableText = createPortableTextComponent({
       horizontalRule: Hr,
       block: Block,
       code: CodeBlock,
-      image: (props: any) => <Image source={urlFor(props.node).url()} />,
+      image: (props: any) => (
+        <Image
+          alt={props.node.alt}
+          caption={props.node.caption}
+          source={urlFor(props.node).url()}
+        />
+      ),
       color: Color,
       colorPalette: ColorPalette,
       prop: Prop,
