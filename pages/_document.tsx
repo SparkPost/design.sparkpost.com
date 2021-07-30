@@ -50,13 +50,27 @@ export default class MyDocument extends Document {
             }}
           />
           <link
-            href="/assets/critical.css"
             rel="preload"
-            as="style"
-            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-            // @ts-expect-error
-            onLoad="this.rel='stylesheet'"
+            href="/assets/Calibre.woff2"
+            as="font"
+            type="font/woff2"
+            crossOrigin="anonymous"
           />
+          <link
+            rel="preload"
+            href="/assets/Calibre-Medium.woff2"
+            as="font"
+            type="font/woff2"
+            crossOrigin="anonymous"
+          />
+          <link
+            rel="preload"
+            href="/assets/Calibre-SemiBold.woff2"
+            as="font"
+            type="font/woff2"
+            crossOrigin="anonymous"
+          />
+          <link href="/assets/critical.css" rel="stylesheet" />
         </Head>
         <body>
           <Main />
