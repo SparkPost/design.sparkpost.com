@@ -86,7 +86,7 @@ function MobileMenu(props: MenuProps): JSX.Element {
       >
         {children}
       </MobileStyledList>
-      <StyledOverlay animate={variant} variants={overlayAnimations} />
+      <StyledOverlay animate={variant} initial={{ opacity: 0 }} variants={overlayAnimations} />
     </Box>
   );
 }
