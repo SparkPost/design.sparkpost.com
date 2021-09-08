@@ -38,7 +38,7 @@
     "@sanity/cli": "^2.15.0",
     "@sparkpost/matchbox-icons": "^5.1.2",
     "@sweatpants/box": "0.0.5",
-    "immer": "^8.0.1",
+    "immer": "^9.0.6",
     "is-svg": "^4.2.2",
     "mem": "^4.0.0",
     "rxjs": "^6.6.7",
