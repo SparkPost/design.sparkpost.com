@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Box, ScreenReaderOnly, styles } from '@sparkpost/matchbox';
+import { Box, BoxProps, ScreenReaderOnly, styles } from '@sparkpost/matchbox';
 import { InvertColors } from '@sparkpost/matchbox-icons';
 import styled from 'styled-components';
 import css from '@styled-system/css';
@@ -26,7 +26,7 @@ const StyledList = styled.ul`
   })}
 `;
 
-const StyledHomeLink = styled(Box)`
+const StyledHomeLink = styled(Box)<BoxProps>`
   text-decoration: none;
   color: white;
   transition: ${(props) => props.theme.motion.duration.fast};

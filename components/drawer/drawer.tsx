@@ -103,7 +103,7 @@ function Drawer(props): JSX.Element {
   return (
     <>
       <ScrollLock isActive={open} />
-      <Portal portalId>
+      <Portal>
         <Box
           position="fixed"
           tabIndex="-1"

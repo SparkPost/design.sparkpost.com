@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router';
-import { Box } from '@sparkpost/matchbox';
+import { Box, BoxProps } from '@sparkpost/matchbox';
 import Link from 'next/link';
 import styled from 'styled-components';
 import css from '@styled-system/css';
@@ -9,7 +9,7 @@ export type MenuItems = {
   slug: string;
 };
 
-const StyledNavLink = styled(Box)`
+const StyledNavLink = styled(Box)<BoxProps>`
   display: inline-block;
   margin-top: -2px;
   margin-bottom: -2px;

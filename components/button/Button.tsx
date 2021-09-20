@@ -1,9 +1,9 @@
 import React from 'react';
-import { Box, styles } from '@sparkpost/matchbox';
+import { Box, BoxProps, styles } from '@sparkpost/matchbox';
 import styled from 'styled-components';
 import css from '@styled-system/css';
 
-const StyledButton = styled(Box)`
+const StyledButton = styled(Box)<BoxProps>`
   ${styles.buttonReset}
   ${css({
     border: 'thick',

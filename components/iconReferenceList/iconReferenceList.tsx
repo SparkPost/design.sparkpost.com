@@ -5,7 +5,7 @@ import * as icons from '@sparkpost/matchbox-icons';
 import styled from 'styled-components';
 import css from '@styled-system/css';
 
-const StyledCopyButton = styled.button`
+const StyledCopyButton = styled.button<{ fontSize?: string }>`
   ${styles.buttonReset}
   cursor: pointer;
   display: block;

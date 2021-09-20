@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 import React, { useEffect } from 'react';
 import { ThemeProvider } from '@sparkpost/matchbox';
 import getTheme from '@lib/theme';
@@ -7,9 +8,10 @@ import { AnimatePresence } from 'framer-motion';
 import { pageView } from '@lib/ga';
 
 const GlobalStyle = createGlobalStyle`	
-  
   body {
+    ${'' /* @ts-ignore */}
     background: ${({ theme }) => theme.colors.scheme.bg};
+    ${'' /* @ts-ignore */}
     color: ${({ theme }) => theme.colors.scheme.fg};
   }
   * {
@@ -34,7 +36,7 @@ function MatchboxApp({ Component, pageProps, router }) {
 
   return (
     <ThemeProvider theme={getTheme(colorScheme)}>
-      <GlobalStyle colorScheme={colorScheme} />
+      <GlobalStyle />
       <AnimatePresence exitBeforeEnter>
         <Component key={router.asPath} {...pageProps} />
         <div id="portal-target" />
