@@ -32,7 +32,11 @@ function CopyButton(props: CopyButtonProps): JSX.Element {
   const { copy, copied } = useCopyToClipboard();
 
   return (
-    <StyledCopyButton onClick={() => copy(children)} fontSize={fontSize} textAlign={textAlign}>
+    <StyledCopyButton
+      onClick={() => copy(String(children))}
+      fontSize={fontSize}
+      textAlign={textAlign}
+    >
       {copied ? 'Copied' : children}
     </StyledCopyButton>
   );
