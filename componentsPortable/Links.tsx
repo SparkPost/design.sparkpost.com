@@ -17,7 +17,7 @@ const StyledLink = styled.a`
     })}
   }
 
-  transition: ${({ theme }) => theme.motion.duration.fast};
+  transition: ${({ theme }) => theme?.motion?.duration.fast};
 `;
 
 type LinkProps = {

@@ -1,11 +1,11 @@
 import { useContext } from 'react';
-import { Box, styles, useCopyToClipboard } from '@sparkpost/matchbox';
+import { Box, BoxProps, styles, useCopyToClipboard } from '@sparkpost/matchbox';
 import SyntaxHighlighter from 'react-syntax-highlighter';
 import styled from 'styled-components';
 import { ColorSchemeContext } from '@context/ColorSchemeContext';
 import { a11yDark, a11yLight } from 'react-syntax-highlighter/dist/cjs/styles/hljs';
 
-const Copy = styled(Box)`
+const Copy = styled(Box)<BoxProps>`
   ${styles.buttonReset}
   cursor: pointer;
   border: ${(props) => props.theme.borders.thick};

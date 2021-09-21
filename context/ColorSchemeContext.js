@@ -1,14 +1,10 @@
 import React from 'react';
-// import { usePrefersColorScheme } from '@sparkpost/matchbox';
+import { usePrefersColorScheme } from '@sparkpost/matchbox';
 
-function noop() {
-  return;
-}
+export const ColorSchemeContext = React.createContext({ colorScheme: 'light', toggle: () => {} });
 
-export const ColorSchemeContext = React.createContext({ colorScheme: 'light', toggle: noop });
-
-export function ColorSchemeProvider(props) {
-  const prefers = 'light';
+export function ColorSchemeProvider({ children }) {
+  const prefers = usePrefersColorScheme();
   const [scheme, setScheme] = React.useState('light');
 
   function handleToggle() {
@@ -21,7 +17,7 @@ export function ColorSchemeProvider(props) {
 
   return (
     <ColorSchemeContext.Provider value={{ colorScheme: scheme, toggle: handleToggle }}>
-      {props.children}
+      {children}
     </ColorSchemeContext.Provider>
   );
 }

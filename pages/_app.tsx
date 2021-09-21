@@ -1,22 +1,20 @@
-/* eslint-disable @typescript-eslint/ban-ts-comment */
 import React, { useEffect } from 'react';
 import { ThemeProvider } from '@sparkpost/matchbox';
 import getTheme from '@lib/theme';
-import { createGlobalStyle } from 'styled-components';
+import styled, { createGlobalStyle } from 'styled-components';
 import { ColorSchemeProvider, ColorSchemeContext } from '../context/ColorSchemeContext';
 import { AnimatePresence } from 'framer-motion';
 import { pageView } from '@lib/ga';
 
-const GlobalStyle = createGlobalStyle`	
-  body {
-    ${'' /* @ts-ignore */}
-    background: ${({ theme }) => theme.colors.scheme.bg};
-    ${'' /* @ts-ignore */}
-    color: ${({ theme }) => theme.colors.scheme.fg};
-  }
+const GlobalStyle = createGlobalStyle`
   * {
     touch-action: manipulation;
   }
+`;
+
+const StyledWrapper = styled.div`
+  background: ${({ theme }) => theme?.colors?.scheme.bg};
+  color: ${({ theme }) => theme?.colors?.scheme.fg};
 `;
 
 function MatchboxApp({ Component, pageProps, router }) {
@@ -37,10 +35,12 @@ function MatchboxApp({ Component, pageProps, router }) {
   return (
     <ThemeProvider theme={getTheme(colorScheme)}>
       <GlobalStyle />
-      <AnimatePresence exitBeforeEnter>
-        <Component key={router.asPath} {...pageProps} />
-        <div id="portal-target" />
-      </AnimatePresence>
+      <StyledWrapper>
+        <AnimatePresence exitBeforeEnter>
+          <Component key={router.asPath} {...pageProps} />
+          <div id="portal-target" />
+        </AnimatePresence>
+      </StyledWrapper>
     </ThemeProvider>
   );
 }

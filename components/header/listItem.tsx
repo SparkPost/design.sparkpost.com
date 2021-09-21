@@ -14,15 +14,15 @@ const StyledNavLink = styled(Box)<BoxProps>`
   margin-top: -2px;
   margin-bottom: -2px;
   margin-left: -2px;
-  color: ${(props) => props.theme.colors.scheme.fg};
+  color: ${(props) => props.theme?.colors?.scheme.fg};
   text-decoration: none;
   border: 2px solid transparent;
-  transition: ${(props) => props.theme.motion.duration.fast};
+  transition: ${(props) => props.theme?.motion?.duration.fast};
 
   &:hover {
-    background: ${(props) => props.theme.colors.scheme.lightAccent};
-    border: ${(props) => props.theme.borders.thick};
-    color: ${(props) => props.theme.colors.scheme.fg};
+    background: ${(props) => props.theme?.colors?.scheme.lightAccent};
+    border: ${(props) => props.theme?.borders?.thick};
+    color: ${(props) => props.theme?.colors?.scheme.fg};
   }
 
   ${css({

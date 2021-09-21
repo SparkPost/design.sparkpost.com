@@ -16,7 +16,7 @@ const StyledOverlay = styled(motion.div)`
   height: calc(100vh - 66px);
   top: 66px;
   left: 0;
-  background: ${(props) => props.theme.colors.scheme.transparentBg};
+  background: ${(props) => props.theme?.colors?.scheme.transparentBg};
   z-index: -1;
 `;
 

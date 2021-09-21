@@ -41,7 +41,7 @@ const Li = styled.li`
 
   a,
   a:visited {
-    color: ${({ theme }) => theme.colors.scheme.fg};
+    color: ${({ theme }) => theme?.colors?.scheme.fg};
   }
 `;
 
