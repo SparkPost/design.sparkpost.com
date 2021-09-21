@@ -37,7 +37,7 @@
   "dependencies": {
     "@sanity/client": "^2.8.0",
     "@sparkpost/design-tokens": "^6.0.1",
-    "@sparkpost/matchbox": "^6.0.1",
+    "@sparkpost/matchbox": "^6.0.2-beta.1",
     "@sparkpost/matchbox-icons": "^6.0.1",
     "@sparkpost/matchbox-media": "^6.0.1",
     "@styled-system/css": "^5.1.5",
@@ -67,6 +67,7 @@
     "@sanity/image-url": "^0.140.22",
     "@types/node": "^14.14.44",
     "@types/react": "^17.0.5",
+    "@types/styled-components": "^5.1.14",
     "@typescript-eslint/eslint-plugin": "^4.22.1",
     "@typescript-eslint/parser": "^4.22.1",
     "babel-eslint": "^10.1.0",
@@ -90,7 +91,8 @@
     "lint-staged": "^10.5.4",
     "mem": "^4.3.0",
     "react-day-picker": "^7.4.10",
-    "typescript": "^4.2.4",
+    "tslib": "^2.3.1",
+    "typescript": "^4.4.3",
     "yargs-parser": "^13.1.2"
   }
 }

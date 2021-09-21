@@ -3,14 +3,14 @@ import { styles, useCopyToClipboard } from '@sparkpost/matchbox';
 import styled from 'styled-components';
 import css from '@styled-system/css';
 
-const StyledCopyButton = styled.button`
+const StyledCopyButton = styled.button<{ $fontSize?: string; $textAlign?: string }>`
   ${styles.buttonReset}
   cursor: pointer;
 
-  ${({ fontSize, textAlign }) =>
+  ${({ $fontSize, $textAlign }) =>
     css({
-      textAlign,
-      fontSize,
+      textAlign: $textAlign,
+      fontSize: $fontSize,
       fontFamily: 'monospace'
     })}
 
@@ -34,8 +34,8 @@ function CopyButton(props: CopyButtonProps): JSX.Element {
   return (
     <StyledCopyButton
       onClick={() => copy(String(children))}
-      fontSize={fontSize}
-      textAlign={textAlign}
+      $fontSize={fontSize}
+      $textAlign={textAlign}
     >
       {copied ? 'Copied' : children}
     </StyledCopyButton>

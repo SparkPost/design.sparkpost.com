@@ -1,6 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
-import { Box } from '@sparkpost/matchbox';
+import { Box, BoxProps } from '@sparkpost/matchbox';
 import { SimplePortableText } from '@lib/sanity';
 import { ArrowForward } from '@sparkpost/matchbox-icons';
 import styled from 'styled-components';
@@ -31,13 +31,13 @@ function toPlainText(blocks = []) {
 // TODO: this is temporary, need to find a better way to scale cards
 function getRatio(span) {
   if (span > 5) {
-    return '25%'
+    return '25%';
   }
 
-  return ['40%', null, '82%', '60%', '44%']
+  return ['40%', null, '82%', '60%', '44%'];
 }
 
-const HoverBox = styled.div`
+const HoverBox = styled.div<BoxProps & { $index: number; $span: number; $url: string }>`
   position: absolute;
   width: 100%;
   height: 100%;
@@ -47,17 +47,17 @@ const HoverBox = styled.div`
   transition: transform 200ms ease-in-out, z-index 200ms linear;
   z-index: 0;
 
-  ${({ url, index }) => {
+  ${({ $url, $index }) => {
     return `
-      cursor: ${url ? 'pointer' : ''};
+      cursor: ${$url ? 'pointer' : ''};
       &:hover {
         transition: transform 200ms ease-in-out, z-index 200ms linear;
-        z-index: ${url ? (index === 0 ? 2 : 1) : 0};
+        z-index: ${$url ? ($index === 0 ? 2 : 1) : 0};
       }
     `;
   }};
 
-  ${({ index, span, url }) =>
+  ${({ $index, $span, $url }) =>
     css({
       bg: 'scheme.bg',
       p: ['300', null, null, '400', '600'],
@@ -67,15 +67,15 @@ const HoverBox = styled.div`
         transform: [
           `translate3d(0, 0, 0)`,
           null,
-          url
-            ? `translate3d(${(index * span) % 12 === 0 ? '12px' : '-12px'}, -12px, 0)`
+          $url
+            ? `translate3d(${($index * $span) % 12 === 0 ? '12px' : '-12px'}, -12px, 0)`
             : 'translate3d(0, 0, 0)'
         ]
       }
     })}
 `;
 
-const BorderBox = styled(Box)`
+const BorderBox = styled(Box)<BoxProps>`
   margin-top: -1px;
   margin-left: -1px;
   margin-bottom: -1px;
@@ -151,7 +151,7 @@ const Card: React.FC<CardProps> = (props: CardProps) => {
         bg={accentColor}
         border="thick"
       />
-      <HoverBox url={url} p={['200', null, '600']} index={index} span={span}>
+      <HoverBox $url={url} p={['200', null, '600']} $index={index} $span={span}>
         {enableCategory && url && <Category category={category} />}
         {date && (
           <Box fontSize="100" mb="0" lineHeight="100">

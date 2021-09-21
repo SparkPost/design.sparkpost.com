@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Box, ScreenReaderOnly, styles } from '@sparkpost/matchbox';
+import { Box, BoxProps, ScreenReaderOnly, styles } from '@sparkpost/matchbox';
 import { InvertColors } from '@sparkpost/matchbox-icons';
 import styled from 'styled-components';
 import css from '@styled-system/css';
@@ -26,25 +26,31 @@ const StyledList = styled.ul`
   })}
 `;
 
-const StyledHomeLink = styled(Box)`
+const StyledHomeLink = styled(Box)<BoxProps>`
   text-decoration: none;
   color: white;
-  transition: ${(props) => props.theme.motion.duration.fast};
+  transition: ${(props) => props.theme?.motion?.duration.fast};
 
   &,
   &:visited {
     color: white;
     &:hover {
       color: white;
-      background: ${(props) => props.theme.colors.scheme.heavyAccent};
+      background: ${(props) => props.theme?.colors?.scheme.heavyAccent};
     }
   }
 `;
 
+function getSpace(theme: any, k: string) {
+  if (theme.space && theme.space[k]) {
+    return theme.space[k];
+  }
+}
+
 const SchemeButton = styled.button`
   ${styles.buttonReset}
   cursor: pointer;
-  padding: ${(props) => props.theme.space[400]} ${(props) => props.theme.space[300]};
+  padding: ${({ theme }) => getSpace(theme, '400')} ${({ theme }) => getSpace(theme, '300')};
 `;
 
 const Header: React.FC<HeaderProps> = (props: HeaderProps) => {

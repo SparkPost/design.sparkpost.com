@@ -1,10 +1,10 @@
 import React from 'react';
-import { Box } from '@sparkpost/matchbox';
+import { Box, BoxProps } from '@sparkpost/matchbox';
 import { PortableText } from '@lib/sanity';
 import styled from 'styled-components';
 import css from '@styled-system/css';
 
-const StyledWrapper = styled(Box)`
+const StyledWrapper = styled(Box)<BoxProps>`
   ${css({
     border: 'thick',
     borderColor: 'scheme.lightFg',

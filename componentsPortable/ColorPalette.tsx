@@ -27,7 +27,7 @@ const activeStyles = {
   zIndex: 10
 };
 
-const StyledColor = styled.button`
+const StyledColor = styled.button<{ $color?: any; $active: boolean }>`
   ${styles.buttonReset}
   cursor: pointer;
   left: 0;
@@ -39,7 +39,7 @@ const StyledColor = styled.button`
     css({
       width: 'calc(100%)',
       height: '3em',
-      backgroundColor: props.color.value,
+      backgroundColor: props.$color.value,
       border: 'thick',
       mt: '-2px'
     })}
@@ -54,7 +54,7 @@ const StyledColor = styled.button`
   }
 
   ${(props) =>
-    props.active &&
+    props.$active &&
     css({
       ...activeStyles,
       '&:hover': {
@@ -202,8 +202,8 @@ function ColorPalette(props: ColorProps): JSX.Element {
               return (
                 <Box key={color.name}>
                   <StyledColor
-                    color={color}
-                    active={color.value === activeColor?.value}
+                    $color={color}
+                    $active={color.value === activeColor?.value}
                     onClick={() => setColor(color)}
                   >
                     <Box color={c.lightness() >= 50 ? 'gray.1000' : 'white'}>

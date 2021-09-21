@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 import React from 'react';
 import { Box } from '@sparkpost/matchbox';
 import { Link as LinkIcon } from '@sparkpost/matchbox-icons';
@@ -61,6 +62,7 @@ export function Header(props: HeaderProps): JSX.Element {
 
   const path = router.asPath.split('#')[0];
   return (
+    // @ts-ignore
     <Box as={`h${level}`} mb={mb} pt="300" fontSize={size} id={toKebab(children[0])}>
       {!props.disableLinks ? (
         <StyledLink href={`${path}#${toKebab(children[0])}`}>

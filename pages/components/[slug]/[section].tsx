@@ -13,7 +13,7 @@ import css from '@styled-system/css';
 import useSeo from '@hooks/useSeo';
 import { PageTransition } from '@components/pageTransition';
 
-const Tab = styled.a`
+const Tab = styled.a<{ $isActive?: boolean }>`
   display: inline-flex;
   align-items: center;
   text-decoration: none;
@@ -33,8 +33,8 @@ const Tab = styled.a`
     })}
   }
 
-  ${({ isActive, theme }) => {
-    if (isActive) {
+  ${({ $isActive, theme }) => {
+    if ($isActive) {
       return `
       background: ${theme.colors.scheme.lightAccent};
       `;
@@ -86,17 +86,17 @@ const Page = ({ data, slug, preview }) => {
               textAlign="left"
             >
               <Link href={`${basePath}/api`} replace={true}>
-                <Tab isActive={pathWithoutHash === `${basePath}/api`}>API</Tab>
+                <Tab $isActive={pathWithoutHash === `${basePath}/api`}>API</Tab>
               </Link>
 
               {pageData.usage && (
                 <Link href={`${basePath}/usage`} replace={true}>
-                  <Tab isActive={pathWithoutHash === `${basePath}/usage`}>Usage</Tab>
+                  <Tab $isActive={pathWithoutHash === `${basePath}/usage`}>Usage</Tab>
                 </Link>
               )}
               {pageData.style && (
                 <Link href={`${basePath}/style`} replace={true}>
-                  <Tab isActive={pathWithoutHash === `${basePath}/style`}>Style</Tab>
+                  <Tab $isActive={pathWithoutHash === `${basePath}/style`}>Style</Tab>
                 </Link>
               )}
             </Box>
