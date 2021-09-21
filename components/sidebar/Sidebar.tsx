@@ -32,7 +32,7 @@ const Ul = styled.ul`
   padding: 0;
 `;
 
-const StyledLink = styled.a`
+const StyledLink = styled.a<{ isActive?: boolean }>`
   text-decoration: none;
   display: block;
   ${css({

@@ -63,9 +63,9 @@ export default connectSearchBox(({ refine, currentRefinement, onFocus, hasFocus 
         type="text"
         autoComplete="off"
         aria-autocomplete="both"
-        autocorrect="off"
-        autocapitalize="off"
-        spellcheck="false"
+        autoCorrect="off"
+        autoCapitalize="off"
+        spellCheck="false"
         placeholder="Search"
         aria-label="Search"
         onChange={(e) => refine(e.target.value)}
