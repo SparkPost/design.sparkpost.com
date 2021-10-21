@@ -7,9 +7,13 @@
   "author": "Logan Sparlin <logan.sparlin@sparkpost.com>",
   "license": "UNLICENSED",
   "scripts": {
+    "preinstall": "npx npm-force-resolutions",
     "start": "./node_modules/.bin/sanity start",
     "build": "./node_modules/.bin/sanity build",
     "deploy": "./node_modules/.bin/sanity deploy"
+  },
+  "resolutions": {
+    "set-value": "^4.1.0"
   },
   "keywords": [
     "sanity"
@@ -43,6 +47,7 @@
     "is-svg": "^4.2.2",
     "mem": "^4.0.0",
     "rxjs": "^6.6.7",
+    "set-value": "^4.1.0",
     "slugify": "^1.5.0",
     "yargs-parser": "^13.1.2"
   },
