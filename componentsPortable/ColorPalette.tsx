@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Box, styles } from '@sparkpost/matchbox';
-import { meta, tokens } from '@sparkpost/design-tokens';
+import { meta, tokens, Meta } from '@sparkpost/design-tokens';
 import Color from 'color'; //eslint-disable-line
 import styled from 'styled-components';
 import css from '@styled-system/css';
@@ -13,12 +13,7 @@ type ColorProps = {
   };
 };
 
-type DetailProps = {
-  value: string;
-  css: string;
-  scss: string;
-  javascript: string;
-};
+type DetailProps = Meta;
 
 const activeStyles = {
   width: ['calc(100% + 16px)', null, 'calc(100% + 30px)'],
