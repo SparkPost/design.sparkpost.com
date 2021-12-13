@@ -7,29 +7,25 @@
   "author": "Logan Sparlin <logan.sparlin@sparkpost.com>",
   "license": "UNLICENSED",
   "scripts": {
-    "preinstall": "npx npm-force-resolutions",
     "start": "./node_modules/.bin/sanity start",
     "build": "./node_modules/.bin/sanity build",
     "deploy": "./node_modules/.bin/sanity deploy"
-  },
-  "resolutions": {
-    "set-value": "^4.1.0"
   },
   "keywords": [
     "sanity"
   ],
   "dependencies": {
-    "@sanity/base": "^2.21.6",
-    "@sanity/code-input": "^2.21.6",
+    "@sanity/base": "^2.23.0",
+    "@sanity/code-input": "^2.23.0",
     "@sanity/components": "^2.14.0",
-    "@sanity/core": "^2.21.6",
-    "@sanity/dashboard": "^2.21.6",
-    "@sanity/default-layout": "^2.21.6",
-    "@sanity/default-login": "^2.21.6",
-    "@sanity/desk-tool": "^2.21.6",
+    "@sanity/core": "^2.23.0",
+    "@sanity/dashboard": "^2.23.0",
+    "@sanity/default-layout": "^2.23.0",
+    "@sanity/default-login": "^2.23.0",
+    "@sanity/desk-tool": "^2.23.0",
     "@sanity/production-preview": "^2.15.0",
-    "@sanity/react-hooks": "^2.21.6",
-    "@sanity/vision": "^2.21.6",
+    "@sanity/react-hooks": "^2.23.0",
+    "@sanity/vision": "^2.23.0",
     "@sparkpost/design-tokens": "^5.1.5",
     "prop-types": "^15.7",
     "react": "^17.0",
@@ -40,14 +36,13 @@
     "styled-components": "^5.3.1"
   },
   "devDependencies": {
-    "@sanity/cli": "^2.21.6",
+    "@sanity/cli": "^2.23.0",
     "@sparkpost/matchbox-icons": "^5.1.2",
     "@sweatpants/box": "0.0.5",
     "immer": "^9.0.6",
     "is-svg": "^4.2.2",
     "mem": "^4.0.0",
     "rxjs": "^6.6.7",
-    "set-value": "^4.1.0",
     "slugify": "^1.5.0",
     "yargs-parser": "^13.1.2"
   },
