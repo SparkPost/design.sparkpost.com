@@ -164,7 +164,7 @@ export const getPageSlug = groq`
 `;
 
 export async function getPage(slug: string, type: IndexTypes, preview: boolean) {
-  const listOrder = type === 'update' ? 'created_at desc' : 'title asc';
+  const listOrder = type === 'update' ? 'updated_at desc' : 'title asc';
   const query = groq`
         *[_type in ${PAGE_TYPES} && slug.current match '${slug}'][0] {
             ${site},
@@ -199,7 +199,7 @@ export async function getPage(slug: string, type: IndexTypes, preview: boolean) 
               title,
               "slug": slug.current,
               subcategory,
-              "created_at": _createdAt
+              "updated_at": _updatedAt
             } | order(${listOrder}),
         }
     `;
