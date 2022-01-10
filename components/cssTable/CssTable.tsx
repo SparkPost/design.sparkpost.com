@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Table } from '@sparkpost/matchbox';
 import { Box } from '@sparkpost/matchbox';
+import { CopyButton } from '@components/copyButton';
 import styled from 'styled-components';
 import css from '@styled-system/css';
 // eslint-disable-next-line @typescript-eslint/no-var-requires
@@ -75,7 +76,9 @@ function CssTable(): JSX.Element {
                     {className}
                   </Box>
                 </Table.Cell>
-                <Table.Cell>{value.replace(':', ': ')}</Table.Cell>
+                <Table.Cell>
+                  <CopyButton>{value.replace(':', ': ')}</CopyButton>
+                </Table.Cell>
               </Table.Row>
             );
           })}
