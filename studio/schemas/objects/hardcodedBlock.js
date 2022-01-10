@@ -18,7 +18,8 @@ export default {
           { title: 'Spacing Token Table', value: 'spacing-token-table' },
           { title: 'Elevation Token Table', value: 'elevation-token-table' },
           { title: 'Typography Token Table', value: 'typography-token-table' },
-          { title: 'Icon Reference List', value: 'icon-reference-list' }
+          { title: 'Icon Reference List', value: 'icon-reference-list' },
+          { title: 'Matchbox CSS Class List', value: 'matchbox-css-class-list' }
         ]
       }
     }

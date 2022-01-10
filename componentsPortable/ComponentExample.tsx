@@ -45,11 +45,13 @@ function ComponentExample(props: ComponentExampleProps): JSX.Element {
   return (
     <Box mb="600">
       <Header level="4">{name}</Header>
-      <Box mb="400">
-        <NegateParagraphMargins>
-          <PortableText blocks={description} />
-        </NegateParagraphMargins>
-      </Box>
+      {description && (
+        <Box mb="400">
+          <NegateParagraphMargins>
+            <PortableText blocks={description} />
+          </NegateParagraphMargins>
+        </Box>
+      )}
       <Box>
         {/* Components need to come after Icons here because of conflicting component and icon names */}
         <LiveProvider code={code.code} scope={{ ...Icons, ...Components, DateUtils }}>
@@ -95,6 +97,10 @@ function ComponentExample(props: ComponentExampleProps): JSX.Element {
                   return (
                     <ThemeProvider target={document.head}>
                       <link href="/assets/critical.css" rel="stylesheet" />
+                      <link
+                        href="https://www.unpkg.com/@sparkpost/matchbox-css@7.0.1/dist/index.css/index.css"
+                        rel="stylesheet"
+                      />
                       <Box p="500">
                         <LivePreview />
                       </Box>
