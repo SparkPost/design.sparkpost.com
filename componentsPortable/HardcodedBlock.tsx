@@ -4,6 +4,7 @@ import { SpacingTokenTable } from '@components/spacingTokenTable';
 import { ElevationTokenTable } from '@components/elevationTokenTable';
 import { TypographyTokenTable } from '@components/typographyTokenTable';
 import { IconReferenceList } from '@components/iconReferenceList';
+import { CssTable } from '@components/cssTable';
 
 type HardcodedBlockProps = {
   node: {
@@ -28,6 +29,8 @@ function HardcodedBlock(props: HardcodedBlockProps): JSX.Element {
       return <TypographyTokenTable />;
     case 'icon-reference-list':
       return <IconReferenceList />;
+    case 'matchbox-css-class-list':
+      return <CssTable />;
     default:
       return <div>ERROR: No component found for "{node.id}"</div>;
   }

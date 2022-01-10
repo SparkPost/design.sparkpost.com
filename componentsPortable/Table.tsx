@@ -58,7 +58,7 @@ function Table(props: TableProps): JSX.Element {
     <StyledWrapper as="div" mb="600">
       <StyledTable width="100%" cellPadding="0">
         <tbody>
-          {node.rows.map((row, i) => {
+          {node.rows?.map((row, i) => {
             return (
               <Box as="tr" key={i}>
                 {row.cells.map((cell, index) => {
