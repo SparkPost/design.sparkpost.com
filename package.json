@@ -37,9 +37,9 @@
   "dependencies": {
     "@sanity/client": "^2.8.0",
     "@sparkpost/design-tokens": "^7.1.0",
-    "@sparkpost/matchbox": "^7.1.0",
+    "@sparkpost/matchbox": "^7.2.0",
     "@sparkpost/matchbox-css": "^7.0.1",
-    "@sparkpost/matchbox-icons": "^7.1.0",
+    "@sparkpost/matchbox-icons": "^7.1.4",
     "@sparkpost/matchbox-media": "^7.0.1",
     "@styled-system/css": "^5.1.5",
     "algoliasearch": "^4.9.1",
