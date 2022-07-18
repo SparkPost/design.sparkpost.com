@@ -9,7 +9,7 @@ export type MenuItems = {
   slug: string;
 };
 
-const StyledNavLink = styled(Box)<BoxProps>`
+const StyledNavLink = styled(Box)<BoxProps & { $isActive?: boolean }>`
   display: inline-block;
   margin-top: -2px;
   margin-bottom: -2px;
@@ -33,8 +33,8 @@ const StyledNavLink = styled(Box)<BoxProps>`
     }
   })}
 
-  ${({ isActive, theme }) => {
-    if (isActive) {
+  ${({ $isActive, theme }) => {
+    if ($isActive) {
       return `
         background: ${theme.colors.scheme.lightAccent};
         border: ${theme.borders.thick};
@@ -56,7 +56,7 @@ const ListItem: React.FC<MenuItems> = (props: MenuItems) => {
           py="450"
           fontSize={['400', null, null, null, '200']}
           fontWeight="500"
-          isActive={router.asPath.includes(slug)}
+          $isActive={router.asPath.includes(slug)}
         >
           {title}
         </StyledNavLink>

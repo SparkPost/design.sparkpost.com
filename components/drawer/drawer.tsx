@@ -106,7 +106,7 @@ function Drawer(props): JSX.Element {
       <Portal>
         <Box
           position="fixed"
-          tabIndex="-1"
+          tabIndex={-1}
           width="100vw"
           height="100vh"
           top="0"

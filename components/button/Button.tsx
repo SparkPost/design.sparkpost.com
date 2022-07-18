@@ -3,7 +3,7 @@ import { Box, BoxProps, styles } from '@sparkpost/matchbox';
 import styled from 'styled-components';
 import css from '@styled-system/css';
 
-const StyledButton = styled(Box)<BoxProps>`
+const StyledButton = styled(Box)<BoxProps & { $isActive?: boolean }>`
   ${styles.buttonReset}
   ${css({
     border: 'thick',
@@ -19,8 +19,8 @@ const StyledButton = styled(Box)<BoxProps>`
     })}
   }
 
-  ${({ isActive }) => {
-    if (isActive) {
+  ${({ $isActive }) => {
+    if ($isActive) {
       return css({
         bg: 'scheme.lightAccent',
         color: 'scheme.heavyAccent',
@@ -41,7 +41,7 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
 function Button(props: ButtonProps): JSX.Element {
   const { children, active, ...rest } = props;
   return (
-    <StyledButton as="button" type="button" {...rest} isActive={active}>
+    <StyledButton as="button" type="button" {...rest} $isActive={active}>
       {children}
     </StyledButton>
   );

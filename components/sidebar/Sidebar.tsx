@@ -142,7 +142,7 @@ function Sidebar(props: SidebarProps): JSX.Element {
           position="sticky"
           top="0"
           maxHeight="100vh"
-          zindex="10"
+          zIndex={10}
         >
           <SidebarList enabled={enabled} items={items} root={root} />
         </Box>

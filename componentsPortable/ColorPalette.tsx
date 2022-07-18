@@ -158,7 +158,7 @@ function ColorValue({ label, value }) {
       display="flex"
       justifyContent="space-between"
       pb="200"
-      flexWarap="wrap"
+      flexWrap="wrap"
       flexDirection={['column', null, 'row']}
       alignItems={['flex-start', null, '']}
     >
