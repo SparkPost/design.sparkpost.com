@@ -1,0 +1,141 @@
+
+  <!DOCTYPE html>
+  <html>
+    <head>
+      <title>ComponentExample.tsx</title>
+      <link href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css" type="text/css" rel="stylesheet">
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.58.2/codemirror.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.58.2/mode/javascript/javascript.min.js" type="text/javascript" charset="utf-8"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.58.2/codemirror.min.css" type="text/css" rel="stylesheet">
+<script src="../../assets/source-file.js" type="text/javascript" charset="utf-8"></script>
+<link href="../../assets/source-file.css" type="text/css" rel="stylesheet">
+    </head>
+    <body>
+    <div style="margin-top:3em" class="ui container"><h1 class="ui header"><a href="../../index.html">TypeScript coverage report</a></h1><table style="margin-top:2em" class="ui celled table"><thead class=""><tr class=""><th class="">Filename</th><th class="">Percent</th><th class="">Threshold</th><th class="">Total</th><th class="">Covered</th><th class="">Uncovered</th></tr></thead><tbody class=""><tr class="positive"><td class="">componentsPortable/ComponentExample.tsx</td><td class="">97.74%</td><td class="">80%</td><td class="">133</td><td class="">130</td><td class="">3</td></tr></tbody></table><textarea id="editor" readonly="" style="margin-top:3em">import React from &#x27;react&#x27;;
+import * as Components from &#x27;@sparkpost/matchbox&#x27;;
+import * as Icons from &#x27;@sparkpost/matchbox-icons&#x27;;
+import { PortableText } from &#x27;@lib/sanity&#x27;;
+import CodeBlock from &#x27;./CodeBlock&#x27;;
+import { LiveProvider, LivePreview, LiveError } from &#x27;react-live&#x27;;
+import { DateUtils } from &#x27;react-day-picker&#x27;;
+import Frame, { FrameContextConsumer } from &#x27;react-frame-component&#x27;;
+import styled from &#x27;styled-components&#x27;;
+import { Header } from &#x27;./Block&#x27;;
+
+const Box = Components.Box;
+const ThemeProvider = Components.ThemeProvider;
+
+const NegateParagraphMargins = styled(Box)`
+  p {
+    margin-bottom: 0;
+  }
+`;
+
+type ComponentExampleProps = {
+  node: {
+    name: string;
+    description?: object[];
+    disableIframe?: boolean;
+    code: {
+      code: string;
+      language: string;
+    };
+  };
+};
+
+// For some reason preview doesnt render on hard refresh of a page
+// But navigating away and back fixes it
+function ComponentExample(props: ComponentExampleProps): JSX.Element {
+  const { name, description, code, disableIframe } = props.node;
+  const [initialized, setInitialized] = React.useState(false);
+
+  React.useEffect(() =&gt; {
+    if (!initialized) {
+      setInitialized(true);
+    }
+  }, [initialized]);
+
+  return (
+    &lt;Box mb=&quot;600&quot;&gt;
+      &lt;Header level=&quot;4&quot;&gt;{name}&lt;/Header&gt;
+      {description &amp;&amp; (
+        &lt;Box mb=&quot;400&quot;&gt;
+          &lt;NegateParagraphMargins&gt;
+            &lt;PortableText blocks={description} /&gt;
+          &lt;/NegateParagraphMargins&gt;
+        &lt;/Box&gt;
+      )}
+      &lt;Box&gt;
+        {/* Components need to come after Icons here because of conflicting component and icon names */}
+        &lt;LiveProvider code={code.code} scope={{ ...Icons, ...Components, DateUtils }}&gt;
+          {disableIframe &amp;&amp; (
+            &lt;Box
+              display=&quot;block&quot;
+              border=&quot;thick&quot;
+              width=&quot;100%&quot;
+              borderRadius=&quot;rounded&quot;
+              borderBottomRightRadius=&quot;0&quot;
+              borderBottomLeftRadius=&quot;0&quot;
+              mb=&quot;-2px&quot;
+              height=&quot;300px&quot;
+              // BG should always be white because matchbox components dont look great in dark mode
+              bg=&quot;white&quot;
+            &gt;
+              &lt;Box p=&quot;500&quot;&gt;
+                &lt;LivePreview /&gt;
+              &lt;/Box&gt;
+            &lt;/Box&gt;
+          )}
+          {/*
+            Important
+            This is rendered in an iframe so that this sites
+            theme and styles do not conflict with previews
+          */}
+          {!disableIframe &amp;&amp; initialized &amp;&amp; (
+            &lt;Box
+              as={Frame}
+              display=&quot;block&quot;
+              border=&quot;thick&quot;
+              width=&quot;100%&quot;
+              borderRadius=&quot;rounded&quot;
+              borderBottomRightRadius=&quot;0&quot;
+              borderBottomLeftRadius=&quot;0&quot;
+              mb=&quot;-2px&quot;
+              height=&quot;300px&quot;
+              // BG should always be white because matchbox components dont look great in dark mode
+              bg=&quot;white&quot;
+            &gt;
+              &lt;FrameContextConsumer&gt;
+                {({ document }) =&gt; {
+                  return (
+                    &lt;ThemeProvider target={document.head}&gt;
+                      &lt;link href=&quot;/assets/critical.css&quot; rel=&quot;stylesheet&quot; /&gt;
+                      &lt;link
+                        href=&quot;https://www.unpkg.com/@sparkpost/matchbox-css@7.0.1/dist/index.css/index.css&quot;
+                        rel=&quot;stylesheet&quot;
+                      /&gt;
+                      &lt;Box p=&quot;500&quot;&gt;
+                        &lt;LivePreview /&gt;
+                      &lt;/Box&gt;
+                    &lt;/ThemeProvider&gt;
+                  );
+                }}
+              &lt;/FrameContextConsumer&gt;
+            &lt;/Box&gt;
+          )}
+          &lt;LiveError /&gt;
+        &lt;/LiveProvider&gt;
+      &lt;/Box&gt;
+      &lt;Box mt=&quot;-2px&quot;&gt;
+        &lt;CodeBlock node={code} connectWithTop /&gt;
+      &lt;/Box&gt;
+    &lt;/Box&gt;
+  );
+}
+
+export default ComponentExample;
+</textarea><pre id="annotations" style="display:none">[{&quot;file&quot;:&quot;componentsPortable/ComponentExample.tsx&quot;,&quot;line&quot;:95,&quot;character&quot;:20,&quot;text&quot;:&quot;document&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;componentsPortable/ComponentExample.tsx&quot;,&quot;line&quot;:97,&quot;character&quot;:43,&quot;text&quot;:&quot;document&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;componentsPortable/ComponentExample.tsx&quot;,&quot;line&quot;:97,&quot;character&quot;:52,&quot;text&quot;:&quot;head&quot;,&quot;kind&quot;:1}]</pre></div>
+    <p class="footer-text">TypeScript Coverage Report generated by <a href="https://github.com/plantain-00/type-coverage">type-coverage</a> and <a href="https://github.com/alexcanessa/typescript-coverage-report">typescript-coverage-report</a> at Thu, 11 Aug 2022 15:27:29 GMT</p>
+    </body>
+  </html>
+  

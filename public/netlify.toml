@@ -1,4 +1,9 @@
 [[redirects]]
+  from = "/studio"
+  to = "/studio/index.html"
+  status = 200
+
+[[redirects]]
   from = "/*"
   to = "/404"
   status = 404

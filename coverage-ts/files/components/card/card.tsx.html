@@ -1,0 +1,218 @@
+
+  <!DOCTYPE html>
+  <html>
+    <head>
+      <title>card.tsx</title>
+      <link href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css" type="text/css" rel="stylesheet">
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.58.2/codemirror.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.58.2/mode/javascript/javascript.min.js" type="text/javascript" charset="utf-8"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.58.2/codemirror.min.css" type="text/css" rel="stylesheet">
+<script src="../../../assets/source-file.js" type="text/javascript" charset="utf-8"></script>
+<link href="../../../assets/source-file.css" type="text/css" rel="stylesheet">
+    </head>
+    <body>
+    <div style="margin-top:3em" class="ui container"><h1 class="ui header"><a href="../../../index.html">TypeScript coverage report</a></h1><table style="margin-top:2em" class="ui celled table"><thead class=""><tr class=""><th class="">Filename</th><th class="">Percent</th><th class="">Threshold</th><th class="">Total</th><th class="">Covered</th><th class="">Uncovered</th></tr></thead><tbody class=""><tr class="positive"><td class="">components/card/card.tsx</td><td class="">91.19%</td><td class="">80%</td><td class="">193</td><td class="">176</td><td class="">17</td></tr></tbody></table><textarea id="editor" readonly="" style="margin-top:3em">import React from &#x27;react&#x27;;
+import Link from &#x27;next/link&#x27;;
+import { Box, BoxProps } from &#x27;@sparkpost/matchbox&#x27;;
+import { SimplePortableText } from &#x27;@lib/sanity&#x27;;
+import { ArrowForward } from &#x27;@sparkpost/matchbox-icons&#x27;;
+import styled from &#x27;styled-components&#x27;;
+import css from &#x27;@styled-system/css&#x27;;
+import { formatDate } from &#x27;@utils/date&#x27;;
+import { Category, categoryColors } from &#x27;@components/category&#x27;;
+
+// Turns block content into plain text
+function toPlainText(blocks = []) {
+  return (
+    blocks
+      // loop through each block
+      .map((block) =&gt; {
+        // if it&#x27;s not a text block with children or if it is a header,
+        // return nothing
+        if (block._type !== &#x27;block&#x27; || !block.children || /^h\d/.test(block.style)) {
+          return &#x27;&#x27;;
+        }
+        // loop through the children spans, and join the
+        // text strings
+        return block.children.map((child) =&gt; child.text).join(&#x27;&#x27;);
+      })
+      // join the paragraphs leaving split by two linebreaks
+      .join(&#x27;\n\n&#x27;)
+  );
+}
+
+// TODO: this is temporary, need to find a better way to scale cards
+function getRatio(span) {
+  if (span &gt; 5) {
+    return &#x27;25%&#x27;;
+  }
+
+  return [&#x27;40%&#x27;, null, &#x27;82%&#x27;, &#x27;60%&#x27;, &#x27;44%&#x27;];
+}
+
+const HoverBox = styled.div&lt;BoxProps &amp; { $index: number; $span: number; $url: string }&gt;`
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  transform: translate3d(0, 0, 0);
+  transition: transform 200ms ease-in-out, z-index 200ms linear;
+  z-index: 0;
+
+  ${({ $url, $index }) =&gt; {
+    return `
+      cursor: ${$url ? &#x27;pointer&#x27; : &#x27;&#x27;};
+      &amp;:hover {
+        transition: transform 200ms ease-in-out, z-index 200ms linear;
+        z-index: ${$url ? ($index === 0 ? 2 : 1) : 0};
+      }
+    `;
+  }};
+
+  ${({ $index, $span, $url }) =&gt;
+    css({
+      bg: &#x27;scheme.bg&#x27;,
+      p: [&#x27;300&#x27;, null, null, &#x27;400&#x27;, &#x27;600&#x27;],
+      border: &#x27;thick&#x27;,
+      &#x27;user-select&#x27;: [&#x27;none&#x27;, null, &#x27;inherit&#x27;],
+      &#x27;&amp;:hover, &amp;:active&#x27;: {
+        transform: [
+          `translate3d(0, 0, 0)`,
+          null,
+          $url
+            ? `translate3d(${($index * $span) % 12 === 0 ? &#x27;12px&#x27; : &#x27;-12px&#x27;}, -12px, 0)`
+            : &#x27;translate3d(0, 0, 0)&#x27;
+        ]
+      }
+    })}
+`;
+
+const BorderBox = styled(Box)&lt;BoxProps&gt;`
+  margin-top: -1px;
+  margin-left: -1px;
+  margin-bottom: -1px;
+  margin-right: -1px;
+  text-decoration: none;
+  display: block;
+
+  &amp;,
+  &amp;:visited,
+  &amp;:hover {
+    ${css({ color: &#x27;scheme.fg&#x27; })}
+  }
+  &amp;:focus {
+    outline: none;
+  }
+`;
+
+const NegateMargins = styled.div`
+  * {
+    margin-bottom: 0;
+    padding-top: 0;
+  }
+`;
+
+type CardProps = {
+  content?: Array&lt;any&gt;;
+  date?: string;
+  enableCategory?: boolean;
+  excerpt?: object[];
+  index?: number; // Used to animate to the right instead of left
+  span: number;
+  mobileSpan?: number;
+  subtitle?: string;
+  title?: string;
+  url: string;
+};
+
+const Card: React.FC&lt;CardProps&gt; = (props: CardProps) =&gt; {
+  const { url, span, mobileSpan, index, content, title, subtitle, enableCategory, date, excerpt } =
+    props;
+
+  const category = React.useMemo(() =&gt; {
+    if (!url) {
+      return &#x27;&#x27;;
+    }
+    return url.split(&#x27;/&#x27;)?.[1];
+  }, [url]);
+
+  const accentColor = React.useMemo(() =&gt; {
+    if (!url) {
+      return &#x27;scheme.heavyAccent&#x27;;
+    }
+
+    return categoryColors[category]?.bg || &#x27;scheme.heavyAccent&#x27;;
+  }, [category, url]);
+
+  const smallSpan = mobileSpan || &#x27;6&#x27;;
+
+  const card = (
+    &lt;BorderBox
+      gridColumn={[`span ${smallSpan}`, null, `span ${span}`]}
+      pb={getRatio(span)}
+      minHeight=&quot;12rem&quot;
+      position=&quot;relative&quot;
+      as={url ? &#x27;a&#x27; : &#x27;div&#x27;}
+    &gt;
+      &lt;Box
+        position=&quot;absolute&quot;
+        width=&quot;100%&quot;
+        height=&quot;100%&quot;
+        top=&quot;0&quot;
+        left=&quot;0&quot;
+        bg={accentColor}
+        border=&quot;thick&quot;
+      /&gt;
+      &lt;HoverBox $url={url} p={[&#x27;200&#x27;, null, &#x27;600&#x27;]} $index={index} $span={span}&gt;
+        {enableCategory &amp;&amp; url &amp;&amp; &lt;Category category={category} /&gt;}
+        {date &amp;&amp; (
+          &lt;Box fontSize=&quot;100&quot; mb=&quot;0&quot; lineHeight=&quot;100&quot;&gt;
+            {formatDate(date)}
+          &lt;/Box&gt;
+        )}
+        {title &amp;&amp; (
+          &lt;Box fontSize=&quot;300&quot; fontWeight=&quot;500&quot; mb=&quot;200&quot;&gt;
+            {title}
+          &lt;/Box&gt;
+        )}
+        {subtitle &amp;&amp; (
+          &lt;Box fontSize=&quot;200&quot; lineHeight=&quot;200&quot; mb=&quot;200&quot;&gt;
+            {subtitle}
+          &lt;/Box&gt;
+        )}
+        {excerpt &amp;&amp; (
+          &lt;Box fontSize=&quot;200&quot; lineHeight=&quot;200&quot; mb=&quot;200&quot;&gt;
+            {toPlainText(excerpt).substring(0, 180)}
+            {toPlainText(excerpt).substring(0, 180).length &gt; 179 ? &#x27;...&#x27; : &#x27;&#x27;}
+          &lt;/Box&gt;
+        )}
+        {content &amp;&amp; (
+          &lt;NegateMargins&gt;
+            &lt;SimplePortableText blocks={content} /&gt;
+          &lt;/NegateMargins&gt;
+        )}
+        {url &amp;&amp; (
+          &lt;Box mt=&quot;100&quot;&gt;
+            &lt;ArrowForward /&gt;
+          &lt;/Box&gt;
+        )}
+      &lt;/HoverBox&gt;
+    &lt;/BorderBox&gt;
+  );
+
+  return url ? (
+    &lt;Link href={url} passHref&gt;
+      {card}
+    &lt;/Link&gt;
+  ) : (
+    &lt;&gt;{card}&lt;/&gt;
+  );
+};
+
+export default Card;
+</textarea><pre id="annotations" style="display:none">[{&quot;file&quot;:&quot;components/card/card.tsx&quot;,&quot;line&quot;:15,&quot;character&quot;:12,&quot;text&quot;:&quot;block&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;components/card/card.tsx&quot;,&quot;line&quot;:18,&quot;character&quot;:12,&quot;text&quot;:&quot;block&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;components/card/card.tsx&quot;,&quot;line&quot;:18,&quot;character&quot;:18,&quot;text&quot;:&quot;_type&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;components/card/card.tsx&quot;,&quot;line&quot;:18,&quot;character&quot;:40,&quot;text&quot;:&quot;block&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;components/card/card.tsx&quot;,&quot;line&quot;:18,&quot;character&quot;:46,&quot;text&quot;:&quot;children&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;components/card/card.tsx&quot;,&quot;line&quot;:18,&quot;character&quot;:70,&quot;text&quot;:&quot;block&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;components/card/card.tsx&quot;,&quot;line&quot;:18,&quot;character&quot;:76,&quot;text&quot;:&quot;style&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;components/card/card.tsx&quot;,&quot;line&quot;:23,&quot;character&quot;:15,&quot;text&quot;:&quot;block&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;components/card/card.tsx&quot;,&quot;line&quot;:23,&quot;character&quot;:21,&quot;text&quot;:&quot;children&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;components/card/card.tsx&quot;,&quot;line&quot;:23,&quot;character&quot;:30,&quot;text&quot;:&quot;map&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;components/card/card.tsx&quot;,&quot;line&quot;:23,&quot;character&quot;:35,&quot;text&quot;:&quot;child&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;components/card/card.tsx&quot;,&quot;line&quot;:23,&quot;character&quot;:45,&quot;text&quot;:&quot;child&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;components/card/card.tsx&quot;,&quot;line&quot;:23,&quot;character&quot;:51,&quot;text&quot;:&quot;text&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;components/card/card.tsx&quot;,&quot;line&quot;:23,&quot;character&quot;:57,&quot;text&quot;:&quot;join&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;components/card/card.tsx&quot;,&quot;line&quot;:31,&quot;character&quot;:18,&quot;text&quot;:&quot;span&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;components/card/card.tsx&quot;,&quot;line&quot;:32,&quot;character&quot;:6,&quot;text&quot;:&quot;span&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;components/card/card.tsx&quot;,&quot;line&quot;:126,&quot;character&quot;:8,&quot;text&quot;:&quot;accentColor&quot;,&quot;kind&quot;:1}]</pre></div>
+    <p class="footer-text">TypeScript Coverage Report generated by <a href="https://github.com/plantain-00/type-coverage">type-coverage</a> and <a href="https://github.com/alexcanessa/typescript-coverage-report">typescript-coverage-report</a> at Thu, 11 Aug 2022 15:27:29 GMT</p>
+    </body>
+  </html>
+  

@@ -1,0 +1,147 @@
+
+  <!DOCTYPE html>
+  <html>
+    <head>
+      <title>header.tsx</title>
+      <link href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css" type="text/css" rel="stylesheet">
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.58.2/codemirror.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.58.2/mode/javascript/javascript.min.js" type="text/javascript" charset="utf-8"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.58.2/codemirror.min.css" type="text/css" rel="stylesheet">
+<script src="../../../assets/source-file.js" type="text/javascript" charset="utf-8"></script>
+<link href="../../../assets/source-file.css" type="text/css" rel="stylesheet">
+    </head>
+    <body>
+    <div style="margin-top:3em" class="ui container"><h1 class="ui header"><a href="../../../index.html">TypeScript coverage report</a></h1><table style="margin-top:2em" class="ui celled table"><thead class=""><tr class=""><th class="">Filename</th><th class="">Percent</th><th class="">Threshold</th><th class="">Total</th><th class="">Covered</th><th class="">Uncovered</th></tr></thead><tbody class=""><tr class="positive"><td class="">components/header/header.tsx</td><td class="">88.20%</td><td class="">80%</td><td class="">161</td><td class="">142</td><td class="">19</td></tr></tbody></table><textarea id="editor" readonly="" style="margin-top:3em">import React, { useState } from &#x27;react&#x27;;
+import { Box, BoxProps, ScreenReaderOnly, styles } from &#x27;@sparkpost/matchbox&#x27;;
+import { InvertColors } from &#x27;@sparkpost/matchbox-icons&#x27;;
+import styled from &#x27;styled-components&#x27;;
+import css from &#x27;@styled-system/css&#x27;;
+import Link from &#x27;next/link&#x27;;
+import { ColorSchemeContext } from &#x27;../../context/ColorSchemeContext&#x27;;
+import { Search } from &#x27;@components/search&#x27;;
+import { MenuIcon } from &#x27;@components/menuIcon&#x27;;
+import MobileMenu from &#x27;./mobileMenu&#x27;;
+import ListItem, { MenuItems } from &#x27;./listItem&#x27;;
+
+type HeaderProps = {
+  title: string;
+  items?: MenuItems[];
+};
+
+const StyledList = styled.ul`
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  flex: 1;
+
+  ${css({
+    display: [&#x27;none&#x27;, null, null, null, &#x27;block&#x27;]
+  })}
+`;
+
+const StyledHomeLink = styled(Box)&lt;BoxProps&gt;`
+  text-decoration: none;
+  color: white;
+  transition: ${(props) =&gt; props.theme?.motion?.duration.fast};
+
+  &amp;,
+  &amp;:visited {
+    color: white;
+    &amp;:hover {
+      color: white;
+      background: ${(props) =&gt; props.theme?.colors?.scheme.heavyAccent};
+    }
+  }
+`;
+
+function getSpace(theme: any, k: string) {
+  if (theme.space &amp;&amp; theme.space[k]) {
+    return theme.space[k];
+  }
+}
+
+const SchemeButton = styled.button`
+  ${styles.buttonReset}
+  cursor: pointer;
+  padding: ${({ theme }) =&gt; getSpace(theme, &#x27;400&#x27;)} ${({ theme }) =&gt; getSpace(theme, &#x27;300&#x27;)};
+`;
+
+const Header: React.FC&lt;HeaderProps&gt; = (props: HeaderProps) =&gt; {
+  const { title, items } = props;
+  const { toggle } = React.useContext(ColorSchemeContext);
+  const [isOpen, setIsOpen] = useState(false);
+
+  const toggleMenu = () =&gt; {
+    setIsOpen(!isOpen);
+  };
+
+  return (
+    &lt;&gt;
+      &lt;Box
+        as=&quot;header&quot;
+        border=&quot;thick&quot;
+        display=&quot;flex&quot;
+        alignItems=&quot;center&quot;
+        bg=&quot;scheme.bg&quot;
+        justifyContent=&quot;space-between&quot;
+        position={[&#x27;sticky&#x27;, null, null, null, &#x27;relative&#x27;]}
+        top=&quot;0&quot;
+        zIndex=&quot;100&quot;
+      &gt;
+        &lt;Link href=&quot;/&quot; passHref&gt;
+          &lt;StyledHomeLink
+            as=&quot;a&quot;
+            display=&quot;inline-block&quot;
+            height=&quot;100%&quot;
+            bg=&quot;gray.1000&quot;
+            fontSize=&quot;400&quot;
+            fontWeight=&quot;500&quot;
+            pr={[&#x27;400&#x27;, null, null, null, &#x27;100px&#x27;]}
+            pl=&quot;400&quot;
+            py=&quot;450&quot;
+            borderX=&quot;thick&quot;
+            ml=&quot;-2px&quot;
+          &gt;
+            {title}
+          &lt;/StyledHomeLink&gt;
+        &lt;/Link&gt;
+        &lt;StyledList&gt;
+          {items?.map((item, index) =&gt; {
+            return &lt;ListItem {...item} key={index} /&gt;;
+          })}
+        &lt;/StyledList&gt;
+        &lt;MobileMenu id=&quot;MainMenu&quot; isOpen={isOpen}&gt;
+          {items?.map((item, index) =&gt; {
+            return &lt;ListItem {...item} key={index} /&gt;;
+          })}
+        &lt;/MobileMenu&gt;
+        &lt;Box
+          display=&quot;flex&quot;
+          alignItems=&quot;center&quot;
+          justifyContent=&quot;flex-end&quot;
+          position=&quot;relative&quot;
+          height=&quot;100%&quot;
+        &gt;
+          &lt;SchemeButton onClick={toggle} type=&quot;button&quot;&gt;
+            &lt;ScreenReaderOnly&gt;Change Theme&lt;/ScreenReaderOnly&gt;
+            &lt;InvertColors /&gt;
+          &lt;/SchemeButton&gt;
+          &lt;MenuIcon aria-controls=&quot;MainMenu&quot; isOpen={isOpen} toggleMenu={toggleMenu} /&gt;
+          &lt;Box borderX=&quot;thick&quot; mr=&quot;-2px&quot; display={[&#x27;none&#x27;, null, &#x27;block&#x27;]}&gt;
+            &lt;Search /&gt;
+          &lt;/Box&gt;
+        &lt;/Box&gt;
+      &lt;/Box&gt;
+      &lt;Box borderX=&quot;thick&quot; borderBottom=&quot;thick&quot; display={[&#x27;block&#x27;, null, &#x27;none&#x27;]}&gt;
+        &lt;Search /&gt;
+      &lt;/Box&gt;
+    &lt;/&gt;
+  );
+};
+
+export default Header;
+</textarea><pre id="annotations" style="display:none">[{&quot;file&quot;:&quot;components/header/header.tsx&quot;,&quot;line&quot;:31,&quot;character&quot;:33,&quot;text&quot;:&quot;theme&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;components/header/header.tsx&quot;,&quot;line&quot;:31,&quot;character&quot;:40,&quot;text&quot;:&quot;motion&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;components/header/header.tsx&quot;,&quot;line&quot;:31,&quot;character&quot;:48,&quot;text&quot;:&quot;duration&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;components/header/header.tsx&quot;,&quot;line&quot;:31,&quot;character&quot;:57,&quot;text&quot;:&quot;fast&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;components/header/header.tsx&quot;,&quot;line&quot;:38,&quot;character&quot;:37,&quot;text&quot;:&quot;theme&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;components/header/header.tsx&quot;,&quot;line&quot;:38,&quot;character&quot;:44,&quot;text&quot;:&quot;colors&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;components/header/header.tsx&quot;,&quot;line&quot;:38,&quot;character&quot;:52,&quot;text&quot;:&quot;scheme&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;components/header/header.tsx&quot;,&quot;line&quot;:38,&quot;character&quot;:59,&quot;text&quot;:&quot;heavyAccent&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;components/header/header.tsx&quot;,&quot;line&quot;:43,&quot;character&quot;:18,&quot;text&quot;:&quot;theme&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;components/header/header.tsx&quot;,&quot;line&quot;:44,&quot;character&quot;:6,&quot;text&quot;:&quot;theme&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;components/header/header.tsx&quot;,&quot;line&quot;:44,&quot;character&quot;:12,&quot;text&quot;:&quot;space&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;components/header/header.tsx&quot;,&quot;line&quot;:44,&quot;character&quot;:21,&quot;text&quot;:&quot;theme&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;components/header/header.tsx&quot;,&quot;line&quot;:44,&quot;character&quot;:27,&quot;text&quot;:&quot;space&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;components/header/header.tsx&quot;,&quot;line&quot;:45,&quot;character&quot;:11,&quot;text&quot;:&quot;theme&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;components/header/header.tsx&quot;,&quot;line&quot;:45,&quot;character&quot;:17,&quot;text&quot;:&quot;space&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;components/header/header.tsx&quot;,&quot;line&quot;:52,&quot;character&quot;:16,&quot;text&quot;:&quot;theme&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;components/header/header.tsx&quot;,&quot;line&quot;:52,&quot;character&quot;:37,&quot;text&quot;:&quot;theme&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;components/header/header.tsx&quot;,&quot;line&quot;:52,&quot;character&quot;:57,&quot;text&quot;:&quot;theme&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;components/header/header.tsx&quot;,&quot;line&quot;:52,&quot;character&quot;:78,&quot;text&quot;:&quot;theme&quot;,&quot;kind&quot;:1}]</pre></div>
+    <p class="footer-text">TypeScript Coverage Report generated by <a href="https://github.com/plantain-00/type-coverage">type-coverage</a> and <a href="https://github.com/alexcanessa/typescript-coverage-report">typescript-coverage-report</a> at Thu, 11 Aug 2022 15:27:29 GMT</p>
+    </body>
+  </html>
+  

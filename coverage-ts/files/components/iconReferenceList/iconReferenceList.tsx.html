@@ -1,0 +1,112 @@
+
+  <!DOCTYPE html>
+  <html>
+    <head>
+      <title>iconReferenceList.tsx</title>
+      <link href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css" type="text/css" rel="stylesheet">
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.58.2/codemirror.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.58.2/mode/javascript/javascript.min.js" type="text/javascript" charset="utf-8"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.58.2/codemirror.min.css" type="text/css" rel="stylesheet">
+<script src="../../../assets/source-file.js" type="text/javascript" charset="utf-8"></script>
+<link href="../../../assets/source-file.css" type="text/css" rel="stylesheet">
+    </head>
+    <body>
+    <div style="margin-top:3em" class="ui container"><h1 class="ui header"><a href="../../../index.html">TypeScript coverage report</a></h1><table style="margin-top:2em" class="ui celled table"><thead class=""><tr class=""><th class="">Filename</th><th class="">Percent</th><th class="">Threshold</th><th class="">Total</th><th class="">Covered</th><th class="">Uncovered</th></tr></thead><tbody class=""><tr class="positive"><td class="">components/iconReferenceList/iconReferenceList.tsx</td><td class="">84.30%</td><td class="">80%</td><td class="">121</td><td class="">102</td><td class="">19</td></tr></tbody></table><textarea id="editor" readonly="" style="margin-top:3em">import { useState } from &#x27;react&#x27;;
+import { Box, useCopyToClipboard, styles, TextField } from &#x27;@sparkpost/matchbox&#x27;;
+import { Search } from &#x27;@sparkpost/matchbox-icons&#x27;;
+import * as icons from &#x27;@sparkpost/matchbox-icons&#x27;;
+import styled from &#x27;styled-components&#x27;;
+import css from &#x27;@styled-system/css&#x27;;
+
+const StyledCopyButton = styled.button&lt;{ fontSize?: string }&gt;`
+  ${styles.buttonReset}
+  cursor: pointer;
+  display: block;
+
+  ${({ fontSize }) =&gt;
+    css({
+      fontSize,
+      fontFamily: &#x27;monospace&#x27;,
+      pt: &#x27;400&#x27;
+    })}
+
+  &amp;:hover {
+    ${css({
+      color: &#x27;scheme.heavyAccent&#x27;
+    })}
+  }
+`;
+
+const StyledTextField = styled(TextField)`
+  border: none;
+  outline: none;
+`;
+
+function IconItem(props) {
+  const { key, icon } = props;
+  const { copy, copied } = useCopyToClipboard();
+  const Icon = icons[icon];
+  return (
+    &lt;Box
+      key={key}
+      gridColumn=&quot;span 1&quot;
+      borderBottom=&quot;thick&quot;
+      borderRight=&quot;thick&quot;
+      width=&quot;calc(100% / 4)&quot;
+      display=&quot;flex&quot;
+      alignItems=&quot;center&quot;
+      justifyContent=&quot;center&quot;
+      py=&quot;600&quot;
+    &gt;
+      &lt;Box textAlign=&quot;center&quot;&gt;
+        &lt;Icon size={40} /&gt;
+        &lt;StyledCopyButton fontSize=&quot;50&quot; onClick={() =&gt; copy(`&lt;${icon} /&gt;`)}&gt;
+          {copied ? &#x27;Copied&#x27; : `&lt;${icon} /&gt;`}
+        &lt;/StyledCopyButton&gt;
+      &lt;/Box&gt;
+    &lt;/Box&gt;
+  );
+}
+
+function IconList({ items }) {
+  return items.map((icon, i) =&gt; {
+    return &lt;IconItem key={i} icon={icon} /&gt;;
+  });
+}
+
+function IconReferenceList() {
+  const [search, setSearch] = useState(&#x27;&#x27;);
+
+  const items = Object.keys(icons).filter((name) =&gt; {
+    return name.toLowerCase().includes(search.toLowerCase());
+  });
+
+  return (
+    &lt;Box width=&quot;100%&quot;&gt;
+      &lt;Box border=&quot;thick&quot; mb=&quot;500&quot;&gt;
+        &lt;StyledTextField
+          onChange={(e) =&gt; setSearch(e.currentTarget.value)}
+          id=&quot;icon-search&quot;
+          type=&quot;text&quot;
+          placeholder=&quot;Search all icons&quot;
+          suffix={&lt;Search size=&quot;24&quot; /&gt;}
+        /&gt;
+      &lt;/Box&gt;
+      &lt;Box display=&quot;flex&quot; flexWrap=&quot;wrap&quot; borderTop=&quot;thick&quot; borderLeft=&quot;thick&quot;&gt;
+        &lt;IconList items={items} /&gt;
+        {items.length &lt; 1 &amp;&amp; (
+          &lt;Box textAlign=&quot;center&quot; width=&quot;100%&quot; borderRight=&quot;thick&quot; borderBottom=&quot;thick&quot; p=&quot;400&quot;&gt;
+            No Icons Found
+          &lt;/Box&gt;
+        )}
+      &lt;/Box&gt;
+    &lt;/Box&gt;
+  );
+}
+
+export default IconReferenceList;
+</textarea><pre id="annotations" style="display:none">[{&quot;file&quot;:&quot;components/iconReferenceList/iconReferenceList.tsx&quot;,&quot;line&quot;:31,&quot;character&quot;:18,&quot;text&quot;:&quot;props&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;components/iconReferenceList/iconReferenceList.tsx&quot;,&quot;line&quot;:32,&quot;character&quot;:10,&quot;text&quot;:&quot;key&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;components/iconReferenceList/iconReferenceList.tsx&quot;,&quot;line&quot;:32,&quot;character&quot;:15,&quot;text&quot;:&quot;icon&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;components/iconReferenceList/iconReferenceList.tsx&quot;,&quot;line&quot;:34,&quot;character&quot;:21,&quot;text&quot;:&quot;icon&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;components/iconReferenceList/iconReferenceList.tsx&quot;,&quot;line&quot;:49,&quot;character&quot;:64,&quot;text&quot;:&quot;icon&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;components/iconReferenceList/iconReferenceList.tsx&quot;,&quot;line&quot;:50,&quot;character&quot;:35,&quot;text&quot;:&quot;icon&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;components/iconReferenceList/iconReferenceList.tsx&quot;,&quot;line&quot;:57,&quot;character&quot;:20,&quot;text&quot;:&quot;items&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;components/iconReferenceList/iconReferenceList.tsx&quot;,&quot;line&quot;:58,&quot;character&quot;:9,&quot;text&quot;:&quot;items&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;components/iconReferenceList/iconReferenceList.tsx&quot;,&quot;line&quot;:58,&quot;character&quot;:15,&quot;text&quot;:&quot;map&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;components/iconReferenceList/iconReferenceList.tsx&quot;,&quot;line&quot;:58,&quot;character&quot;:20,&quot;text&quot;:&quot;icon&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;components/iconReferenceList/iconReferenceList.tsx&quot;,&quot;line&quot;:58,&quot;character&quot;:26,&quot;text&quot;:&quot;i&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;components/iconReferenceList/iconReferenceList.tsx&quot;,&quot;line&quot;:59,&quot;character&quot;:21,&quot;text&quot;:&quot;key&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;components/iconReferenceList/iconReferenceList.tsx&quot;,&quot;line&quot;:59,&quot;character&quot;:26,&quot;text&quot;:&quot;i&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;components/iconReferenceList/iconReferenceList.tsx&quot;,&quot;line&quot;:59,&quot;character&quot;:29,&quot;text&quot;:&quot;icon&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;components/iconReferenceList/iconReferenceList.tsx&quot;,&quot;line&quot;:59,&quot;character&quot;:35,&quot;text&quot;:&quot;icon&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;components/iconReferenceList/iconReferenceList.tsx&quot;,&quot;line&quot;:74,&quot;character&quot;:21,&quot;text&quot;:&quot;e&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;components/iconReferenceList/iconReferenceList.tsx&quot;,&quot;line&quot;:74,&quot;character&quot;:37,&quot;text&quot;:&quot;e&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;components/iconReferenceList/iconReferenceList.tsx&quot;,&quot;line&quot;:74,&quot;character&quot;:39,&quot;text&quot;:&quot;currentTarget&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;components/iconReferenceList/iconReferenceList.tsx&quot;,&quot;line&quot;:74,&quot;character&quot;:53,&quot;text&quot;:&quot;value&quot;,&quot;kind&quot;:1}]</pre></div>
+    <p class="footer-text">TypeScript Coverage Report generated by <a href="https://github.com/plantain-00/type-coverage">type-coverage</a> and <a href="https://github.com/alexcanessa/typescript-coverage-report">typescript-coverage-report</a> at Thu, 11 Aug 2022 15:27:29 GMT</p>
+    </body>
+  </html>
+  

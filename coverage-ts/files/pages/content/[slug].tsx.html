@@ -1,0 +1,110 @@
+
+  <!DOCTYPE html>
+  <html>
+    <head>
+      <title>[slug].tsx</title>
+      <link href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css" type="text/css" rel="stylesheet">
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.58.2/codemirror.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.58.2/mode/javascript/javascript.min.js" type="text/javascript" charset="utf-8"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.58.2/codemirror.min.css" type="text/css" rel="stylesheet">
+<script src="../../../assets/source-file.js" type="text/javascript" charset="utf-8"></script>
+<link href="../../../assets/source-file.css" type="text/css" rel="stylesheet">
+    </head>
+    <body>
+    <div style="margin-top:3em" class="ui container"><h1 class="ui header"><a href="../../../index.html">TypeScript coverage report</a></h1><table style="margin-top:2em" class="ui celled table"><thead class=""><tr class=""><th class="">Filename</th><th class="">Percent</th><th class="">Threshold</th><th class="">Total</th><th class="">Covered</th><th class="">Uncovered</th></tr></thead><tbody class=""><tr class="negative"><td class="">pages/content/[slug].tsx</td><td class="">67.15%</td><td class="">80%</td><td class="">137</td><td class="">92</td><td class="">45</td></tr></tbody></table><textarea id="editor" readonly="" style="margin-top:3em">import { usePreviewSubscription, PortableText } from &#x27;@lib/sanity&#x27;;
+import { getPage, getPagesByType } from &#x27;@lib/api&#x27;;
+import { Header } from &#x27;@components/header&#x27;;
+import Footer from &#x27;@components/footer&#x27;;
+import PageHero from &#x27;@components/pageHero&#x27;;
+import { Sidebar } from &#x27;@components/sidebar&#x27;;
+import { SEO } from &#x27;@components/seo&#x27;;
+import { Box } from &#x27;@sparkpost/matchbox&#x27;;
+import useSeo from &#x27;@hooks/useSeo&#x27;;
+import { PageTransition } from &#x27;@components/pageTransition&#x27;;
+
+const Page = ({ data, slug, preview }) =&gt; {
+  const { data: pageData } = usePreviewSubscription(data?.query, {
+    params: { slug: slug },
+    initialData: data?.pageData,
+    enabled: preview
+  });
+
+  const { site, title, subtitle, body, list, seo, updated_at } = pageData;
+
+  const { getSeoProps } = useSeo({
+    site: site?.seo,
+    page: seo,
+    pageTitle: title
+  });
+
+  if (!pageData) {
+    return &lt;div&gt;Error&lt;/div&gt;;
+  }
+
+  return (
+    &lt;div&gt;
+      &lt;SEO {...getSeoProps()} /&gt;
+      &lt;Header title=&quot;Matchbox&quot; items={site?.header?.menu?.items} /&gt;
+      &lt;Box display=&quot;grid&quot; gridTemplateColumns={[&#x27;1fr&#x27;, null, &#x27;197px 1fr&#x27;]}&gt;
+        &lt;Sidebar enabled items={list} activePage={title} root=&quot;Content&quot; /&gt;
+        &lt;PageTransition&gt;
+          &lt;div&gt;
+            &lt;PageHero title={title} subtitle={subtitle} updatedAt={updated_at} enableCategory /&gt;
+            &lt;Box border=&quot;thick&quot;&gt;
+              &lt;Box
+                maxWidth=&quot;1200&quot;
+                width=&quot;100vw&quot;
+                ml={[&#x27;-2px&#x27;, null, &#x27;auto&#x27;]}
+                mr={[&#x27;-2px&#x27;, null, &#x27;auto&#x27;]}
+                py=&quot;800&quot;
+                px=&quot;400&quot;
+              &gt;
+                &lt;PortableText blocks={body || []} /&gt;
+              &lt;/Box&gt;
+            &lt;/Box&gt;
+          &lt;/div&gt;
+        &lt;/PageTransition&gt;
+      &lt;/Box&gt;
+
+      &lt;Footer items={site?.footer?.menu?.items} /&gt;
+    &lt;/div&gt;
+  );
+};
+
+export async function getStaticProps({ params, preview = false }) {
+  const { slug = &#x27;&#x27; } = params;
+
+  const { data: pageData, query } = await getPage(`content/${slug}`, &#x27;content&#x27;, preview);
+
+  return {
+    props: {
+      preview,
+      data: {
+        pageData,
+        query
+      },
+      slug
+    },
+    revalidate: 10
+  };
+}
+
+export async function getStaticPaths() {
+  const { data: pages } = await getPagesByType(&#x27;content&#x27;);
+
+  const paths = pages.map(({ slug }) =&gt; ({
+    params: { slug: slug.split(&#x27;/&#x27;).pop() }
+  }));
+
+  return {
+    paths,
+    fallback: false
+  };
+}
+
+export default Page;
+</textarea><pre id="annotations" style="display:none">[{&quot;file&quot;:&quot;pages/content/[slug].tsx&quot;,&quot;line&quot;:11,&quot;character&quot;:16,&quot;text&quot;:&quot;data&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;pages/content/[slug].tsx&quot;,&quot;line&quot;:11,&quot;character&quot;:22,&quot;text&quot;:&quot;slug&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;pages/content/[slug].tsx&quot;,&quot;line&quot;:11,&quot;character&quot;:28,&quot;text&quot;:&quot;preview&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;pages/content/[slug].tsx&quot;,&quot;line&quot;:12,&quot;character&quot;:16,&quot;text&quot;:&quot;pageData&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;pages/content/[slug].tsx&quot;,&quot;line&quot;:12,&quot;character&quot;:52,&quot;text&quot;:&quot;data&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;pages/content/[slug].tsx&quot;,&quot;line&quot;:12,&quot;character&quot;:58,&quot;text&quot;:&quot;query&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;pages/content/[slug].tsx&quot;,&quot;line&quot;:14,&quot;character&quot;:4,&quot;text&quot;:&quot;initialData&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;pages/content/[slug].tsx&quot;,&quot;line&quot;:14,&quot;character&quot;:17,&quot;text&quot;:&quot;data&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;pages/content/[slug].tsx&quot;,&quot;line&quot;:14,&quot;character&quot;:23,&quot;text&quot;:&quot;pageData&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;pages/content/[slug].tsx&quot;,&quot;line&quot;:18,&quot;character&quot;:10,&quot;text&quot;:&quot;site&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;pages/content/[slug].tsx&quot;,&quot;line&quot;:18,&quot;character&quot;:16,&quot;text&quot;:&quot;title&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;pages/content/[slug].tsx&quot;,&quot;line&quot;:18,&quot;character&quot;:23,&quot;text&quot;:&quot;subtitle&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;pages/content/[slug].tsx&quot;,&quot;line&quot;:18,&quot;character&quot;:33,&quot;text&quot;:&quot;body&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;pages/content/[slug].tsx&quot;,&quot;line&quot;:18,&quot;character&quot;:39,&quot;text&quot;:&quot;list&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;pages/content/[slug].tsx&quot;,&quot;line&quot;:18,&quot;character&quot;:45,&quot;text&quot;:&quot;seo&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;pages/content/[slug].tsx&quot;,&quot;line&quot;:18,&quot;character&quot;:50,&quot;text&quot;:&quot;updated_at&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;pages/content/[slug].tsx&quot;,&quot;line&quot;:21,&quot;character&quot;:10,&quot;text&quot;:&quot;site&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;pages/content/[slug].tsx&quot;,&quot;line&quot;:21,&quot;character&quot;:16,&quot;text&quot;:&quot;seo&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;pages/content/[slug].tsx&quot;,&quot;line&quot;:26,&quot;character&quot;:7,&quot;text&quot;:&quot;pageData&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;pages/content/[slug].tsx&quot;,&quot;line&quot;:33,&quot;character&quot;:38,&quot;text&quot;:&quot;site&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;pages/content/[slug].tsx&quot;,&quot;line&quot;:33,&quot;character&quot;:44,&quot;text&quot;:&quot;header&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;pages/content/[slug].tsx&quot;,&quot;line&quot;:33,&quot;character&quot;:52,&quot;text&quot;:&quot;menu&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;pages/content/[slug].tsx&quot;,&quot;line&quot;:33,&quot;character&quot;:58,&quot;text&quot;:&quot;items&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;pages/content/[slug].tsx&quot;,&quot;line&quot;:48,&quot;character&quot;:30,&quot;text&quot;:&quot;blocks&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;pages/content/[slug].tsx&quot;,&quot;line&quot;:48,&quot;character&quot;:38,&quot;text&quot;:&quot;body&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;pages/content/[slug].tsx&quot;,&quot;line&quot;:55,&quot;character&quot;:21,&quot;text&quot;:&quot;site&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;pages/content/[slug].tsx&quot;,&quot;line&quot;:55,&quot;character&quot;:27,&quot;text&quot;:&quot;footer&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;pages/content/[slug].tsx&quot;,&quot;line&quot;:55,&quot;character&quot;:35,&quot;text&quot;:&quot;menu&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;pages/content/[slug].tsx&quot;,&quot;line&quot;:55,&quot;character&quot;:41,&quot;text&quot;:&quot;items&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;pages/content/[slug].tsx&quot;,&quot;line&quot;:60,&quot;character&quot;:39,&quot;text&quot;:&quot;params&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;pages/content/[slug].tsx&quot;,&quot;line&quot;:61,&quot;character&quot;:10,&quot;text&quot;:&quot;slug&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;pages/content/[slug].tsx&quot;,&quot;line&quot;:63,&quot;character&quot;:16,&quot;text&quot;:&quot;pageData&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;pages/content/[slug].tsx&quot;,&quot;line&quot;:63,&quot;character&quot;:61,&quot;text&quot;:&quot;slug&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;pages/content/[slug].tsx&quot;,&quot;line&quot;:69,&quot;character&quot;:8,&quot;text&quot;:&quot;pageData&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;pages/content/[slug].tsx&quot;,&quot;line&quot;:72,&quot;character&quot;:6,&quot;text&quot;:&quot;slug&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;pages/content/[slug].tsx&quot;,&quot;line&quot;:79,&quot;character&quot;:16,&quot;text&quot;:&quot;pages&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;pages/content/[slug].tsx&quot;,&quot;line&quot;:81,&quot;character&quot;:8,&quot;text&quot;:&quot;paths&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;pages/content/[slug].tsx&quot;,&quot;line&quot;:81,&quot;character&quot;:16,&quot;text&quot;:&quot;pages&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;pages/content/[slug].tsx&quot;,&quot;line&quot;:81,&quot;character&quot;:22,&quot;text&quot;:&quot;map&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;pages/content/[slug].tsx&quot;,&quot;line&quot;:81,&quot;character&quot;:29,&quot;text&quot;:&quot;slug&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;pages/content/[slug].tsx&quot;,&quot;line&quot;:82,&quot;character&quot;:14,&quot;text&quot;:&quot;slug&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;pages/content/[slug].tsx&quot;,&quot;line&quot;:82,&quot;character&quot;:20,&quot;text&quot;:&quot;slug&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;pages/content/[slug].tsx&quot;,&quot;line&quot;:82,&quot;character&quot;:25,&quot;text&quot;:&quot;split&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;pages/content/[slug].tsx&quot;,&quot;line&quot;:82,&quot;character&quot;:36,&quot;text&quot;:&quot;pop&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;pages/content/[slug].tsx&quot;,&quot;line&quot;:86,&quot;character&quot;:4,&quot;text&quot;:&quot;paths&quot;,&quot;kind&quot;:1}]</pre></div>
+    <p class="footer-text">TypeScript Coverage Report generated by <a href="https://github.com/plantain-00/type-coverage">type-coverage</a> and <a href="https://github.com/alexcanessa/typescript-coverage-report">typescript-coverage-report</a> at Thu, 11 Aug 2022 15:27:29 GMT</p>
+    </body>
+  </html>
+  

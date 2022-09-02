@@ -1,0 +1,295 @@
+
+  <!DOCTYPE html>
+  <html>
+    <head>
+      <title>api.ts</title>
+      <link href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css" type="text/css" rel="stylesheet">
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.58.2/codemirror.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.58.2/mode/javascript/javascript.min.js" type="text/javascript" charset="utf-8"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.58.2/codemirror.min.css" type="text/css" rel="stylesheet">
+<script src="../../assets/source-file.js" type="text/javascript" charset="utf-8"></script>
+<link href="../../assets/source-file.css" type="text/css" rel="stylesheet">
+    </head>
+    <body>
+    <div style="margin-top:3em" class="ui container"><h1 class="ui header"><a href="../../index.html">TypeScript coverage report</a></h1><table style="margin-top:2em" class="ui celled table"><thead class=""><tr class=""><th class="">Filename</th><th class="">Percent</th><th class="">Threshold</th><th class="">Total</th><th class="">Covered</th><th class="">Uncovered</th></tr></thead><tbody class=""><tr class="positive"><td class="">lib/api.ts</td><td class="">89.22%</td><td class="">80%</td><td class="">102</td><td class="">91</td><td class="">11</td></tr></tbody></table><textarea id="editor" readonly="" style="margin-top:3em">import { groq } from &#x27;next-sanity&#x27;;
+import { getClient } from &#x27;@lib/sanity&#x27;;
+
+type IndexTypes =
+  | &#x27;foundation&#x27;
+  | &#x27;component&#x27;
+  | &#x27;content&#x27;
+  | &#x27;pattern&#x27;
+  | &#x27;brand&#x27;
+  | &#x27;resource&#x27;
+  | &#x27;update&#x27;;
+
+export const PAGE_TYPES = `[&#x27;page&#x27;, &#x27;foundation&#x27;, &#x27;component&#x27;, &#x27;content&#x27;, &#x27;pattern&#x27;, &#x27;brand&#x27;, &#x27;resource&#x27;, &#x27;update&#x27;]`;
+
+const fillMarkDefs = `
+markDefs[]{
+  ...,
+  _type == &quot;internalLink&quot; =&gt; {
+    &quot;slug&quot;: @.to-&gt;slug.current
+  }
+}
+`;
+
+export const modules = groq`
+  _type == &#x27;grid&#x27; =&gt; {
+    _type,
+    _key,
+    size,
+    columns[] {
+      span,
+      mobileSpan,
+      &quot;slug&quot;: link-&gt;slug.current,
+      content[] {
+        ...,
+        ${fillMarkDefs}
+      },
+      enableCategoryLabel
+    }
+  }
+`;
+
+const header = groq`
+  &quot;header&quot;: *[_type == &quot;headerSettings&quot;][0] {
+    &quot;menu&quot;: headerMenu -&gt; {
+      items[] {
+        title,
+        &quot;slug&quot;: page-&gt;slug.current,
+      }
+    }
+  }
+`;
+
+const footer = groq`
+  &quot;footer&quot;: *[_type == &quot;footerSettings&quot;][0] {
+    &quot;menu&quot;: footerMenu -&gt; {
+      items[]{
+        title,
+        &quot;slug&quot;: url
+      }
+    }
+  }
+`;
+
+const seo = groq`
+  &quot;seo&quot;: *[_type == &quot;seoSettings&quot;][0] {
+    metaTitle,
+    metaDescription,
+    metaKeywords,
+    metaImage,
+    favicon
+  }
+`;
+
+const site = groq`
+  &quot;site&quot;: {
+    ${seo},
+    ${header},
+    ${footer},
+  }
+`;
+
+const fillPropComponentLinks = `
+_type == &quot;prop&quot; =&gt; {
+  ...,
+  description[] {
+    ...,
+   ${fillMarkDefs} 
+  }
+}
+`;
+
+const fillResourceDownloadComponentLinks = `
+  _type == &quot;resourceDownload&quot; =&gt; {
+    ...,
+    &quot;url&quot;: displayImage.asset-&gt;url,
+    resources[] {
+      ...,
+      &quot;url&quot;: asset-&gt;url,
+      &quot;extension&quot;: asset-&gt;extension,
+      &quot;originalFilename&quot;: asset-&gt;originalFilename
+    }
+  }
+`;
+
+const fillTeamGridLinks = `
+  _type == &quot;teamGrid&quot; =&gt; {
+    ...
+  }
+`;
+
+const fillComponentExampleLinks = `
+_type == &quot;componentExample&quot; =&gt; {
+  ...,
+  description[] {
+    ...,
+    ${fillMarkDefs} 
+  }
+}
+`;
+
+const fillTableLinks = `
+_type == &quot;table&quot; =&gt; {
+  ...,
+  rows[] {
+    ...,
+    cells[] {
+      ...,
+      content[] {
+        ...,
+        ${fillMarkDefs} 
+      }
+    }
+  }
+}
+`;
+
+export async function getHomePage(preview) {
+  const query = groq`
+    *[_type == &quot;homePage&quot;] | order(_updatedAt desc)[0] {
+      ${site},
+      seo,
+      hero {
+        title,
+        description
+      },
+      modules[] {
+        ${modules}
+      }
+    }
+    `;
+
+  const data = await getClient(preview).fetch(query);
+
+  return {
+    data,
+    query
+  };
+}
+
+export const getPageSlug = groq`
+  *[_type in ${PAGE_TYPES} &amp;&amp; slug.current match $slug][0] {
+    &quot;slug&quot;: slug.current
+  }
+`;
+
+export async function getPage(slug: string, type: IndexTypes, preview: boolean) {
+  const listOrder = type === &#x27;update&#x27; ? &#x27;updated_at desc&#x27; : &#x27;title asc&#x27;;
+  const query = groq`
+        *[_type in ${PAGE_TYPES} &amp;&amp; slug.current match &#x27;${slug}&#x27;][0] {
+            ${site},
+            seo,
+            title,
+            subtitle,
+            &quot;slug&quot;: slug.current,
+            &quot;created_at&quot;: _createdAt,
+            &quot;updated_at&quot;: _updatedAt,
+            body[] {
+              ...,
+              ${fillMarkDefs},
+              ${fillResourceDownloadComponentLinks},
+              ${fillTableLinks},
+              ${fillTeamGridLinks},
+            },
+            api[] {
+							...,
+              ${fillMarkDefs},
+							${fillPropComponentLinks}
+            },
+            style[] {
+              ...,
+              ${fillMarkDefs} 
+            },
+            usage[] {
+              ...,
+              ${fillMarkDefs},
+              ${fillComponentExampleLinks}
+            },
+            &quot;list&quot;: *[_type == &#x27;${type}&#x27;] {
+              title,
+              &quot;slug&quot;: slug.current,
+              subcategory,
+              &quot;updated_at&quot;: _updatedAt
+            } | order(${listOrder}),
+        }
+    `;
+
+  const data = await getClient(preview).fetch(query);
+
+  return {
+    data,
+    query
+  };
+}
+
+export async function getAllPageSlugs() {
+  const query = groq`
+        *[_type in ${PAGE_TYPES} &amp;&amp; defined(slug.current)][].slug.current
+    `;
+
+  const data = await getClient().fetch(query);
+
+  return {
+    data,
+    query
+  };
+}
+
+export async function getPagesByType(type: IndexTypes) {
+  const query = groq`
+    *[_type == &#x27;${type}&#x27;] {
+      ${site},
+      seo,
+      title,
+      subtitle,
+      &quot;slug&quot;: slug.current,
+      body
+    } | order(title asc)
+  `;
+
+  const data = await getClient().fetch(query);
+
+  return {
+    data,
+    query
+  };
+}
+
+export async function getIndexPageFor(type: IndexTypes, { order = &#x27;title asc&#x27; } = {}) {
+  const query = groq`
+        *[0] {
+          &quot;list&quot;: *[_type == &#x27;${type}&#x27;] | order(${order}) {
+            title,
+            &quot;slug&quot;: slug.current,
+            subcategory,
+            subtitle,
+            &quot;created_at&quot;: _createdAt,
+            &quot;updated_at&quot;: _updatedAt,
+            &quot;excerpt&quot;: body
+          },
+          &quot;settings&quot;: *[_type==&#x27;indexPage&#x27; &amp;&amp; (slug.current match &#x27;/${type}*&#x27; || slug.current match &#x27;/${type}&#x27;)][0] {
+            title,
+            subtitle,
+            layout,
+            enableSidebar,
+            seo
+          },
+          ${site},
+        }
+    `;
+
+  const data = await getClient().fetch(query);
+
+  return {
+    data,
+    query
+  };
+}
+</textarea><pre id="annotations" style="display:none">[{&quot;file&quot;:&quot;lib/api.ts&quot;,&quot;line&quot;:136,&quot;character&quot;:34,&quot;text&quot;:&quot;preview&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;lib/api.ts&quot;,&quot;line&quot;:151,&quot;character&quot;:8,&quot;text&quot;:&quot;data&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;lib/api.ts&quot;,&quot;line&quot;:154,&quot;character&quot;:4,&quot;text&quot;:&quot;data&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;lib/api.ts&quot;,&quot;line&quot;:206,&quot;character&quot;:8,&quot;text&quot;:&quot;data&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;lib/api.ts&quot;,&quot;line&quot;:209,&quot;character&quot;:4,&quot;text&quot;:&quot;data&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;lib/api.ts&quot;,&quot;line&quot;:219,&quot;character&quot;:8,&quot;text&quot;:&quot;data&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;lib/api.ts&quot;,&quot;line&quot;:222,&quot;character&quot;:4,&quot;text&quot;:&quot;data&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;lib/api.ts&quot;,&quot;line&quot;:239,&quot;character&quot;:8,&quot;text&quot;:&quot;data&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;lib/api.ts&quot;,&quot;line&quot;:242,&quot;character&quot;:4,&quot;text&quot;:&quot;data&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;lib/api.ts&quot;,&quot;line&quot;:270,&quot;character&quot;:8,&quot;text&quot;:&quot;data&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;lib/api.ts&quot;,&quot;line&quot;:273,&quot;character&quot;:4,&quot;text&quot;:&quot;data&quot;,&quot;kind&quot;:1}]</pre></div>
+    <p class="footer-text">TypeScript Coverage Report generated by <a href="https://github.com/plantain-00/type-coverage">type-coverage</a> and <a href="https://github.com/alexcanessa/typescript-coverage-report">typescript-coverage-report</a> at Thu, 11 Aug 2022 15:27:29 GMT</p>
+    </body>
+  </html>
+  

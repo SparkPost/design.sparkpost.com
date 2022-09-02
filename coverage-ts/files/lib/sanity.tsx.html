@@ -1,0 +1,119 @@
+
+  <!DOCTYPE html>
+  <html>
+    <head>
+      <title>sanity.tsx</title>
+      <link href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css" type="text/css" rel="stylesheet">
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.58.2/codemirror.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.58.2/mode/javascript/javascript.min.js" type="text/javascript" charset="utf-8"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.58.2/codemirror.min.css" type="text/css" rel="stylesheet">
+<script src="../../assets/source-file.js" type="text/javascript" charset="utf-8"></script>
+<link href="../../assets/source-file.css" type="text/css" rel="stylesheet">
+    </head>
+    <body>
+    <div style="margin-top:3em" class="ui container"><h1 class="ui header"><a href="../../index.html">TypeScript coverage report</a></h1><table style="margin-top:2em" class="ui celled table"><thead class=""><tr class=""><th class="">Filename</th><th class="">Percent</th><th class="">Threshold</th><th class="">Total</th><th class="">Covered</th><th class="">Uncovered</th></tr></thead><tbody class=""><tr class="positive"><td class="">lib/sanity.tsx</td><td class="">92.09%</td><td class="">80%</td><td class="">139</td><td class="">128</td><td class="">11</td></tr></tbody></table><textarea id="editor" readonly="" style="margin-top:3em">import React from &#x27;react&#x27;;
+
+import {
+  createClient,
+  createImageUrlBuilder,
+  createPreviewSubscriptionHook,
+  createCurrentUserHook,
+  createPortableTextComponent
+} from &#x27;next-sanity&#x27;;
+
+import Block from &#x27;@componentsPortable/Block&#x27;;
+import Hr from &#x27;@componentsPortable/Hr&#x27;;
+import Image from &#x27;@componentsPortable/Image&#x27;;
+import CodeBlock from &#x27;@componentsPortable/CodeBlock&#x27;;
+import Color from &#x27;@componentsPortable/Color&#x27;;
+import ColorPalette from &#x27;@componentsPortable/ColorPalette&#x27;;
+import List from &#x27;@componentsPortable/List&#x27;;
+import InlineCode from &#x27;@componentsPortable/InlineCode&#x27;;
+import { InternalLink, ExternalLink } from &#x27;@componentsPortable/Links&#x27;;
+import Prop from &#x27;@componentsPortable/Prop&#x27;;
+import ComponentExample from &#x27;@componentsPortable/ComponentExample&#x27;;
+import SystemProps from &#x27;@componentsPortable/SystemProps&#x27;;
+import HardcodedBlock from &#x27;@componentsPortable/HardcodedBlock&#x27;;
+import ResourceDownload from &#x27;@componentsPortable/ResourceDownload&#x27;;
+import Table from &#x27;@componentsPortable/Table&#x27;;
+import TeamGrid from &#x27;@componentsPortable/TeamGrid&#x27;;
+
+export const config = {
+  projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID,
+  dataset: process.env.NEXT_PUBLIC_SANITY_DATASET,
+  apiVersion: &#x27;2021-03-25&#x27;,
+  useCdn: process.env.NODE_ENV === &#x27;production&#x27;
+};
+
+// Creates image urls for Image nodes
+export const urlFor = (source) =&gt; createImageUrlBuilder(config).image(source);
+
+export const PortableText = createPortableTextComponent({
+  ...config,
+  serializers: {
+    types: {
+      horizontalRule: Hr,
+      block: Block,
+      code: CodeBlock,
+      image: (props: any) =&gt; (
+        &lt;Image
+          alt={props.node.alt}
+          caption={props.node.caption}
+          source={urlFor(props.node).url()}
+        /&gt;
+      ),
+      color: Color,
+      colorPalette: ColorPalette,
+      prop: Prop,
+      componentExample: ComponentExample,
+      systemProps: SystemProps,
+      hardcodedBlock: HardcodedBlock,
+      resourceDownload: ResourceDownload,
+      table: Table,
+      teamGrid: TeamGrid
+    },
+    list: List,
+    marks: {
+      code: InlineCode,
+      internalLink: InternalLink,
+      externalLink: ExternalLink
+    }
+  }
+});
+
+// This is used for portable text within cards, where we want limited functionality
+// Disables header links so we dont get nested &lt;a&gt;s
+export const SimplePortableText = createPortableTextComponent({
+  ...config,
+  serializers: {
+    types: {
+      block: (props) =&gt; &lt;Block {...props} disableLinks /&gt;
+    },
+    list: List,
+    marks: {
+      code: InlineCode,
+      internalLink: InternalLink,
+      externalLink: ExternalLink
+    }
+  }
+});
+
+export const usePreviewSubscription = createPreviewSubscriptionHook(config);
+
+export const sanityClient = createClient(config);
+
+export const previewClient = createClient({
+  ...config,
+  useCdn: false,
+  token: process.env.SANITY_API_TOKEN,
+  withCredentials: true
+});
+
+export const getClient = (usePreview = false) =&gt; (usePreview ? previewClient : sanityClient);
+
+export const useCurrentUser = createCurrentUserHook(config);
+</textarea><pre id="annotations" style="display:none">[{&quot;file&quot;:&quot;lib/sanity.tsx&quot;,&quot;line&quot;:35,&quot;character&quot;:23,&quot;text&quot;:&quot;source&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;lib/sanity.tsx&quot;,&quot;line&quot;:44,&quot;character&quot;:14,&quot;text&quot;:&quot;props&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;lib/sanity.tsx&quot;,&quot;line&quot;:46,&quot;character&quot;:15,&quot;text&quot;:&quot;props&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;lib/sanity.tsx&quot;,&quot;line&quot;:46,&quot;character&quot;:21,&quot;text&quot;:&quot;node&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;lib/sanity.tsx&quot;,&quot;line&quot;:46,&quot;character&quot;:26,&quot;text&quot;:&quot;alt&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;lib/sanity.tsx&quot;,&quot;line&quot;:47,&quot;character&quot;:19,&quot;text&quot;:&quot;props&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;lib/sanity.tsx&quot;,&quot;line&quot;:47,&quot;character&quot;:25,&quot;text&quot;:&quot;node&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;lib/sanity.tsx&quot;,&quot;line&quot;:47,&quot;character&quot;:30,&quot;text&quot;:&quot;caption&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;lib/sanity.tsx&quot;,&quot;line&quot;:48,&quot;character&quot;:25,&quot;text&quot;:&quot;props&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;lib/sanity.tsx&quot;,&quot;line&quot;:48,&quot;character&quot;:31,&quot;text&quot;:&quot;node&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;lib/sanity.tsx&quot;,&quot;line&quot;:76,&quot;character&quot;:14,&quot;text&quot;:&quot;props&quot;,&quot;kind&quot;:1}]</pre></div>
+    <p class="footer-text">TypeScript Coverage Report generated by <a href="https://github.com/plantain-00/type-coverage">type-coverage</a> and <a href="https://github.com/alexcanessa/typescript-coverage-report">typescript-coverage-report</a> at Thu, 11 Aug 2022 15:27:29 GMT</p>
+    </body>
+  </html>
+  

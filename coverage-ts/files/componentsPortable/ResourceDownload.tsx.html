@@ -1,0 +1,128 @@
+
+  <!DOCTYPE html>
+  <html>
+    <head>
+      <title>ResourceDownload.tsx</title>
+      <link href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css" type="text/css" rel="stylesheet">
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.58.2/codemirror.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.58.2/mode/javascript/javascript.min.js" type="text/javascript" charset="utf-8"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.58.2/codemirror.min.css" type="text/css" rel="stylesheet">
+<script src="../../assets/source-file.js" type="text/javascript" charset="utf-8"></script>
+<link href="../../assets/source-file.css" type="text/css" rel="stylesheet">
+    </head>
+    <body>
+    <div style="margin-top:3em" class="ui container"><h1 class="ui header"><a href="../../index.html">TypeScript coverage report</a></h1><table style="margin-top:2em" class="ui celled table"><thead class=""><tr class=""><th class="">Filename</th><th class="">Percent</th><th class="">Threshold</th><th class="">Total</th><th class="">Covered</th><th class="">Uncovered</th></tr></thead><tbody class=""><tr class="positive"><td class="">componentsPortable/ResourceDownload.tsx</td><td class="">92.79%</td><td class="">80%</td><td class="">111</td><td class="">103</td><td class="">8</td></tr></tbody></table><textarea id="editor" readonly="" style="margin-top:3em">import { urlFor } from &#x27;@lib/sanity&#x27;;
+import { Box } from &#x27;@sparkpost/matchbox&#x27;;
+import styled from &#x27;styled-components&#x27;;
+import css from &#x27;@styled-system/css&#x27;;
+
+type ResourceProps = {
+  url: string;
+  extension: string;
+  originalFilename: string;
+};
+
+type ResourceDownloadProps = {
+  node: {
+    resources: ResourceProps[];
+    displayImage: object;
+    darkBackground: boolean;
+  };
+};
+
+const StyledLink = styled.a`
+  &amp;,
+  &amp;:visited {
+    ${css({
+      color: &#x27;scheme.fg&#x27;
+    })}
+  }
+
+  &amp;:hover {
+    ${css({
+      color: &#x27;scheme.heavyAccent&#x27;
+    })}
+  }
+
+  transition: ${({ theme }) =&gt; theme.motion.duration.fast};
+`;
+
+const StyledResource = styled.div`
+  display: inline-block;
+  ${css({
+    mb: &#x27;600&#x27;,
+    width: [&#x27;100%&#x27;, null, &#x27;50%&#x27;],
+    pr: [&#x27;0&#x27;, null, &#x27;500&#x27;]
+  })}
+`;
+
+function ResourceDownload(props: ResourceDownloadProps): JSX.Element {
+  const { resources, displayImage, darkBackground } = props.node;
+  const displayImageUrl = urlFor(displayImage).url();
+
+  const downloadLink = () =&gt; {
+    if (resources?.length &lt; 1) {
+      return null;
+    }
+
+    const getSeparator = (i) =&gt; {
+      if (i === resources.length - 1) {
+        return;
+      }
+
+      if (i === resources.length - 2) {
+        return resources.length &gt; 2 ? &#x27;, or &#x27; : &#x27; or &#x27;;
+      }
+
+      return &#x27;, &#x27;;
+    };
+
+    return (
+      &lt;span&gt;
+        Download as{&#x27; &#x27;}
+        {resources.map((resource, i) =&gt; {
+          return (
+            &lt;span key={i}&gt;
+              &lt;StyledLink href={`${resource.url}?dl=${resource.originalFilename || resource.url}`}&gt;
+                {resource.extension.toUpperCase()}
+              &lt;/StyledLink&gt;
+              {getSeparator(i)}
+            &lt;/span&gt;
+          );
+        })}
+      &lt;/span&gt;
+    );
+  };
+
+  return (
+    &lt;StyledResource&gt;
+      &lt;Box
+        p=&quot;500&quot;
+        textAlign=&quot;center&quot;
+        border=&quot;thick&quot;
+        borderRadius=&quot;rounded&quot;
+        bg={darkBackground ? &#x27;gray.900&#x27; : &#x27;white&#x27;}
+      &gt;
+        &lt;Box width=&quot;100%&quot; position=&quot;relative&quot; height=&quot;150px&quot; maxWidth=&quot;200px&quot; margin=&quot;0 auto&quot;&gt;
+          &lt;Box
+            as=&quot;img&quot;
+            src={displayImageUrl}
+            width=&quot;100%&quot;
+            height=&quot;100%&quot;
+            style={{ objectFit: &#x27;contain&#x27; }}
+          /&gt;
+        &lt;/Box&gt;
+      &lt;/Box&gt;
+      &lt;Box as=&quot;p&quot; pt=&quot;200&quot;&gt;
+        {downloadLink()}
+      &lt;/Box&gt;
+    &lt;/StyledResource&gt;
+  );
+}
+
+export default ResourceDownload;
+</textarea><pre id="annotations" style="display:none">[{&quot;file&quot;:&quot;componentsPortable/ResourceDownload.tsx&quot;,&quot;line&quot;:33,&quot;character&quot;:19,&quot;text&quot;:&quot;theme&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;componentsPortable/ResourceDownload.tsx&quot;,&quot;line&quot;:33,&quot;character&quot;:31,&quot;text&quot;:&quot;theme&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;componentsPortable/ResourceDownload.tsx&quot;,&quot;line&quot;:33,&quot;character&quot;:37,&quot;text&quot;:&quot;motion&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;componentsPortable/ResourceDownload.tsx&quot;,&quot;line&quot;:33,&quot;character&quot;:44,&quot;text&quot;:&quot;duration&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;componentsPortable/ResourceDownload.tsx&quot;,&quot;line&quot;:33,&quot;character&quot;:53,&quot;text&quot;:&quot;fast&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;componentsPortable/ResourceDownload.tsx&quot;,&quot;line&quot;:54,&quot;character&quot;:26,&quot;text&quot;:&quot;i&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;componentsPortable/ResourceDownload.tsx&quot;,&quot;line&quot;:55,&quot;character&quot;:10,&quot;text&quot;:&quot;i&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;componentsPortable/ResourceDownload.tsx&quot;,&quot;line&quot;:59,&quot;character&quot;:10,&quot;text&quot;:&quot;i&quot;,&quot;kind&quot;:1}]</pre></div>
+    <p class="footer-text">TypeScript Coverage Report generated by <a href="https://github.com/plantain-00/type-coverage">type-coverage</a> and <a href="https://github.com/alexcanessa/typescript-coverage-report">typescript-coverage-report</a> at Thu, 11 Aug 2022 15:27:29 GMT</p>
+    </body>
+  </html>
+  

@@ -1,0 +1,257 @@
+
+  <!DOCTYPE html>
+  <html>
+    <head>
+      <title>TypographyTokenTable.tsx</title>
+      <link href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css" type="text/css" rel="stylesheet">
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.58.2/codemirror.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.58.2/mode/javascript/javascript.min.js" type="text/javascript" charset="utf-8"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.58.2/codemirror.min.css" type="text/css" rel="stylesheet">
+<script src="../../../assets/source-file.js" type="text/javascript" charset="utf-8"></script>
+<link href="../../../assets/source-file.css" type="text/css" rel="stylesheet">
+    </head>
+    <body>
+    <div style="margin-top:3em" class="ui container"><h1 class="ui header"><a href="../../../index.html">TypeScript coverage report</a></h1><table style="margin-top:2em" class="ui celled table"><thead class=""><tr class=""><th class="">Filename</th><th class="">Percent</th><th class="">Threshold</th><th class="">Total</th><th class="">Covered</th><th class="">Uncovered</th></tr></thead><tbody class=""><tr class="positive"><td class="">components/typographyTokenTable/TypographyTokenTable.tsx</td><td class="">100.00%</td><td class="">80%</td><td class="">392</td><td class="">392</td><td class="">0</td></tr></tbody></table><textarea id="editor" readonly="" style="margin-top:3em">import React from &#x27;react&#x27;;
+import { meta } from &#x27;@sparkpost/design-tokens&#x27;;
+import { Box } from &#x27;@sparkpost/matchbox&#x27;;
+import { Button } from &#x27;@components/button&#x27;;
+import { CopyButton } from &#x27;@components/copyButton&#x27;;
+import styled from &#x27;styled-components&#x27;;
+
+const fontTokens = meta
+  .filter((t) =&gt; t.name.includes(&#x27;font-size-&#x27;))
+  .filter((t) =&gt; !t.name.includes(&#x27;root&#x27;))
+  .sort(({ javascript: js1 }, { javascript: js2 }) =&gt; {
+    const v1 = Number(js1.replace(&#x27;fontSize_&#x27;, &#x27;&#x27;));
+    const v2 = Number(js2.replace(&#x27;fontSize_&#x27;, &#x27;&#x27;));
+    return v1 &gt; v2 ? 1 : -1;
+  });
+
+type ThProps = {
+  children: React.ReactNode;
+  align?: &#x27;left&#x27; | &#x27;right&#x27;;
+  width?: string;
+};
+
+const Uppercase = styled.span`
+  text-transform: uppercase;
+`;
+
+function Th(props: ThProps): JSX.Element {
+  const { children, align = &#x27;left&#x27;, width } = props;
+
+  return (
+    &lt;Box
+      as=&quot;th&quot;
+      textAlign={align}
+      fontSize=&quot;100&quot;
+      fontWeight=&quot;400&quot;
+      lineHeight=&quot;100&quot;
+      py=&quot;100&quot;
+      width={width}
+    &gt;
+      &lt;Uppercase&gt;{children}&lt;/Uppercase&gt;
+    &lt;/Box&gt;
+  );
+}
+
+function TypographyTokenTable(): JSX.Element {
+  const [syntax, setSyntax] = React.useState(&#x27;css&#x27;);
+  const [family, setFamily] = React.useState(&#x27;sans&#x27;);
+  const [weight, setWeight] = React.useState(&#x27;normal&#x27;);
+
+  const familyMeta = meta.find((t) =&gt; {
+    return t.name.includes(family);
+  });
+
+  const weightMeta = meta.find((t) =&gt; {
+    return t.name.includes(weight);
+  });
+
+  return (
+    &lt;Box&gt;
+      &lt;Box display=&quot;flex&quot;&gt;
+        &lt;Box&gt;
+          &lt;Box mb=&quot;100&quot; fontSize=&quot;200&quot; lineHeight=&quot;200&quot;&gt;
+            Font Stack
+          &lt;/Box&gt;
+          &lt;Box mb=&quot;600&quot;&gt;
+            &lt;Button.Group&gt;
+              &lt;Button onClick={() =&gt; setFamily(&#x27;sans&#x27;)} active={family === &#x27;sans&#x27;}&gt;
+                Sans
+              &lt;/Button&gt;
+              &lt;Button onClick={() =&gt; setFamily(&#x27;monospace&#x27;)} active={family === &#x27;monospace&#x27;}&gt;
+                Monospace
+              &lt;/Button&gt;
+            &lt;/Button.Group&gt;
+          &lt;/Box&gt;
+        &lt;/Box&gt;
+        &lt;Box ml=&quot;400&quot;&gt;
+          &lt;Box mb=&quot;100&quot; fontSize=&quot;200&quot; lineHeight=&quot;200&quot;&gt;
+            Font Weight
+          &lt;/Box&gt;
+          &lt;Box mb=&quot;600&quot;&gt;
+            &lt;Button.Group&gt;
+              &lt;Button onClick={() =&gt; setWeight(&#x27;light&#x27;)} active={weight === &#x27;light&#x27;}&gt;
+                Light
+              &lt;/Button&gt;
+              &lt;Button onClick={() =&gt; setWeight(&#x27;normal&#x27;)} active={weight === &#x27;normal&#x27;}&gt;
+                Normal
+              &lt;/Button&gt;
+              &lt;Button onClick={() =&gt; setWeight(&#x27;medium&#x27;)} active={weight === &#x27;medium&#x27;}&gt;
+                Medium
+              &lt;/Button&gt;
+              &lt;Button onClick={() =&gt; setWeight(&#x27;semibold&#x27;)} active={weight === &#x27;semibold&#x27;}&gt;
+                Semibold
+              &lt;/Button&gt;
+            &lt;/Button.Group&gt;
+          &lt;/Box&gt;
+        &lt;/Box&gt;
+      &lt;/Box&gt;
+
+      &lt;Box mb=&quot;100&quot; fontSize=&quot;200&quot; lineHeight=&quot;200&quot;&gt;
+        Code Format
+      &lt;/Box&gt;
+      &lt;Box mb=&quot;600&quot;&gt;
+        &lt;Button.Group&gt;
+          &lt;Button onClick={() =&gt; setSyntax(&#x27;css&#x27;)} active={syntax === &#x27;css&#x27;}&gt;
+            CSS
+          &lt;/Button&gt;
+          &lt;Button onClick={() =&gt; setSyntax(&#x27;scss&#x27;)} active={syntax === &#x27;scss&#x27;}&gt;
+            Scss
+          &lt;/Button&gt;
+          &lt;Button onClick={() =&gt; setSyntax(&#x27;javascript&#x27;)} active={syntax === &#x27;javascript&#x27;}&gt;
+            JavaScript
+          &lt;/Button&gt;
+          &lt;Button onClick={() =&gt; setSyntax(&#x27;system&#x27;)} active={syntax === &#x27;system&#x27;}&gt;
+            System Prop
+          &lt;/Button&gt;
+        &lt;/Button.Group&gt;
+      &lt;/Box&gt;
+
+      &lt;Box mb=&quot;600&quot;&gt;
+        &lt;Box as=&quot;table&quot; width=&quot;100%&quot;&gt;
+          &lt;thead&gt;
+            &lt;Box as=&quot;tr&quot;&gt;
+              &lt;Th width=&quot;70%&quot;&gt;Font Family&lt;/Th&gt;
+              &lt;Th align=&quot;right&quot;&gt;Font Weight&lt;/Th&gt;
+            &lt;/Box&gt;
+          &lt;/thead&gt;
+          &lt;tbody&gt;
+            &lt;tr&gt;
+              &lt;Box as=&quot;td&quot; borderTop=&quot;1px solid transparent&quot; borderColor=&quot;scheme.lightFg&quot; py=&quot;300&quot;&gt;
+                &lt;Box&gt;
+                  &lt;CopyButton textAlign=&quot;left&quot;&gt;{familyMeta.value}&lt;/CopyButton&gt;
+                &lt;/Box&gt;
+                &lt;Box&gt;
+                  &lt;CopyButton&gt;{familyMeta[syntax]}&lt;/CopyButton&gt;
+                &lt;/Box&gt;
+              &lt;/Box&gt;
+              &lt;Box as=&quot;td&quot; borderTop=&quot;1px solid transparent&quot; borderColor=&quot;scheme.lightFg&quot; py=&quot;300&quot;&gt;
+                &lt;Box textAlign=&quot;right&quot;&gt;
+                  &lt;CopyButton&gt;{weightMeta.value}&lt;/CopyButton&gt;
+                &lt;/Box&gt;
+                &lt;Box textAlign=&quot;right&quot;&gt;
+                  &lt;CopyButton&gt;{weightMeta[syntax]}&lt;/CopyButton&gt;
+                &lt;/Box&gt;
+              &lt;/Box&gt;
+            &lt;/tr&gt;
+          &lt;/tbody&gt;
+        &lt;/Box&gt;
+      &lt;/Box&gt;
+
+      &lt;Box&gt;
+        &lt;Box as=&quot;table&quot; width=&quot;100%&quot; style={{ borderCollapse: &#x27;collapse&#x27; }}&gt;
+          &lt;thead&gt;
+            &lt;Box as=&quot;tr&quot;&gt;
+              &lt;Th&gt;Example&lt;/Th&gt;
+              &lt;Th align=&quot;right&quot; width=&quot;25%&quot;&gt;
+                Font Size
+              &lt;/Th&gt;
+              &lt;Th align=&quot;right&quot; width=&quot;25%&quot;&gt;
+                Line Height
+              &lt;/Th&gt;
+            &lt;/Box&gt;
+          &lt;/thead&gt;
+          &lt;tbody&gt;
+            {fontTokens.map((t) =&gt; {
+              const lineHeightMeta = meta
+                .filter((m) =&gt; m.category === &#x27;line-height&#x27;)
+                .find((m) =&gt; {
+                  const match = m.name.endsWith(t.name.replace(&#x27;font-size-&#x27;, &#x27;&#x27;));
+                  return match || m.name.endsWith(&#x27;100&#x27;); // Returns lh 100 for font size 50
+                });
+
+              return (
+                &lt;Box as=&quot;tr&quot; key={t.name}&gt;
+                  &lt;Box
+                    as=&quot;td&quot;
+                    py=&quot;300&quot;
+                    borderTop=&quot;1px solid transparent&quot;
+                    borderBottom=&quot;1px solid transparent&quot;
+                    borderColor=&quot;scheme.lightFg&quot;
+                  &gt;
+                    &lt;Box
+                      fontSize={t.value}
+                      lineHeight=&quot;1.5em&quot;
+                      fontWeight={weight}
+                      fontFamily={family}
+                    &gt;
+                      {family.charAt(0).toUpperCase()}
+                      {family.slice(1)} {t.friendly.replace(&#x27;Font Size &#x27;, &#x27;&#x27;)}
+                    &lt;/Box&gt;
+                  &lt;/Box&gt;
+
+                  &lt;Box
+                    as=&quot;td&quot;
+                    textAlign=&quot;right&quot;
+                    py=&quot;300&quot;
+                    borderTop=&quot;1px solid transparent&quot;
+                    borderBottom=&quot;1px solid transparent&quot;
+                    borderColor=&quot;scheme.lightFg&quot;
+                  &gt;
+                    &lt;div&gt;
+                      &lt;CopyButton&gt;{t.value}&lt;/CopyButton&gt;
+                    &lt;/div&gt;
+                    &lt;div&gt;
+                      &lt;CopyButton&gt;{t.pixel_value}&lt;/CopyButton&gt;
+                    &lt;/div&gt;
+                    &lt;div&gt;
+                      &lt;CopyButton&gt;{t[syntax]}&lt;/CopyButton&gt;
+                    &lt;/div&gt;
+                  &lt;/Box&gt;
+
+                  &lt;Box
+                    as=&quot;td&quot;
+                    textAlign=&quot;right&quot;
+                    py=&quot;300&quot;
+                    borderTop=&quot;1px solid transparent&quot;
+                    borderBottom=&quot;1px solid transparent&quot;
+                    borderColor=&quot;scheme.lightFg&quot;
+                  &gt;
+                    &lt;div&gt;
+                      &lt;CopyButton&gt;{lineHeightMeta.value}&lt;/CopyButton&gt;
+                    &lt;/div&gt;
+                    &lt;div&gt;
+                      &lt;CopyButton&gt;{lineHeightMeta.pixel_value}&lt;/CopyButton&gt;
+                    &lt;/div&gt;
+                    &lt;div&gt;
+                      &lt;CopyButton&gt;{lineHeightMeta[syntax]}&lt;/CopyButton&gt;
+                    &lt;/div&gt;
+                  &lt;/Box&gt;
+                &lt;/Box&gt;
+              );
+            })}
+          &lt;/tbody&gt;
+        &lt;/Box&gt;
+      &lt;/Box&gt;
+    &lt;/Box&gt;
+  );
+}
+
+export default TypographyTokenTable;
+</textarea><pre id="annotations" style="display:none">[]</pre></div>
+    <p class="footer-text">TypeScript Coverage Report generated by <a href="https://github.com/plantain-00/type-coverage">type-coverage</a> and <a href="https://github.com/alexcanessa/typescript-coverage-report">typescript-coverage-report</a> at Thu, 11 Aug 2022 15:27:29 GMT</p>
+    </body>
+  </html>
+  

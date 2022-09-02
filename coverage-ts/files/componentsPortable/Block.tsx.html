@@ -1,0 +1,145 @@
+
+  <!DOCTYPE html>
+  <html>
+    <head>
+      <title>Block.tsx</title>
+      <link href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css" type="text/css" rel="stylesheet">
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.58.2/codemirror.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.58.2/mode/javascript/javascript.min.js" type="text/javascript" charset="utf-8"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.58.2/codemirror.min.css" type="text/css" rel="stylesheet">
+<script src="../../assets/source-file.js" type="text/javascript" charset="utf-8"></script>
+<link href="../../assets/source-file.css" type="text/css" rel="stylesheet">
+    </head>
+    <body>
+    <div style="margin-top:3em" class="ui container"><h1 class="ui header"><a href="../../index.html">TypeScript coverage report</a></h1><table style="margin-top:2em" class="ui celled table"><thead class=""><tr class=""><th class="">Filename</th><th class="">Percent</th><th class="">Threshold</th><th class="">Total</th><th class="">Covered</th><th class="">Uncovered</th></tr></thead><tbody class=""><tr class="positive"><td class="">componentsPortable/Block.tsx</td><td class="">100.00%</td><td class="">80%</td><td class="">142</td><td class="">142</td><td class="">0</td></tr></tbody></table><textarea id="editor" readonly="" style="margin-top:3em">/* eslint-disable @typescript-eslint/ban-ts-comment */
+import React from &#x27;react&#x27;;
+import { Box } from &#x27;@sparkpost/matchbox&#x27;;
+import { Link as LinkIcon } from &#x27;@sparkpost/matchbox-icons&#x27;;
+import { useRouter } from &#x27;next/router&#x27;;
+import styled from &#x27;styled-components&#x27;;
+import css from &#x27;@styled-system/css&#x27;;
+
+type HeaderProps = {
+  level: string;
+  children: string | React.ReactNode | number;
+  disableLinks?: boolean;
+};
+
+const StyledLink = styled.a`
+  text-decoration: none;
+  &amp;,
+  &amp;:hover,
+  &amp;:visited {
+    ${css({
+      color: &#x27;scheme.fg&#x27;
+    })}
+  }
+  svg {
+    opacity: 0;
+    margin-top: -2px;
+    transition: 0.15s;
+  }
+
+  &amp;:hover svg {
+    opacity: 1;
+  }
+`;
+
+export function Header(props: HeaderProps): JSX.Element {
+  const { level, children = &#x27;&#x27; } = props;
+  const router = useRouter();
+
+  const mb = level === &#x27;1&#x27; || level === &#x27;2&#x27; ? &#x27;400&#x27; : &#x27;200&#x27;;
+
+  const size = React.useMemo(() =&gt; {
+    switch (level) {
+      case &#x27;1&#x27;:
+        return &#x27;700&#x27;;
+      case &#x27;2&#x27;:
+        return &#x27;600&#x27;;
+      case &#x27;3&#x27;:
+        return &#x27;500&#x27;;
+      case &#x27;4&#x27;:
+        return &#x27;400&#x27;;
+      default:
+        break;
+    }
+  }, [level]);
+
+  function toKebab(str: string): string {
+    if (!str || typeof str !== &#x27;string&#x27;) {
+      return &#x27;&#x27;;
+    }
+    return str.replace(/\s+/g, &#x27;-&#x27;).toLowerCase();
+  }
+
+  const path = router.asPath.split(&#x27;#&#x27;)[0];
+  return (
+    // @ts-ignore
+    &lt;Box as={`h${level}`} mb={mb} pt=&quot;300&quot; fontSize={size} id={toKebab(children[0])}&gt;
+      {!props.disableLinks ? (
+        &lt;StyledLink href={`${path}#${toKebab(children[0])}`}&gt;
+          {children} &lt;LinkIcon /&gt;
+        &lt;/StyledLink&gt;
+      ) : (
+        children
+      )}
+    &lt;/Box&gt;
+  );
+}
+
+type BlockQuoteProps = {
+  children: React.ReactNode;
+};
+
+function BlockQuote(props: BlockQuoteProps): JSX.Element {
+  const { children } = props;
+
+  return (
+    &lt;Box as=&quot;blockquote&quot; display=&quot;flex&quot; p=&quot;0&quot; m=&quot;0&quot; mb=&quot;600&quot;&gt;
+      &lt;Box bg=&quot;scheme.lightFg&quot; width=&quot;3px&quot; borderRadius=&quot;pill&quot;&gt;&lt;/Box&gt;
+      &lt;Box pl=&quot;400&quot; py=&quot;300&quot; fontSize=&quot;400&quot; lineHeight=&quot;500&quot; fontStyle=&quot;italic&quot; color=&quot;scheme.fg&quot;&gt;
+        {children}
+      &lt;/Box&gt;
+    &lt;/Box&gt;
+  );
+}
+
+type BlockProps = {
+  node: {
+    style: &#x27;normal&#x27; | &#x27;h1&#x27; | &#x27;h2&#x27; | &#x27;h3&#x27; | &#x27;h4&#x27; | &#x27;blockquote&#x27;;
+  };
+  children: React.ReactNode;
+  disableLinks?: boolean;
+};
+
+// This component is reponsible for rendering default Sanity blocks – paragraphs and headers and blockquotes
+function Block(props: BlockProps): JSX.Element {
+  const style = props?.node?.style || &#x27;normal&#x27;;
+
+  // This is a header
+  if (/^h\d/.test(style)) {
+    return (
+      &lt;Header level={style.replace(/[^\d]/g, &#x27;&#x27;)} disableLinks={props.disableLinks}&gt;
+        {props.children}
+      &lt;/Header&gt;
+    );
+  }
+
+  if (style === &#x27;blockquote&#x27;) {
+    return &lt;BlockQuote&gt;{props.children}&lt;/BlockQuote&gt;;
+  }
+
+  return (
+    &lt;Box as=&quot;p&quot; fontSize=&quot;300&quot; lineHeight=&quot;300&quot; mb=&quot;500&quot;&gt;
+      {props.children}
+    &lt;/Box&gt;
+  );
+}
+
+export default Block;
+</textarea><pre id="annotations" style="display:none">[]</pre></div>
+    <p class="footer-text">TypeScript Coverage Report generated by <a href="https://github.com/plantain-00/type-coverage">type-coverage</a> and <a href="https://github.com/alexcanessa/typescript-coverage-report">typescript-coverage-report</a> at Thu, 11 Aug 2022 15:27:29 GMT</p>
+    </body>
+  </html>
+  

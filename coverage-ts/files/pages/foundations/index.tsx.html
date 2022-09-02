@@ -1,0 +1,62 @@
+
+  <!DOCTYPE html>
+  <html>
+    <head>
+      <title>index.tsx</title>
+      <link href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css" type="text/css" rel="stylesheet">
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.58.2/codemirror.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.58.2/mode/javascript/javascript.min.js" type="text/javascript" charset="utf-8"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.58.2/codemirror.min.css" type="text/css" rel="stylesheet">
+<script src="../../../assets/source-file.js" type="text/javascript" charset="utf-8"></script>
+<link href="../../../assets/source-file.css" type="text/css" rel="stylesheet">
+    </head>
+    <body>
+    <div style="margin-top:3em" class="ui container"><h1 class="ui header"><a href="../../../index.html">TypeScript coverage report</a></h1><table style="margin-top:2em" class="ui celled table"><thead class=""><tr class=""><th class="">Filename</th><th class="">Percent</th><th class="">Threshold</th><th class="">Total</th><th class="">Covered</th><th class="">Uncovered</th></tr></thead><tbody class=""><tr class="negative"><td class="">pages/foundations/index.tsx</td><td class="">54.10%</td><td class="">80%</td><td class="">61</td><td class="">33</td><td class="">28</td></tr></tbody></table><textarea id="editor" readonly="" style="margin-top:3em">import React from &#x27;react&#x27;;
+import { getIndexPageFor } from &#x27;@lib/api&#x27;;
+import { IndexLayout } from &#x27;@components/indexLayout&#x27;;
+import useSeo from &#x27;@hooks/useSeo&#x27;;
+
+function FoundationsIndexPage({ data }) {
+  const { site, settings, list } = data.pageData;
+
+  const { seo } = useSeo({
+    site: site?.seo,
+    page: settings?.seo
+  });
+
+  return (
+    &lt;IndexLayout
+      seo={seo}
+      headerList={site?.header?.menu?.items}
+      enableSidebar={settings.enableSidebar}
+      sidebarList={list}
+      layoutType={settings.layout}
+      list={list}
+      footerList={site?.footer?.menu?.items}
+      title={settings.title}
+      subtitle={settings.subtitle}
+    /&gt;
+  );
+}
+
+export default FoundationsIndexPage;
+
+export async function getStaticProps({ preview = false }) {
+  const { data: pageData, query } = await getIndexPageFor(&#x27;foundation&#x27;);
+
+  return {
+    props: {
+      preview,
+      data: {
+        pageData,
+        query
+      }
+    },
+    revalidate: 10
+  };
+}
+</textarea><pre id="annotations" style="display:none">[{&quot;file&quot;:&quot;pages/foundations/index.tsx&quot;,&quot;line&quot;:5,&quot;character&quot;:32,&quot;text&quot;:&quot;data&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;pages/foundations/index.tsx&quot;,&quot;line&quot;:6,&quot;character&quot;:10,&quot;text&quot;:&quot;site&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;pages/foundations/index.tsx&quot;,&quot;line&quot;:6,&quot;character&quot;:16,&quot;text&quot;:&quot;settings&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;pages/foundations/index.tsx&quot;,&quot;line&quot;:6,&quot;character&quot;:26,&quot;text&quot;:&quot;list&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;pages/foundations/index.tsx&quot;,&quot;line&quot;:6,&quot;character&quot;:35,&quot;text&quot;:&quot;data&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;pages/foundations/index.tsx&quot;,&quot;line&quot;:6,&quot;character&quot;:40,&quot;text&quot;:&quot;pageData&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;pages/foundations/index.tsx&quot;,&quot;line&quot;:9,&quot;character&quot;:10,&quot;text&quot;:&quot;site&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;pages/foundations/index.tsx&quot;,&quot;line&quot;:9,&quot;character&quot;:16,&quot;text&quot;:&quot;seo&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;pages/foundations/index.tsx&quot;,&quot;line&quot;:10,&quot;character&quot;:10,&quot;text&quot;:&quot;settings&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;pages/foundations/index.tsx&quot;,&quot;line&quot;:10,&quot;character&quot;:20,&quot;text&quot;:&quot;seo&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;pages/foundations/index.tsx&quot;,&quot;line&quot;:16,&quot;character&quot;:18,&quot;text&quot;:&quot;site&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;pages/foundations/index.tsx&quot;,&quot;line&quot;:16,&quot;character&quot;:24,&quot;text&quot;:&quot;header&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;pages/foundations/index.tsx&quot;,&quot;line&quot;:16,&quot;character&quot;:32,&quot;text&quot;:&quot;menu&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;pages/foundations/index.tsx&quot;,&quot;line&quot;:16,&quot;character&quot;:38,&quot;text&quot;:&quot;items&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;pages/foundations/index.tsx&quot;,&quot;line&quot;:17,&quot;character&quot;:21,&quot;text&quot;:&quot;settings&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;pages/foundations/index.tsx&quot;,&quot;line&quot;:17,&quot;character&quot;:30,&quot;text&quot;:&quot;enableSidebar&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;pages/foundations/index.tsx&quot;,&quot;line&quot;:19,&quot;character&quot;:18,&quot;text&quot;:&quot;settings&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;pages/foundations/index.tsx&quot;,&quot;line&quot;:19,&quot;character&quot;:27,&quot;text&quot;:&quot;layout&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;pages/foundations/index.tsx&quot;,&quot;line&quot;:21,&quot;character&quot;:18,&quot;text&quot;:&quot;site&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;pages/foundations/index.tsx&quot;,&quot;line&quot;:21,&quot;character&quot;:24,&quot;text&quot;:&quot;footer&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;pages/foundations/index.tsx&quot;,&quot;line&quot;:21,&quot;character&quot;:32,&quot;text&quot;:&quot;menu&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;pages/foundations/index.tsx&quot;,&quot;line&quot;:21,&quot;character&quot;:38,&quot;text&quot;:&quot;items&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;pages/foundations/index.tsx&quot;,&quot;line&quot;:22,&quot;character&quot;:13,&quot;text&quot;:&quot;settings&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;pages/foundations/index.tsx&quot;,&quot;line&quot;:22,&quot;character&quot;:22,&quot;text&quot;:&quot;title&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;pages/foundations/index.tsx&quot;,&quot;line&quot;:23,&quot;character&quot;:16,&quot;text&quot;:&quot;settings&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;pages/foundations/index.tsx&quot;,&quot;line&quot;:23,&quot;character&quot;:25,&quot;text&quot;:&quot;subtitle&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;pages/foundations/index.tsx&quot;,&quot;line&quot;:31,&quot;character&quot;:16,&quot;text&quot;:&quot;pageData&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;pages/foundations/index.tsx&quot;,&quot;line&quot;:37,&quot;character&quot;:8,&quot;text&quot;:&quot;pageData&quot;,&quot;kind&quot;:1}]</pre></div>
+    <p class="footer-text">TypeScript Coverage Report generated by <a href="https://github.com/plantain-00/type-coverage">type-coverage</a> and <a href="https://github.com/alexcanessa/typescript-coverage-report">typescript-coverage-report</a> at Thu, 11 Aug 2022 15:27:29 GMT</p>
+    </body>
+  </html>
+  

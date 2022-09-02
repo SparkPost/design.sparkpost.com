@@ -1,0 +1,174 @@
+
+  <!DOCTYPE html>
+  <html>
+    <head>
+      <title>results.tsx</title>
+      <link href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css" type="text/css" rel="stylesheet">
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.58.2/codemirror.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.58.2/mode/javascript/javascript.min.js" type="text/javascript" charset="utf-8"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.58.2/codemirror.min.css" type="text/css" rel="stylesheet">
+<script src="../../../assets/source-file.js" type="text/javascript" charset="utf-8"></script>
+<link href="../../../assets/source-file.css" type="text/css" rel="stylesheet">
+    </head>
+    <body>
+    <div style="margin-top:3em" class="ui container"><h1 class="ui header"><a href="../../../index.html">TypeScript coverage report</a></h1><table style="margin-top:2em" class="ui celled table"><thead class=""><tr class=""><th class="">Filename</th><th class="">Percent</th><th class="">Threshold</th><th class="">Total</th><th class="">Covered</th><th class="">Uncovered</th></tr></thead><tbody class=""><tr class="negative"><td class="">components/search/results.tsx</td><td class="">69.57%</td><td class="">80%</td><td class="">161</td><td class="">112</td><td class="">49</td></tr></tbody></table><textarea id="editor" readonly="" style="margin-top:3em">import { Box } from &#x27;@sparkpost/matchbox&#x27;;
+import Link from &#x27;next/link&#x27;;
+import { Category } from &#x27;@components/category&#x27;;
+import { connectStateResults, Highlight, Hits } from &#x27;react-instantsearch-dom&#x27;;
+import styled from &#x27;styled-components&#x27;;
+
+type ResultsProps = {
+  show: boolean;
+};
+
+const ResultsWrapper = styled.div`
+  padding: ${(props) =&gt; props.theme.space[&#x27;400&#x27;]};
+
+  .ais-Hits-item {
+    margin: 0;
+    cursor: pointer;
+  }
+
+  .ais-Highlight-highlighted,
+  .ais-Snippet-highlighted {
+    font-weight: 600;
+    background: ${({ theme }) =&gt; theme.colors.scheme.lightAccent};
+    color: inherit;
+  }
+
+  ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+  }
+`;
+
+const ResultCount = connectStateResults(({ searchResults }) =&gt; {
+  const resultCount = searchResults &amp;&amp; searchResults.nbHits;
+  return resultCount &gt; 0 ? (
+    &lt;Box
+      fontSize=&quot;100&quot;
+      color=&quot;scheem.fg&quot;
+      borderBottom=&quot;thick&quot;
+      px=&quot;400&quot;
+      py=&quot;200&quot;
+      display=&quot;flex&quot;
+      justifyContent=&quot;space-between&quot;
+    &gt;
+      &lt;span&gt;
+        {resultCount} result{resultCount &gt; 1 ? &#x27;s&#x27; : &#x27;&#x27;}
+      &lt;/span&gt;
+    &lt;/Box&gt;
+  ) : (
+    &lt;Box px=&quot;400&quot; py=&quot;200&quot;&gt;
+      No Results
+    &lt;/Box&gt;
+  );
+});
+
+const StyledLink = styled.a`
+  display: block;
+  margin-bottom: 0;
+  text-decoration: none;
+  padding: ${({ theme }) =&gt; theme.space[300]} ${({ theme }) =&gt; theme.space[400]};
+  color: inherit;
+  background: ${({ theme }) =&gt; theme.colors.scheme.bg};
+
+  &amp;:hover,
+  &amp;:focus {
+    outline: none;
+    background: ${({ theme }) =&gt; theme.colors.scheme.lightAccent};
+  }
+
+  &amp;,
+  &amp;:hover,
+  &amp;:focus,
+  &amp;:visited {
+    color: ${({ theme }) =&gt; theme.colors.scheme.fg};
+  }
+
+  &amp;:visited {
+    background: inherit;
+  }
+`;
+
+const getCategoryFromType = (type) =&gt; {
+  const pluralTypes = [&#x27;resource&#x27;, &#x27;component&#x27;, &#x27;update&#x27;, &#x27;foundation&#x27;];
+
+  if (pluralTypes.includes(type)) {
+    return `${type}s`;
+  }
+
+  return type;
+};
+
+const Result = ({ hit }) =&gt; {
+  return (
+    &lt;Link href={hit.path} passHref&gt;
+      &lt;StyledLink href={hit.path}&gt;
+        &lt;Box pb=&quot;500&quot;&gt;
+          &lt;Box display=&quot;flex&quot; justifyContent=&quot;space-between&quot;&gt;
+            &lt;Box as=&quot;h5&quot;&gt;
+              &lt;Highlight attribute=&quot;title&quot; hit={hit} tagName=&quot;mark&quot; /&gt;
+            &lt;/Box&gt;
+            &lt;Category category={getCategoryFromType(hit.type)} /&gt;
+          &lt;/Box&gt;
+          &lt;Box fontSize=&quot;200&quot; lineHeight=&quot;200&quot; color=&quot;scheem.fg&quot; pt=&quot;200&quot;&gt;
+            &lt;Highlight attribute=&quot;subtitle&quot; hit={hit} tagName=&quot;mark&quot; /&gt;
+          &lt;/Box&gt;
+        &lt;/Box&gt;
+      &lt;/StyledLink&gt;
+    &lt;/Link&gt;
+  );
+};
+
+const SearchResults: React.FC&lt;ResultsProps&gt; = (props: ResultsProps) =&gt; {
+  const { show } = props;
+
+  if (!show) {
+    return null;
+  }
+
+  return (
+    &lt;Box&gt;
+      &lt;Box
+        position=&quot;absolute&quot;
+        width={[&#x27;calc(100vw - 2px)&#x27;, null, &#x27;550px&#x27;]}
+        bg=&quot;scheme.bg&quot;
+        ml=&quot;-2px&quot;
+        right=&quot;0&quot;
+        top=&quot;100%&quot;
+        border=&quot;thick&quot;
+        borderRight=&quot;none&quot;
+        zIndex=&quot;11&quot;
+        maxHeight={[&#x27;400px&#x27;, null, &#x27;90vh&#x27;]}
+        overflow=&quot;auto&quot;
+      &gt;
+        &lt;ResultCount /&gt;
+        &lt;ResultsWrapper&gt;
+          &lt;Hits className=&quot;Hits&quot; hitComponent={Result} /&gt;
+        &lt;/ResultsWrapper&gt;
+      &lt;/Box&gt;
+      &lt;Box
+        style={{
+          pointerEvents: &#x27;none&#x27;
+        }}
+        position={[&#x27;fixed&#x27;, null, &#x27;fixed&#x27;]}
+        width=&quot;100vw&quot;
+        height=&quot;100vh&quot;
+        bg=&quot;scheme.transparentBg&quot;
+        zIndex=&quot;1&quot;
+        top=&quot;0&quot;
+        left=&quot;0&quot;
+        bottom=&quot;0&quot;
+      /&gt;
+    &lt;/Box&gt;
+  );
+};
+
+export default SearchResults;
+</textarea><pre id="annotations" style="display:none">[{&quot;file&quot;:&quot;components/search/results.tsx&quot;,&quot;line&quot;:11,&quot;character&quot;:30,&quot;text&quot;:&quot;theme&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;components/search/results.tsx&quot;,&quot;line&quot;:11,&quot;character&quot;:36,&quot;text&quot;:&quot;space&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;components/search/results.tsx&quot;,&quot;line&quot;:21,&quot;character&quot;:21,&quot;text&quot;:&quot;theme&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;components/search/results.tsx&quot;,&quot;line&quot;:21,&quot;character&quot;:33,&quot;text&quot;:&quot;theme&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;components/search/results.tsx&quot;,&quot;line&quot;:21,&quot;character&quot;:39,&quot;text&quot;:&quot;colors&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;components/search/results.tsx&quot;,&quot;line&quot;:21,&quot;character&quot;:46,&quot;text&quot;:&quot;scheme&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;components/search/results.tsx&quot;,&quot;line&quot;:21,&quot;character&quot;:53,&quot;text&quot;:&quot;lightAccent&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;components/search/results.tsx&quot;,&quot;line&quot;:32,&quot;character&quot;:43,&quot;text&quot;:&quot;searchResults&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;components/search/results.tsx&quot;,&quot;line&quot;:33,&quot;character&quot;:8,&quot;text&quot;:&quot;resultCount&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;components/search/results.tsx&quot;,&quot;line&quot;:33,&quot;character&quot;:22,&quot;text&quot;:&quot;searchResults&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;components/search/results.tsx&quot;,&quot;line&quot;:33,&quot;character&quot;:39,&quot;text&quot;:&quot;searchResults&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;components/search/results.tsx&quot;,&quot;line&quot;:33,&quot;character&quot;:53,&quot;text&quot;:&quot;nbHits&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;components/search/results.tsx&quot;,&quot;line&quot;:34,&quot;character&quot;:9,&quot;text&quot;:&quot;resultCount&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;components/search/results.tsx&quot;,&quot;line&quot;:45,&quot;character&quot;:29,&quot;text&quot;:&quot;resultCount&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;components/search/results.tsx&quot;,&quot;line&quot;:59,&quot;character&quot;:16,&quot;text&quot;:&quot;theme&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;components/search/results.tsx&quot;,&quot;line&quot;:59,&quot;character&quot;:28,&quot;text&quot;:&quot;theme&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;components/search/results.tsx&quot;,&quot;line&quot;:59,&quot;character&quot;:34,&quot;text&quot;:&quot;space&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;components/search/results.tsx&quot;,&quot;line&quot;:59,&quot;character&quot;:51,&quot;text&quot;:&quot;theme&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;components/search/results.tsx&quot;,&quot;line&quot;:59,&quot;character&quot;:63,&quot;text&quot;:&quot;theme&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;components/search/results.tsx&quot;,&quot;line&quot;:59,&quot;character&quot;:69,&quot;text&quot;:&quot;space&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;components/search/results.tsx&quot;,&quot;line&quot;:61,&quot;character&quot;:19,&quot;text&quot;:&quot;theme&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;components/search/results.tsx&quot;,&quot;line&quot;:61,&quot;character&quot;:31,&quot;text&quot;:&quot;theme&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;components/search/results.tsx&quot;,&quot;line&quot;:61,&quot;character&quot;:37,&quot;text&quot;:&quot;colors&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;components/search/results.tsx&quot;,&quot;line&quot;:61,&quot;character&quot;:44,&quot;text&quot;:&quot;scheme&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;components/search/results.tsx&quot;,&quot;line&quot;:61,&quot;character&quot;:51,&quot;text&quot;:&quot;bg&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;components/search/results.tsx&quot;,&quot;line&quot;:66,&quot;character&quot;:21,&quot;text&quot;:&quot;theme&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;components/search/results.tsx&quot;,&quot;line&quot;:66,&quot;character&quot;:33,&quot;text&quot;:&quot;theme&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;components/search/results.tsx&quot;,&quot;line&quot;:66,&quot;character&quot;:39,&quot;text&quot;:&quot;colors&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;components/search/results.tsx&quot;,&quot;line&quot;:66,&quot;character&quot;:46,&quot;text&quot;:&quot;scheme&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;components/search/results.tsx&quot;,&quot;line&quot;:66,&quot;character&quot;:53,&quot;text&quot;:&quot;lightAccent&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;components/search/results.tsx&quot;,&quot;line&quot;:73,&quot;character&quot;:16,&quot;text&quot;:&quot;theme&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;components/search/results.tsx&quot;,&quot;line&quot;:73,&quot;character&quot;:28,&quot;text&quot;:&quot;theme&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;components/search/results.tsx&quot;,&quot;line&quot;:73,&quot;character&quot;:34,&quot;text&quot;:&quot;colors&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;components/search/results.tsx&quot;,&quot;line&quot;:73,&quot;character&quot;:41,&quot;text&quot;:&quot;scheme&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;components/search/results.tsx&quot;,&quot;line&quot;:73,&quot;character&quot;:48,&quot;text&quot;:&quot;fg&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;components/search/results.tsx&quot;,&quot;line&quot;:81,&quot;character&quot;:29,&quot;text&quot;:&quot;type&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;components/search/results.tsx&quot;,&quot;line&quot;:85,&quot;character&quot;:14,&quot;text&quot;:&quot;type&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;components/search/results.tsx&quot;,&quot;line&quot;:88,&quot;character&quot;:9,&quot;text&quot;:&quot;type&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;components/search/results.tsx&quot;,&quot;line&quot;:91,&quot;character&quot;:18,&quot;text&quot;:&quot;hit&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;components/search/results.tsx&quot;,&quot;line&quot;:93,&quot;character&quot;:16,&quot;text&quot;:&quot;hit&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;components/search/results.tsx&quot;,&quot;line&quot;:93,&quot;character&quot;:20,&quot;text&quot;:&quot;path&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;components/search/results.tsx&quot;,&quot;line&quot;:94,&quot;character&quot;:24,&quot;text&quot;:&quot;hit&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;components/search/results.tsx&quot;,&quot;line&quot;:94,&quot;character&quot;:28,&quot;text&quot;:&quot;path&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;components/search/results.tsx&quot;,&quot;line&quot;:98,&quot;character&quot;:43,&quot;text&quot;:&quot;hit&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;components/search/results.tsx&quot;,&quot;line&quot;:98,&quot;character&quot;:48,&quot;text&quot;:&quot;hit&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;components/search/results.tsx&quot;,&quot;line&quot;:100,&quot;character&quot;:52,&quot;text&quot;:&quot;hit&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;components/search/results.tsx&quot;,&quot;line&quot;:100,&quot;character&quot;:56,&quot;text&quot;:&quot;type&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;components/search/results.tsx&quot;,&quot;line&quot;:103,&quot;character&quot;:44,&quot;text&quot;:&quot;hit&quot;,&quot;kind&quot;:1},{&quot;file&quot;:&quot;components/search/results.tsx&quot;,&quot;line&quot;:103,&quot;character&quot;:49,&quot;text&quot;:&quot;hit&quot;,&quot;kind&quot;:1}]</pre></div>
+    <p class="footer-text">TypeScript Coverage Report generated by <a href="https://github.com/plantain-00/type-coverage">type-coverage</a> and <a href="https://github.com/alexcanessa/typescript-coverage-report">typescript-coverage-report</a> at Thu, 11 Aug 2022 15:27:29 GMT</p>
+    </body>
+  </html>
+  
