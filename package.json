@@ -91,7 +91,7 @@
     "husky": "^6.0.0",
     "immer": "^9.0.6",
     "is-svg": "^4.3.1",
-    "lint-staged": "^10.5.4",
+    "lint-staged": "^13.2.1",
     "mem": "^4.3.0",
     "react-day-picker": "^7.4.10",
     "to-string-loader": "^1.2.0",
